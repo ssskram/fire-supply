@@ -39,15 +39,41 @@ export class NavMenu extends React.Component<any, any>  {
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
-                        <li className="sidenav-header">Services</li>
+                        <li className="sidenav-header">Order</li>
                         <li>
                             <NavLink to={'/Survey'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> Survey
+                                <span className='glyphicon glyphicon-list'></span> House supplies
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to={'/Map'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-map-marker'></span> Map
+                                <span className='glyphicon glyphicon-map-marker'></span> Office supplies
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-map-marker'></span> Medical supplies
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-map-marker'></span> Medicine
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-map-marker'></span> Equipment
+                            </NavLink>
+                        </li>
+                        <li className="sidenav-header">Track</li>
+                        <li>
+                            <NavLink to={'/MyOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-list'></span> My orders
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-map-marker'></span> All orders
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>

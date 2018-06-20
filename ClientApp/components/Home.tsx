@@ -1,9 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ApplicationState } from '../store';
 import * as Ping from '../store/ping';
 import * as MessagesStore from '../store/messages';
 import Messages from './Messages';
+
+const imgStyle = {
+    minHeight: '200px'
+}
 
 export class Home extends React.Component<any, any> {
 
@@ -20,20 +25,29 @@ export class Home extends React.Component<any, any> {
 
     public render() {
         return <div className="home-container">
-            <img src='./images/ip.png' className="img-responsive center-block home-image" />
+            <img src='./images/fire.webp' style={imgStyle} className="img-responsive center-block home-image" />
             <div className='text-center'>
-                <h1>Welcome to the warehouse</h1>
+                <h1>Pittsburgh Bureau of Fire</h1>
+                <h1><b>Supply Portal</b></h1>
                 <div className="row text-center">
                     <Messages messages={this.props.messages} />
                 </div>
                 <hr />
             </div>
             <div className='row'>
-                <div className='col-md-4 text-center'>
+                <div className='col-md-6 text-center'>
+                    <Link to={'/MyOrders'} type="button" className="btn btn-big">
+                        <i className="glyphicon glyphicon-cog home-icon"></i><br />
+                        <div className="hidden-md">My Orders</div>
+                        <div className="hidden-xs hidden-sm hidden-lg">My</div>
+                    </Link>
                 </div>
-                <div className='col-md-4 text-center'>
-                </div>
-                <div className='col-md-4 text-center'>
+                <div className='col-md-6 text-center'>
+                    <Link to={'/AllOrders'} type="button" title="Email, OneDrive, etc." className="btn btn-big">
+                        <i className="glyphicon glyphicon-th-large home-icon"></i><br />
+                        <div className="hidden-md">All Orders</div>
+                        <div className="hidden-xs hidden-sm hidden-lg hidden-xl">All</div>
+                    </Link>
                 </div>
             </div>
         </div>;
