@@ -41,28 +41,28 @@ export class NavMenu extends React.Component<any, any>  {
                     <ul className='nav navbar-nav'>
                         <li className="sidenav-header">Order</li>
                         <li>
-                            <NavLink to={'/Survey'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> House supplies
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-home'></span> House supplies
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/Map'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-map-marker'></span> Office supplies
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-folder-open'></span> Office supplies
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-map-marker'></span> Medical supplies
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-plus-sign'></span> Medical supplies
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-map-marker'></span> Medicine
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-grain'></span> Medicine
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-map-marker'></span> Equipment
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-wrench'></span> Equipment
                             </NavLink>
                         </li>
                         <li className="sidenav-header">Track</li>
@@ -73,7 +73,7 @@ export class NavMenu extends React.Component<any, any>  {
                         </li>
                         <li>
                             <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-map-marker'></span> All orders
+                                <span className='glyphicon glyphicon-list'></span> All orders
                             </NavLink>
                         </li>
                         <div className='accountcontainer'>

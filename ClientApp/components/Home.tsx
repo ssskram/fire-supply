@@ -36,15 +36,15 @@ export class Home extends React.Component<any, any> {
             </div>
             <div className='row'>
                 <div className='col-md-6 text-center'>
-                    <Link to={'/MyOrders'} type="button" className="btn btn-big">
-                        <i className="glyphicon glyphicon-cog home-icon"></i><br />
+                    <Link to={'/MyOrders'} type="button" title="My orders" className="btn btn-big">
+                        <i className="glyphicon glyphicon-list home-icon"></i><br />
                         <div className="hidden-md">My Orders</div>
                         <div className="hidden-xs hidden-sm hidden-lg">My</div>
                     </Link>
                 </div>
                 <div className='col-md-6 text-center'>
-                    <Link to={'/AllOrders'} type="button" title="Email, OneDrive, etc." className="btn btn-big">
-                        <i className="glyphicon glyphicon-th-large home-icon"></i><br />
+                    <Link to={'/AllOrders'} type="button" title="All orders" className="btn btn-big">
+                        <i className="glyphicon glyphicon-list home-icon"></i><br />
                         <div className="hidden-md">All Orders</div>
                         <div className="hidden-xs hidden-sm hidden-lg hidden-xl">All</div>
                     </Link>
