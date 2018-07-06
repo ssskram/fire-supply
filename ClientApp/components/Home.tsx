@@ -25,7 +25,7 @@ export class Home extends React.Component<any, any> {
 
     public render() {
         return <div className="home-container">
-            <img src='./images/fire.webp' style={imgStyle} className="img-responsive center-block home-image" />
+            <img src='./images/fire.png' style={imgStyle} className="img-responsive center-block home-image" />
             <div className='text-center'>
                 <h1>Pittsburgh Bureau of Fire</h1>
                 <h1><b>Supply Portal</b></h1>
