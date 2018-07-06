@@ -35,7 +35,7 @@ body {
     /* remove blue underline */
     text-decoration: none;
     /* border */
-    border: 2px #000000;
+    border: 2px #383838;
     border-style: solid;
     border-radius: 10px;
     /* transitions */
