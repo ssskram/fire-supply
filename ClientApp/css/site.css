@@ -148,7 +148,7 @@ hr {
 }
 
 .navbar-inverse {
-    background-color: rgb(44, 62, 80) !important;
+    background-color: rgba(255, 250, 238, .5) !important;
     border-color: rgba(202, 205, 206, .5) !important;
 }
 
