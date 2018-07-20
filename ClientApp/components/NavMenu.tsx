@@ -39,8 +39,8 @@ export class NavMenu extends React.Component<any, any>  {
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
-                        <li className="sidenav-header">Order</li>
-                        <li>
+                        <button className='btn btn-success'>Place an order</button>
+                        {/* <li>
                             <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-home'></span> House supplies
                             </NavLink>
@@ -64,7 +64,7 @@ export class NavMenu extends React.Component<any, any>  {
                             <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
                                 <span className='glyphicon glyphicon-wrench'></span> Equipment
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li className="sidenav-header">Track</li>
                         <li>
                             <NavLink to={'/MyOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
