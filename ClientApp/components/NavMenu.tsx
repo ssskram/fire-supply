@@ -28,7 +28,7 @@ export class NavMenu extends React.Component<any, any>  {
         return <div className='main-nav'>
             <div className='navbar navbar-inverse'>
                 <div className='navbar-header'>
-                    <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+                    <button type='button' className='navbar-toggle'>
                         <span className='sr-only'>Toggle navigation</span>
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
@@ -39,32 +39,10 @@ export class NavMenu extends React.Component<any, any>  {
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
                     <ul className='nav navbar-nav'>
-                        <button className='btn btn-success'>Place an order</button>
-                        {/* <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-home'></span> House supplies
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-folder-open'></span> Office supplies
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-plus-sign'></span> Medical supplies
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-grain'></span> Medicine
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-wrench'></span> Equipment
-                            </NavLink>
-                        </li> */}
+                        <div className='text-center'>
+                            <button style={{ width: '93%' }} className='btn btn-success hidden-sm'>Place an order</button>
+                            <button style={{ width: '93%' }} className='btn btn-success hidden-md hidden-lg hidden-xl'>Order</button>
+                        </div>
                         <li className="sidenav-header">Track</li>
                         <li>
                             <NavLink to={'/MyOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
@@ -76,6 +54,20 @@ export class NavMenu extends React.Component<any, any>  {
                                 <span className='glyphicon glyphicon-list'></span> All orders
                             </NavLink>
                         </li>
+                        <li className="sidenav-header">Resources</li>
+                        <li>
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-list'></span> Units of Issue
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
+                                <span className='glyphicon glyphicon-list'></span> What's an emergency order?
+                            </NavLink>
+                        </li>
+                        <div className='cart-container'>
+                                Shopping Cart
+                        </div>
                         <div className='accountcontainer'>
                             <li className="account">{user}</li>
                             <li className='logout'>
@@ -92,8 +84,8 @@ export class NavMenu extends React.Component<any, any>  {
 }
 
 export default connect(
-    (state: ApplicationState) => 
-    state.user,
+    (state: ApplicationState) =>
+        state.user,
     User.actionCreators
 )(NavMenu as any) as typeof NavMenu;
 

@@ -27,7 +27,7 @@ export class Home extends React.Component<any, any> {
         return <div className="home-container">
             <img src='./images/fire.png' style={imgStyle} className="img-responsive center-block home-image" />
             <div className='text-center'>
-                <h1>Pittsburgh Bureau of Fire</h1>
+                <h1 className='hidden-xs'>Pittsburgh Bureau of Fire</h1>
                 <h1><b>Supply Portal</b></h1>
                 <div className="row text-center">
                     <Messages messages={this.props.messages} />
@@ -39,7 +39,7 @@ export class Home extends React.Component<any, any> {
                     <Link to={'/MyOrders'} type="button" title="My orders" className="btn btn-big">
                         <i className="glyphicon glyphicon-list home-icon"></i><br />
                         <div className="hidden-md">My Orders</div>
-                        <div className="hidden-xs hidden-sm hidden-lg">My</div>
+                        <div className="hidden-xs hidden-sm hidden-lg">Mine</div>
                     </Link>
                 </div>
                 <div className='col-md-6 text-center'>
@@ -50,6 +50,9 @@ export class Home extends React.Component<any, any> {
                     </Link>
                 </div>
             </div>
+            <br/>
+            <br/>
+            <br/>
         </div>;
     }
 }
