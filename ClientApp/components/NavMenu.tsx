@@ -4,6 +4,15 @@ import * as User from '../store/user';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
 
+const btnWidth = {
+    width: '93%'
+}
+
+const hrMargin = {
+    marginLeft: '15px',
+    marginRight: '15px'
+}
+
 export class NavMenu extends React.Component<any, any>  {
     constructor(props) {
         super(props);
@@ -34,50 +43,53 @@ export class NavMenu extends React.Component<any, any>  {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">PBF <strong>Supply</strong></Link>
+                    <div className='navbar-brand-container'>
+                        <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">
+                            <span><img src='./images/helmet.png' className="navbar-brand-image" />
+                                PBF <strong>Supply</strong>
+                            </span>
+                        </Link>
+                    </div>
                 </div>
                 <div className='clearfix'></div>
-                <div className='navbar-collapse collapse'>
-                    <ul className='nav navbar-nav'>
-                        <div className='text-center'>
-                            <button style={{ width: '93%' }} className='btn btn-success hidden-sm'>Place an order</button>
-                            <button style={{ width: '93%' }} className='btn btn-success hidden-md hidden-lg hidden-xl'>Order</button>
-                        </div>
-                        <li className="sidenav-header">Track</li>
-                        <li>
-                            <NavLink to={'/MyOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> My orders
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/AllOrders'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> All orders
-                            </NavLink>
-                        </li>
-                        <li className="sidenav-header">Resources</li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> Units of Issue
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={'/'} activeClassName='active' data-toggle="collapse" data-target=".in">
-                                <span className='glyphicon glyphicon-list'></span> What's an emergency order?
-                            </NavLink>
-                        </li>
-                        <div className='cart-container'>
-                                Shopping Cart
-                        </div>
-                        <div className='accountcontainer'>
-                            <li className="account">{user}</li>
-                            <li className='logout'>
-                                <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
-                                    <span className='glyphicon glyphicon-user'></span>Logout
-                                </NavLink>
-                            </li>
-                        </div>
-                    </ul>
+                <div className='text-center'>
+                    <button style={btnWidth} className='btn btn-primary hidden-sm'><b>Place an order</b></button>
+                    <button style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl'><b>Order</b></button>
                 </div>
+                <div className="sidenav-header">Track</div>
+                <div className='text-center'>
+                    <hr style={hrMargin} />
+                    <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary'>
+                        My orders
+                        </NavLink>
+                    <NavLink to={'/AllOrders'} style={btnWidth} className='btn btn-primary'>
+                        All orders
+                        </NavLink>
+                </div>
+                <div className="sidenav-header">Resources</div>
+                <div className='text-center'>
+                    <hr style={hrMargin} />
+                    <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
+                        Units of Issue
+                        </NavLink>
+                    <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
+                        What's an emergency order?
+                        </NavLink>
+                </div>
+                <div className="sidenav-header">Shopping Cart</div>
+                <hr style={hrMargin} />
+                <div className='cart-container'>
+                    <div><span className='glyphicon glyphicon-shopping-cart'> Your cart is empty</span></div>
+                </div>
+                <div className='accountcontainer'>
+                    <div className="account">{user}</div>
+                    <div className='logout'>
+                        <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
+                            <span className='glyphicon glyphicon-user'></span>Logout
+                                </NavLink>
+                    </div>
+                </div>
+
             </div>
         </div>;
     }

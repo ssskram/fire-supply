@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { ApplicationState } from '../store';
 import * as Ping from '../store/ping';
 import * as MessagesStore from '../store/messages';
@@ -32,27 +31,7 @@ export class Home extends React.Component<any, any> {
                 <div className="row text-center">
                     <Messages messages={this.props.messages} />
                 </div>
-                <hr />
             </div>
-            <div className='row'>
-                <div className='col-md-6 text-center'>
-                    <Link to={'/MyOrders'} type="button" title="My orders" className="btn btn-big">
-                        <i className="glyphicon glyphicon-list home-icon"></i><br />
-                        <div className="hidden-md">My Orders</div>
-                        <div className="hidden-xs hidden-sm hidden-lg">Mine</div>
-                    </Link>
-                </div>
-                <div className='col-md-6 text-center'>
-                    <Link to={'/AllOrders'} type="button" title="All orders" className="btn btn-big">
-                        <i className="glyphicon glyphicon-list home-icon"></i><br />
-                        <div className="hidden-md">All Orders</div>
-                        <div className="hidden-xs hidden-sm hidden-lg hidden-xl">All</div>
-                    </Link>
-                </div>
-            </div>
-            <br/>
-            <br/>
-            <br/>
         </div>;
     }
 }
