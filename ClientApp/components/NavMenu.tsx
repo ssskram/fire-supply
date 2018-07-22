@@ -52,6 +52,8 @@ export class NavMenu extends React.Component<any, any>  {
                     </div>
                 </div>
                 <div className='clearfix'></div>
+                <div className='navbar-collapse collapse'>
+                <div className='nav navbar-nav'>
                 <div className='text-center'>
                     <button style={btnWidth} className='btn btn-primary hidden-sm'><b>Place an order</b></button>
                     <button style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl'><b>Order</b></button>
@@ -61,10 +63,7 @@ export class NavMenu extends React.Component<any, any>  {
                     <hr style={hrMargin} />
                     <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary'>
                         My orders
-                        </NavLink>
-                    <NavLink to={'/AllOrders'} style={btnWidth} className='btn btn-primary'>
-                        All orders
-                        </NavLink>
+                    </NavLink>
                 </div>
                 <div className="sidenav-header">Resources</div>
                 <div className='text-center'>
@@ -89,7 +88,8 @@ export class NavMenu extends React.Component<any, any>  {
                                 </NavLink>
                     </div>
                 </div>
-
+                </div>
+                </div>
             </div>
         </div>;
     }
