@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as Ping from '../../store/ping';
 import * as OrdersStore from '../../store/orders';
-import OrderFilters from './Filter';
+import OrderFilters from './../Filters/OrderFilter';
 
 export class MyOrders extends React.Component<any, any> {
     constructor() {

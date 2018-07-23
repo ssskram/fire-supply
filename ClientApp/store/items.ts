@@ -3,7 +3,13 @@ import { Action, Reducer } from 'redux';
 import { AppThunkAction } from '.';
 
 export interface ItemsState {
-    items: number;
+    items: InventoryItems[]
+}
+
+export interface InventoryItems {
+    family: any
+    obj: any
+    unit: any
 }
 
 interface RequestItemsAction {
@@ -11,16 +17,16 @@ interface RequestItemsAction {
 }
 
 interface ReceiveItemsAction {
-    type: 'RECEIVE_ITEMS';
-    items: number;
+    type: 'RECEIVE_ITEMS'
+    items: InventoryItems[]
 }
 
 type KnownAction = RequestItemsAction | ReceiveItemsAction;
 
 
 export const actionCreators = {
-    items: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        let fetchTask = fetch('/api/items/pong', {
+    getItems: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        let fetchTask = fetch('/api/items/get', {
             credentials: 'same-origin',
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
@@ -39,7 +45,7 @@ export const actionCreators = {
     },
 };
 
-const unloadedState: ItemsState = { items: 1 };
+const unloadedState: ItemsState = { items: [] };
 
 export const reducer: Reducer<ItemsState> = (state: ItemsState, incomingAction: Action) => {
     const action = incomingAction as KnownAction;

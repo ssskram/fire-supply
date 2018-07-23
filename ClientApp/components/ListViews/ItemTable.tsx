@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 
-export class Item extends React.Component<any, any> {
+export class ItemTable extends React.Component<any, any> {
     constructor() {
         super();
     }
@@ -12,6 +12,7 @@ export class Item extends React.Component<any, any> {
 
     public render() {
         return <div>
+            Table
         </div>;
     }
 }
@@ -23,4 +24,4 @@ export default connect(
     ({
 
     })
-)(Item as any) as typeof Item;
+)(ItemTable as any) as typeof ItemTable;
