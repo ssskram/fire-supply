@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import * as OrdersStore from '../../store/orders';
-import OrderFilters from './../Filters/OrderFilter';
+import OrderFilters from '../Filters/OrderFilter';
 
 export class AllOrders extends React.Component<any, any> {
     constructor() {

@@ -31,9 +31,11 @@ namespace firesupply.Controllers {
             dynamic parsedItems = JObject.Parse (items) ["value"];
             foreach (var item in parsedItems) {
                 Items itm = new Items () {
+                    id = item.Id,
                     family = item.Family,
                     obj = item.Object,
-                    unit = item.Unit
+                    unit = item.Unit,
+                    addToCart = false
                 };
                 AllItems.Add (itm);
             }

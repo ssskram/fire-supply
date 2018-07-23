@@ -1,15 +1,20 @@
 import * as React from 'react'
+import Modal from 'react-responsive-modal';
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import Paging from './Paging'
+import SelectQuantity from '../Cart/SelectQuantity'
 
 export class ItemCard extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
             currentPage: 1,
-            itemsPerPage: 15
+            itemsPerPage: 45,
+            selectedItem: {},
+            modalIsOpen: false
         }
+        this.addtoCart = this.addtoCart.bind(this);
     }
 
     handleNextClick() {
@@ -28,10 +33,29 @@ export class ItemCard extends React.Component<any, any> {
         });
     }
 
+    addtoCart(item) {
+        this.setState({
+            selectedItem: item
+        }, function (this) {
+            this.setState({
+                modalIsOpen: true
+            })
+        })
+    }
+
+    closeModal() {
+        this.setState({
+          modalIsOpen: false,
+          selectedItem: {}
+        });
+      }
+    
     public render() {
         const {
             currentPage,
-            itemsPerPage
+            itemsPerPage,
+            selectedItem,
+            modalIsOpen
         } = this.state
 
         const {
@@ -44,12 +68,12 @@ export class ItemCard extends React.Component<any, any> {
         const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
         const renderItems = currentItems.map((item) => {
             return (
-                <div className="container-fluid" key={item.obj}>
-                    <div className="row">
-                        <div className="panel">
-                            <div className="panel-body text-center">
-                                {item.obj}
-                            </div>
+                <div className="col-md-4" key={item.id}>
+                    <div className="panel">
+                        <div className="panel-body text-center">
+                            <h4>{item.obj}</h4>
+                            <h5>Item type: <b>{item.family}</b></h5>
+                            <button className='btn btn-success' onClick={() => this.addtoCart(item)}>Select</button>
                         </div>
                     </div>
                 </div>
@@ -63,17 +87,28 @@ export class ItemCard extends React.Component<any, any> {
         }
 
         return <div>
-            <div className="col-md-12">
+            <div>
                 {renderItems}
-                <Paging
-                    count={items}
-                    currentPage={currentPage}
-                    totalPages={pageNumbers}
-                    next={this.handleNextClick.bind(this)}
-                    prev={this.handlePreviousClick.bind(this)} />
-                <br />
-                <br />
             </div>
+            <br />
+            <Paging
+                count={items}
+                currentPage={currentPage}
+                totalPages={pageNumbers}
+                next={this.handleNextClick.bind(this)}
+                prev={this.handlePreviousClick.bind(this)} />
+            <br />
+            <br />
+            <Modal
+                open={modalIsOpen}
+                onClose={this.closeModal.bind(this)}
+                classNames={{
+                    overlay: 'custom-overlay',
+                    modal: 'custom-modal'
+                }}
+                center>
+               <SelectQuantity item={selectedItem}/>
+            </Modal>
         </div>;
     }
 }

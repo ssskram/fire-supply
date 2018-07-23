@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../store'
 import * as Ping from '../store/ping'
 import * as MessagesStore from '../store/messages'
-import Messages from './Messages'
+import Messages from './Utilities/Messages'
 import AllOrders from './Track/AllOrders'
 import * as ItemsStore from '../store/items'
 

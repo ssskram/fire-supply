@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as Ping from '../../store/ping'
 import * as ItemsStore from '../../store/items'
-import ItemFilters from './../Filters/InventoryFilter'
+import ItemFilters from '../Filters/InventoryFilter'
 import Items from './Items'
-import Modal from 'react-responsive-modal'
+import Spinner from '../Utilities/Spinner'
 
 export class ItemSelection extends React.Component<any, any> {
     constructor() {
@@ -54,43 +54,25 @@ export class ItemSelection extends React.Component<any, any> {
         })
     }
 
-    closeModal() {
-        // just required for modal lib
-    }
-
     public render() {
         const {
             items,
             viewFormat,
         } = this.state
 
-        return <div>
-            <div className='row col-md-12'>
+        return <div className='col-md-12'>
+            <div className='text-center'>
                 <h2>Select an item, choose a quantity, and add it to your cart</h2>
                 <hr />
             </div>
             {items.length > 0 &&
-                <div className='row col-md-12'>
+                <div>
                     <ItemFilters toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)} />
                     <Items items={items} viewFormat={viewFormat} />
                 </div>
             }
             {items.length == 0 &&
-                <Modal
-                    open={true}
-                    onClose={this.closeModal.bind(this)}
-                    classNames={{
-                        overlay: 'spinner-overlay',
-                        modal: 'spinner-modal'
-                    }}
-                    animationDuration={1000}
-                    closeOnEsc={false}
-                    closeOnOverlayClick={false}
-                    showCloseIcon={false}
-                    center>
-                    <div className="loader"></div>
-                    ...loading the inventory...
-            </Modal>
+                <Spinner notice='...loading the inventory...' />
             }
         </div>;
     }

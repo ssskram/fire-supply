@@ -7,9 +7,11 @@ export interface ItemsState {
 }
 
 export interface InventoryItems {
+    id: any
     family: any
     obj: any
     unit: any
+    addToCard: any
 }
 
 interface RequestItemsAction {
