@@ -21,12 +21,10 @@ export class Home extends React.Component<any, any> {
 
     public render() {
         return <div className="home-container">
-            <div className="row text-center">
+            <div className='text-center'>
                 <Messages messages={this.props.messages} />
             </div>
-            <div className='row col-md-12'>
-                <AllOrders />
-            </div>
+            <AllOrders />
         </div>;
     }
 }

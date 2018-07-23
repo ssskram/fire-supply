@@ -12,6 +12,10 @@ body {
     letter-spacing: .5px;
 }
 
+.container-fluid {
+    padding-top: 25px;
+}
+
 h1,
 h2,
 h3,
@@ -387,6 +391,13 @@ textarea {
     transition: all .2s ease 0s;
 }
 
+.btn-secondary {
+    margin: 10px 0px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    width: 100%;
+}
+
 .btn-default:focus,
 .btn-default:hover {
     background-color: rgb(44, 62, 80) !important;
@@ -573,6 +584,29 @@ fieldset[disabled] .btn {
 .ReactTable .rt-thead .rt-td.-sort-desc {
     box-shadow: inset 0 3px 0 0 rgba(0, 0, 0, 0.0) !important;
 }
+
+/* Datepicker
+/* ------------------------- */
+
+.react-datepicker-wrapper {
+    width: 100% !important;
+}
+
+.react-datepicker__input-container {
+    width: 100% !important;
+}
+
+.datepicker-calendar {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2rem;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #aeaeae;
+    border-radius: 0.3rem;
+    display: inline-block;
+    position: relative;
+}
+
 
 /* Modal
 /* ------------------------- */

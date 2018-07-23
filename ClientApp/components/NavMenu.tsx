@@ -71,10 +71,10 @@ export class NavMenu extends React.Component<any, any>  {
                         <div className="sidenav-header">Resources</div>
                         <div className='text-center'>
                             <hr style={hrMargin} />
-                            <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
+                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-primary'>
                                 Units of Issue
                             </NavLink>
-                            <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
+                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-primary'>
                                 What's an emergency order?
                             </NavLink>
                         </div>

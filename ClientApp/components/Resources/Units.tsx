@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 
-export class ItemFilter extends React.Component<any, any> {
+export class UnitsofIssue extends React.Component<any, any> {
     constructor() {
         super();
     }
@@ -12,7 +12,10 @@ export class ItemFilter extends React.Component<any, any> {
 
     public render() {
         return <div>
-            Insert item filters here
+            <div className='row col-md-12'>
+                <h2>Units of issue</h2>
+                <hr />
+            </div>
         </div>;
     }
 }
@@ -24,4 +27,4 @@ export default connect(
     ({
 
     })
-)(ItemFilter as any) as typeof ItemFilter;
+)(UnitsofIssue as any) as typeof UnitsofIssue;
