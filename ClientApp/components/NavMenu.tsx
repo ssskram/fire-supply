@@ -53,42 +53,45 @@ export class NavMenu extends React.Component<any, any>  {
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
-                <div className='nav navbar-nav'>
-                <div className='text-center'>
-                    <button style={btnWidth} className='btn btn-primary hidden-sm'><b>Place an order</b></button>
-                    <button style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl'><b>Order</b></button>
-                </div>
-                <div className="sidenav-header">Track</div>
-                <div className='text-center'>
-                    <hr style={hrMargin} />
-                    <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary'>
-                        My orders
-                    </NavLink>
-                </div>
-                <div className="sidenav-header">Resources</div>
-                <div className='text-center'>
-                    <hr style={hrMargin} />
-                    <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
-                        Units of Issue
-                        </NavLink>
-                    <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
-                        What's an emergency order?
-                        </NavLink>
-                </div>
-                <div className="sidenav-header">Shopping Cart</div>
-                <hr style={hrMargin} />
-                <div className='cart-container'>
-                    <div><span className='glyphicon glyphicon-shopping-cart'> Your cart is empty</span></div>
-                </div>
-                <div className='accountcontainer'>
-                    <div className="account">{user}</div>
-                    <div className='logout'>
-                        <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn navbar-link'>
-                            <span className='glyphicon glyphicon-user'></span>Logout
+                    <div className='nav navbar-nav'>
+                        <div className='text-center'>
+                            <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                                <b>Place an order</b>
+                            </NavLink>
+                            <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl main-nav-btn'>
+                                <b>Order</b>
+                            </NavLink>
+                            <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                                Track my orders
+                            </NavLink>
+                            <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl main-nav-btn'>
+                                My orders
+                            </NavLink>
+                        </div>
+                        <div className="sidenav-header">Resources</div>
+                        <div className='text-center'>
+                            <hr style={hrMargin} />
+                            <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
+                                Units of Issue
+                            </NavLink>
+                            <NavLink to={'/'} style={btnWidth} className='btn btn-primary'>
+                                What's an emergency order?
+                            </NavLink>
+                        </div>
+                        <div className="sidenav-header">Shopping Cart</div>
+                        <hr style={hrMargin} />
+                        <div className='cart-container'>
+                            <div><span className='glyphicon glyphicon-shopping-cart'> Your cart is empty</span></div>
+                        </div>
+                        <div className='accountcontainer'>
+                            <div className="account">{user}</div>
+                            <div className='logout'>
+                                <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn'>
+                                    <span className='glyphicon glyphicon-user'></span>Logout
                                 </NavLink>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                </div>
                 </div>
             </div>
         </div>;
