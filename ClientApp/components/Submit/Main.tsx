@@ -6,6 +6,7 @@ import * as ItemsStore from '../../store/items'
 import ItemFilters from '../Filters/InventoryFilter'
 import Items from './Items'
 import Spinner from '../Utilities/Spinner'
+import * as Cart from '../../store/cart'
 
 export class ItemSelection extends React.Component<any, any> {
     constructor() {
@@ -18,13 +19,28 @@ export class ItemSelection extends React.Component<any, any> {
     }
 
     componentDidMount() {
+        let self = this
         window.scrollTo(0, 0)
-
+    
         if (this.props.items.length != 0) {
-            this.setState({
-                items: this.props.items
-            })
+            console.log(this.props.items)
+            if (this.props.cart.length != 0) {
+                this.setState({
+                    items: this.props.items.filter(function(i) {
+                        const filterCartItems = obj => obj.id === i.id
+                        return !self.props.cart.some(filterCartItems)
+                    })
+                })
+            } else {
+                this.setState ({
+                    items: this.props.items
+                })
+            }
+
         }
+
+        // load cart items
+        this.props.loadCart()
 
         // load inventory items
         this.props.getItems()
@@ -35,10 +51,20 @@ export class ItemSelection extends React.Component<any, any> {
 
     componentWillReceiveProps(nextProps) {
         if (this.state.onFilter == false) {
-            this.setState({
-                items: nextProps.items,
-                loadingData: false
-            })
+            if (nextProps.cart.length != 0) {
+                this.setState({
+                    items: nextProps.items.filter(function(i) {
+                        const filterCartItems = obj => obj.id === i.id
+                        return !nextProps.cart.some(filterCartItems)
+                    }),
+                    loadingData: false
+                })
+            } else {
+                this.setState({
+                    items: nextProps.items,
+                    loadingData: false
+                })
+            }
         }
     }
 
@@ -62,7 +88,7 @@ export class ItemSelection extends React.Component<any, any> {
 
         return <div className='col-md-12'>
             <div className='text-center'>
-                <h2>Select an item, choose a quantity, and add it to your cart</h2>
+                <h2>Select an item, enter a quantity, and add it to your cart</h2>
                 <hr />
             </div>
             {items.length > 0 &&
@@ -82,10 +108,12 @@ export class ItemSelection extends React.Component<any, any> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.ping,
-        ...state.items
+        ...state.items,
+        ...state.cart
     }),
     ({
         ...Ping.actionCreators,
-        ...ItemsStore.actionCreators
+        ...ItemsStore.actionCreators,
+        ...Cart.actionCreators
     })
 )(ItemSelection as any) as typeof ItemSelection;

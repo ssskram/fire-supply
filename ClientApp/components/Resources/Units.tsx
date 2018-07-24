@@ -25,9 +25,6 @@ export class UnitsofIssue extends React.Component<any, any> {
         this.props.getItems()
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-    }
     public render() {
         const {
             items

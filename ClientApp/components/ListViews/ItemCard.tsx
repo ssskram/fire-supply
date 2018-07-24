@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Modal from 'react-responsive-modal';
+import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import Paging from './Paging'

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as Cart from '../../store/cart'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import * as ItemsStore from '../../store/items'
 import classnames from 'classnames'
 

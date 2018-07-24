@@ -17,9 +17,10 @@ export class SelectQuantity extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            object: props.item.obj,
-            itemID: props.item.id,
+            obj: props.item.obj,
+            id: props.item.id,
             family: props.item.family,
+            unit: props.item.unit,
             quantity: ''
         }
     }
