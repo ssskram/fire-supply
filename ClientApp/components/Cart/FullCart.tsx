@@ -12,6 +12,7 @@ export class FullCart extends React.Component<any, any> {
 
     public render() {
         return <div>
+            carrt
         </div>;
     }
 }

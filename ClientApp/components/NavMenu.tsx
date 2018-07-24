@@ -110,7 +110,8 @@ export class NavMenu extends React.Component<any, any>  {
                         </div>
                         <div className="sidenav-header">Shopping Cart</div>
                         <hr style={hrMargin} />
-                            <MiniCart/>
+                        <MiniCart />
+                        <br />
                         <div className='accountcontainer'>
                             <div className="account">{user}</div>
                             <div className='logout'>
@@ -131,6 +132,8 @@ export class NavMenu extends React.Component<any, any>  {
                 }}
                 center>
                 <div className='col-md-12'>
+                    <br />
+                    <br />
                     <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
                         <b>Place an order</b>
                     </Link>
@@ -147,8 +150,8 @@ export class NavMenu extends React.Component<any, any>  {
                     <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
                         What's an emergency order?
                     </Link>
-                    <h3 style={{paddingLeft: '35px'}}>Cart</h3>
-                    <MiniCart/>
+                    <h3 style={{ paddingLeft: '35px' }}>Cart</h3>
+                    <MiniCart closeModal={this.closeModal.bind(this)} />
                     <div className='accountcontainer'>
                         <div className="account">{user}</div>
                         <div className='logout'>
@@ -157,6 +160,8 @@ export class NavMenu extends React.Component<any, any>  {
                             </NavLink>
                         </div>
                     </div>
+                    <br />
+                    <br />
                 </div>
             </Modal>
         </div>;
