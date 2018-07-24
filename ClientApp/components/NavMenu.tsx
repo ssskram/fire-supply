@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import * as User from '../store/user';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
+import Modal from 'react-responsive-modal';
+import MiniCart from '../components/Cart/MiniCart'
 
 const btnWidth = {
     width: '93%'
@@ -13,11 +15,18 @@ const hrMargin = {
     marginRight: '15px'
 }
 
+const modalLogout = {
+    color: '#383838',
+    width: '100%',
+    whiteSpace: 'normal'
+}
+
 export class NavMenu extends React.Component<any, any>  {
     constructor(props) {
         super(props);
         this.state = {
-            user: this.props.user
+            user: this.props.user,
+            modalIsOpen: false
         }
     }
 
@@ -31,13 +40,34 @@ export class NavMenu extends React.Component<any, any>  {
         self.setState({ user: props.user })
     }
 
+    componentWillUnmount() {
+        this.setState({
+            modalIsOpen: false
+        })
+    }
+
+    closeModal() {
+        this.setState({
+            modalIsOpen: false
+        });
+    }
+
+    navModal() {
+        this.setState({
+            modalIsOpen: true
+        })
+    }
+
     public render() {
-        const { user } = this.state
+        const {
+            user,
+            modalIsOpen
+        } = this.state
 
         return <div className='main-nav'>
             <div className='navbar navbar-inverse'>
                 <div className='navbar-header'>
-                    <button type='button' className='navbar-toggle'>
+                    <button onClick={this.navModal.bind(this)} type='button' className='navbar-toggle'>
                         <span className='sr-only'>Toggle navigation</span>
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
@@ -80,20 +110,55 @@ export class NavMenu extends React.Component<any, any>  {
                         </div>
                         <div className="sidenav-header">Shopping Cart</div>
                         <hr style={hrMargin} />
-                        <div className='cart-container'>
-                            <div><span className='glyphicon glyphicon-shopping-cart'> Your cart is empty</span></div>
-                        </div>
+                            <MiniCart/>
                         <div className='accountcontainer'>
                             <div className="account">{user}</div>
                             <div className='logout'>
                                 <NavLink to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn'>
-                                    <span className='glyphicon glyphicon-user'></span>Logout
+                                    <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout
                                 </NavLink>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Modal
+                open={modalIsOpen}
+                onClose={this.closeModal.bind(this)}
+                classNames={{
+                    overlay: 'custom-overlay',
+                    modal: 'custom-modal'
+                }}
+                center>
+                <div className='col-md-12'>
+                    <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                        <b>Place an order</b>
+                    </Link>
+                    <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                        All orders
+                    </Link>
+                    <Link onClick={this.closeModal.bind(this)} to={'/MyOrders'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                        My orders
+                    </Link>
+                    <h3>Resources</h3>
+                    <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                        Units of Issue
+                    </Link>
+                    <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                        What's an emergency order?
+                    </Link>
+                    <h3 style={{paddingLeft: '35px'}}>Cart</h3>
+                    <MiniCart/>
+                    <div className='accountcontainer'>
+                        <div className="account">{user}</div>
+                        <div className='logout'>
+                            <NavLink style={modalLogout} to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn'>
+                                <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout
+                            </NavLink>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
         </div>;
     }
 }

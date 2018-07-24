@@ -68,6 +68,7 @@ export class ItemSelection extends React.Component<any, any> {
             {items.length > 0 &&
                 <div>
                     <ItemFilters toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)} />
+                    <br/>
                     <Items items={items} viewFormat={viewFormat} />
                 </div>
             }

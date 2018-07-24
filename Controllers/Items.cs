@@ -34,8 +34,7 @@ namespace firesupply.Controllers {
                     id = item.Id,
                     family = item.Family,
                     obj = item.Object,
-                    unit = item.Unit,
-                    addToCart = false
+                    unit = item.Unit
                 };
                 AllItems.Add (itm);
             }

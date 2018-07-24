@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import Input from '../FormElements/input'
+import * as Cart from '../../store/cart'
 
 const padding = {
     padding: '25px'
@@ -13,9 +14,12 @@ const width = {
 }
 
 export class SelectQuantity extends React.Component<any, any> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            object: props.item.obj,
+            itemID: props.item.id,
+            family: props.item.family,
             quantity: ''
         }
     }
@@ -24,6 +28,11 @@ export class SelectQuantity extends React.Component<any, any> {
         this.setState({
             [event.target.name]: event.target.value
         })
+    }
+
+    updateCart () {
+        this.props.updateCart(this.state)
+        this.props.closeModal()
     }
 
     public render() {
@@ -56,7 +65,7 @@ export class SelectQuantity extends React.Component<any, any> {
                         </div>
                     </div>
                     <div className='row'>
-                        <button disabled={!isEnabled} className='btn btn-success'>Add to cart</button>
+                        <button disabled={!isEnabled} onClick={this.updateCart.bind(this)} className='btn btn-success'>Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -66,9 +75,9 @@ export class SelectQuantity extends React.Component<any, any> {
 
 export default connect(
     (state: ApplicationState) => ({
-
+        ...state.cart
     }),
     ({
-
+        ...Cart.actionCreators
     })
 )(SelectQuantity as any) as typeof SelectQuantity;

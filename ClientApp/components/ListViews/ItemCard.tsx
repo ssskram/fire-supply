@@ -5,6 +5,14 @@ import { ApplicationState } from '../../store'
 import Paging from './Paging'
 import SelectQuantity from '../Cart/SelectQuantity'
 
+const btnColor = {
+    backgroundColor: 'rgba(92, 184, 92, .8)'
+}
+
+const fixedHeight = {
+    height: '200px',
+}
+
 export class ItemCard extends React.Component<any, any> {
     constructor() {
         super();
@@ -68,12 +76,12 @@ export class ItemCard extends React.Component<any, any> {
         const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
         const renderItems = currentItems.map((item) => {
             return (
-                <div className="col-md-4" key={item.id}>
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h4>{item.obj}</h4>
                             <h5>Item type: <b>{item.family}</b></h5>
-                            <button className='btn btn-success' onClick={() => this.addtoCart(item)}>Select</button>
+                            <button style={btnColor} className='btn btn-success' onClick={() => this.addtoCart(item)}>Select</button>
                         </div>
                     </div>
                 </div>
@@ -87,7 +95,7 @@ export class ItemCard extends React.Component<any, any> {
         }
 
         return <div>
-            <div>
+            <div className='row'>
                 {renderItems}
             </div>
             <br />
@@ -107,7 +115,7 @@ export class ItemCard extends React.Component<any, any> {
                     modal: 'custom-modal'
                 }}
                 center>
-               <SelectQuantity item={selectedItem}/>
+               <SelectQuantity closeModal={this.closeModal.bind(this)} item={selectedItem}/>
             </Modal>
         </div>;
     }

@@ -5,6 +5,5 @@ namespace firesupply.Models {
         public string family { get; set; }
         public string obj { get; set; }
         public string unit { get; set; }
-        public bool addToCart { get; set; }
     }
 }

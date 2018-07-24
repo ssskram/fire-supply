@@ -11,7 +11,6 @@ export interface InventoryItems {
     family: any
     obj: any
     unit: any
-    addToCard: any
 }
 
 interface RequestItemsAction {

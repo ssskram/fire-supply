@@ -11,7 +11,8 @@ export class MiniCart extends React.Component<any, any> {
     }
 
     public render() {
-        return <div>
+        return <div className='cart-container'>
+            <div><span className='glyphicon glyphicon-shopping-cart'> Your cart is empty</span></div>
         </div>;
     }
 }
