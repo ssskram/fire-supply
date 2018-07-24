@@ -1,13 +1,13 @@
 
-const initialState = { cart: [] };
-const incrementCountType = 'LOAD_CART';
-const decrementCountType = 'DECREMENT_COUNT';
+const load = 'load';
+const add = 'add';
 
 export interface CartState {
     cart: CartItems[]
 }
 
 export interface CartItems {
+    quantity: any
     id: any
     family: any
     obj: any
@@ -15,21 +15,27 @@ export interface CartItems {
 }
 
 export const actionCreators = {
-    loadCart: () => ({ type: incrementCountType }),
-    decrement: () => ({ type: decrementCountType })
-  };
-  
+    loadCart: () => ({ type: load }),
+    updateCart: (newItem) => (
+        console.log(newItem),
+        { type: add, newItem }
+    )
+};
 
-export const reducer = (state, action) => {
-    state = state || initialState;
-  
-    if (action.type === incrementCountType) {
-      return { ...state, count: state.count + 1 };
+const unloadedState: CartState = { cart: [] };
+
+export const reducer = (state: CartState, action) => {
+
+    if (action.type === load) {
+        return { ...state, cart: [] };
     }
-  
-    if (action.type === decrementCountType) {
-      return { ...state, count: state.count - 1 };
+
+    if (action.type === add) {
+        return { 
+            ...state,  
+            cart: state.cart.concat(action.newItem) 
+        };
     }
-  
-    return state;
-  };
+
+    return state || unloadedState;
+};

@@ -35,7 +35,6 @@ export class Home extends React.Component<any, any> {
     }
 
     componentWillReceiveProps (nextProps) {
-        console.log(nextProps)
         if (nextProps.items != null) {
             this.setState({
                 loadingData: false

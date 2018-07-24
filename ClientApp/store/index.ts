@@ -21,7 +21,7 @@ export const reducers = {
     messages: Messages.reducer,
     orders: Orders.reducer,
     items: Items.reducer,
-    card: Cart.reducer
+    cart: Cart.reducer
 };
 
 export interface AppThunkAction<TAction> {

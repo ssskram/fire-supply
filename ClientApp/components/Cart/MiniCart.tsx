@@ -1,6 +1,8 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
+import * as Cart from '../../store/cart'
+import * as ItemsStore from '../../store/items'
 
 export class MiniCart extends React.Component<any, any> {
     constructor() {
@@ -8,6 +10,12 @@ export class MiniCart extends React.Component<any, any> {
     }
 
     componentDidMount() {
+        this.props.loadCart()
+        console.log(this.props.cart)
+    }
+
+    componentWillReceiveProps (nextProps) {
+        console.log(nextProps)
     }
 
     public render() {
@@ -19,9 +27,11 @@ export class MiniCart extends React.Component<any, any> {
 
 export default connect(
     (state: ApplicationState) => ({
-
+        ...state.cart,
+        ...state.items
     }),
     ({
-
+        ...Cart.actionCreators,
+        ...ItemsStore.actionCreators
     })
 )(MiniCart as any) as typeof MiniCart;
