@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
+import { ApplicationState } from '../../../store';
 
-export class OrderCard extends React.Component<any, any> {
+export class OrderTable extends React.Component<any, any> {
     constructor() {
         super();
     }
@@ -23,4 +23,4 @@ export default connect(
     ({
 
     })
-)(OrderCard as any) as typeof OrderCard;
+)(OrderTable as any) as typeof OrderTable;

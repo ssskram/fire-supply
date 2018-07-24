@@ -23,7 +23,6 @@ export class ItemSelection extends React.Component<any, any> {
         window.scrollTo(0, 0)
     
         if (this.props.items.length != 0) {
-            console.log(this.props.items)
             if (this.props.cart.length != 0) {
                 this.setState({
                     items: this.props.items.filter(function(i) {

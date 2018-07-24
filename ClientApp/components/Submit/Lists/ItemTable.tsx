@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 import Modal from 'react-responsive-modal'
-import { ApplicationState } from '../../store'
+import { ApplicationState } from '../../../store'
 import Table from "react-table"
-import SelectQuantity from '../Cart/SelectQuantity'
+import SelectQuantity from '../../Cart/SelectQuantity'
 
 export class ItemTable extends React.Component<any, any> {
     constructor() {
@@ -17,7 +17,6 @@ export class ItemTable extends React.Component<any, any> {
     }
 
     addtoCart(props) {
-        console.log(props)
         this.setState({
             selectedItem: props.original
         }, function (this) {

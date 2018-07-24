@@ -18,11 +18,6 @@ export class MiniCart extends React.Component<any, any> {
 
     componentDidMount() {
         this.props.loadCart()
-        console.log(this.props.cart)
-    }
-
-    componentWillReceiveProps (nextProps) {
-        console.log(nextProps)
     }
 
     public render() {
