@@ -529,6 +529,7 @@ textarea {
 }
 
 .rt-td {
+    text-align: center !important;
     white-space: pre-wrap !important;
     overflow: visible !important;
     text-overflow: inherit !important;

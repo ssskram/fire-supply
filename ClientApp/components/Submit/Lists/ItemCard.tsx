@@ -3,7 +3,7 @@ import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
 import Paging from '../../Utilities/Paging'
-import SelectQuantity from '../../Cart/SelectQuantity'
+import SelectQuantity from '../../Cart/EnterQuantity'
 
 const btnColor = {
     backgroundColor: 'rgba(92, 184, 92, .8)'

@@ -46,7 +46,8 @@ export class SelectQuantity extends React.Component<any, any> {
         } = this.props
 
         const isEnabled =
-            quantity != ''
+            quantity != '' &&
+            quantity.match(/^[0-9]+$/)
 
         return <div style={padding}>
             <div className="col-md-12 form" key={item.id}>

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 import Modal from 'react-responsive-modal'
-import { ApplicationState } from '../../../store'
+import { ApplicationState } from '../../store'
 import Table from "react-table"
-import SelectQuantity from '../../Cart/EnterQuantity'
+import SelectQuantity from '../Cart/EnterQuantity'
 
 export class ItemTable extends React.Component<any, any> {
     constructor() {
