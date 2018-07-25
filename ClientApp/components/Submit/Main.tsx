@@ -16,7 +16,6 @@ export class ItemSelection extends React.Component<any, any> {
             items: [],
             viewFormat: 'cards',
             onFilter: false,
-            resetFilter: false
         }
     }
 
@@ -129,27 +128,11 @@ export class ItemSelection extends React.Component<any, any> {
 
     }
 
-
-    // race condition anybody?
-    addToCart() {
-        this.setState({
-            resetFilter: true
-        }, function (this) {
-            this._resetCart.bind(this)()
-        })
-    }
-    _resetCart() {
-        this.setState({
-            resetFilter: false
-        })
-    }
-
     public render() {
         const {
             items,
             viewFormat,
             onFilter,
-            resetFilter
         } = this.state
 
         return <div className='col-md-12'>
@@ -164,13 +147,12 @@ export class ItemSelection extends React.Component<any, any> {
             <ItemFilters
                 toggleViewFormat={this.toggleViewFormat.bind(this)}
                 filter={this.filter.bind(this)}
-                clear={this.clearFilters.bind(this)}
-                resetFilter={resetFilter} />
+                clear={this.clearFilters.bind(this)}/>
 
             {items.length > 0 &&
                 <div>
                     <br />
-                    <Items items={items} viewFormat={viewFormat} clearFilters={this.addToCart.bind(this)} />
+                    <Items items={items} viewFormat={viewFormat} />
                 </div>
             }
             {items.length == 0 && onFilter == true &&

@@ -62,7 +62,6 @@ export class ItemCard extends React.Component<any, any> {
     }
 
     closeModal() {
-        this.props.clearFilters()
         this.setState({
           modalIsOpen: false,
           selectedItem: {}

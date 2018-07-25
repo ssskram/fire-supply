@@ -26,15 +26,6 @@ export class InventoryFilter extends React.Component<any, any> {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.resetFilter == true) {
-            this.setState({
-                obj: '',
-                family: ''
-            })
-        }
-    }
-
     handleChildChange(event) {
         this.setState({
             [event.target.name]: event.target.value
