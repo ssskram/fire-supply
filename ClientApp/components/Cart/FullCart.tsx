@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { Helmet } from "react-helmet"
 import SelectQuantity from './EnterQuantity'
 import DeleteItem from './DeleteItems'
+import Table from "react-table"
 
 const paddingLeft = {
     paddingLeft: '25px'
@@ -26,13 +27,29 @@ const submitButton = {
     marginTop: '15px'
 }
 
+const columns = [{
+    Header: 'Item',
+    accessor: 'obj'
+}, {
+    Header: 'Type',
+    accessor: 'family'
+}, {
+    Header: 'Unit',
+    accessor: 'unit'
+}, {
+    Header: 'Quantity',
+    accessor: 'quantity'
+}]
+
 export class FullCart extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
             modalIsOpen: false,
             selectedItem: {},
-            updateType: ''
+            updateType: '',
+            emergencyOrder: false,
+            house: ''
         }
     }
 
@@ -66,6 +83,10 @@ export class FullCart extends React.Component<any, any> {
 
     confirmCart() {
         console.log(this.props.cart)
+        this.setState({
+            modalIsOpen: true,
+            updateType: 'confirm'
+        })
     }
 
     public render() {
@@ -200,7 +221,7 @@ export class FullCart extends React.Component<any, any> {
                                     </div>
                                 </div>
                             }
-                            {cart.filter(item => item.family == 'Office').length > 0 &&
+                            {officeSupplies.length > 0 &&
                                 <div className='row'>
                                     <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-folder-open'></span>Office supplies</h2>
                                     <hr />
@@ -209,7 +230,7 @@ export class FullCart extends React.Component<any, any> {
                                     </div>
                                 </div>
                             }
-                            {cart.filter(item => item.family == 'Medical').length > 0 &&
+                            {medicalSupplies.length > 0 &&
                                 <div className='row'>
                                     <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-plus-sign'></span>Medical supplies</h2>
                                     <hr />
@@ -218,7 +239,7 @@ export class FullCart extends React.Component<any, any> {
                                     </div>
                                 </div>
                             }
-                            {cart.filter(item => item.family == 'Medicine').length > 0 &&
+                            {medicine.length > 0 &&
                                 <div className='row'>
                                     <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-grain'></span>Medicine</h2>
                                     <hr />
@@ -227,7 +248,7 @@ export class FullCart extends React.Component<any, any> {
                                     </div>
                                 </div>
                             }
-                            {cart.filter(item => item.family == 'Equipment').length > 0 &&
+                            {equipment.length > 0 &&
                                 <div className='row'>
                                     <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Equipment</h2>
                                     <hr />
@@ -256,6 +277,27 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {updateType == 'delete' &&
                     <DeleteItem closeModal={this.closeModal.bind(this)} item={selectedItem} />
+                }
+                {updateType == 'confirm' &&
+                    <div className='col-md-12'>
+                        <br />
+                        <h2>Is this right?</h2>
+                        <Table
+                            data={cart}
+                            columns={columns}
+                            loading={false}
+                            minRows={0}
+                            pageSize={50}
+                            showPageSizeOptions={false}
+                            noDataText=''
+                            defaultSorted={[
+                                {
+                                    id: 'family',
+                                    asc: true
+                                }
+                            ]} />
+
+                    </div>
                 }
             </Modal>
         </div>;

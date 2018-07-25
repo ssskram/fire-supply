@@ -91,7 +91,7 @@ export class NavMenu extends React.Component<any, any>  {
                                     <b>Place an order</b>
                                 }
                                 {this.props.cart.length > 0 &&
-                                    <b>Add to cart</b>
+                                    <b>Add items to cart</b>
                                 }
                             </NavLink>
                             <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl main-nav-btn'>
