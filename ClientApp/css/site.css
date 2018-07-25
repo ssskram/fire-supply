@@ -269,6 +269,10 @@ hr {
 /* Forms
 /* ------------------------- */
 
+input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;
+}
+
 .form-h {
     margin-left: 15px;
 }

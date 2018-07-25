@@ -22,17 +22,17 @@ export class ItemSelection extends React.Component<any, any> {
     componentDidMount() {
         let self = this
         window.scrollTo(0, 0)
-    
+
         if (this.props.items.length != 0) {
             if (this.props.cart.length != 0) {
                 this.setState({
-                    items: this.props.items.filter(function(i) {
+                    items: this.props.items.filter(function (i) {
                         const filterCartItems = obj => obj.id === i.id
                         return !self.props.cart.some(filterCartItems)
                     })
                 })
             } else {
-                this.setState ({
+                this.setState({
                     items: this.props.items
                 })
             }
@@ -53,7 +53,7 @@ export class ItemSelection extends React.Component<any, any> {
         if (this.state.onFilter == false) {
             if (nextProps.cart.length != 0) {
                 this.setState({
-                    items: nextProps.items.filter(function(i) {
+                    items: nextProps.items.filter(function (i) {
                         const filterCartItems = obj => obj.id === i.id
                         return !nextProps.cart.some(filterCartItems)
                     }),
@@ -69,21 +69,73 @@ export class ItemSelection extends React.Component<any, any> {
     }
 
     filter(state) {
-        this.setState({
-            onFilter: true
+        let cart = this.props.cart
+        if (state.obj) {
+            var obj = state.obj.toLowerCase()
+        }
+        if (state.family) {
+            var family = state.family.toLowerCase()
+        }
+        var filtered = this.props.items.filter(function (item) {
+            if (obj) {
+                if (!item.obj.toLowerCase().includes(obj)) {
+                    return false
+                }
+            }
+            if (family) {
+                if (!item.family.toLowerCase().includes(family)) {
+                    return false
+                }
+            }
+            return true
         })
+        if (cart.length != 0) {
+            this.setState({
+                items: filtered.filter(function (i) {
+                    const filterCartItems = obj => obj.id === i.id
+                    return !cart.some(filterCartItems)
+                }),
+                onFilter: true
+            })
+        } else {
+            this.setState({
+                items: filtered,
+                onFilter: true
+            })
+        }
     }
 
     toggleViewFormat(type) {
+        console.log(type)
         this.setState({
             viewFormat: type
         })
+    }
+
+    clearFilters() {
+        let cart = this.props.cart
+        if (cart.length != 0) {
+            this.setState({
+                items: this.props.items.filter(function (i) {
+                    const filterCartItems = obj => obj.id === i.id
+                    return !cart.some(filterCartItems)
+                }),
+                onFilter: false
+            })
+        } else {
+            this.setState({
+                items: this.props.items,
+                onFilter: false
+            })
+        }
+
     }
 
     public render() {
         const {
             items,
             viewFormat,
+            onFilter
         } = this.state
 
         return <div className='col-md-12'>
@@ -94,14 +146,22 @@ export class ItemSelection extends React.Component<any, any> {
                 <h2>Select an item, enter a quantity, and add it to your cart</h2>
                 <hr />
             </div>
+            <ItemFilters toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)} clear={this.clearFilters.bind(this)} />
             {items.length > 0 &&
                 <div>
-                    <ItemFilters toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)} />
-                    <br/>
+                    <br />
                     <Items items={items} viewFormat={viewFormat} />
                 </div>
             }
-            {items.length == 0 &&
+            {items.length == 0 && onFilter == true &&
+                <div>
+                    <br />
+                    <div className='col-md-12 text-center'>
+                        <h1>Sorry, I can't find anything matching those parameters</h1>
+                    </div>
+                </div>
+            }
+            {items.length == 0 && onFilter == false &&
                 <Spinner notice='...loading the inventory...' />
             }
         </div>;

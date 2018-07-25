@@ -6,9 +6,9 @@ import Input from '../FormElements/input'
 
 const families = [
     { value: '', label: 'All', name: 'family' },
-    { value: 'House Supplies', label: 'House', name: 'family' },
-    { value: 'Office Supplies', label: 'Office', name: 'family' },
-    { value: 'Medical Supplies', label: 'Medical', name: 'family' },
+    { value: 'House', label: 'House Supplies', name: 'family' },
+    { value: 'Office', label: 'Office Supplies', name: 'family' },
+    { value: 'Medical', label: 'Medical Supplies', name: 'family' },
     { value: 'Medicine', label: 'Medicine', name: 'family' },
     { value: 'Equipment', label: 'Equipment', name: 'family' },
 ]
@@ -47,7 +47,7 @@ export class InventoryFilter extends React.Component<any, any> {
             obj: '',
             family: ''
         }, function (this) {
-            this.filter()
+            this.props.clear()
         })
     }
 
