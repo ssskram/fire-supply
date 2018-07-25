@@ -129,6 +129,8 @@ export class ItemSelection extends React.Component<any, any> {
 
     }
 
+
+    // race condition anybody?
     addToCart() {
         this.setState({
             resetFilter: true
@@ -136,7 +138,6 @@ export class ItemSelection extends React.Component<any, any> {
             this._resetCart.bind(this)()
         })
     }
-
     _resetCart() {
         this.setState({
             resetFilter: false
