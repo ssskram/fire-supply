@@ -24,6 +24,7 @@ export class ItemCard extends React.Component<any, any> {
             modalIsOpen: false
         }
         this.addtoCart = this.addtoCart.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     componentWillReceiveProps (nextProps) {
@@ -61,6 +62,7 @@ export class ItemCard extends React.Component<any, any> {
     }
 
     closeModal() {
+        this.props.clearFilters()
         this.setState({
           modalIsOpen: false,
           selectedItem: {}

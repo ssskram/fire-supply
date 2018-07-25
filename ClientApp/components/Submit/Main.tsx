@@ -15,7 +15,8 @@ export class ItemSelection extends React.Component<any, any> {
         this.state = {
             items: [],
             viewFormat: 'cards',
-            onFilter: false
+            onFilter: false,
+            resetFilter: false
         }
     }
 
@@ -128,11 +129,26 @@ export class ItemSelection extends React.Component<any, any> {
 
     }
 
+    addToCart() {
+        this.setState({
+            resetFilter: true
+        }, function (this) {
+            this._resetCart.bind(this)()
+        })
+    }
+
+    _resetCart() {
+        this.setState({
+            resetFilter: false
+        })
+    }
+
     public render() {
         const {
             items,
             viewFormat,
-            onFilter
+            onFilter,
+            resetFilter
         } = this.state
 
         return <div className='col-md-12'>
@@ -143,11 +159,17 @@ export class ItemSelection extends React.Component<any, any> {
                 <h2>Select an item, enter a quantity, and add it to your cart</h2>
                 <hr />
             </div>
-            <ItemFilters toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)} clear={this.clearFilters.bind(this)} />
+            
+            <ItemFilters
+                toggleViewFormat={this.toggleViewFormat.bind(this)}
+                filter={this.filter.bind(this)}
+                clear={this.clearFilters.bind(this)}
+                resetFilter={resetFilter} />
+
             {items.length > 0 &&
                 <div>
                     <br />
-                    <Items items={items} viewFormat={viewFormat} />
+                    <Items items={items} viewFormat={viewFormat} clearFilters={this.addToCart.bind(this)} />
                 </div>
             }
             {items.length == 0 && onFilter == true &&

@@ -15,15 +15,16 @@ export class Item extends React.Component<any, any> {
     public render() {
         const {
             items,
-            viewFormat
+            viewFormat,
+            clearFilters
         } = this.props
 
         return <div>
             {viewFormat == 'cards' &&
-                <Card items={items}/>
+                <Card items={items} clearFilters={clearFilters}/>
             }
             {viewFormat == 'table' &&
-                <Table items={items}/>
+                <Table items={items} clearFilters={clearFilters}/>
             }
         </div>;
     }
