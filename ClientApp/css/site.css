@@ -400,7 +400,8 @@ textarea {
 .btn-secondary {
     margin: 10px 0px;
     font-family: 'Raleway', sans-serif;
-    font-weight: 600;
+    font-size: 16px;
+    padding: 10px 0px;
     width: 100%;
 }
 
@@ -608,16 +609,18 @@ textarea {
 }
 
 .custom-overlay {
-    background: rgba(26, 36, 47, .8);
+    background: rgba(26, 36, 47, 0.192);
 }
 
 .custom-modal {
     margin: 5px !important;
     background: #fffcf5;
     max-height: 100vh;
+    min-width: 35vw;
     overflow-x: hidden;
     overflow-y: scroll;
     margin-top: 25px !important;
+    padding-bottom: 25px;
 }
 
 .styles_closeButton__20ID4 {

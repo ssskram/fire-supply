@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet"
 import SelectQuantity from './EnterQuantity'
 import DeleteItem from './DeleteItems'
 import Table from "react-table"
+import Submit from './Submit'
 
 const paddingLeft = {
     paddingLeft: '25px'
@@ -25,6 +26,10 @@ const cartIcon = {
 const submitButton = {
     fontSize: '22px',
     marginTop: '15px'
+}
+
+const btnStyle = {
+    width: '250px'
 }
 
 const columns = [{
@@ -89,6 +94,11 @@ export class FullCart extends React.Component<any, any> {
         })
     }
 
+    submitIt () {
+        this.setState ({
+            updateType: 'submit'
+        })
+    }
     public render() {
         const {
             cart
@@ -279,16 +289,15 @@ export class FullCart extends React.Component<any, any> {
                     <DeleteItem closeModal={this.closeModal.bind(this)} item={selectedItem} />
                 }
                 {updateType == 'confirm' &&
-                    <div className='col-md-12'>
+                    <div className='col-md-12 text-center'>
                         <br />
-                        <h2>Is this right?</h2>
+                        <h2>Is this everything?</h2>
                         <Table
                             data={cart}
                             columns={columns}
                             loading={false}
                             minRows={0}
-                            pageSize={50}
-                            showPageSizeOptions={false}
+                            showPagination={false}
                             noDataText=''
                             defaultSorted={[
                                 {
@@ -296,8 +305,12 @@ export class FullCart extends React.Component<any, any> {
                                     asc: true
                                 }
                             ]} />
-
+                            <br/>
+                            <button style={btnStyle} onClick={this.submitIt.bind(this)} className='btn btn-success'>Yes</button>
                     </div>
+                }
+                {updateType == 'submit' &&
+                    <Submit />
                 }
             </Modal>
         </div>;
