@@ -11,6 +11,7 @@ const btnColor = {
 
 const fixedHeight = {
     height: '200px',
+    margin: '10px 0px'
 }
 
 export class ItemCard extends React.Component<any, any> {
@@ -25,6 +26,14 @@ export class ItemCard extends React.Component<any, any> {
         this.addtoCart = this.addtoCart.bind(this);
     }
 
+    componentWillReceiveProps (nextProps) {
+        if (this.props.items != nextProps.items) {
+            this.setState({
+                currentPage: 1
+            })
+        }
+    }
+    
     handleNextClick() {
         window.scrollTo(0, 0)
         let current = this.state.currentPage
@@ -81,6 +90,7 @@ export class ItemCard extends React.Component<any, any> {
                         <div className="panel-body text-center">
                             <h4>{item.obj}</h4>
                             <h5>Item type: <b>{item.family}</b></h5>
+                            <h5>Unit: <b>{item.unit}</b></h5>
                             <button style={btnColor} className='btn btn-success' onClick={() => this.addtoCart(item)}>Select</button>
                         </div>
                     </div>
