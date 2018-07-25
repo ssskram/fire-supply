@@ -1,8 +1,8 @@
 
-
 const load = 'load'
 const init = 'new'
 const add = 'add'
+const update = 'update'
 const del = 'delete'
 const submit = 'submit'
 const receive = 'receive'
@@ -36,9 +36,15 @@ export const actionCreators = {
         { type: init, cart }
     ),
 
-    updateCart: (item) => (
+    addItem: (item) => (
         // PUT function here
         { type: add, item }
+    ),
+
+    updateItem: (item) => (
+        console.log(item),
+        // PUT function here
+        { type: update, item }
     ),
 
     deleteItem: (item) => (
@@ -66,6 +72,13 @@ export const reducer = (state: CartState, action) => {
             return {
                 ...state,
                 cart: state.cart.concat(action.item)
+            };
+        case update:
+            return {
+                ...state,
+                cart: state.cart.map(cart => cart.id === action.item.id ?
+                    { ...cart, quantity: action.item.quantity } : cart
+                )
             };
         case del:
             return {

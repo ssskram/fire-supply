@@ -31,8 +31,13 @@ export class SelectQuantity extends React.Component<any, any> {
         })
     }
 
-    updateCart () {
-        this.props.updateCart(this.state)
+    addItem() {
+        this.props.addItem(this.state)
+        this.props.closeModal()
+    }
+
+    updateItem() {
+        this.props.updateItem(this.state)
         this.props.closeModal()
     }
 
@@ -42,6 +47,7 @@ export class SelectQuantity extends React.Component<any, any> {
         } = this.state
 
         const {
+            put,
             item
         } = this.props
 
@@ -66,9 +72,16 @@ export class SelectQuantity extends React.Component<any, any> {
                             />
                         </div>
                     </div>
-                    <div className='row'>
-                        <button disabled={!isEnabled} onClick={this.updateCart.bind(this)} className='btn btn-success'>Add to cart</button>
-                    </div>
+                    {!put &&
+                        <div className='row'>
+                            <button disabled={!isEnabled} onClick={this.addItem.bind(this)} className='btn btn-success'>Add to cart</button>
+                        </div>
+                    }
+                    {put == true &&
+                        <div className='row'>
+                            <button disabled={!isEnabled} onClick={this.updateItem.bind(this)} className='btn btn-success'>Update quantity</button>
+                        </div>
+                    }
                 </div>
             </div>
         </div>;

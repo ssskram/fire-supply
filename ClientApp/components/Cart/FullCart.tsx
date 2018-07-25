@@ -85,7 +85,7 @@ export class FullCart extends React.Component<any, any> {
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ export class FullCart extends React.Component<any, any> {
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ export class FullCart extends React.Component<any, any> {
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ export class FullCart extends React.Component<any, any> {
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ export class FullCart extends React.Component<any, any> {
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
                         </div>
                     </div>
                 </div>
