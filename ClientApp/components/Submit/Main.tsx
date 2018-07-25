@@ -7,6 +7,7 @@ import ItemFilters from '../Filters/InventoryFilter'
 import Items from './Items'
 import Spinner from '../Utilities/Spinner'
 import * as Cart from '../../store/cart'
+import { Helmet } from "react-helmet"
 
 export class ItemSelection extends React.Component<any, any> {
     constructor() {
@@ -86,6 +87,9 @@ export class ItemSelection extends React.Component<any, any> {
         } = this.state
 
         return <div className='col-md-12'>
+            <Helmet>
+                <style>{'body { background-color: rgba(92, 184, 92, .05); }'}</style>
+            </Helmet>
             <div className='text-center'>
                 <h2>Select an item, enter a quantity, and add it to your cart</h2>
                 <hr />

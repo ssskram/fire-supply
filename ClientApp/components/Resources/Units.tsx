@@ -14,7 +14,7 @@ const columns = [{
 }]
 
 const padding = {
-    padding: '20px'
+    paddingBottom: '20px'
 }
 export class UnitsofIssue extends React.Component<any, any> {
 

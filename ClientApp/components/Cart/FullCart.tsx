@@ -3,11 +3,24 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as Cart from '../../store/cart'
 import { Link } from 'react-router-dom'
+import { Helmet } from "react-helmet"
 
+const paddingLeft = {
+    paddingLeft: '25px'
+}
 
-const padding = {
+const cartIcon = {
     paddingRight: '15px',
-    paddingLeft: '15px'
+    paddingLeft: '15px',
+    fontSize: '5em'
+}
+
+const fixedHeight = {
+    height: '200px',
+}
+
+const quantityColor = {
+    color: '#BF1E2E'
 }
 
 export class FullCart extends React.Component<any, any> {
@@ -27,12 +40,83 @@ export class FullCart extends React.Component<any, any> {
         const houseSupplies = cart.filter(item => item.family == 'House')
         const renderHouse = houseSupplies.map((item) => {
             return (
-                <div className="col-md-12" key={item.id}>
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h4>{item.obj}</h4>
-                            <h5>Item type: <b>{item.family}</b></h5>
-                            <button className='btn btn-success'>Delete</button>
+                            <h5>Unit: <b>{item.unit}</b></h5>
+                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
+                            <button className='btn btn-danger'>Delete</button>
+                            <button className='btn btn-success'>Update quantity</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
+        const officeSupplies = cart.filter(item => item.family == 'Office')
+        const renderOffice = officeSupplies.map((item) => {
+            return (
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                    <div className="panel">
+                        <div className="panel-body text-center">
+                            <h4>{item.obj}</h4>
+                            <h4>{item.obj}</h4>
+                            <h5>Unit: <b>{item.unit}</b></h5>
+                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
+                            <button className='btn btn-danger'>Delete</button>
+                            <button className='btn btn-success'>Update quantity</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
+        const medicalSupplies = cart.filter(item => item.family == 'Medical')
+        const renderMedical = medicalSupplies.map((item) => {
+            return (
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                    <div className="panel">
+                        <div className="panel-body text-center">
+                            <h4>{item.obj}</h4>
+                            <h5>Unit: <b>{item.unit}</b></h5>
+                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
+                            <button className='btn btn-danger'>Delete</button>
+                            <button className='btn btn-success'>Update quantity</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
+        const medicine = cart.filter(item => item.family == 'Medicine')
+        const renderMedicine = medicine.map((item) => {
+            return (
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                    <div className="panel">
+                        <div className="panel-body text-center">
+                            <h4>{item.obj}</h4>
+                            <h5>Unit: <b>{item.unit}</b></h5>
+                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
+                            <button className='btn btn-danger'>Delete</button>
+                            <button className='btn btn-success'>Update quantity</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
+        const equipment = cart.filter(item => item.family == 'Equipment')
+        const renderEquipment = equipment.map((item) => {
+            return (
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                    <div className="panel">
+                        <div className="panel-body text-center">
+                            <h4>{item.obj}</h4>
+                            <h5>Unit: <b>{item.unit}</b></h5>
+                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
+                            <button className='btn btn-danger'>Delete</button>
+                            <button className='btn btn-success'>Update quantity</button>
                         </div>
                     </div>
                 </div>
@@ -40,8 +124,11 @@ export class FullCart extends React.Component<any, any> {
         })
 
         return <div>
+            <Helmet>
+                <style>{'body { background-color: rgba(92, 184, 92, .05); }'}</style>
+            </Helmet>
             <div className='col-md-12'>
-                <h2><span style={padding} className='glyphicon glyphicon-shopping-cart'></span>Shopping Cart</h2>
+                <div><span style={cartIcon} className='glyphicon glyphicon-shopping-cart'></span></div>
                 <br />
                 <div>
                     {cart.length == 0 &&
@@ -55,41 +142,50 @@ export class FullCart extends React.Component<any, any> {
                         </div>
                     }
                     {cart.length > 0 &&
-                        <div className='cart-container'>
+                        <div>
                             {houseSupplies.length > 0 &&
-                                <div>
-                                    <h2>House supplies</h2>
+                                <div className='row'>
+                                    <h2 style={paddingLeft}>House supplies</h2>
+                                    <hr/>
                                     <div>
                                         {renderHouse}
                                     </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Office').length > 0 &&
-                                <div>
-                                    <h2>
-                                        House supplies
-                                </h2>
+                                <div className='row'>
+                                    <h2 style={paddingLeft}>Office supplies</h2>
+                                    <hr/>
+                                    <div>
+                                        {renderOffice}
+                                    </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Medical').length > 0 &&
-                                <div>
-                                    <h2>
-                                        Medical supplies
-                                </h2>
+                                <div className='row'>
+                                    <h2 style={paddingLeft}>Medical supplies</h2>
+                                    <hr/>
+                                    <div>
+                                        {renderMedical}
+                                    </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Medicine').length > 0 &&
-                                <div>
-                                    <h2>
-                                        Medicine
-                                </h2>
+                                <div className='row'>
+                                    <h2 style={paddingLeft}>Medicine</h2>
+                                    <hr/>
+                                    <div>
+                                        {renderMedicine}
+                                    </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Equipment').length > 0 &&
-                                <div>
-                                    <h2>
-                                        Equipment
-                                </h2>
+                                <div className='row'>
+                                    <h2 style={paddingLeft}>Equipment</h2>
+                                    <hr/>
+                                    <div>
+                                        {renderEquipment}
+                                    </div>
                                 </div>
                             }
                         </div>
