@@ -12,18 +12,18 @@ const paddingLeft = {
     paddingLeft: '25px'
 }
 
+const paddingRight = {
+    paddingRight: '25px'
+}
+
 const cartIcon = {
-    paddingRight: '15px',
     paddingLeft: '15px',
-    fontSize: '5em'
+    fontSize: '5em',
 }
 
-const fixedHeight = {
-    height: '200px',
-}
-
-const quantityColor = {
-    color: '#BF1E2E'
+const submitButton = {
+    fontSize: '22px',
+    marginTop: '15px'
 }
 
 export class FullCart extends React.Component<any, any> {
@@ -64,6 +64,10 @@ export class FullCart extends React.Component<any, any> {
         })
     }
 
+    confirmCart() {
+        console.log(this.props.cart)
+    }
+
     public render() {
         const {
             cart
@@ -78,14 +82,14 @@ export class FullCart extends React.Component<any, any> {
         const houseSupplies = cart.filter(item => item.family == 'House')
         const renderHouse = houseSupplies.map((item) => {
             return (
-                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <h4>{item.obj}</h4>
+                            <h3>{item.obj}</h3>
+                            <h3><b>{item.quantity}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
-                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
-                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
                         </div>
                     </div>
                 </div>
@@ -95,15 +99,14 @@ export class FullCart extends React.Component<any, any> {
         const officeSupplies = cart.filter(item => item.family == 'Office')
         const renderOffice = officeSupplies.map((item) => {
             return (
-                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <h4>{item.obj}</h4>
-                            <h4>{item.obj}</h4>
+                            <h3>{item.obj}</h3>
+                            <h3><b>{item.quantity}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
-                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
-                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
                         </div>
                     </div>
                 </div>
@@ -113,14 +116,14 @@ export class FullCart extends React.Component<any, any> {
         const medicalSupplies = cart.filter(item => item.family == 'Medical')
         const renderMedical = medicalSupplies.map((item) => {
             return (
-                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <h4>{item.obj}</h4>
+                            <h3>{item.obj}</h3>
+                            <h3><b>{item.quantity}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
-                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
-                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
                         </div>
                     </div>
                 </div>
@@ -130,14 +133,14 @@ export class FullCart extends React.Component<any, any> {
         const medicine = cart.filter(item => item.family == 'Medicine')
         const renderMedicine = medicine.map((item) => {
             return (
-                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <h4>{item.obj}</h4>
+                            <h3>{item.obj}</h3>
+                            <h3><b>{item.quantity}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
-                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
-                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
                         </div>
                     </div>
                 </div>
@@ -147,14 +150,14 @@ export class FullCart extends React.Component<any, any> {
         const equipment = cart.filter(item => item.family == 'Equipment')
         const renderEquipment = equipment.map((item) => {
             return (
-                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <h4>{item.obj}</h4>
+                            <h3>{item.obj}</h3>
+                            <h3><b>{item.quantity}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
-                            <h4 style={quantityColor}>Quantity: <b>{item.quantity}</b></h4>
-                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'>Delete</button>
-                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'>Update quantity</button>
+                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
                         </div>
                     </div>
                 </div>
@@ -181,49 +184,54 @@ export class FullCart extends React.Component<any, any> {
                     }
                     {cart.length > 0 &&
                         <div>
-                            <div><span style={cartIcon} className='glyphicon glyphicon-shopping-cart'></span></div>
+                            <div className='row'>
+                                <span style={cartIcon} className='glyphicon glyphicon-shopping-cart pull-left'></span>
+                                <button style={submitButton} onClick={this.confirmCart.bind(this)} className='btn btn-success pull-right'><b>Submit order</b></button>
+                            </div>
                             <br />
                             {houseSupplies.length > 0 &&
                                 <div className='row'>
-                                    <h2 style={paddingLeft}>House supplies</h2>
+                                    <div className='d-flex justify-content-between'>
+                                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-home'></span>House supplies</h2>
+                                    </div>
                                     <hr />
-                                    <div>
+                                    <div className='col-md-12'>
                                         {renderHouse}
                                     </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Office').length > 0 &&
                                 <div className='row'>
-                                    <h2 style={paddingLeft}>Office supplies</h2>
+                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-folder-open'></span>Office supplies</h2>
                                     <hr />
-                                    <div>
+                                    <div className='col-md-12'>
                                         {renderOffice}
                                     </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Medical').length > 0 &&
                                 <div className='row'>
-                                    <h2 style={paddingLeft}>Medical supplies</h2>
+                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-plus-sign'></span>Medical supplies</h2>
                                     <hr />
-                                    <div>
+                                    <div className='col-md-12'>
                                         {renderMedical}
                                     </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Medicine').length > 0 &&
                                 <div className='row'>
-                                    <h2 style={paddingLeft}>Medicine</h2>
+                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-grain'></span>Medicine</h2>
                                     <hr />
-                                    <div>
+                                    <div className='col-md-12'>
                                         {renderMedicine}
                                     </div>
                                 </div>
                             }
                             {cart.filter(item => item.family == 'Equipment').length > 0 &&
                                 <div className='row'>
-                                    <h2 style={paddingLeft}>Equipment</h2>
+                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Equipment</h2>
                                     <hr />
-                                    <div>
+                                    <div className='col-md-12'>
                                         {renderEquipment}
                                     </div>
                                 </div>
@@ -231,6 +239,9 @@ export class FullCart extends React.Component<any, any> {
                         </div>
                     }
                 </div>
+                <br />
+                <br />
+                <br />
             </div>
             <Modal
                 open={modalIsOpen}

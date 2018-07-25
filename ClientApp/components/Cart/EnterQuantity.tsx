@@ -53,6 +53,7 @@ export class SelectQuantity extends React.Component<any, any> {
 
         const isEnabled =
             quantity != '' &&
+            quantity != '0' &&
             quantity.match(/^[0-9]+$/)
 
         return <div style={padding}>

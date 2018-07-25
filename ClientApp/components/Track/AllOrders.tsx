@@ -31,7 +31,10 @@ export class AllOrders extends React.Component<any, any> {
 
         return <div>
             <OrderFilters all={true} toggleViewFormat={this.toggleViewFormat.bind(this)} countOrders={countOrders} filter={this.filter.bind(this)}/>
-            <h1>Return all orders</h1>
+            <br/>
+            <br/>
+            <br/>
+            <h1 className='text-center'>( All orders returned here )</h1>
         </div>;
     }
 }

@@ -42,7 +42,6 @@ export const actionCreators = {
     ),
 
     updateItem: (item) => (
-        console.log(item),
         // PUT function here
         { type: update, item }
     ),

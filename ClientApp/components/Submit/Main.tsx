@@ -50,21 +50,19 @@ export class ItemSelection extends React.Component<any, any> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.onFilter == false) {
-            if (nextProps.cart.length != 0) {
-                this.setState({
-                    items: nextProps.items.filter(function (i) {
-                        const filterCartItems = obj => obj.id === i.id
-                        return !nextProps.cart.some(filterCartItems)
-                    }),
-                    loadingData: false
-                })
-            } else {
-                this.setState({
-                    items: nextProps.items,
-                    loadingData: false
-                })
-            }
+        if (nextProps.cart.length != 0) {
+            this.setState({
+                items: this.state.items.filter(function (i) {
+                    const filterCartItems = obj => obj.id === i.id
+                    return !nextProps.cart.some(filterCartItems)
+                }),
+                loadingData: false
+            })
+        } else {
+            this.setState({
+                items: nextProps.items,
+                loadingData: false
+            })
         }
     }
 
@@ -106,7 +104,6 @@ export class ItemSelection extends React.Component<any, any> {
     }
 
     toggleViewFormat(type) {
-        console.log(type)
         this.setState({
             viewFormat: type
         })
