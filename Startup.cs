@@ -24,6 +24,8 @@ namespace firesupply
         string _SPClientID = null;
         string _redirecturi = null;
         string _spresourceid = null;
+        string _azureTableName = null;
+        string _azureTableKey = null;
         private readonly IHostingEnvironment _currentEnvironment;
         public IConfiguration HostingConfig { get; private set; }
         public IConfiguration Configuration { get; }
@@ -56,6 +58,8 @@ namespace firesupply
             _SPClientID = Configuration["SPClientID"];
             _redirecturi = Configuration["redirecturi"];
             _spresourceid = Configuration["spresourceid"];
+            _azureTableName = Configuration["azureTableName"];
+            _azureTableKey = Configuration["azureTableKey"];
 
             // add application services
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -91,6 +95,8 @@ namespace firesupply
             Environment.SetEnvironmentVariable("SPClientID", Configuration["SPClientID"]);
             Environment.SetEnvironmentVariable("redirecturi", Configuration["redirecturi"]);
             Environment.SetEnvironmentVariable("spresourceid", Configuration["spresourceid"]);
+            Environment.SetEnvironmentVariable("azureTableName", Configuration["azureTableName"]);
+            Environment.SetEnvironmentVariable("azureTableKey", Configuration["azureTableKey"]);
 
             services.AddMvc()
                 .AddSessionStateTempDataProvider();

@@ -43,7 +43,8 @@ export const actionCreators = {
         { type: del, item }
     ),
 
-    submitCart: (order) => (
+    submitCart: (order) => () => (
+        console.log(order),
         // SUBMIT function here
         { type: submit }
     ),
