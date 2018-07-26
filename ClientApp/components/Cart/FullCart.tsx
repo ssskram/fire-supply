@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import Modal from 'react-responsive-modal'
 import * as Cart from '../../store/cart'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Helmet } from "react-helmet"
 import SelectQuantity from './EnterQuantity'
 import DeleteItem from './DeleteItems'
@@ -99,6 +99,7 @@ export class FullCart extends React.Component<any, any> {
             updateType: 'submit'
         })
     }
+
     public render() {
         const {
             cart
@@ -195,6 +196,23 @@ export class FullCart extends React.Component<any, any> {
             )
         })
 
+        const miscellaneous = cart.filter(item => item.family == 'Miscellaneous')
+        const renderMiscellaneous = miscellaneous.map((item) => {
+            return (
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
+                    <div className="panel">
+                        <div className="panel-body text-center">
+                            <h3>{item.obj}</h3>
+                            <h3><b>{item.quantity}</b></h3>
+                            <h5>Unit: <b>{item.unit}</b></h5>
+                            <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
+                            <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
         if (cart.length == 0) {
             return <Redirect to='/Items' />;
         }
@@ -253,6 +271,15 @@ export class FullCart extends React.Component<any, any> {
                         <hr />
                         <div className='col-md-12'>
                             {renderEquipment}
+                        </div>
+                    </div>
+                }
+                {miscellaneous.length > 0 &&
+                    <div className='row'>
+                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Miscellaneous</h2>
+                        <hr />
+                        <div className='col-md-12'>
+                            {renderMiscellaneous}
                         </div>
                     </div>
                 }

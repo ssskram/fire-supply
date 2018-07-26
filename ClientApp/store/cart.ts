@@ -75,7 +75,7 @@ export const reducer = (state: CartState, action) => {
         case update:
             return {
                 ...state,
-                cart: state.cart.map(cart => cart.id === action.item.id ?
+                cart: state.cart.map(cart => cart.obj === action.item.obj ?
                     { ...cart, quantity: action.item.quantity } : cart
                 )
             };
@@ -83,7 +83,7 @@ export const reducer = (state: CartState, action) => {
             return {
                 ...state,
                 cart: state.cart.filter(function (i) {
-                    return i.id !== action.item.id;
+                    return i.obj !== action.item.obj;
                 })
             };
         case submit:

@@ -5,9 +5,11 @@ import * as Ping from '../../store/ping'
 import * as ItemsStore from '../../store/items'
 import ItemFilters from '../Filters/InventoryFilter'
 import Items from './Items'
+import Modal from 'react-responsive-modal'
 import Spinner from '../Utilities/Spinner'
 import * as Cart from '../../store/cart'
 import { Helmet } from "react-helmet"
+import MiscItem from './MiscItem'
 
 export class ItemSelection extends React.Component<any, any> {
     constructor() {
@@ -16,6 +18,7 @@ export class ItemSelection extends React.Component<any, any> {
             items: [],
             viewFormat: 'cards',
             onFilter: false,
+            modalIsOpen: false
         }
     }
 
@@ -128,11 +131,24 @@ export class ItemSelection extends React.Component<any, any> {
 
     }
 
+    addMiscItem() {
+        this.setState({
+            modalIsOpen: true
+        })
+    }
+
+    closeModal() {
+        this.setState({
+            modalIsOpen: false
+        });
+    }
+
     public render() {
         const {
             items,
             viewFormat,
             onFilter,
+            modalIsOpen
         } = this.state
 
         return <div className='col-md-12'>
@@ -143,20 +159,39 @@ export class ItemSelection extends React.Component<any, any> {
                 <h2>Select an item, enter a quantity, and add it to your cart</h2>
                 <hr />
             </div>
-            
+
             <ItemFilters
                 toggleViewFormat={this.toggleViewFormat.bind(this)}
                 filter={this.filter.bind(this)}
-                clear={this.clearFilters.bind(this)}/>
+                clear={this.clearFilters.bind(this)} />
 
             {items.length > 0 &&
                 <div>
                     <Items items={items} viewFormat={viewFormat} />
                 </div>
             }
+            {items.length == 0 && onFilter == true &&
+                <div>
+                    <br />
+                    <div className='col-md-12 text-center'>
+                        <h1>Can't find what you're looking for?</h1>
+                        <button onClick={this.addMiscItem.bind(this)} className='btn btn-success'>Add a miscellaneous item</button>
+                    </div>
+                </div>
+            }
             {items.length == 0 && onFilter == false &&
                 <Spinner notice='...loading the inventory...' />
             }
+            <Modal
+                open={modalIsOpen}
+                onClose={this.closeModal.bind(this)}
+                classNames={{
+                    overlay: 'custom-overlay',
+                    modal: 'custom-modal'
+                }}
+                center>
+                <MiscItem closeModal={this.closeModal.bind(this)} />
+            </Modal>
         </div>;
     }
 }
