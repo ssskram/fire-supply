@@ -15,7 +15,6 @@ const cartIcon = {
 }
 
 const cartCount = {
-    marginTop: '-20px',
     marginLeft: '10px'
 }
 

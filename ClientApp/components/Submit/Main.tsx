@@ -154,14 +154,6 @@ export class ItemSelection extends React.Component<any, any> {
                     <Items items={items} viewFormat={viewFormat} />
                 </div>
             }
-            {items.length == 0 && onFilter == true &&
-                <div>
-                    <br />
-                    <div className='col-md-12 text-center'>
-                        <h1>Sorry, I can't find that</h1>
-                    </div>
-                </div>
-            }
             {items.length == 0 && onFilter == false &&
                 <Spinner notice='...loading the inventory...' />
             }
