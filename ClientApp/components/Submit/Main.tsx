@@ -151,7 +151,6 @@ export class ItemSelection extends React.Component<any, any> {
 
             {items.length > 0 &&
                 <div>
-                    <br />
                     <Items items={items} viewFormat={viewFormat} />
                 </div>
             }
@@ -159,7 +158,7 @@ export class ItemSelection extends React.Component<any, any> {
                 <div>
                     <br />
                     <div className='col-md-12 text-center'>
-                        <h1>Sorry, I can't find anything matching those parameters</h1>
+                        <h1>Sorry, I can't find that</h1>
                     </div>
                 </div>
             }

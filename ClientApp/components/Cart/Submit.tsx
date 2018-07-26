@@ -68,6 +68,7 @@ export class Submit extends React.Component<any, any> {
         if (redirect) {
             return <Redirect to='/' />;
         }
+        
         return <div>
             <div className='text-center' >
                 <h2 style={greenFont}>Submit your order</h2>

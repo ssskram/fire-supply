@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import Modal from 'react-responsive-modal'
 import * as Cart from '../../store/cart'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Helmet } from "react-helmet"
 import SelectQuantity from './EnterQuantity'
 import DeleteItem from './DeleteItems'
@@ -94,8 +94,8 @@ export class FullCart extends React.Component<any, any> {
         })
     }
 
-    submitIt () {
-        this.setState ({
+    submitIt() {
+        this.setState({
             updateType: 'submit'
         })
     }
@@ -195,81 +195,67 @@ export class FullCart extends React.Component<any, any> {
             )
         })
 
+        if (cart.length == 0) {
+            return <Redirect to='/Items' />;
+        }
+
         return <div>
             <Helmet>
                 <style>{'body { background-color: rgba(92, 184, 92, .05); }'}</style>
             </Helmet>
             <div className='col-md-12'>
-                <div>
-                    {cart.length == 0 &&
-                        <div className='text-center'>
-                            <br />
-                            <br />
-                            <br />
-                            <h1>Your cart is empty!</h1>
-                            <br />
-                            <div><span style={cartIcon} className='glyphicon glyphicon-shopping-cart'></span></div>
-                            <br />
-                            <h1><Link to={'/Items'}>Head here to get started</Link></h1>
-                        </div>
-                    }
-                    {cart.length > 0 &&
-                        <div>
-                            <div className='row'>
-                                <span style={cartIcon} className='glyphicon glyphicon-shopping-cart pull-left'></span>
-                                <button style={submitButton} onClick={this.confirmCart.bind(this)} className='btn btn-success pull-right'><b>Submit order</b></button>
-                            </div>
-                            <br />
-                            {houseSupplies.length > 0 &&
-                                <div className='row'>
-                                    <div className='d-flex justify-content-between'>
-                                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-home'></span>House supplies</h2>
-                                    </div>
-                                    <hr />
-                                    <div className='col-md-12'>
-                                        {renderHouse}
-                                    </div>
-                                </div>
-                            }
-                            {officeSupplies.length > 0 &&
-                                <div className='row'>
-                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-folder-open'></span>Office supplies</h2>
-                                    <hr />
-                                    <div className='col-md-12'>
-                                        {renderOffice}
-                                    </div>
-                                </div>
-                            }
-                            {medicalSupplies.length > 0 &&
-                                <div className='row'>
-                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-plus-sign'></span>Medical supplies</h2>
-                                    <hr />
-                                    <div className='col-md-12'>
-                                        {renderMedical}
-                                    </div>
-                                </div>
-                            }
-                            {medicine.length > 0 &&
-                                <div className='row'>
-                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-grain'></span>Medicine</h2>
-                                    <hr />
-                                    <div className='col-md-12'>
-                                        {renderMedicine}
-                                    </div>
-                                </div>
-                            }
-                            {equipment.length > 0 &&
-                                <div className='row'>
-                                    <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Equipment</h2>
-                                    <hr />
-                                    <div className='col-md-12'>
-                                        {renderEquipment}
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    }
+                <div className='row'>
+                    <span style={cartIcon} className='glyphicon glyphicon-shopping-cart pull-left'></span>
+                    <button style={submitButton} onClick={this.confirmCart.bind(this)} className='btn btn-success pull-right'><b>Submit order</b></button>
                 </div>
+                <br />
+                {houseSupplies.length > 0 &&
+                    <div className='row'>
+                        <div className='d-flex justify-content-between'>
+                            <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-home'></span>House supplies</h2>
+                        </div>
+                        <hr />
+                        <div className='col-md-12'>
+                            {renderHouse}
+                        </div>
+                    </div>
+                }
+                {officeSupplies.length > 0 &&
+                    <div className='row'>
+                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-folder-open'></span>Office supplies</h2>
+                        <hr />
+                        <div className='col-md-12'>
+                            {renderOffice}
+                        </div>
+                    </div>
+                }
+                {medicalSupplies.length > 0 &&
+                    <div className='row'>
+                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-plus-sign'></span>Medical supplies</h2>
+                        <hr />
+                        <div className='col-md-12'>
+                            {renderMedical}
+                        </div>
+                    </div>
+                }
+                {medicine.length > 0 &&
+                    <div className='row'>
+                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-grain'></span>Medicine</h2>
+                        <hr />
+                        <div className='col-md-12'>
+                            {renderMedicine}
+                        </div>
+                    </div>
+                }
+                {equipment.length > 0 &&
+                    <div className='row'>
+                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Equipment</h2>
+                        <hr />
+                        <div className='col-md-12'>
+                            {renderEquipment}
+                        </div>
+                    </div>
+                }
                 <br />
                 <br />
                 <br />
@@ -305,8 +291,8 @@ export class FullCart extends React.Component<any, any> {
                                     asc: true
                                 }
                             ]} />
-                            <br/>
-                            <button style={btnStyle} onClick={this.submitIt.bind(this)} className='btn btn-success'>Yes</button>
+                        <br />
+                        <button style={btnStyle} onClick={this.submitIt.bind(this)} className='btn btn-success'>Yes</button>
                     </div>
                 }
                 {updateType == 'submit' &&
