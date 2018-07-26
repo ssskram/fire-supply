@@ -32,7 +32,9 @@ const greenFont = {
 
 const red = {
     color: '#BF1E2E',
-    paddingLeft: '15px'
+    paddingLeft: '15px',
+    marginBottom: '-15px',
+    marginTop: '15px'
 }
 
 export class Submit extends React.Component<any, any> {
