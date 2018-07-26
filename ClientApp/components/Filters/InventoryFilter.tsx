@@ -134,7 +134,7 @@ export class InventoryFilter extends React.Component<any, any> {
                             <Select
                                 value={family}
                                 name="family"
-                                header='Filter by item type'
+                                header='Filter by type'
                                 placeholder='Select an item type'
                                 onChange={this.handleChildSelect.bind(this)}
                                 multi={false}
