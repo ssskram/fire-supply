@@ -17,6 +17,11 @@ const emergencies = [
     { value: 'No', label: 'No', name: 'emergency' },
 ]
 
+const narcans = [
+    { value: 'Yes', label: 'Yes', name: 'narcanCases' },
+    { value: 'No', label: 'No', name: 'narcanCases' },
+]
+
 const btnStyle = {
     width: '250px'
 }
@@ -25,6 +30,10 @@ const greenFont = {
     color: '#5cb85c'
 }
 
+const red = {
+    color: '#BF1E2E',
+    paddingLeft: '15px'
+}
 
 export class Submit extends React.Component<any, any> {
     constructor(props) {
@@ -34,7 +43,9 @@ export class Submit extends React.Component<any, any> {
             items: props.cart,
             comments: '',
             emergency: '',
-            emergencyJusticiation: ''
+            emergencyJusticiation: '',
+            narcanCases: '',
+            narcanExplanation: '',
         }
     }
 
@@ -59,12 +70,15 @@ export class Submit extends React.Component<any, any> {
             comments,
             emergency,
             emergencyJusticiation,
-            redirect
+            narcanCases,
+            narcanExplanation
         } = this.state
 
         const isEnabled =
             house != ''
-        
+
+        const narcan = this.props.cart.filter(item => item.obj == 'Narcan')
+
         return <div>
             <div className='text-center' >
                 <h2 style={greenFont}>Submit your order</h2>
@@ -88,25 +102,50 @@ export class Submit extends React.Component<any, any> {
                     callback={this.handleChildChange.bind(this)}
                 />
 
-                <Select
-                    value={emergency}
-                    name="emergency"
-                    header='Is this an emergency?'
-                    placeholder='Select...'
-                    onChange={this.handleChildSelect.bind(this)}
-                    multi={false}
-                    options={emergencies}
-                />
-
-                {emergency == 'Yes' &&
-                    <TextArea
-                        value={emergencyJusticiation}
-                        name="emergencyJusticiation"
-                        header="Justicication"
-                        placeholder="Explain the circumstances"
-                        callback={this.handleChildChange.bind(this)}
+                <div>
+                    <Select
+                        value={emergency}
+                        name="emergency"
+                        header='Is this an emergency?'
+                        placeholder='Select...'
+                        onChange={this.handleChildSelect.bind(this)}
+                        multi={false}
+                        options={emergencies}
                     />
+                    {emergency == 'Yes' &&
+                        <TextArea
+                            value={emergencyJusticiation}
+                            name="emergencyJusticiation"
+                            header="Justicication"
+                            placeholder="Explain the emergency"
+                            callback={this.handleChildChange.bind(this)}
+                        />
+                    }
+                </div>
+
+                {narcan.length > 0 &&
+                    <div>
+                        <h3 style={red}>Narcan</h3>
+                        <hr/>
+                        <Select
+                            value={narcanCases}
+                            name="narcanCases"
+                            header='Do you have the cases?'
+                            placeholder='Select...'
+                            onChange={this.handleChildSelect.bind(this)}
+                            multi={false}
+                            options={narcans}
+                        />
+                        <TextArea
+                            value={narcanExplanation}
+                            name="narcanExplanation"
+                            header="If amount administered is unknown, please explain why"
+                            placeholder="Explanation..."
+                            callback={this.handleChildChange.bind(this)}
+                        />
+                    </div>
                 }
+
                 <div className='text-center'>
                     <button disabled={!isEnabled} style={btnStyle} onClick={this.post.bind(this)} className='btn btn-success'>Submit</button>
                 </div>
