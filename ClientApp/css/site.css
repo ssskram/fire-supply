@@ -787,7 +787,9 @@ a[href^="https://maps.google.com/maps"] {
 }
 
 .mini-cart-button {
-    width: 150px !important;
+    width: 200px !important;
+    font-size: 20px !important;
+    width: 85% !important;
 }
 
 .red-border {

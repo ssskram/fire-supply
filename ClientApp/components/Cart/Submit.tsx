@@ -38,7 +38,7 @@ export class Submit extends React.Component<any, any> {
 
         }
     }
-    
+
     handleChildSelect(event) {
         this.setState({ [event.name]: event.value });
     }
@@ -61,6 +61,9 @@ export class Submit extends React.Component<any, any> {
             emergencyJusticiation,
             redirect
         } = this.state
+
+        const isEnabled =
+            house != ''
 
         if (redirect) {
             return <Redirect to='/' />;
@@ -108,7 +111,7 @@ export class Submit extends React.Component<any, any> {
                     />
                 }
                 <div className='text-center'>
-                    <button style={btnStyle} onClick={this.post.bind(this)} className='btn btn-success'>Submit</button>
+                    <button disabled={!isEnabled} style={btnStyle} onClick={this.post.bind(this)} className='btn btn-success'>Submit</button>
                 </div>
             </div>
         </div>;

@@ -117,7 +117,6 @@ export class NavMenu extends React.Component<any, any>  {
                         <div className="sidenav-header">Shopping Cart</div>
                         <hr style={hrMargin} />
                         <MiniCart />
-                        <br />
                         <div className='accountcontainer'>
                             <div className="account">{user}</div>
                             <div className='logout'>
@@ -141,7 +140,12 @@ export class NavMenu extends React.Component<any, any>  {
                     <br />
                     <br />
                     <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        <b>Place an order</b>
+                        {this.props.cart.length == 0 &&
+                            <b>Place an order</b>
+                        }
+                        {this.props.cart.length > 0 &&
+                            <b>Add items to cart</b>
+                        }
                     </Link>
                     <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
                         All orders
