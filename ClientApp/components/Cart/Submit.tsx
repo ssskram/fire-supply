@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as MessagesStore from '../../store/messages'
 import TextArea from './../FormElements/textarea'
 import Select from './../FormElements/select'
+import * as Cart from '../../store/cart'
 
 const houses = [
     { value: '', label: 'All', name: 'house' },
@@ -27,15 +27,14 @@ const greenFont = {
 
 
 export class Submit extends React.Component<any, any> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             house: '',
+            items: props.cart,
             comments: '',
             emergency: '',
-            emergencyJusticiation: '',
-            redirect: false
-
+            emergencyJusticiation: ''
         }
     }
 
@@ -50,7 +49,8 @@ export class Submit extends React.Component<any, any> {
     post(event) {
         event.preventDefault()
         this.props.success()
-        this.setState({ redirect: true })
+        this.props.GoHome()
+        this.props.submitCart(this.state)
     }
 
     public render() {
@@ -64,10 +64,6 @@ export class Submit extends React.Component<any, any> {
 
         const isEnabled =
             house != ''
-
-        if (redirect) {
-            return <Redirect to='/' />;
-        }
         
         return <div>
             <div className='text-center' >
@@ -122,8 +118,10 @@ export class Submit extends React.Component<any, any> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.messages,
+        ...state.cart
     }),
     ({
         ...MessagesStore.actionCreators,
+        ...Cart.actionCreators
     })
 )(Submit as any) as typeof Submit;

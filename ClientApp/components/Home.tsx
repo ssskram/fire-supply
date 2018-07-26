@@ -24,7 +24,7 @@ export class Home extends React.Component<any, any> {
                 loadingData: false
             })
         }
-        
+
         // ping server
         this.props.ping()
 

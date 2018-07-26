@@ -54,7 +54,8 @@ export class FullCart extends React.Component<any, any> {
             selectedItem: {},
             updateType: '',
             emergencyOrder: false,
-            house: ''
+            house: '',
+            submitted: false
         }
     }
 
@@ -100,6 +101,12 @@ export class FullCart extends React.Component<any, any> {
         })
     }
 
+    goHome() {
+        this.setState({
+            submitted: true
+        })
+    }
+
     public render() {
         const {
             cart
@@ -108,8 +115,17 @@ export class FullCart extends React.Component<any, any> {
         const {
             modalIsOpen,
             selectedItem,
-            updateType
+            updateType,
+            submitted
         } = this.state
+
+        if (submitted == true) {
+            return <Redirect to='/' />;
+        }
+
+        if (cart.length == 0) {
+            return <Redirect to='/Items' />;
+        }
 
         const houseSupplies = cart.filter(item => item.family == 'House')
         const renderHouse = houseSupplies.map((item) => {
@@ -212,10 +228,6 @@ export class FullCart extends React.Component<any, any> {
                 </div>
             )
         })
-
-        if (cart.length == 0) {
-            return <Redirect to='/Items' />;
-        }
 
         return <div>
             <Helmet>
@@ -323,7 +335,7 @@ export class FullCart extends React.Component<any, any> {
                     </div>
                 }
                 {updateType == 'submit' &&
-                    <Submit />
+                    <Submit cart={cart} GoHome={this.goHome.bind(this)}/>
                 }
             </Modal>
         </div>;

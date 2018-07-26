@@ -1,6 +1,5 @@
 
 const load = 'load'
-const init = 'new'
 const add = 'add'
 const update = 'update'
 const del = 'delete'
@@ -8,13 +7,11 @@ const submit = 'submit'
 const receive = 'receive'
 
 const unloadedState: CartState = {
-    cart: [],
-    house: ''
+    cart: []
 };
 
 export interface CartState {
     cart: CartItems[]
-    house: string
 }
 
 export interface CartItems {
@@ -29,11 +26,6 @@ export const actionCreators = {
     loadCart: () => (
         // GET function here
         { type: load }
-    ),
-
-    newCart: (cart) => (
-        // POST function here
-        { type: init, cart }
     ),
 
     addItem: (item) => (
@@ -51,19 +43,15 @@ export const actionCreators = {
         { type: del, item }
     ),
 
-    submitCart: (cart) => (
-        // PUT function here
-        { type: submit, cart }
-    )
+    submitCart: (order) => (
+        // SUBMIT function here
+        { type: submit }
+    ),
 };
 
 export const reducer = (state: CartState, action) => {
     switch (action.type) {
         case load:
-            return {
-                cart: state.cart
-            };
-        case init:
             return {
                 cart: state.cart
             };
@@ -88,7 +76,7 @@ export const reducer = (state: CartState, action) => {
             };
         case submit:
             return {
-                cart: unloadedState
+                cart: []
             };
         case receive:
             return {

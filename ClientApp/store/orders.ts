@@ -20,7 +20,7 @@ type KnownAction = RequestOrdersAction | ReceiveOrdersAction;
 
 export const actionCreators = {
     orders: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        let fetchTask = fetch('/api/orders/pong', {
+        let fetchTask = fetch('/api/orders/all', {
             credentials: 'same-origin',
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
