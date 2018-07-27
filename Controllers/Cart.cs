@@ -49,7 +49,6 @@ namespace firesupply.Controllers {
 
         [HttpGet ("[action]")]
         public async Task load () {
-            await Task.Delay (1);
             var user = _userManager.GetUserName (HttpContext.User);
             var table = Environment.GetEnvironmentVariable ("azureTableName");
             var key = Environment.GetEnvironmentVariable ("azureTableKey");
@@ -58,16 +57,17 @@ namespace firesupply.Controllers {
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient ();
             CloudTable orders = tableClient.GetTableReference ("Orders");
 
-            var query = new TableQuery<OrderEntity> () {
-                SelectColumns = new List<string> { "RowKey", "Description" }
-            };
+            string filter = String.Format ("PartitionKey eq 'false' and user eq {0}", user);
+            TableQuery<OrderEntity> query = new TableQuery<OrderEntity> ().Where (filter);
 
-            var cart = await orders.ExecuteQuerySegmentedAsync<OrderEntity>(query, null);
+            var cart = await orders.ExecuteQuerySegmentedAsync<OrderEntity> (query, null);
 
             if (cart != null) {
-
+                // return existing cart to client
             } else {
                 await newCart ();
+                var id = newCart ().Result;
+                // return new cart to client
             }
         }
 
@@ -109,7 +109,7 @@ namespace firesupply.Controllers {
             OrderEntity updateEntity = (OrderEntity) retrievedResult.Result;
 
             // modify the result
-            updateEntity.items = "425-555-0105";
+            updateEntity.items = "[...]";
 
             // create the new order entity operation
             TableOperation updateOperation = TableOperation.Replace (updateEntity);
