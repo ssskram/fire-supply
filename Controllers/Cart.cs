@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using firesupply.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Table;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
+using MongoDB.Driver;
+using MongoDB.Driver.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -25,128 +28,63 @@ namespace firesupply.Controllers {
             _userManager = userManager;
         }
 
-        public class OrderEntity : TableEntity {
-            public OrderEntity (string submitted, string id) {
-                this.PartitionKey = submitted;
-                this.RowKey = id;
-            }
-            public OrderEntity () { }
-
-            public string submitted { get; set; }
-            public string user { get; set; }
-            public string house { get; set; }
-            public string comments { get; set; }
-            public string emergency { get; set; }
-            public string emergencyJustification { get; set; }
-            public string narcanCases { get; set; }
-            public string narcanExplanation { get; set; }
-            public string supplyComments { get; set; }
-            public string status { get; set; }
-            public string items { get; set; }
-        }
-
         HttpClient client = new HttpClient ();
 
         [HttpGet ("[action]")]
-        public async Task load () {
-            var user = _userManager.GetUserName (HttpContext.User);
-            var table = Environment.GetEnvironmentVariable ("azureTableName");
-            var key = Environment.GetEnvironmentVariable ("azureTableKey");
-            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials (table, key);
-            var storageAccount = new CloudStorageAccount (credentials, "core.usgovcloudapi.net", useHttps : true);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient ();
-            CloudTable orders = tableClient.GetTableReference ("Orders");
-
-            string filter = String.Format ("PartitionKey eq 'false' and user eq {0}", user);
-            TableQuery<OrderEntity> query = new TableQuery<OrderEntity> ().Where (filter);
-
-            var cart = await orders.ExecuteQuerySegmentedAsync<OrderEntity> (query, null);
-
+        public async Task<object> load () {
+            var collection = getCollection ();
+            var filter = Builders<OrderEntity>.Filter.Eq ("submitted", "false");
+            // TODO add additional filter to select logged in user
+            var cart = collection.Find (filter).FirstOrDefault ();
             if (cart != null) {
-                // return existing cart to client
+                return cart;
             } else {
                 await newCart ();
                 var id = newCart ().Result;
-                // return new cart to client
+                return id;
             }
         }
 
         public async Task<string> newCart () {
+            var collection = getCollection ();
             var user = _userManager.GetUserName (HttpContext.User);
-            var table = Environment.GetEnvironmentVariable ("azureTableName");
-            var key = Environment.GetEnvironmentVariable ("azureTableKey");
-            Guid id = Guid.NewGuid ();
-            OrderEntity order = new OrderEntity ("false", id.ToString ());
-            order.user = user;
-            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials (table, key);
-            var storageAccount = new CloudStorageAccount (credentials, "core.usgovcloudapi.net", useHttps : true);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient ();
-            CloudTable orders = tableClient.GetTableReference ("Orders");
-            TableOperation insertOperation = TableOperation.Insert (order);
-            await orders.ExecuteAsync (insertOperation);
-            return id.ToString ();
+            Guid uuid = Guid.NewGuid ();
+            OrderEntity crt = new OrderEntity () {
+                id = uuid.ToString (),
+                user = user,
+                submitted = "false"
+            };
+            collection.InsertOne (crt);
+            return uuid.ToString ();
         }
 
-        public async Task put (string id) {
-            // handle full object here from client
-
-            var user = _userManager.GetUserName (HttpContext.User);
-            var table = Environment.GetEnvironmentVariable ("azureTableName");
-            var key = Environment.GetEnvironmentVariable ("azureTableKey");
-            string submitted = "false";
-            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials (table, key);
-            var storageAccount = new CloudStorageAccount (credentials, "core.usgovcloudapi.net", useHttps : true);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient ();
-            CloudTable orders = tableClient.GetTableReference ("Orders");
-
-            // create a retrieve operation that takes an order entity.
-            TableOperation retrieveOperation = TableOperation.Retrieve<OrderEntity> (submitted, id);
-
-            // get it
-            TableResult retrievedResult = await orders.ExecuteAsync (retrieveOperation);
-
-            // handle result
-            OrderEntity updateEntity = (OrderEntity) retrievedResult.Result;
-
-            // modify the result
-            updateEntity.items = "[...]";
-
-            // create the new order entity operation
-            TableOperation updateOperation = TableOperation.Replace (updateEntity);
-
-            // execute it
-            await orders.ExecuteAsync (updateOperation);
+        [HttpPost ("[action]")]
+        public async Task put ([FromBody] OrderEntity model) {
+            var collection = getCollection ();
+            var filter = Builders<OrderEntity>.Filter.Eq ("Id", model.id);
+            var update = Builders<OrderEntity>.Update.Set ("Items", model.items);
+            var result = await collection.UpdateOneAsync (filter, update);
         }
 
-        public async Task submit (string id) {
-            // handle full object here from client
+        [HttpPost ("[action]")]
+        public async Task submit ([FromBody] OrderEntity model) {
+            var collection = getCollection ();
+            var filter = Builders<OrderEntity>.Filter.Eq ("Id", model.id);
+            var result = await collection.FindOneAndReplaceAsync (filter, model);
+        }
 
+        private IMongoCollection<OrderEntity> getCollection () {
             var user = _userManager.GetUserName (HttpContext.User);
-            var table = Environment.GetEnvironmentVariable ("azureTableName");
-            var key = Environment.GetEnvironmentVariable ("azureTableKey");
-            string submitted = "true";
-            var credentials = new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials (table, key);
-            var storageAccount = new CloudStorageAccount (credentials, "core.usgovcloudapi.net", useHttps : true);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient ();
-            CloudTable orders = tableClient.GetTableReference ("Orders");
-
-            // create a retrieve operation that takes an order entity.
-            TableOperation retrieveOperation = TableOperation.Retrieve<OrderEntity> (submitted, id);
-
-            // get it
-            TableResult retrievedResult = await orders.ExecuteAsync (retrieveOperation);
-
-            // handle result
-            OrderEntity updateEntity = (OrderEntity) retrievedResult.Result;
-
-            // modify the result
-            updateEntity.items = "425-555-0105";
-
-            // create the new order entity operation
-            TableOperation updateOperation = TableOperation.Replace (updateEntity);
-
-            // execute it
-            await orders.ExecuteAsync (updateOperation);
+            var connectionString = Environment.GetEnvironmentVariable ("mongoURI");
+            MongoClientSettings settings = MongoClientSettings.FromUrl (
+                new MongoUrl (connectionString)
+            );
+            settings.SslSettings =
+                new SslSettings () { EnabledSslProtocols = SslProtocols.Tls12 };
+            var mongoClient = new MongoClient (settings);
+            var database = mongoClient.GetDatabase ("firesupply");
+            var collection = database.GetCollection<OrderEntity> ("orders");
+            return collection;
         }
     }
 }

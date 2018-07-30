@@ -1,3 +1,4 @@
+import { fetch } from 'domain-task';
 
 const load = 'load'
 const add = 'add'
@@ -23,15 +24,31 @@ export interface CartItems {
 }
 
 export const actionCreators = {
-    loadCart: () => (
-        // GET function here
-        { type: load }
-    ),
+    loadCart: () => (dispatch) => {
+        fetch('/api/cart/load', {
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({ type: load, cart: data });
+            });
+    },
 
-    addItem: (item) => (
-        // PUT function here
-        { type: add, item }
-    ),
+    addItem: (item) => (dispatch) => {
+        fetch('/api/cart/update', {
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({ type: add, item });
+            });
+    },
 
     updateItem: (item) => (
         // PUT function here
