@@ -37,18 +37,9 @@ export const actionCreators = {
             });
     },
 
-    addItem: (item) => (dispatch) => {
-        fetch('/api/cart/update', {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                dispatch({ type: add, item });
-            });
-    },
+    addItem: (item) => (
+        {type: add, item}
+    ),
 
     updateItem: (item) => (
         // PUT function here

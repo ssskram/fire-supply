@@ -31,21 +31,20 @@ namespace firesupply.Controllers {
         HttpClient client = new HttpClient ();
 
         [HttpGet ("[action]")]
-        public async Task<object> load () {
+        public object load () {
             var collection = getCollection ();
-            var filter = Builders<OrderEntity>.Filter.Eq ("submitted", "false");
-            // TODO add additional filter to select logged in user
+            var user = _userManager.GetUserName (HttpContext.User);
+            var filter = Builders<OrderEntity>.Filter.Eq ("submitted", "false") & Builders<OrderEntity>.Filter.Eq ("user", user);
             var cart = collection.Find (filter).FirstOrDefault ();
             if (cart != null) {
                 return cart;
             } else {
-                await newCart ();
-                var id = newCart ().Result;
+                var id = newCart ();
                 return id;
             }
         }
 
-        public async Task<string> newCart () {
+        private string newCart () {
             var collection = getCollection ();
             var user = _userManager.GetUserName (HttpContext.User);
             Guid uuid = Guid.NewGuid ();
