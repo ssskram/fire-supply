@@ -39,22 +39,31 @@ namespace firesupply.Controllers {
             if (cart != null) {
                 return cart;
             } else {
-                var id = newCart ();
-                return id;
+                var emptyCart = newCart ();
+                return emptyCart;
             }
         }
 
-        private string newCart () {
+        private object newCart () {
             var collection = getCollection ();
             var user = _userManager.GetUserName (HttpContext.User);
             Guid uuid = Guid.NewGuid ();
             OrderEntity crt = new OrderEntity () {
                 id = uuid.ToString (),
                 user = user,
-                submitted = "false"
+                submitted = "false",
+                house = null,
+                comments = null,
+                emergency = null,
+                emergencyJustification = null,
+                narcanCases = null,
+                narcanExplanation = null,
+                supplyComments = null,
+                status = null,
+                items = null
             };
             collection.InsertOne (crt);
-            return uuid.ToString ();
+            return crt;
         }
 
         [HttpPost ("[action]")]

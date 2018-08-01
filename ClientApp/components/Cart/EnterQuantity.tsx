@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import Input from '../FormElements/input'
 import * as Cart from '../../store/cart'
+import { Item } from '../Submit/Items';
 
 const padding = {
     padding: '25px'
@@ -17,17 +18,22 @@ export class SelectQuantity extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            obj: props.item.obj,
-            id: props.item.id,
-            family: props.item.family,
-            unit: props.item.unit,
-            quantity: ''
+            id: this.props.id,
+            item: {
+                obj: props.item.obj,
+                id: props.item.id,
+                family: props.item.family,
+                unit: props.item.unit,
+                quantity: ''
+            }
         }
     }
 
     handleChildChange(event) {
+        let item = {...this.state.item}
+        item.quantity = event.target.value
         this.setState({
-            [event.target.name]: event.target.value
+            item
         })
     }
 
@@ -44,7 +50,7 @@ export class SelectQuantity extends React.Component<any, any> {
     public render() {
         const {
             quantity
-        } = this.state
+        } = this.state.item
 
         const {
             put,

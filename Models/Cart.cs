@@ -38,7 +38,16 @@ namespace firesupply.Models {
         public string status { get; set; }
 
         [BsonElement ("items")]
-        public string items { get; set; }
+        public CartItem items { get; set; }
+    }
+
+    public class CartItem {
+        public string obj { get; set; }
+        public string id { get; set; }
+        public int quantity { get; set; }
+        public string family { get; set; }
+        public string unit { get; set; }
+
     }
 
 }

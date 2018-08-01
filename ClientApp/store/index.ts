@@ -13,6 +13,7 @@ export interface ApplicationState {
     orders: Orders.OrdersState;
     items: Items.ItemsState;
     cart: Cart.CartState;
+    cartID: Cart.ID
 
 }
 export const reducers = {

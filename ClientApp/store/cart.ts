@@ -8,11 +8,31 @@ const submit = 'submit'
 const receive = 'receive'
 
 const unloadedState: CartState = {
-    cart: []
+    cart: [],
+    submitted: '',
+    user: '',
+    house: '',
+    comments: '',
+    emergency: '',
+    emergencyJustification: '',
+    narcanCases: '',
+    narcanExplanation: ''
 };
+
+export interface ID {
+    id: string
+}
 
 export interface CartState {
     cart: CartItems[]
+    submitted: string
+    user: string
+    house: string
+    comments: string
+    emergency: string
+    emergencyJustification: string
+    narcanCases: string
+    narcanExplanation: string
 }
 
 export interface CartItems {
@@ -33,54 +53,97 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: load, cart: data });
+                dispatch({ type: load, cart: data.items, id: data.id });
             });
     },
 
-    addItem: (item) => (
-        {type: add, item}
-    ),
+    addItem: (item) => (dispatch) => {
+        console.log(item)
+        fetch('/api/cart/put', {
+            method: 'POST',
+            body: item,
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (dispatch ({
+            type: add, item
+        }))
+    },
 
-    updateItem: (item) => (
-        // PUT function here
-        { type: update, item }
-    ),
+    updateItem: (item) => (dispatch) => {
+        console.log(item)
+        fetch('/api/cart/put', {
+            method: 'POST',
+            body: item,
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (dispatch ({
+            type: update, item
+        }))
+    },
 
-    deleteItem: (item) => (
-        // PUT function here
-        { type: del, item }
-    ),
+    deleteItem: (item) => (dispatch) => {
+        fetch('/api/cart/put', {
+            method: 'POST',
+            body: item,
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (dispatch ({
+            type: del, item
+        }))
+    },
 
-    submitCart: (order) => () => (
-        console.log(order),
-        // SUBMIT function here
-        { type: submit }
-    ),
+    submitCart: (order) => (dispatch) => {
+        fetch('/api/cart/put', {
+            method: 'POST',
+            body: order,
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (dispatch ({
+            type: submit
+        }))
+    },
 };
 
 export const reducer = (state: CartState, action) => {
     switch (action.type) {
         case load:
             return {
-                cart: state.cart
+                cart: state.cart,
+                cartID: action.id
             };
         case add:
             return {
                 ...state,
-                cart: state.cart.concat(action.item)
+                cart: state.cart.concat(action.item.item)
             };
         case update:
             return {
                 ...state,
-                cart: state.cart.map(cart => cart.obj === action.item.obj ?
-                    { ...cart, quantity: action.item.quantity } : cart
+                cart: state.cart.map(cart => cart.obj === action.item.item.obj ?
+                    { ...cart, quantity: action.item.item.quantity } : cart
                 )
             };
         case del:
             return {
                 ...state,
                 cart: state.cart.filter(function (i) {
-                    return i.obj !== action.item.obj;
+                    return i.obj !== action.item.item.obj;
                 })
             };
         case submit:

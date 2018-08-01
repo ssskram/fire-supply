@@ -63,6 +63,10 @@ export class FullCart extends React.Component<any, any> {
         this.props.loadCart()
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+    }
+
     closeModal() {
         this.setState({
             modalIsOpen: false,
