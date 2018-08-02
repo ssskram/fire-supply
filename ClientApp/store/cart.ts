@@ -50,7 +50,6 @@ export const actionCreators = {
             unit: item.unit,
             quantityOrdered: item.quantityOrdered
         })
-        console.log(data)
         fetch('/api/cart/addItem', {
             method: 'POST',
             body: data,
@@ -65,26 +64,18 @@ export const actionCreators = {
         }))
     },
 
-    updateItem: (item) => (dispatch) => {
-        console.log(item)
-        fetch('/api/cart/put', {
-            method: 'POST',
-            body: item,
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then (dispatch ({
-            type: update, item
-        }))
-    },
-
     deleteItem: (item) => (dispatch) => {
-        fetch('/api/cart/put', {
+        let data  = JSON.stringify({
+            cartID: item.cartID, 
+            obj: item.obj,
+            itemID: item.itemID,
+            family: item.family,
+            unit: item.unit,
+            quantityOrdered: item.quantityOrdered
+        })
+        fetch('/api/cart/deleteItem', {
             method: 'POST',
-            body: item,
+            body: data,
             credentials: 'same-origin',
             headers: {
                 'Accept': 'application/json',
@@ -96,8 +87,32 @@ export const actionCreators = {
         }))
     },
 
+    changeQty: (item) => (dispatch) => {
+        let data  = JSON.stringify({
+            cartID: item.cartID, 
+            obj: item.obj,
+            itemID: item.itemID,
+            family: item.family,
+            unit: item.unit,
+            quantityOrdered: item.quantityOrdered
+        })
+        console.log(data)
+        fetch('/api/cart/changeQuantity', {
+            method: 'POST',
+            body: data,
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then (dispatch ({
+            type: update, item
+        }))
+    },
+
     submitCart: (order) => (dispatch) => {
-        fetch('/api/cart/put', {
+        fetch('/api/cart/submitOrder', {
             method: 'POST',
             body: order,
             credentials: 'same-origin',
@@ -128,7 +143,7 @@ export const reducer = (state: CartState, action) => {
             return {
                 ...state,
                 cart: state.cart.map(cart => cart.obj === action.item.obj ?
-                    { ...cart, quantity: action.item.quantity } : cart
+                    { ...cart, quantityOrdered: action.item.quantityOrdered } : cart
                 )
             };
         case del:

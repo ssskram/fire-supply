@@ -42,7 +42,7 @@ export class SelectQuantity extends React.Component<any, any> {
     }
 
     updateItem() {
-        this.props.updateItem(this.state)
+        this.props.changeQty(this.state)
         this.props.closeModal()
     }
 

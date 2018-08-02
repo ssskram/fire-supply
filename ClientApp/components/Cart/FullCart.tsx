@@ -129,11 +129,11 @@ export class FullCart extends React.Component<any, any> {
         const houseSupplies = cart.filter(item => item.family == 'House')
         const renderHouse = houseSupplies.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantity}</b></h3>
+                            <h3><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -146,11 +146,11 @@ export class FullCart extends React.Component<any, any> {
         const officeSupplies = cart.filter(item => item.family == 'Office')
         const renderOffice = officeSupplies.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantity}</b></h3>
+                            <h3><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -163,11 +163,11 @@ export class FullCart extends React.Component<any, any> {
         const medicalSupplies = cart.filter(item => item.family == 'Medical')
         const renderMedical = medicalSupplies.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantity}</b></h3>
+                            <h3><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -180,11 +180,11 @@ export class FullCart extends React.Component<any, any> {
         const medicine = cart.filter(item => item.family == 'Medicine')
         const renderMedicine = medicine.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantity}</b></h3>
+                            <h3><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -197,11 +197,11 @@ export class FullCart extends React.Component<any, any> {
         const equipment = cart.filter(item => item.family == 'Equipment')
         const renderEquipment = equipment.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantity}</b></h3>
+                            <h3><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -218,7 +218,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantity}</b></h3>
+                            <h3><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
