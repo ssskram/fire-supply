@@ -100,12 +100,14 @@ namespace firesupply.Controllers {
                 Builders<OrderEntity>.Filter.Eq ("id", model.id);
             var update = Builders<OrderEntity>.Update
                 .Set ("submitted", "true")
+                .Set ("status", "Order Submitted")
+                .Set ("orderSubmitted", DateTime.Now.ToString ())
                 .Set ("house", model.house)
                 .Set ("comments", model.comments)
                 .Set ("emergency", model.emergency)
                 .Set ("emergencyJustification", model.emergencyJustification)
-                .Set ("status", "Order Submitted")
-                .Set ("orderSubmitted", DateTime.Now.ToString ());
+                .Set ("narcanCases", model.narcanCases)
+                .Set ("narcanExplanation", model.narcanExplanation);
             await collection.FindOneAndUpdateAsync (filter, update);
         }
 

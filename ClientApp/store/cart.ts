@@ -112,9 +112,18 @@ export const actionCreators = {
     },
 
     submitCart: (order) => (dispatch) => {
+        let data  = JSON.stringify({
+            id: order.id, 
+            house: order.house,
+            comments: order.comments,
+            emergency: order.emergency,
+            emergencyJustification: order.emergencyJustification,
+            narcanCases: order.narcanCases,
+            narcanExplanation: order.narcanExplanation
+        })
         fetch('/api/cart/submitOrder', {
             method: 'POST',
-            body: order,
+            body: data,
             credentials: 'same-origin',
             headers: {
                 'Accept': 'application/json',

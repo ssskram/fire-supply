@@ -41,8 +41,8 @@ export class Submit extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
+            id: this.props.cartID,
             house: '',
-            items: props.cart,
             comments: '',
             emergency: '',
             emergencyJusticiation: '',
