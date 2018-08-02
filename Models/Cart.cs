@@ -1,5 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace firesupply.Models {
 
@@ -9,6 +10,12 @@ namespace firesupply.Models {
 
         [BsonElement ("submitted")]
         public string submitted { get; set; }
+
+        [BsonElement ("orderStarted")]
+        public string orderStarted { get; set; }
+
+        [BsonElement ("orderSubmitted")]
+        public string orderSubmitted { get; set; }
 
         [BsonElement ("user")]
         public string user { get; set; }
@@ -34,20 +41,35 @@ namespace firesupply.Models {
         [BsonElement ("supplyComments")]
         public string supplyComments { get; set; }
 
+        [BsonElement ("lastModified")]
+        public string lastModified { get; set; }
+
         [BsonElement ("status")]
         public string status { get; set; }
 
         [BsonElement ("items")]
-        public CartItem items { get; set; }
+        public List<cartItem> items { get; set; }
     }
+    public class cartItem {
+        [BsonIgnore]
+        public string cartID { get; set; }
 
-    public class CartItem {
+        [BsonElement ("obj")]
         public string obj { get; set; }
-        public string id { get; set; }
-        public int quantity { get; set; }
+
+        [BsonElement ("itemID")]
+        public string itemID { get; set; }
+
+        [BsonElement ("family")]
         public string family { get; set; }
+
+        [BsonElement ("unit")]
         public string unit { get; set; }
 
-    }
+        [BsonElement ("quantityOrdered")]
+        public string quantityOrdered { get; set; }
 
+        [BsonElement ("quantityReceived")]
+        public string quantityReceived { get; set; }
+    }
 }

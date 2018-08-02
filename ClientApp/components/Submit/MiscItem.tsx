@@ -12,20 +12,16 @@ export class MiscItem extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
-            item: {
-                obj: '',
-                family: 'Miscellaneous',
-                unit: 'Each',
-                quantity: '1'
-            }
+            obj: '',
+            family: 'Miscellaneous',
+            unit: 'Each',
+            quantity: '1'
         }
     }
 
     handleChildChange(event) {
-        let item = {...this.state.item}
-        item.obj = event.target.value
-        this.setState({
-            item
+        this.setState({ 
+            [event.target.name]: event.target.value 
         })
     }
 

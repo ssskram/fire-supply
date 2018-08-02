@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../../store';
 import Input from '../FormElements/input'
 import * as Cart from '../../store/cart'
-import { Item } from '../Submit/Items';
 
 const padding = {
     padding: '25px'
@@ -18,22 +17,22 @@ export class SelectQuantity extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
-            item: {
-                obj: props.item.obj,
-                id: props.item.id,
-                family: props.item.family,
-                unit: props.item.unit,
-                quantity: ''
-            }
+            cartID: this.props.cartID,
+            obj: props.item.obj,
+            itemID: props.item.id,
+            family: props.item.family,
+            unit: props.item.unit,
+            quantityOrdered: ''
         }
     }
 
+    componentDidMount() {
+        console.log(this.props)
+    }
+    
     handleChildChange(event) {
-        let item = {...this.state.item}
-        item.quantity = event.target.value
-        this.setState({
-            item
+        this.setState({ 
+            [event.target.name]: event.target.value 
         })
     }
 
@@ -49,8 +48,8 @@ export class SelectQuantity extends React.Component<any, any> {
 
     public render() {
         const {
-            quantity
-        } = this.state.item
+            quantityOrdered
+        } = this.state
 
         const {
             put,
@@ -58,9 +57,9 @@ export class SelectQuantity extends React.Component<any, any> {
         } = this.props
 
         const isEnabled =
-            quantity != '' &&
-            quantity != '0' &&
-            quantity.match(/^[0-9]+$/)
+            quantityOrdered != '' &&
+            quantityOrdered != '0' &&
+            quantityOrdered.match(/^[0-9]+$/)
 
         return <div style={padding}>
             <div className="col-md-12 form" key={item.id}>
@@ -71,8 +70,8 @@ export class SelectQuantity extends React.Component<any, any> {
                     <div className='row' >
                         <div style={width}>
                             <Input
-                                value={quantity}
-                                name="quantity"
+                                value={quantityOrdered}
+                                name="quantityOrdered"
                                 header="Enter quantity"
                                 placeholder="Numbers only"
                                 callback={this.handleChildChange.bind(this)}

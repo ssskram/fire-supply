@@ -9,14 +9,6 @@ const receive = 'receive'
 
 const unloadedState: CartState = {
     cart: [],
-    submitted: '',
-    user: '',
-    house: '',
-    comments: '',
-    emergency: '',
-    emergencyJustification: '',
-    narcanCases: '',
-    narcanExplanation: ''
 };
 
 export interface ID {
@@ -25,19 +17,11 @@ export interface ID {
 
 export interface CartState {
     cart: CartItems[]
-    submitted: string
-    user: string
-    house: string
-    comments: string
-    emergency: string
-    emergencyJustification: string
-    narcanCases: string
-    narcanExplanation: string
 }
 
 export interface CartItems {
-    quantity: number
-    id: number
+    quantityOrdered: number
+    itemID: number
     family: string
     obj: string
     unit: string
@@ -53,15 +37,23 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: load, cart: data.items, id: data.id });
+                dispatch({ type: load, cart: data.item, id: data.id });
             });
     },
 
     addItem: (item) => (dispatch) => {
-        console.log(item)
-        fetch('/api/cart/put', {
+        let data  = JSON.stringify({
+            cartID: item.cartID, 
+            obj: item.obj,
+            itemID: item.itemID,
+            family: item.family,
+            unit: item.unit,
+            quantityOrdered: item.quantityOrdered
+        })
+        console.log(data)
+        fetch('/api/cart/addItem', {
             method: 'POST',
-            body: item,
+            body: data,
             credentials: 'same-origin',
             headers: {
                 'Accept': 'application/json',
@@ -130,25 +122,26 @@ export const reducer = (state: CartState, action) => {
         case add:
             return {
                 ...state,
-                cart: state.cart.concat(action.item.item)
+                cart: state.cart.concat(action.item)
             };
         case update:
             return {
                 ...state,
-                cart: state.cart.map(cart => cart.obj === action.item.item.obj ?
-                    { ...cart, quantity: action.item.item.quantity } : cart
+                cart: state.cart.map(cart => cart.obj === action.item.obj ?
+                    { ...cart, quantity: action.item.quantity } : cart
                 )
             };
         case del:
             return {
                 ...state,
                 cart: state.cart.filter(function (i) {
-                    return i.obj !== action.item.item.obj;
+                    return i.obj !== action.item.obj;
                 })
             };
         case submit:
             return {
-                cart: []
+                cart: [],
+                cartID: ''
             };
         case receive:
             return {
