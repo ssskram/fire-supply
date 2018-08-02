@@ -28,11 +28,11 @@ export class Home extends React.Component<any, any> {
         // ping server
         this.props.ping()
 
-        // load cart items
-        this.props.loadCart()
-
         // load inventory items
         this.props.getItems()
+
+        // load cart items
+        this.props.loadCart()
     }
 
     componentWillUnmount() {

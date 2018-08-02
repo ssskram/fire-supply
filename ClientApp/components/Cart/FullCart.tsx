@@ -43,7 +43,7 @@ const columns = [{
     accessor: 'unit'
 }, {
     Header: 'Quantity',
-    accessor: 'quantity'
+    accessor: 'quantityOrdered'
 }]
 
 export class FullCart extends React.Component<any, any> {

@@ -55,7 +55,7 @@ namespace firesupply.Controllers {
                 id = uuid.ToString (),
                 submitted = "false",
                 user = user,
-                orderStarted = DateTime.Now.ToString (),
+                cartGenerated = DateTime.Now.ToString (),
                 items = new List<cartItem> ()
             };
             collection.InsertOne (itm);

@@ -11,8 +11,8 @@ namespace firesupply.Models {
         [BsonElement ("submitted")]
         public string submitted { get; set; }
 
-        [BsonElement ("orderStarted")]
-        public string orderStarted { get; set; }
+        [BsonElement ("cartGenerated")]
+        public string cartGenerated { get; set; }
 
         [BsonElement ("orderSubmitted")]
         public string orderSubmitted { get; set; }

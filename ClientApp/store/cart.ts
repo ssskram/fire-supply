@@ -1,11 +1,10 @@
 import { fetch } from 'domain-task';
 
-const load = 'load'
+const loadCart = 'load'
 const add = 'add'
 const update = 'update'
 const del = 'delete'
 const submit = 'submit'
-const receive = 'receive'
 
 const unloadedState: CartState = {
     cart: [],
@@ -37,13 +36,13 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: load, cart: data.item, id: data.id });
+                dispatch({ type: loadCart, cart: data.items, id: data.id });
             });
     },
 
     addItem: (item) => (dispatch) => {
-        let data  = JSON.stringify({
-            cartID: item.cartID, 
+        let data = JSON.stringify({
+            cartID: item.cartID,
             obj: item.obj,
             itemID: item.itemID,
             family: item.family,
@@ -59,14 +58,14 @@ export const actionCreators = {
                 'Content-Type': 'application/json'
             }
         })
-        .then (dispatch ({
-            type: add, item
-        }))
+            .then(dispatch({
+                type: add, item
+            }))
     },
 
     deleteItem: (item) => (dispatch) => {
-        let data  = JSON.stringify({
-            cartID: item.cartID, 
+        let data = JSON.stringify({
+            cartID: item.cartID,
             obj: item.obj,
             itemID: item.itemID,
             family: item.family,
@@ -82,14 +81,14 @@ export const actionCreators = {
                 'Content-Type': 'application/json'
             }
         })
-        .then (dispatch ({
-            type: del, item
-        }))
+            .then(dispatch({
+                type: del, item
+            }))
     },
 
     changeQty: (item) => (dispatch) => {
-        let data  = JSON.stringify({
-            cartID: item.cartID, 
+        let data = JSON.stringify({
+            cartID: item.cartID,
             obj: item.obj,
             itemID: item.itemID,
             family: item.family,
@@ -106,14 +105,14 @@ export const actionCreators = {
                 'Content-Type': 'application/json'
             }
         })
-        .then (dispatch ({
-            type: update, item
-        }))
+            .then(dispatch({
+                type: update, item
+            }))
     },
 
     submitCart: (order) => (dispatch) => {
-        let data  = JSON.stringify({
-            id: order.id, 
+        let data = JSON.stringify({
+            id: order.id,
             house: order.house,
             comments: order.comments,
             emergency: order.emergency,
@@ -130,19 +129,20 @@ export const actionCreators = {
                 'Content-Type': 'application/json'
             }
         })
-        .then (dispatch ({
-            type: submit
-        }))
+            .then(dispatch({
+                type: submit
+            }))
     },
 };
 
 export const reducer = (state: CartState, action) => {
     switch (action.type) {
-        case load:
+        case loadCart:
             return {
-                cart: state.cart,
+                ...state,
+                cart: action.cart,
                 cartID: action.id
-            };
+            }
         case add:
             return {
                 ...state,
@@ -156,6 +156,7 @@ export const reducer = (state: CartState, action) => {
                 )
             };
         case del:
+        // TODO - replace this function with a shared update function
             return {
                 ...state,
                 cart: state.cart.filter(function (i) {
@@ -166,10 +167,6 @@ export const reducer = (state: CartState, action) => {
             return {
                 cart: [],
                 cartID: ''
-            };
-        case receive:
-            return {
-                cart: action.cart
             }
     }
 
