@@ -30,7 +30,7 @@ export class ItemSelection extends React.Component<any, any> {
             if (this.props.cart.length != 0) {
                 this.setState({
                     items: this.props.items.filter(function (i) {
-                        const filterCartItems = obj => obj.itemID === i.itemID
+                        const filterCartItems = obj => obj.obj === i.obj
                         return !self.props.cart.some(filterCartItems)
                     })
                 })
@@ -56,7 +56,7 @@ export class ItemSelection extends React.Component<any, any> {
         if (nextProps.cart.length != 0) {
             this.setState({
                 items: this.state.items.filter(function (i) {
-                    const filterCartItems = obj => obj.itemID === i.itemID
+                    const filterCartItems = obj => obj.obj === i.obj
                     return !nextProps.cart.some(filterCartItems)
                 }),
                 loadingData: false
@@ -93,7 +93,7 @@ export class ItemSelection extends React.Component<any, any> {
         if (cart.length != 0) {
             this.setState({
                 items: filtered.filter(function (i) {
-                    const filterCartItems = obj => obj.itemID === i.itemID
+                    const filterCartItems = obj => obj.obj === i.obj
                     return !cart.some(filterCartItems)
                 }),
                 onFilter: true
@@ -117,7 +117,7 @@ export class ItemSelection extends React.Component<any, any> {
         if (cart.length != 0) {
             this.setState({
                 items: this.props.items.filter(function (i) {
-                    const filterCartItems = obj => obj.itemID === i.itemID
+                    const filterCartItems = obj => obj.obj === i.obj
                     return !cart.some(filterCartItems)
                 }),
                 onFilter: false

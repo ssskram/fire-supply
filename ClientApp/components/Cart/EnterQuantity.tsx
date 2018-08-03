@@ -18,17 +18,13 @@ export class SelectQuantity extends React.Component<any, any> {
         super(props);
         this.state = {
             cartID: this.props.cartID,
-            obj: props.item.obj,
-            itemID: props.item.id,
-            family: props.item.family,
-            unit: props.item.unit,
+            obj: this.props.item.obj,
+            family: this.props.item.family,
+            unit: this.props.item.unit,
             quantityOrdered: ''
         }
     }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
     
     handleChildChange(event) {
         this.setState({ 

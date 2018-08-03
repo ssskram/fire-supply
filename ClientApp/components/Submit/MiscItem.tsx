@@ -9,19 +9,20 @@ const padding = {
 }
 
 export class MiscItem extends React.Component<any, any> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            cartID: this.props.cartID,
             obj: '',
             family: 'Miscellaneous',
             unit: 'Each',
-            quantity: '1'
+            quantityOrdered: ''
         }
     }
 
     handleChildChange(event) {
-        this.setState({ 
-            [event.target.name]: event.target.value 
+        this.setState({
+            [event.target.name]: event.target.value
         })
     }
 
@@ -32,7 +33,8 @@ export class MiscItem extends React.Component<any, any> {
 
     public render() {
         const {
-            obj
+            obj,
+            quantityOrdered
         } = this.state
 
         const isEnabled =
@@ -46,7 +48,15 @@ export class MiscItem extends React.Component<any, any> {
                             value={obj}
                             name="obj"
                             header="Miscellaneous item"
-                            placeholder="Enter item"
+                            placeholder="Describe item"
+                            callback={this.handleChildChange.bind(this)}
+                        />
+
+                        <Input
+                            value={quantityOrdered}
+                            name="quantityOrdered"
+                            header="Enter quantity"
+                            placeholder="Numbers only"
                             callback={this.handleChildChange.bind(this)}
                         />
                     </div>

@@ -10,10 +10,21 @@ const padding = {
 export class DeleteItems extends React.Component<any, any> {
     constructor(props) {
         super(props);
+        this.state = {
+            cartID : this.props.cartID,
+            obj: this.props.item.obj,
+            family: this.props.item.family,
+            unit: this.props.item.family.unit,
+            quantityOrdered: this.props.item.quantityOrdered
+        }
     }
 
-    updateCart (item) {
-        this.props.deleteItem(item)
+    componentDidMount() {
+        console.log(this.props)
+    }
+
+    updateCart () {
+        this.props.deleteItem(this.state)
         this.props.closeModal()
     }
 
@@ -29,9 +40,9 @@ export class DeleteItems extends React.Component<any, any> {
                     <h3>{item.obj}</h3>
                     <h4>Item type: <b>{item.family}</b></h4>
                     <h4>Unit of issue: <b>{item.unit}</b></h4>
-                    <h4>Quantity: <b>{item.quantity}</b></h4>
+                    <h4>Quantity: <b>{item.quantityOrdered}</b></h4>
                     <div className='row'>
-                        <button onClick={() => this.updateCart(item)} className='btn btn-danger'>Delete</button>
+                        <button onClick={this.updateCart.bind(this)} className='btn btn-danger'>Delete</button>
                     </div>
                 </div>
             </div>

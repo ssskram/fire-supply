@@ -20,7 +20,6 @@ export interface CartState {
 
 export interface CartItems {
     quantityOrdered: number
-    itemID: number
     family: string
     obj: string
     unit: string
@@ -44,7 +43,6 @@ export const actionCreators = {
         let data = JSON.stringify({
             cartID: item.cartID,
             obj: item.obj,
-            itemID: item.itemID,
             family: item.family,
             unit: item.unit,
             quantityOrdered: item.quantityOrdered
@@ -67,11 +65,11 @@ export const actionCreators = {
         let data = JSON.stringify({
             cartID: item.cartID,
             obj: item.obj,
-            itemID: item.itemID,
             family: item.family,
             unit: item.unit,
             quantityOrdered: item.quantityOrdered
         })
+        console.log(data)
         fetch('/api/cart/deleteItem', {
             method: 'POST',
             body: data,
@@ -90,7 +88,6 @@ export const actionCreators = {
         let data = JSON.stringify({
             cartID: item.cartID,
             obj: item.obj,
-            itemID: item.itemID,
             family: item.family,
             unit: item.unit,
             quantityOrdered: item.quantityOrdered
@@ -137,12 +134,13 @@ export const actionCreators = {
 
 export const reducer = (state: CartState, action) => {
     switch (action.type) {
-        case loadCart:
+        case del:
+            var cartCopy= state.cart.slice()
+            cartCopy.splice( cartCopy.indexOf(action.item.obj), 1 );
             return {
                 ...state,
-                cart: action.cart,
-                cartID: action.id
-            }
+                cart: cartCopy
+            };
         case add:
             return {
                 ...state,
@@ -155,18 +153,17 @@ export const reducer = (state: CartState, action) => {
                     { ...cart, quantityOrdered: action.item.quantityOrdered } : cart
                 )
             };
-        case del:
-        // TODO - replace this function with a shared update function
-            return {
-                ...state,
-                cart: state.cart.filter(function (i) {
-                    return i.obj !== action.item.obj;
-                })
-            };
+
         case submit:
             return {
                 cart: [],
                 cartID: ''
+            }
+        case loadCart:
+            return {
+                ...state,
+                cart: action.cart,
+                cartID: action.id
             }
     }
 

@@ -72,6 +72,7 @@ export class FullCart extends React.Component<any, any> {
     }
 
     deleteItem(item) {
+        console.log(item)
         this.setState({
             modalIsOpen: true,
             selectedItem: item,
@@ -129,7 +130,7 @@ export class FullCart extends React.Component<any, any> {
         const houseSupplies = cart.filter(item => item.family == 'House')
         const renderHouse = houseSupplies.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
@@ -146,7 +147,7 @@ export class FullCart extends React.Component<any, any> {
         const officeSupplies = cart.filter(item => item.family == 'Office')
         const renderOffice = officeSupplies.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
@@ -163,7 +164,7 @@ export class FullCart extends React.Component<any, any> {
         const medicalSupplies = cart.filter(item => item.family == 'Medical')
         const renderMedical = medicalSupplies.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
@@ -180,7 +181,7 @@ export class FullCart extends React.Component<any, any> {
         const medicine = cart.filter(item => item.family == 'Medicine')
         const renderMedicine = medicine.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
@@ -197,7 +198,7 @@ export class FullCart extends React.Component<any, any> {
         const equipment = cart.filter(item => item.family == 'Equipment')
         const renderEquipment = equipment.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.itemID}>
+                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>

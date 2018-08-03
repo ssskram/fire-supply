@@ -57,9 +57,6 @@ namespace firesupply.Models {
         [BsonElement ("obj")]
         public string obj { get; set; }
 
-        [BsonElement ("itemID")]
-        public string itemID { get; set; }
-
         [BsonElement ("family")]
         public string family { get; set; }
 
