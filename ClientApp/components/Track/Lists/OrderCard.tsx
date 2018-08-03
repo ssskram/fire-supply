@@ -3,6 +3,13 @@ import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
 import Paging from '../../Utilities/Paging'
+import LoadingImage from '../../Utilities/LoadingImage'
+
+const imgStyle = {
+    maxHeight: '150px',
+    borderRadius: '10px',
+    margin: '0 auto'
+}
 
 export class OrderCard extends React.Component<any, any> {
     constructor() {
@@ -16,14 +23,14 @@ export class OrderCard extends React.Component<any, any> {
         this.closeModal = this.closeModal.bind(this);
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         if (this.props.items != nextProps.items) {
             this.setState({
                 currentPage: 1
             })
         }
     }
-    
+
     handleNextClick() {
         window.scrollTo(0, 0)
         let current = this.state.currentPage
@@ -42,11 +49,11 @@ export class OrderCard extends React.Component<any, any> {
 
     closeModal() {
         this.setState({
-          modalIsOpen: false,
-          selectedItem: {}
+            modalIsOpen: false,
+            selectedItem: {}
         });
-      }
-    
+    }
+
     public render() {
         const {
             currentPage,
@@ -64,13 +71,24 @@ export class OrderCard extends React.Component<any, any> {
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
         const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
         const renderItems = currentItems.map((item) => {
+            const encodedHouse = item.house.split(' ').join('_');
+            const imgUrl = "https://tools.wprdc.org/images/pittsburgh/facilities/" + encodedHouse + ".jpg"
             return (
                 <div className="col-md-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <h4>{item.user}</h4>
-                            <h5>House: <b>{item.house}</b></h5>
-                            <h5>Comments: <b>{item.comments}</b></h5>
+                            <div className='col-md-4'>
+                                <h4><b>{item.house}</b></h4>
+                                <LoadingImage style={imgStyle} src={imgUrl} />
+                            </div>
+                            <div className='col-md-4'>
+                                Order info
+                                <h4>Ordered by: <b>{item.user}</b></h4>
+                                <h5>Comments: <b>{item.comments}</b></h5>
+                            </div>
+                            <div className='col-md-4'>
+                                Supply feedback
+                            </div>
                         </div>
                     </div>
                 </div>

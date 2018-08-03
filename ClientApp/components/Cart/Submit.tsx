@@ -5,12 +5,8 @@ import * as MessagesStore from '../../store/messages'
 import TextArea from '../FormElements/textarea'
 import Select from '../FormElements/select'
 import * as Cart from '../../store/cart'
+import * as Houses from '../../store/houses'
 
-const houses = [
-    { value: '', label: 'All', name: 'house' },
-    { value: '1', label: '1', name: 'house' },
-    { value: '2', label: '2', name: 'house' }
-]
 
 const emergencies = [
     { value: 'Yes', label: 'Yes', name: 'emergency' },
@@ -41,6 +37,7 @@ export class Submit extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
+            houseOptions: [{ "value": '...loading...', "label": '...loading...' }],
             id: this.props.cartID,
             house: '',
             comments: '',
@@ -49,6 +46,24 @@ export class Submit extends React.Component<any, any> {
             narcanCases: '',
             narcanExplanation: '',
         }
+    }
+
+    componentDidMount() {
+        // load engine houses
+        this.props.loadHouses()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let self = this
+        // add options to select
+        var futureOptions: any[] = [];
+        nextProps.houses.forEach(function (element) {
+            var json = { "value": element.name, "label": element.name, "name": 'house' };
+            futureOptions.push(json)
+        })
+        self.setState({
+            houseOptions: futureOptions
+        })
     }
 
     handleChildSelect(event) {
@@ -68,6 +83,7 @@ export class Submit extends React.Component<any, any> {
 
     public render() {
         const {
+            houseOptions,
             house,
             comments,
             emergency,
@@ -89,11 +105,11 @@ export class Submit extends React.Component<any, any> {
                 <Select
                     value={house}
                     name="house"
-                    header='Select your engine house'
+                    header='Select your house'
                     placeholder='Select...'
                     onChange={this.handleChildSelect.bind(this)}
                     multi={false}
-                    options={houses}
+                    options={houseOptions}
                 />
 
                 <TextArea
@@ -159,10 +175,12 @@ export class Submit extends React.Component<any, any> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.messages,
-        ...state.cart
+        ...state.cart,
+        ...state.houses
     }),
     ({
         ...MessagesStore.actionCreators,
-        ...Cart.actionCreators
+        ...Cart.actionCreators,
+        ...Houses.actionCreators
     })
 )(Submit as any) as typeof Submit;

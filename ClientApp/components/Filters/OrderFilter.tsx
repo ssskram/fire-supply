@@ -1,25 +1,27 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
 import Select from '../FormElements/select'
-import Datepicker from '../FormElements/datepicker';
-
-const houses = [
-    { value: '', label: 'All', name: 'house' },
-    { value: '1', label: '1', name: 'house' },
-    { value: '2', label: '2', name: 'house' }
-]
+import * as Houses from '../../store/houses'
+import Datepicker from '../FormElements/datepicker'
 
 const statuses = [
     { value: '', label: 'All', name: 'status' },
-    { value: 'Open', label: 'Open', name: 'status' },
-    { value: 'Closed', label: 'Closed', name: 'status' }
+    { value: 'Order Submitted', label: 'Order Submitted', name: 'status' },
+    { value: 'Approved', label: 'Approved', name: 'status' },
+    { value: 'Pending Higher Approval', label: 'Pending Higher Approval', name: 'status' },
+    { value: 'Partially Delivered', label: 'Partially Delivered', name: 'status' },
+    { value: 'Complete', label: 'Complete', name: 'status' },
+    { value: 'Rejected', label: 'Rejected', name: 'status' }
 ]
 
 const itemTypes = [
     { value: '', label: 'All', name: 'itemsOrdered' },
-    { value: 'House', label: 'House', name: 'itemsOrdered' },
-    { value: 'Medical', label: 'Medical', name: 'itemsOrdered' }
+    { value: 'House', label: 'House Supplies', name: 'itemsOrdered' },
+    { value: 'Office', label: 'Office Supplies', name: 'itemsOrdered' },
+    { value: 'Medical', label: 'Medical Supplies', name: 'itemsOrdered' },
+    { value: 'Medicine', label: 'Medicine', name: 'itemsOrdered' },
+    { value: 'Equipment', label: 'Equipment', name: 'itemsOrdered' },
 ]
 
 const marginTop = {
@@ -30,6 +32,7 @@ export class OrderFilter extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
+            houseOptions: [{ "value": '...loading...', "label": '...loading...' }],
             house: '',
             orderDate: '',
             status: '',
@@ -40,6 +43,24 @@ export class OrderFilter extends React.Component<any, any> {
             filters: false,
             viewFormat: 'cards'
         }
+    }
+
+    componentDidMount() {
+        // load engine houses
+        this.props.loadHouses()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let self = this
+        // add options to select
+        var futureOptions: any[] = [];
+        nextProps.houses.forEach(function (element) {
+            var json = { "value": element.name, "label": element.name, "name": 'house' };
+            futureOptions.push(json)
+        })
+        self.setState({
+            houseOptions: futureOptions
+        })
     }
 
     handleChildDate(date) {
@@ -105,6 +126,7 @@ export class OrderFilter extends React.Component<any, any> {
 
     public render() {
         const {
+            houseOptions,
             house,
             orderDate,
             status,
@@ -146,11 +168,11 @@ export class OrderFilter extends React.Component<any, any> {
                             <Select
                                 value={house}
                                 name="house"
-                                header='Engine House'
+                                header='House'
                                 placeholder='Filter by house'
                                 onChange={this.handleChildSelect.bind(this)}
                                 multi={false}
-                                options={houses}
+                                options={houseOptions}
                             />
                         </div>
                         <div className='col-md-6'>
@@ -180,7 +202,7 @@ export class OrderFilter extends React.Component<any, any> {
                             <Select
                                 value={itemsOrdered}
                                 name="itemsOrdered"
-                                header='Order Type'
+                                header='Order Contents'
                                 placeholder='Filter by items ordered'
                                 onChange={this.handleChildSelect.bind(this)}
                                 multi={false}
@@ -196,9 +218,9 @@ export class OrderFilter extends React.Component<any, any> {
 
 export default connect(
     (state: ApplicationState) => ({
-
+        ...state.houses
     }),
     ({
-
+        ...Houses.actionCreators
     })
 )(OrderFilter as any) as typeof OrderFilter;

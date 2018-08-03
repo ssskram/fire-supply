@@ -2,6 +2,7 @@ import { fetch, addTask } from 'domain-task';
 
 const requestOrders = 'request'
 const receiveOrders = 'receive'
+const add = 'add'
 
 export interface OrdersState {
     orders: OrderItems[]
@@ -47,7 +48,7 @@ export const actionCreators = {
             });
         addTask(fetchTask);
         dispatch({ type: requestOrders });
-    }
+    },
 };
 
 const unloadedState: OrdersState = {
