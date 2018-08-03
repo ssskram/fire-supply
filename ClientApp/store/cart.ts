@@ -155,7 +155,7 @@ export const reducer = (state: CartState, action) => {
 
         case submit:
             return {
-                cart: unloadedState,
+                cart: [],
                 cartID: ''
             }
         case loadCart:

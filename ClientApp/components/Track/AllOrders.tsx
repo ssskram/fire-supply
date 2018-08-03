@@ -20,7 +20,6 @@ export class AllOrders extends React.Component<any, any> {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.orders)
         if (nextProps.orders) {
             this.setState({
                 countOrders: nextProps.orders.length

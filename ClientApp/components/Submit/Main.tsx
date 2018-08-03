@@ -6,8 +6,8 @@ import * as ItemsStore from '../../store/items'
 import ItemFilters from '../Filters/InventoryFilter'
 import Items from './Items'
 import Modal from 'react-responsive-modal'
-import Spinner from '../Utilities/Spinner'
 import * as Cart from '../../store/cart'
+import Spinner from '../Utilities/Spinner'
 import { Helmet } from "react-helmet"
 import MiscItem from './MiscItem'
 
@@ -26,6 +26,9 @@ export class ItemSelection extends React.Component<any, any> {
         let self = this
         window.scrollTo(0, 0)
 
+        // ping server
+        this.props.ping()
+
         if (this.props.items) {
             if (this.props.items.length != 0) {
                 if (this.props.cart.length != 0) {
@@ -43,14 +46,8 @@ export class ItemSelection extends React.Component<any, any> {
             }
         }
 
-        // load cart items
-        this.props.loadCart()
-
         // load inventory items
         this.props.getItems()
-
-        // ping server
-        this.props.ping()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -59,13 +56,11 @@ export class ItemSelection extends React.Component<any, any> {
                 items: this.state.items.filter(function (i) {
                     const filterCartItems = obj => obj.obj === i.obj
                     return !nextProps.cart.some(filterCartItems)
-                }),
-                loadingData: false
+                })
             })
         } else {
             this.setState({
-                items: nextProps.items,
-                loadingData: false
+                items: nextProps.items
             })
         }
     }
@@ -194,13 +189,13 @@ export class ItemSelection extends React.Component<any, any> {
 
 export default connect(
     (state: ApplicationState) => ({
+        ...state.cart,
         ...state.ping,
-        ...state.items,
-        ...state.cart
+        ...state.items
     }),
     ({
         ...Ping.actionCreators,
-        ...ItemsStore.actionCreators,
-        ...Cart.actionCreators
+        ...Cart.actionCreators,
+        ...ItemsStore.actionCreators
     })
 )(ItemSelection as any) as typeof ItemSelection;

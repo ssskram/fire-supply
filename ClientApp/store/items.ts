@@ -1,11 +1,6 @@
 import { fetch, addTask } from 'domain-task'
-
-const requestItems = 'request'
-const receiveItems = 'receive'
-
-const unloadedState: ItemsState = { 
-    items: [] 
-};
+import { Action, Reducer } from 'redux'
+import { AppThunkAction } from '.'
 
 export interface ItemsState {
     items: InventoryItems[]
@@ -18,8 +13,20 @@ export interface InventoryItems {
     unit: any
 }
 
+interface RequestItemsAction {
+    type: 'REQUEST_ITEMS';
+}
+
+interface ReceiveItemsAction {
+    type: 'RECEIVE_ITEMS'
+    items: InventoryItems[]
+}
+
+type KnownAction = RequestItemsAction | ReceiveItemsAction;
+
+
 export const actionCreators = {
-    getItems: () => (dispatch) => {
+    getItems: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         let fetchTask = fetch('/api/items/get', {
             credentials: 'same-origin',
             headers: {
@@ -28,29 +35,32 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: receiveItems, items: data });
+                dispatch({ type: 'RECEIVE_ITEMS', items: data });
                 if (data == 0) {
                     window.location.reload();
                 }
             });
 
         addTask(fetchTask);
-        dispatch({ type: requestItems });
+        dispatch({ type: 'REQUEST_ITEMS' });
     },
 };
 
-export const reducer = (state: ItemsState, action) => {
+const unloadedState: ItemsState = { items: [] };
+
+export const reducer: Reducer<ItemsState> = (state: ItemsState, incomingAction: Action) => {
+    const action = incomingAction as KnownAction;
     switch (action.type) {
-        case requestItems:
+        case 'REQUEST_ITEMS':
             return {
-                ...state,
                 items: state.items,
             };
-        case receiveItems:
+        case 'RECEIVE_ITEMS':
             return {
-                ...state,
                 items: action.items,
             };
+        default:
+            const exhaustiveCheck: never = action;
     }
 
     return state || unloadedState;

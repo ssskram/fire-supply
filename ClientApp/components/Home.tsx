@@ -2,32 +2,24 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../store'
 import * as Ping from '../store/ping'
+import * as ItemsStore from '../store/items'
 import * as MessagesStore from '../store/messages'
 import Messages from './Utilities/Messages'
 import AllOrders from './Track/AllOrders'
-import * as ItemsStore from '../store/items'
-import * as Cart from '../store/cart'
-import * as Orders from '../store/orders'
 
 export class Home extends React.Component<any, any> {
-    constructor() {
-        super();
-        this.state = {
-            loadingData: true
-        }
+    constructor(props) {
+        super(props);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
 
-        // ping server
-        this.props.ping()
-
-        // load inventory items
+        // load inventory
         this.props.getItems()
 
-        // load cart items
-        this.props.loadCart()
+        // ping server
+        this.props.ping()
     }
 
     componentWillUnmount() {
@@ -40,7 +32,7 @@ export class Home extends React.Component<any, any> {
             <div className='text-center'>
                 <Messages messages={this.props.messages} />
             </div>
-            <AllOrders orders={this.props.orders}/>
+            <AllOrders />
         </div>;
     }
 }
@@ -49,15 +41,11 @@ export default connect(
     (state: ApplicationState) => ({
         ...state.messages,
         ...state.ping,
-        ...state.items,
-        ...state.cart,
-        ...state.orders
+        ...state.items
     }),
     ({
         ...MessagesStore.actionCreators,
         ...Ping.actionCreators,
-        ...ItemsStore.actionCreators,
-        ...Cart.actionCreators,
-        ...Orders.actionCreators
+        ...ItemsStore.actionCreators
     })
 )(Home as any) as typeof Home;

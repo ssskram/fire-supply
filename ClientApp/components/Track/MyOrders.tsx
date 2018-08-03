@@ -1,9 +1,11 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
-import * as Ping from '../../store/ping';
-import * as OrdersStore from '../../store/orders';
-import OrderFilters from '../Filters/OrderFilter';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
+import * as Ping from '../../store/ping'
+import * as OrdersStore from '../../store/orders'
+import OrderFilters from '../Filters/OrderFilter'
+import Spinner from '../Utilities/Spinner'
+import Orders from './Orders'
 
 export class MyOrders extends React.Component<any, any> {
     constructor() {
@@ -14,11 +16,22 @@ export class MyOrders extends React.Component<any, any> {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.orders) {
+            this.setState({
+                countOrders: nextProps.orders.length
+            })
+        }
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0)
 
         // ping server
         this.props.ping()
+
+        // load orders
+        this.props.loadOrders()
     }
 
     filter(state) {
@@ -26,20 +39,33 @@ export class MyOrders extends React.Component<any, any> {
     }
 
     toggleViewFormat(type) {
-        console.log(type)
+        this.setState({
+            viewFormat: type
+        })
     }
 
     public render() {
         const {
-            countOrders
+            countOrders,
+            viewFormat
         } = this.state
 
+        const {
+            orders
+        } = this.props
+
         return <div>
-            <OrderFilters countOrders={countOrders} toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)}/>
-            <br/>
-            <br/>
-            <br/>
-            <h1 className='text-center'>( My orders returned here )</h1>
+            <OrderFilters countOrders={countOrders} toggleViewFormat={this.toggleViewFormat.bind(this)} filter={this.filter.bind(this)} />
+            {orders &&
+                <Orders orders={orders} viewFormat={viewFormat} />
+            }
+            {orders &&
+                <div>
+                    {orders.length == 0 &&
+                        <Spinner notice='...loading the orders...' />
+                    }
+                </div>
+            }
         </div>;
     }
 }

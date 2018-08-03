@@ -9,9 +9,6 @@ export class Orders extends React.Component<any, any> {
         super();
     }
 
-    componentDidMount() {
-    }
-
     public render() {
         const {
             orders,
