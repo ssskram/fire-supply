@@ -10,6 +10,10 @@ import DeleteItem from './DeleteItems'
 import Table from "react-table"
 import Submit from './Submit'
 
+const fixedHeight = {
+    height: '225px',
+}
+
 const paddingLeft = {
     paddingLeft: '25px'
 }
@@ -202,7 +206,7 @@ export class FullCart extends React.Component<any, any> {
         const equipment = cart.filter(item => item.family == 'Equipment')
         const renderEquipment = equipment.map((item) => {
             return (
-                <div className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
+                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.obj}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>

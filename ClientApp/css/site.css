@@ -16,6 +16,10 @@ body {
     padding-top: 25px;
 }
 
+.card-row {
+    min-height: 250px;
+}
+
 h1,
 h2,
 h3,

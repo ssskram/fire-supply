@@ -10,8 +10,7 @@ const btnColor = {
 }
 
 const fixedHeight = {
-    height: '200px',
-    margin: '10px 0px'
+    height: '225px',
 }
 
 export class ItemCard extends React.Component<any, any> {
