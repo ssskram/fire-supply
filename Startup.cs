@@ -25,6 +25,7 @@ namespace firesupply
         string _redirecturi = null;
         string _spresourceid = null;
         string _mongoURI = null;
+        string _CartegraphAPIkey = null;
         private readonly IHostingEnvironment _currentEnvironment;
         public IConfiguration HostingConfig { get; private set; }
         public IConfiguration Configuration { get; }
@@ -58,6 +59,7 @@ namespace firesupply
             _redirecturi = Configuration["redirecturi"];
             _spresourceid = Configuration["spresourceid"];
             _mongoURI = Configuration["mongoURI"];
+            _CartegraphAPIkey = Configuration["CartegraphAPIkey"];
 
             // add application services
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -94,6 +96,7 @@ namespace firesupply
             Environment.SetEnvironmentVariable("redirecturi", Configuration["redirecturi"]);
             Environment.SetEnvironmentVariable("spresourceid", Configuration["spresourceid"]);
             Environment.SetEnvironmentVariable("mongoURI", Configuration["mongoURI"]);
+            Environment.SetEnvironmentVariable("CartegraphAPIkey", Configuration["CartegraphAPIkey"]);
 
             services.AddMvc()
                 .AddSessionStateTempDataProvider();

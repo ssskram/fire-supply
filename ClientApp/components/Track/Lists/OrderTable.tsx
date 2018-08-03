@@ -1,17 +1,54 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../../../store';
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../../store'
+import Table from "react-table"
 
 export class OrderTable extends React.Component<any, any> {
     constructor() {
         super();
     }
 
-    componentDidMount() {
-    }
 
     public render() {
+        const {
+            orders
+        } = this.props
+
+        const columns = [{
+            Header: 'Submitted',
+            accessor: 'orderSubmitted'
+        }, {
+            Header: 'House',
+            accessor: 'house'
+        }, {
+            Header: 'Submitted by',
+            accessor: 'user'
+        }, {
+            Header: 'Status',
+            accessor: 'status'
+        }, {
+            Header: '',
+            Cell: props=> <button className='btn btn-success'>View</button>
+        }]
+
         return <div>
+            <Table
+                data={orders}
+                columns={columns}
+                loading={false}
+                minRows={0}
+                pageSize={50}
+                showPageSizeOptions={false}
+                noDataText=''
+                defaultSorted={[
+                    {
+                        id: 'obj',
+                        asc: true
+                    }
+                ]}
+            />
+            <br />
+            <br />
         </div>;
     }
 }

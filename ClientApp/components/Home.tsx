@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../store'
 import * as Ping from '../store/ping'
+import * as Houses from '../store/houses'
 import * as ItemsStore from '../store/items'
 import * as MessagesStore from '../store/messages'
 import Messages from './Utilities/Messages'
@@ -20,6 +21,9 @@ export class Home extends React.Component<any, any> {
 
         // ping server
         this.props.ping()
+
+        // load engine houses
+        this.props.loadHouses()
     }
 
     componentWillUnmount() {
@@ -41,11 +45,13 @@ export default connect(
     (state: ApplicationState) => ({
         ...state.messages,
         ...state.ping,
-        ...state.items
+        ...state.items,
+        ...state.houses
     }),
     ({
         ...MessagesStore.actionCreators,
         ...Ping.actionCreators,
-        ...ItemsStore.actionCreators
+        ...ItemsStore.actionCreators,
+        ...Houses.actionCreators
     })
 )(Home as any) as typeof Home;

@@ -27,7 +27,8 @@ namespace firesupply.Controllers {
         public object all () {
             var collection = getCollection ();
             var list = collection.Find (new BsonDocument ()).ToList ();
-            return list;
+            var onlySubmitted = list.Where(order=> order.submitted =="true");
+            return onlySubmitted;
         }
         private IMongoCollection<OrderEntity> getCollection () {
             var connectionString = Environment.GetEnvironmentVariable ("mongoURI");

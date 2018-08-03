@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as OrdersStore from '../../store/orders'
+import * as User from '../../store/user'
 import Spinner from '../Utilities/Spinner'
 import OrderFilters from '../Filters/OrderFilter'
 import Orders from './Orders'
@@ -10,8 +11,10 @@ export class AllOrders extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            countOrders: 'All',
-            viewFormat: 'cards'
+            orders: this.props.orders,
+            viewFormat: 'cards',
+            onFilter: false,
+            allOrMine: 'All'
         }
     }
 
@@ -20,14 +23,33 @@ export class AllOrders extends React.Component<any, any> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.orders) {
+        if (this.state.onFilter == false) {
             this.setState({
-                countOrders: nextProps.orders.length
+                orders: nextProps.orders
             })
         }
     }
 
+    mine() {
+        this.setState({
+            onFilter: true,
+            allOrMine: 'Mine',
+            orders: this.props.orders.filter(order => order.user == this.props.user)
+        })
+    }
+
+    all() {
+        this.setState({
+            onFilter: false,
+            allOrMine: 'All',
+            orders: this.props.orders
+        })
+    }
+
     filter(state) {
+        this.setState({
+            onFilter: true
+        })
         console.log(state)
     }
 
@@ -39,35 +61,43 @@ export class AllOrders extends React.Component<any, any> {
 
     public render() {
         const {
-            countOrders,
-            viewFormat
+            viewFormat,
+            orders,
+            onFilter
         } = this.state
 
-        const {
-            orders
-        } = this.props
-
         return <div>
-            <OrderFilters all={true} toggleViewFormat={this.toggleViewFormat.bind(this)} countOrders={countOrders} filter={this.filter.bind(this)} />
-            {orders &&
-                <Orders orders={orders} viewFormat={viewFormat} />
-            }
-            {orders &&
-                <div>
-                    {orders.length == 0 &&
-                        <Spinner notice='...loading the orders...' />
-                    }
+            <div className='row'>
+                <div className='col-md-6'>
+                    <button onClick={this.all.bind(this)} className='btn btn-secondary'>All Orders</button>
                 </div>
-            }
+                <div className='col-md-6'>
+                    <button onClick={this.mine.bind(this)} className='btn btn-secondary'>My Orders</button>
+                </div>
+            </div>
+            <OrderFilters
+                all={true}
+                toggleViewFormat={this.toggleViewFormat.bind(this)}
+                filter={this.filter.bind(this)} />
+            <Orders
+                orders={orders}
+                viewFormat={viewFormat} />
+            <div>
+                {orders.length == 0 && onFilter == false &&
+                    <Spinner notice='...loading the orders...' />
+                }
+            </div>
         </div>;
     }
 }
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.orders
+        ...state.orders,
+        ...state.user
     }),
     ({
-        ...OrdersStore.actionCreators
+        ...OrdersStore.actionCreators,
+        ...User.actionCreators
     })
 )(AllOrders as any) as typeof AllOrders;

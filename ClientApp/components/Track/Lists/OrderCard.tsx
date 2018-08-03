@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
 import Paging from '../../Utilities/Paging'
 
-const fixedHeight = {
-    height: '225px',
-}
-
 export class OrderCard extends React.Component<any, any> {
     constructor() {
         super();
@@ -69,7 +65,7 @@ export class OrderCard extends React.Component<any, any> {
         const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
         const renderItems = currentItems.map((item) => {
             return (
-                <div style={fixedHeight} className="col-lg-4 col-md-6 col-sm-12" key={item.id}>
+                <div className="col-md-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h4>{item.user}</h4>

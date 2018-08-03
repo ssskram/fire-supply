@@ -86,16 +86,7 @@ export class NavMenu extends React.Component<any, any>  {
                     <div className='nav navbar-nav'>
                         <div className='text-center'>
                             <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                                <b>Add to cart</b>
-                            </NavLink>
-                            <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl main-nav-btn'>
-                                <b>Order</b>
-                            </NavLink>
-                            <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                                Track my orders
-                            </NavLink>
-                            <NavLink to={'/MyOrders'} style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl main-nav-btn'>
-                                My orders
+                                <b>Add items to cart</b>
                             </NavLink>
                         </div>
                         <div className="sidenav-header">Resources</div>
@@ -134,13 +125,10 @@ export class NavMenu extends React.Component<any, any>  {
                     <br />
                     <br />
                     <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        <b>Add to cart</b>
+                        <b>Add items to cart</b>
                     </Link>
                     <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        All orders
-                    </Link>
-                    <Link onClick={this.closeModal.bind(this)} to={'/MyOrders'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        My orders
+                        View orders
                     </Link>
                     <h3>Resources</h3>
                     <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
@@ -169,7 +157,7 @@ export class NavMenu extends React.Component<any, any>  {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.user,
+        ...state.user
     }),
     ({
         ...User.actionCreators

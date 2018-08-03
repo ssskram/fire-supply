@@ -114,17 +114,10 @@ export class OrderFilter extends React.Component<any, any> {
             viewFormat
         } = this.state
 
-        const {
-            countOrders
-        } = this.props
-
         return <div>
             <div className='row'>
-                <div className='col-md-3 col-sm-12'>
-                    <h1>{countOrders} Orders</h1>
-                </div>
                 <div style={marginTop}>
-                    <div className='col-md-3 col-sm-12 text-center'>
+                    <div className='col-md-4 col-sm-12 text-center'>
                         {filters === true &&
                             <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
                         }
@@ -132,10 +125,10 @@ export class OrderFilter extends React.Component<any, any> {
                             <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
                         }
                     </div>
-                    <div className='col-md-3 col-sm-12 text-center'>
+                    <div className='col-md-4 col-sm-12 text-center'>
                         <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear all filters</button>
                     </div>
-                    <div className='col-md-3 col-sm-12 text-center'>
+                    <div className='col-md-4 col-sm-12 text-center'>
                         {viewFormat == 'cards' &&
                             <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
                         }
