@@ -150,7 +150,7 @@ export class OrderFilter extends React.Component<any, any> {
                     <div className='col-md-4 col-sm-12 text-center'>
                         <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear all filters</button>
                     </div>
-                    <div className='col-md-4 col-sm-12 text-center'>
+                    <div className='col-md-4 hidden-sm hidden-xs text-center'>
                         {viewFormat == 'cards' &&
                             <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
                         }
