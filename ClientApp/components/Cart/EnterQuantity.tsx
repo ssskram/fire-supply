@@ -4,6 +4,10 @@ import { ApplicationState } from '../../store';
 import Input from '../FormElements/input'
 import * as Cart from '../../store/cart'
 
+const objColor = {
+    color: '#449d44'
+}
+
 const padding = {
     padding: '25px'
 }
@@ -60,7 +64,7 @@ export class SelectQuantity extends React.Component<any, any> {
         return <div style={padding}>
             <div className="col-md-12 form" key={item.id}>
                 <div className="text-center">
-                    <h3>{item.obj}</h3>
+                    <h3 style={objColor}>{item.obj}</h3>
                     <h4>Item type: <b>{item.family}</b></h4>
                     <h4>Unit of issue: <b>{item.unit}</b></h4>
                     <div className='row' >

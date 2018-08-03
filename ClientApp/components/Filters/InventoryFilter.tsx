@@ -95,29 +95,6 @@ export class InventoryFilter extends React.Component<any, any> {
 
 
         return <div>
-            <div className='row'>
-                <div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        {filters === true &&
-                            <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
-                        }
-                        {filters === false &&
-                            <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
-                        }
-                    </div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear filters</button>
-                    </div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        {viewFormat == 'cards' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
-                        }
-                        {viewFormat == 'table' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
-                        }
-                    </div>
-                </div>
-            </div>
             {filters == true &&
                 <div className='form-group'>
                     <div className='row'>
@@ -144,6 +121,29 @@ export class InventoryFilter extends React.Component<any, any> {
                     </div>
                 </div>
             }
+            <div className='form-group'>
+                <div>
+                    <div className='col-md-4 col-sm-12 text-center'>
+                        {filters === true &&
+                            <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
+                        }
+                        {filters === false &&
+                            <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
+                        }
+                    </div>
+                    <div className='col-md-4 col-sm-12 text-center'>
+                        <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear filters</button>
+                    </div>
+                    <div className='col-md-4 col-sm-12 text-center'>
+                        {viewFormat == 'cards' &&
+                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
+                        }
+                        {viewFormat == 'table' &&
+                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>;
     }
 }

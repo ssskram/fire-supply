@@ -32,6 +32,10 @@ const btnStyle = {
     width: '250px'
 }
 
+const qtyColor = {
+    color: '#449d44'
+}
+
 const columns = [{
     Header: 'Item',
     accessor: 'obj'
@@ -134,7 +138,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantityOrdered}</b></h3>
+                            <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -151,7 +155,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantityOrdered}</b></h3>
+                            <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -168,7 +172,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantityOrdered}</b></h3>
+                            <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -185,7 +189,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantityOrdered}</b></h3>
+                            <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -202,7 +206,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantityOrdered}</b></h3>
+                            <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
@@ -219,7 +223,7 @@ export class FullCart extends React.Component<any, any> {
                     <div className="panel">
                         <div className="panel-body text-center">
                             <h3>{item.obj}</h3>
-                            <h3><b>{item.quantityOrdered}</b></h3>
+                            <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
                             <h5>Unit: <b>{item.unit}</b></h5>
                             <button onClick={() => this.deleteItem(item)} className='btn btn-danger'><span className='glyphicon glyphicon-trash'></span></button>
                             <button onClick={() => this.updateQuantity(item)} className='btn btn-success'><span className='glyphicon glyphicon-plus'></span></button>
