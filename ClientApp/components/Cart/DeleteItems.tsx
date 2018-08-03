@@ -23,10 +23,6 @@ export class DeleteItems extends React.Component<any, any> {
         }
     }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     updateCart () {
         this.props.deleteItem(this.state)
         this.props.closeModal()

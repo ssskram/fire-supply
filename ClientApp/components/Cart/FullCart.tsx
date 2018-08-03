@@ -80,7 +80,6 @@ export class FullCart extends React.Component<any, any> {
     }
 
     deleteItem(item) {
-        console.log(item)
         this.setState({
             modalIsOpen: true,
             selectedItem: item,

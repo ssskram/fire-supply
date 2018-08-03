@@ -112,7 +112,6 @@ namespace firesupply.Controllers {
         }
 
         private IMongoCollection<OrderEntity> getCollection () {
-            var user = _userManager.GetUserName (HttpContext.User);
             var connectionString = Environment.GetEnvironmentVariable ("mongoURI");
             MongoClientSettings settings = MongoClientSettings.FromUrl (
                 new MongoUrl (connectionString)

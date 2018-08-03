@@ -7,6 +7,7 @@ import Messages from './Utilities/Messages'
 import AllOrders from './Track/AllOrders'
 import * as ItemsStore from '../store/items'
 import * as Cart from '../store/cart'
+import * as Orders from '../store/orders'
 
 export class Home extends React.Component<any, any> {
     constructor() {
@@ -19,14 +20,11 @@ export class Home extends React.Component<any, any> {
     componentDidMount() {
         window.scrollTo(0, 0)
 
-        if (this.props.items != null) {
-            this.setState({
-                loadingData: false
-            })
-        }
-
         // ping server
         this.props.ping()
+
+        // load orders
+        this.props.loadOrders()
 
         // load inventory items
         this.props.getItems()
@@ -40,19 +38,16 @@ export class Home extends React.Component<any, any> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.items != null) {
-            this.setState({
-                loadingData: false
-            })
-        }
+        console.log(nextProps)
     }
+
 
     public render() {
         return <div className="home-container">
             <div className='text-center'>
                 <Messages messages={this.props.messages} />
             </div>
-            <AllOrders />
+            <AllOrders orders={this.props.orders}/>
         </div>;
     }
 }
@@ -62,12 +57,14 @@ export default connect(
         ...state.messages,
         ...state.ping,
         ...state.items,
-        ...state.cart
+        ...state.cart,
+        ...state.orders
     }),
     ({
         ...MessagesStore.actionCreators,
         ...Ping.actionCreators,
         ...ItemsStore.actionCreators,
-        ...Cart.actionCreators
+        ...Cart.actionCreators,
+        ...Orders.actionCreators
     })
 )(Home as any) as typeof Home;

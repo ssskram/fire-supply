@@ -1,26 +1,44 @@
-import { fetch, addTask } from 'domain-task';
-import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
+import { fetch } from 'domain-task';
+
+const loadOrders = 'load'
+
+const unloadedState: OrdersState = {
+    orders: []
+}
 
 export interface OrdersState {
-    orders: number;
+    orders: OrderItems[]
 }
 
-interface RequestOrdersAction {
-    type: 'REQUEST_ORDERS';
+export interface OrderItems {
+    id: string
+    submitted: string
+    cartGenerated: string
+    orderSubmitted: string
+    user: string
+    house: string
+    comments: string
+    emergency: string
+    emergencyJustification: string
+    narcanCases: string
+    narcanExplanation: string
+    supplyComments: string
+    lastModified: string
+    status: string
+    items: CartItems[]
 }
 
-interface ReceiveOrdersAction {
-    type: 'RECEIVE_ORDERS';
-    orders: number;
+export interface CartItems {
+    obj: string
+    family: string
+    unit: string
+    quantityOrdered: string
+    quantityReceived: string
 }
-
-type KnownAction = RequestOrdersAction | ReceiveOrdersAction;
-
 
 export const actionCreators = {
-    orders: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
-        let fetchTask = fetch('/api/orders/all', {
+    loadOrders: () => (dispatch) => {
+        fetch('/api/orders/all', {
             credentials: 'same-origin',
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
@@ -28,32 +46,19 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: 'RECEIVE_ORDERS', orders: data });
-                if (data == 0) {
-                    window.location.reload();
-                }
+                console.log(data)
+                dispatch({ type: loadOrders, orders: data });
             });
-
-        addTask(fetchTask);
-        dispatch({ type: 'REQUEST_ORDERS' });
     },
 };
 
-const unloadedState: OrdersState = { orders: 1 };
-
-export const reducer: Reducer<OrdersState> = (state: OrdersState, incomingAction: Action) => {
-    const action = incomingAction as KnownAction;
+export const reducer = (state: OrdersState, action) => {
     switch (action.type) {
-        case 'REQUEST_ORDERS':
+        case loadOrders:
             return {
-                orders: state.orders,
-            };
-        case 'RECEIVE_ORDERS':
-            return {
+                ...state,
                 orders: action.orders,
             };
-        default:
-            const exhaustiveCheck: never = action;
     }
 
     return state || unloadedState;

@@ -7,7 +7,7 @@ const del = 'delete'
 const submit = 'submit'
 
 const unloadedState: CartState = {
-    cart: [],
+    cart: []
 };
 
 export interface ID {
@@ -19,7 +19,8 @@ export interface CartState {
 }
 
 export interface CartItems {
-    quantityOrdered: number
+    quantityOrdered: string
+    quantityReceived: string
     family: string
     obj: string
     unit: string
@@ -69,7 +70,6 @@ export const actionCreators = {
             unit: item.unit,
             quantityOrdered: item.quantityOrdered
         })
-        console.log(data)
         fetch('/api/cart/deleteItem', {
             method: 'POST',
             body: data,
@@ -92,7 +92,6 @@ export const actionCreators = {
             unit: item.unit,
             quantityOrdered: item.quantityOrdered
         })
-        console.log(data)
         fetch('/api/cart/changeQuantity', {
             method: 'POST',
             body: data,
