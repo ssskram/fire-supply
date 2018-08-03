@@ -19,8 +19,8 @@ const cartCount = {
 }
 
 export class MiniCart extends React.Component<any, any> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
 
     componentDidMount() {
@@ -29,7 +29,7 @@ export class MiniCart extends React.Component<any, any> {
 
     public render() {
         const {
-            cart,
+            cart
         } = this.props
 
         return <div>

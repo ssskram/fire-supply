@@ -37,10 +37,6 @@ export class Home extends React.Component<any, any> {
         this.props.clear()
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-    }
-
 
     public render() {
         return <div className="home-container">

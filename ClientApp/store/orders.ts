@@ -46,7 +46,6 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 dispatch({ type: loadOrders, orders: data });
             });
     },

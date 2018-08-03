@@ -14,10 +14,6 @@ export class AllOrders extends React.Component<any, any> {
             viewFormat: 'cards'
         }
     }
-
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-    }
     
     filter(state) {
         console.log(state)
@@ -39,9 +35,9 @@ export class AllOrders extends React.Component<any, any> {
             <br />
             <br />
             <h1 className='text-center'>( All orders returned here )</h1>
-            {allOrders.length == 0 &&
+            {/* {allOrders.length == 0 &&
                 <Spinner notice='...loading the orders...' />
-            }
+            } */}
         </div>;
     }
 }

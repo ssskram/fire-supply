@@ -31,6 +31,7 @@
     "json-loader": "0.5.4",
     "moment": "^2.22.2",
     "node-noop": "1.0.0",
+    "prop-types": "^15.6.2",
     "react": "15.6.1",
     "react-center": "^1.1.1",
     "react-datepicker": "^1.5.0",

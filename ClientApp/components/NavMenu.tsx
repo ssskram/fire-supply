@@ -3,7 +3,6 @@ import { Link, NavLink } from 'react-router-dom';
 import * as User from '../store/user';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../store';
-import * as Cart from '../store/cart'
 import Modal from 'react-responsive-modal';
 import MiniCart from './Cart/MiniCart'
 
@@ -87,12 +86,7 @@ export class NavMenu extends React.Component<any, any>  {
                     <div className='nav navbar-nav'>
                         <div className='text-center'>
                             <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                                {this.props.cart.length == 0 &&
-                                    <b>Place an order</b>
-                                }
-                                {this.props.cart.length > 0 &&
-                                    <b>Add items to cart</b>
-                                }
+                                <b>Add to cart</b>
                             </NavLink>
                             <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-md hidden-lg hidden-xl main-nav-btn'>
                                 <b>Order</b>
@@ -140,12 +134,7 @@ export class NavMenu extends React.Component<any, any>  {
                     <br />
                     <br />
                     <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        {this.props.cart.length == 0 &&
-                            <b>Place an order</b>
-                        }
-                        {this.props.cart.length > 0 &&
-                            <b>Add items to cart</b>
-                        }
+                        <b>Add to cart</b>
                     </Link>
                     <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
                         All orders
@@ -180,11 +169,9 @@ export class NavMenu extends React.Component<any, any>  {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.cart,
         ...state.user,
     }),
     ({
-        ...Cart.actionCreators,
         ...User.actionCreators
     })
 )(NavMenu as any) as typeof NavMenu;
