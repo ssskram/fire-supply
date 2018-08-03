@@ -155,11 +155,6 @@ export class ItemSelection extends React.Component<any, any> {
             <Helmet>
                 <style>{'body { background-color: rgba(92, 184, 92, .05); }'}</style>
             </Helmet>
-            <div className='text-center'>
-                <h2>Select an item, enter a quantity, and add it to your cart</h2>
-                <hr />
-            </div>
-
             <ItemFilters
                 toggleViewFormat={this.toggleViewFormat.bind(this)}
                 filter={this.filter.bind(this)}

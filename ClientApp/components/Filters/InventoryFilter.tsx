@@ -4,6 +4,10 @@ import { ApplicationState } from '../../store';
 import Select from '../FormElements/select'
 import Input from '../FormElements/input'
 
+const marginTop = {
+    marginTop: '5px'
+}
+
 const families = [
     { value: '', label: 'All', name: 'family' },
     { value: 'House', label: 'House Supplies', name: 'family' },
@@ -95,6 +99,33 @@ export class InventoryFilter extends React.Component<any, any> {
 
 
         return <div>
+            <div className='row'>
+                <div className='col-md-3 col-sm-12'>
+                    <h2>Select your items</h2>
+                </div>
+                <div style={marginTop} className='hidden-xs'>
+                    <div className='col-md-3 col-sm-12 text-center'>
+                        {filters === true &&
+                            <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
+                        }
+                        {filters === false &&
+                            <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
+                        }
+                    </div>
+                    <div className='col-md-3 col-sm-12 text-center'>
+                        <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear filters</button>
+                    </div>
+                    <div className='col-md-3 col-sm-12 text-center'>
+                        {viewFormat == 'cards' &&
+                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
+                        }
+                        {viewFormat == 'table' &&
+                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
+                        }
+                    </div>
+                </div>
+            </div>
+            <hr/>
             {filters == true &&
                 <div className='form-group'>
                     <div className='row'>
@@ -121,29 +152,6 @@ export class InventoryFilter extends React.Component<any, any> {
                     </div>
                 </div>
             }
-            <div className='form-group'>
-                <div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        {filters === true &&
-                            <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
-                        }
-                        {filters === false &&
-                            <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
-                        }
-                    </div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear filters</button>
-                    </div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        {viewFormat == 'cards' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
-                        }
-                        {viewFormat == 'table' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
-                        }
-                    </div>
-                </div>
-            </div>
         </div>;
     }
 }

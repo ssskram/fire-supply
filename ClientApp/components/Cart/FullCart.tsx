@@ -292,7 +292,7 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {miscellaneous.length > 0 &&
                     <div className='row'>
-                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Miscellaneous</h2>
+                        <h2 style={paddingLeft}><span style={paddingRight}><b>?</b></span>Miscellaneous</h2>
                         <hr />
                         <div className='col-md-12'>
                             {renderMiscellaneous}
