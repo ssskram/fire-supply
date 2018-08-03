@@ -1,6 +1,7 @@
-import { fetch } from 'domain-task';
+import { fetch, addTask } from 'domain-task';
 
-const loadOrders = 'load'
+const requestOrders = 'request'
+const receiveOrders = 'receive'
 
 const unloadedState: OrdersState = {
     orders: []
@@ -38,7 +39,7 @@ export interface CartItems {
 
 export const actionCreators = {
     loadOrders: () => (dispatch) => {
-        fetch('/api/orders/all', {
+        let fetchTask = fetch('/api/orders/all', {
             credentials: 'same-origin',
             headers: {
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8'
@@ -46,16 +47,21 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: loadOrders, orders: data });
+                dispatch({ type: receiveOrders, orders: data });
             });
-    },
+        addTask(fetchTask);
+        dispatch({ type: requestOrders });
+    }
 };
 
 export const reducer = (state: OrdersState, action) => {
     switch (action.type) {
-        case loadOrders:
+        case requestOrders:
             return {
-                ...state,
+                orders: state.orders,
+            };
+        case receiveOrders:
+            return {
                 orders: action.orders,
             };
     }

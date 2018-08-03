@@ -12,8 +12,8 @@ import { Helmet } from "react-helmet"
 import MiscItem from './MiscItem'
 
 export class ItemSelection extends React.Component<any, any> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             items: [],
             viewFormat: 'cards',

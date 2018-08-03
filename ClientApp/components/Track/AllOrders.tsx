@@ -9,12 +9,24 @@ export class AllOrders extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            allOrders: this.props.orders,
             countOrders: 'All',
             viewFormat: 'cards'
         }
     }
-    
+
+    componentDidMount() {
+        this.props.loadOrders()
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.orders)
+        if (nextProps.orders) {
+            this.setState({
+                countOrders: nextProps.orders.length
+            })
+        }
+    }
+
     filter(state) {
         console.log(state)
     }
@@ -25,9 +37,12 @@ export class AllOrders extends React.Component<any, any> {
 
     public render() {
         const {
-            countOrders,
-            allOrders
+            countOrders
         } = this.state
+
+        const {
+            orders
+        } = this.props
 
         return <div>
             <OrderFilters all={true} toggleViewFormat={this.toggleViewFormat.bind(this)} countOrders={countOrders} filter={this.filter.bind(this)} />
@@ -35,9 +50,13 @@ export class AllOrders extends React.Component<any, any> {
             <br />
             <br />
             <h1 className='text-center'>( All orders returned here )</h1>
-            {/* {allOrders.length == 0 &&
-                <Spinner notice='...loading the orders...' />
-            } */}
+            {orders &&
+                <div>
+                    {orders.length == 0 &&
+                        <Spinner notice='...loading the orders...' />
+                    }
+                </div>
+            }
         </div>;
     }
 }

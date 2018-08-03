@@ -1,6 +1,7 @@
 import { fetch, addTask } from 'domain-task'
-import { Action, Reducer } from 'redux'
-import { AppThunkAction } from '.'
+
+const requestItems = 'request'
+const receiveItems = 'receive'
 
 export interface ItemsState {
     items: InventoryItems[]
@@ -13,20 +14,8 @@ export interface InventoryItems {
     unit: any
 }
 
-interface RequestItemsAction {
-    type: 'REQUEST_ITEMS';
-}
-
-interface ReceiveItemsAction {
-    type: 'RECEIVE_ITEMS'
-    items: InventoryItems[]
-}
-
-type KnownAction = RequestItemsAction | ReceiveItemsAction;
-
-
 export const actionCreators = {
-    getItems: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
+    getItems: () => (dispatch) => {
         let fetchTask = fetch('/api/items/get', {
             credentials: 'same-origin',
             headers: {
@@ -35,32 +24,29 @@ export const actionCreators = {
         })
             .then(response => response.json())
             .then(data => {
-                dispatch({ type: 'RECEIVE_ITEMS', items: data });
+                dispatch({ type: receiveItems, items: data });
                 if (data == 0) {
                     window.location.reload();
                 }
             });
 
         addTask(fetchTask);
-        dispatch({ type: 'REQUEST_ITEMS' });
+        dispatch({ type: requestItems });
     },
 };
 
 const unloadedState: ItemsState = { items: [] };
 
-export const reducer: Reducer<ItemsState> = (state: ItemsState, incomingAction: Action) => {
-    const action = incomingAction as KnownAction;
+export const reducer = (state: ItemsState, action) => {
     switch (action.type) {
-        case 'REQUEST_ITEMS':
+        case requestItems:
             return {
                 items: state.items,
             };
-        case 'RECEIVE_ITEMS':
+        case receiveItems:
             return {
                 items: action.items,
             };
-        default:
-            const exhaustiveCheck: never = action;
     }
 
     return state || unloadedState;
