@@ -1,6 +1,6 @@
-import { fetch, addTask } from 'domain-task';
-import { Action, Reducer } from 'redux';
-import { AppThunkAction } from '.';
+import { fetch, addTask } from 'domain-task'
+import { Action, Reducer } from 'redux'
+import { AppThunkAction } from '.'
 
 export interface PingState {
     ping: number;
@@ -15,8 +15,9 @@ interface ReceivePingAction {
     ping: number;
 }
 
-type KnownAction = RequestPingAction | ReceivePingAction;
-
+type KnownAction =
+    RequestPingAction |
+    ReceivePingAction;
 
 export const actionCreators = {
     ping: (): AppThunkAction<KnownAction> => (dispatch, getState) => {

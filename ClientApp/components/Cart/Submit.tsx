@@ -2,8 +2,8 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as MessagesStore from '../../store/messages'
-import TextArea from './../FormElements/textarea'
-import Select from './../FormElements/select'
+import TextArea from '../FormElements/textarea'
+import Select from '../FormElements/select'
 import * as Cart from '../../store/cart'
 
 const houses = [

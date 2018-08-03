@@ -3,6 +3,10 @@ import { fetch, addTask } from 'domain-task'
 const requestItems = 'request'
 const receiveItems = 'receive'
 
+const unloadedState: ItemsState = { 
+    items: [] 
+};
+
 export interface ItemsState {
     items: InventoryItems[]
 }
@@ -35,16 +39,16 @@ export const actionCreators = {
     },
 };
 
-const unloadedState: ItemsState = { items: [] };
-
 export const reducer = (state: ItemsState, action) => {
     switch (action.type) {
         case requestItems:
             return {
+                ...state,
                 items: state.items,
             };
         case receiveItems:
             return {
+                ...state,
                 items: action.items,
             };
     }

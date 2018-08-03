@@ -26,20 +26,21 @@ export class ItemSelection extends React.Component<any, any> {
         let self = this
         window.scrollTo(0, 0)
 
-        if (this.props.items.length != 0) {
-            if (this.props.cart.length != 0) {
-                this.setState({
-                    items: this.props.items.filter(function (i) {
-                        const filterCartItems = obj => obj.obj === i.obj
-                        return !self.props.cart.some(filterCartItems)
+        if (this.props.items) {
+            if (this.props.items.length != 0) {
+                if (this.props.cart.length != 0) {
+                    this.setState({
+                        items: this.props.items.filter(function (i) {
+                            const filterCartItems = obj => obj.obj === i.obj
+                            return !self.props.cart.some(filterCartItems)
+                        })
                     })
-                })
-            } else {
-                this.setState({
-                    items: this.props.items
-                })
+                } else {
+                    this.setState({
+                        items: this.props.items
+                    })
+                }
             }
-
         }
 
         // load cart items

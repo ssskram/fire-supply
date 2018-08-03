@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { ApplicationState } from '../../store';
-import * as OrdersStore from '../../store/orders';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
+import * as OrdersStore from '../../store/orders'
 import Spinner from '../Utilities/Spinner'
-import OrderFilters from '../Filters/OrderFilter';
+import OrderFilters from '../Filters/OrderFilter'
+import Orders from './Orders'
 
 export class AllOrders extends React.Component<any, any> {
     constructor(props) {
@@ -32,12 +33,15 @@ export class AllOrders extends React.Component<any, any> {
     }
 
     toggleViewFormat(type) {
-        console.log(type)
+        this.setState({
+            viewFormat: type
+        })
     }
 
     public render() {
         const {
-            countOrders
+            countOrders,
+            viewFormat
         } = this.state
 
         const {
@@ -46,10 +50,9 @@ export class AllOrders extends React.Component<any, any> {
 
         return <div>
             <OrderFilters all={true} toggleViewFormat={this.toggleViewFormat.bind(this)} countOrders={countOrders} filter={this.filter.bind(this)} />
-            <br />
-            <br />
-            <br />
-            <h1 className='text-center'>( All orders returned here )</h1>
+            {orders &&
+                <Orders orders={orders} viewFormat={viewFormat} />
+            }
             {orders &&
                 <div>
                     {orders.length == 0 &&

@@ -23,9 +23,6 @@ export class Home extends React.Component<any, any> {
         // ping server
         this.props.ping()
 
-        // // load orders
-        // this.props.loadOrders()
-
         // load inventory items
         this.props.getItems()
 
