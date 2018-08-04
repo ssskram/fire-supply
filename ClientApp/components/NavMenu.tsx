@@ -10,11 +10,6 @@ const btnWidth = {
     width: '93%'
 }
 
-const hrMargin = {
-    marginLeft: '15px',
-    marginRight: '15px'
-}
-
 const modalLogout = {
     color: '#383838',
     width: '100%',
@@ -85,22 +80,16 @@ export class NavMenu extends React.Component<any, any>  {
                 <div className='navbar-collapse collapse'>
                     <div className='nav navbar-nav'>
                         <div className='text-center'>
-                            <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
+                            <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary'>
                                 <b>Add items to cart</b>
                             </NavLink>
-                        </div>
-                        <div className="sidenav-header">Resources</div>
-                        <div className='text-center'>
-                            <hr style={hrMargin} />
-                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-primary'>
+                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-info'>
                                 Units of Issue
                             </NavLink>
-                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-primary'>
+                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-info'>
                                 What's an emergency order?
                             </NavLink>
                         </div>
-                        <div className="sidenav-header">Shopping Cart</div>
-                        <hr style={hrMargin} />
                         <MiniCart />
                         <div className='accountcontainer'>
                             <div className="account">{user}</div>
@@ -124,21 +113,21 @@ export class NavMenu extends React.Component<any, any>  {
                 <div className='col-md-12'>
                     <br />
                     <br />
-                    <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        <b>Add items to cart</b>
+                    <div className='text-center'>
+                        <Link onClick={this.closeModal.bind(this)} to={'/Items'} style={btnWidth} className='btn btn-primary'>
+                            <b>Add items to cart</b>
+                        </Link>
+                        <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary'>
+                            View orders
                     </Link>
-                    <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        View orders
+                        <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-info'>
+                            Units of Issue
                     </Link>
-                    <h3>Resources</h3>
-                    <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        Units of Issue
+                        <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-info'>
+                            What's an emergency order?
                     </Link>
-                    <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-primary hidden-sm main-nav-btn'>
-                        What's an emergency order?
-                    </Link>
-                    <h3 style={{ paddingLeft: '35px' }}>Cart</h3>
-                    <MiniCart closeModal={this.closeModal.bind(this)} />
+                        <MiniCart closeModal={this.closeModal.bind(this)} />
+                    </div>
                     <div className='accountcontainer'>
                         <div className="account">{user}</div>
                         <div className='logout'>

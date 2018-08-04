@@ -29,6 +29,9 @@ export class ItemSelection extends React.Component<any, any> {
         // ping server
         this.props.ping()
 
+        // load inventory items
+        this.props.getItems()
+
         if (this.props.items) {
             if (this.props.items.length != 0) {
                 if (this.props.cart.length != 0) {
@@ -45,9 +48,6 @@ export class ItemSelection extends React.Component<any, any> {
                 }
             }
         }
-
-        // load inventory items
-        this.props.getItems()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -108,25 +108,6 @@ export class ItemSelection extends React.Component<any, any> {
         })
     }
 
-    clearFilters() {
-        let cart = this.props.cart
-        if (cart.length != 0) {
-            this.setState({
-                items: this.props.items.filter(function (i) {
-                    const filterCartItems = obj => obj.obj === i.obj
-                    return !cart.some(filterCartItems)
-                }),
-                onFilter: false
-            })
-        } else {
-            this.setState({
-                items: this.props.items,
-                onFilter: false
-            })
-        }
-
-    }
-
     addMiscItem() {
         this.setState({
             modalIsOpen: true
@@ -153,8 +134,7 @@ export class ItemSelection extends React.Component<any, any> {
             </Helmet>
             <ItemFilters
                 toggleViewFormat={this.toggleViewFormat.bind(this)}
-                filter={this.filter.bind(this)}
-                clear={this.clearFilters.bind(this)} />
+                filter={this.filter.bind(this)} />
 
             {items.length > 0 &&
                 <div>

@@ -249,7 +249,7 @@ export class FullCart extends React.Component<any, any> {
                 {houseSupplies.length > 0 &&
                     <div className='row'>
                         <div className='d-flex justify-content-between'>
-                            <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-home'></span>House supplies</h2>
+                            <h2 style={paddingLeft}>House supplies<span style={paddingRight} className='glyphicon glyphicon-home pull-right'></span></h2>
                         </div>
                         <hr />
                         <div className='col-md-12'>
@@ -259,7 +259,7 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {officeSupplies.length > 0 &&
                     <div className='row'>
-                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-folder-open'></span>Office supplies</h2>
+                        <h2 style={paddingLeft}>Office supplies<span style={paddingRight} className='glyphicon glyphicon-folder-open pull-right'></span></h2>
                         <hr />
                         <div className='col-md-12'>
                             {renderOffice}
@@ -268,7 +268,7 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {medicalSupplies.length > 0 &&
                     <div className='row'>
-                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-plus-sign'></span>Medical supplies</h2>
+                        <h2 style={paddingLeft}>Medical supplies<span style={paddingRight} className='glyphicon glyphicon-plus-sign pull-right'></span></h2>
                         <hr />
                         <div className='col-md-12'>
                             {renderMedical}
@@ -277,7 +277,7 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {medicine.length > 0 &&
                     <div className='row'>
-                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-grain'></span>Medicine</h2>
+                        <h2 style={paddingLeft}>Medicine<span style={paddingRight} className='glyphicon glyphicon-grain pull-right'></span></h2>
                         <hr />
                         <div className='col-md-12'>
                             {renderMedicine}
@@ -286,7 +286,7 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {equipment.length > 0 &&
                     <div className='row'>
-                        <h2 style={paddingLeft}><span style={paddingRight} className='glyphicon glyphicon-wrench'></span>Equipment</h2>
+                        <h2 style={paddingLeft}>Equipment<span style={paddingRight} className='glyphicon glyphicon-wrench pull-right'></span></h2>
                         <hr />
                         <div className='col-md-12'>
                             {renderEquipment}
@@ -295,7 +295,7 @@ export class FullCart extends React.Component<any, any> {
                 }
                 {miscellaneous.length > 0 &&
                     <div className='row'>
-                        <h2 style={paddingLeft}><span style={paddingRight}><b>?</b></span>Miscellaneous</h2>
+                        <h2 style={paddingLeft}>Miscellaneous<span className='pull-right' style={paddingRight}><b>?</b></span></h2>
                         <hr />
                         <div className='col-md-12'>
                             {renderMiscellaneous}

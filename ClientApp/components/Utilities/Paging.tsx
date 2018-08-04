@@ -12,12 +12,6 @@ const paddingRight = {
     paddingRight: '25px'
 }
 
-const btnStyle = {
-    fontSize: '16px',
-    padding: '15px 30px',
-    width: 'auto'
-}
-
 export default class Paging extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -40,10 +34,10 @@ export default class Paging extends React.Component<any, any> {
                             <div className='row'>
                                 <div className='col-md-12'>
                                     <div className='col-sm-6 text-center'>
-                                        <button style={btnStyle} className='btn btn-secondary' onClick={prev.bind(this)} disabled><span style={paddingRight} className='glyphicon glyphicon-arrow-left'></span>Previous</button>
+                                        <button className='btn btn-secondary' onClick={prev.bind(this)} disabled><span style={paddingRight} className='glyphicon glyphicon-arrow-left'></span>Previous</button>
                                     </div>
                                     <div className='col-sm-6 text-center'>
-                                        <button style={btnStyle} className='btn btn-secondary' onClick={next.bind(this)}>Next<span style={paddingLeft} className='glyphicon glyphicon-arrow-right'></span></button>
+                                        <button className='btn btn-secondary' onClick={next.bind(this)}>Next<span style={paddingLeft} className='glyphicon glyphicon-arrow-right'></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -52,10 +46,10 @@ export default class Paging extends React.Component<any, any> {
                             <div className='row'>
                                 <div className='col-md-12'>
                                     <div className='col-sm-6 text-center'>
-                                        <button style={btnStyle} className='btn btn-secondary' onClick={prev.bind(this)}><span style={paddingRight} className='glyphicon glyphicon-arrow-left'></span>Previous</button>
+                                        <button className='btn btn-secondary' onClick={prev.bind(this)}><span style={paddingRight} className='glyphicon glyphicon-arrow-left'></span>Previous</button>
                                     </div>
                                     <div className='col-sm-6 text-center'>
-                                        <button style={btnStyle} className='btn btn-secondary' onClick={next.bind(this)}>Next<span style={paddingLeft} className='glyphicon glyphicon-arrow-right'></span></button>
+                                        <button className='btn btn-secondary' onClick={next.bind(this)}>Next<span style={paddingLeft} className='glyphicon glyphicon-arrow-right'></span></button>
                                     </div>
                                 </div>
                             </div>
@@ -64,10 +58,10 @@ export default class Paging extends React.Component<any, any> {
                             <div className='row'>
                                 <div className='col-md-12'>
                                     <div className='col-sm-6 text-center'>
-                                        <button style={btnStyle} className='btn btn-secondary' onClick={prev.bind(this)}><span style={paddingRight} className='glyphicon glyphicon-arrow-left'></span>Previous</button>
+                                        <button className='btn btn-secondary' onClick={prev.bind(this)}><span style={paddingRight} className='glyphicon glyphicon-arrow-left'></span>Previous</button>
                                     </div>
                                     <div className='col-sm-6 text-center'>
-                                        <button style={btnStyle} className='btn btn-secondary' onClick={next.bind(this)} disabled>Next<span style={paddingLeft} className='glyphicon glyphicon-arrow-right'></span></button>
+                                        <button className='btn btn-secondary' onClick={next.bind(this)} disabled>Next<span style={paddingLeft} className='glyphicon glyphicon-arrow-right'></span></button>
                                     </div>
                                 </div>
                             </div>

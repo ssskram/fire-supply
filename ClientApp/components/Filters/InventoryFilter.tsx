@@ -5,7 +5,7 @@ import Select from '../FormElements/select'
 import Input from '../FormElements/input'
 
 const marginTop = {
-    marginTop: '5px'
+    marginTop: '18px'
 }
 
 const families = [
@@ -25,8 +25,7 @@ export class InventoryFilter extends React.Component<any, any> {
             family: '',
 
             // utilities
-            viewFormat: 'cards',
-            filters: true
+            viewFormat: 'cards'
         }
     }
 
@@ -44,27 +43,6 @@ export class InventoryFilter extends React.Component<any, any> {
         }, function (this) {
             this.filter()
         })
-    }
-
-    clearFilters() {
-        this.setState({
-            obj: '',
-            family: ''
-        }, function (this) {
-            this.props.clear()
-        })
-    }
-
-    hideFilters() {
-        this.setState({
-            filters: false
-        });
-    }
-
-    showFilters() {
-        this.setState({
-            filters: true
-        });
     }
 
     toggleViewFormat() {
@@ -91,67 +69,39 @@ export class InventoryFilter extends React.Component<any, any> {
     public render() {
         const {
             obj,
-            family,
-            filters,
-            viewFormat
+            family
         } = this.state
 
 
 
         return <div>
-            <div className='row'>
-                <div className='col-md-3 col-sm-12'>
-                    <h2>Select your items</h2>
-                </div>
-                <div style={marginTop} className='hidden-xs'>
-                    <div className='col-md-3 col-sm-12 text-center'>
-                        {filters === true &&
-                            <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
-                        }
-                        {filters === false &&
-                            <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
-                        }
+            <div className='form-group'>
+                <div className='row'>
+                    <div className='col-md-5'>
+                        <Input
+                            value={obj}
+                            name="obj"
+                            header="Search for an item"
+                            placeholder="Enter item name"
+                            callback={this.handleChildChange.bind(this)}
+                        />
                     </div>
-                    <div className='col-md-3 col-sm-12 text-center'>
-                        <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear filters</button>
+                    <div className='col-md-5'>
+                        <Select
+                            value={family}
+                            name="family"
+                            header='Filter by type'
+                            placeholder='Select an item type'
+                            onChange={this.handleChildSelect.bind(this)}
+                            multi={false}
+                            options={families}
+                        />
                     </div>
-                    <div className='col-md-3 col-sm-12 text-center'>
-                        {viewFormat == 'cards' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
-                        }
-                        {viewFormat == 'table' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
-                        }
+                    <div style={marginTop} className='col-md-2 text-center hidden-xs hidden-sm'>
+                        <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}><span className='glyphicon glyphicon-eye-open'></span></button>
                     </div>
                 </div>
             </div>
-            <hr/>
-            {filters == true &&
-                <div className='form-group'>
-                    <div className='row'>
-                        <div className='col-md-6'>
-                            <Input
-                                value={obj}
-                                name="obj"
-                                header="Search for an item"
-                                placeholder="Enter item name"
-                                callback={this.handleChildChange.bind(this)}
-                            />
-                        </div>
-                        <div className='col-md-6'>
-                            <Select
-                                value={family}
-                                name="family"
-                                header='Filter by type'
-                                placeholder='Select an item type'
-                                onChange={this.handleChildSelect.bind(this)}
-                                multi={false}
-                                options={families}
-                            />
-                        </div>
-                    </div>
-                </div>
-            }
         </div>;
     }
 }

@@ -63,20 +63,16 @@ export class AllOrders extends React.Component<any, any> {
         const {
             viewFormat,
             orders,
-            onFilter
+            onFilter,
+            allOrMine
         } = this.state
 
         return <div>
-            <div className='row'>
-                <div className='col-md-6'>
-                    <button onClick={this.all.bind(this)} className='btn btn-secondary'>All Orders</button>
-                </div>
-                <div className='col-md-6'>
-                    <button onClick={this.mine.bind(this)} className='btn btn-secondary'>My Orders</button>
-                </div>
-            </div>
             <OrderFilters
-                all={true}
+                mine={this.mine.bind(this)}
+                all={this.all.bind(this)}
+                allOrMine={allOrMine}
+                count={orders.length}
                 toggleViewFormat={this.toggleViewFormat.bind(this)}
                 filter={this.filter.bind(this)} />
             <Orders

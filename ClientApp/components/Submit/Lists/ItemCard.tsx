@@ -91,7 +91,7 @@ export class ItemCard extends React.Component<any, any> {
                             <h4>{item.obj}</h4>
                             <h5>Item type: <b>{item.family}</b></h5>
                             <h5>Unit: <b>{item.unit}</b></h5>
-                            <button style={btnColor} className='btn btn-success' onClick={() => this.addtoCart(item)}>Select</button>
+                            <button style={btnColor} className='btn btn-success' onClick={() => this.addtoCart(item)}><span className='glyphicon glyphicon-plus'></span></button>
                         </div>
                     </div>
                 </div>

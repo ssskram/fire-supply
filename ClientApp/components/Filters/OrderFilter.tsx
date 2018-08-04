@@ -4,6 +4,19 @@ import { ApplicationState } from '../../store'
 import Select from '../FormElements/select'
 import * as Houses from '../../store/houses'
 import Datepicker from '../FormElements/datepicker'
+import classnames from 'classnames'
+
+const filterContainer = {
+    backgroundColor: 'rgba(92, 184, 92, .05)',
+    padding: '10px',
+    marginBottom: '25px',
+    borderRadius: '20px',
+    border: '1px solid #BF1E2E'
+}
+
+const imgSize = {
+    maxHeight: '150px'
+}
 
 const statuses = [
     { value: '', label: 'All', name: 'status' },
@@ -24,8 +37,8 @@ const itemTypes = [
     { value: 'Equipment', label: 'Equipment', name: 'itemsOrdered' },
 ]
 
-const marginTop = {
-    marginTop: '15px'
+const marginLeft = {
+    marginLeft: '20px'
 }
 
 export class OrderFilter extends React.Component<any, any> {
@@ -91,16 +104,16 @@ export class OrderFilter extends React.Component<any, any> {
         })
     }
 
-    hideFilters() {
-        this.setState({
-            filters: false
-        });
-    }
-
-    showFilters() {
-        this.setState({
-            filters: true
-        });
+    toggleFilters() {
+        if (this.state.filters == true) {
+            this.setState({
+                filters: false
+            });
+        } else {
+            this.setState({
+                filters: true
+            });
+        }
     }
 
     toggleViewFormat() {
@@ -124,6 +137,7 @@ export class OrderFilter extends React.Component<any, any> {
         this.props.filter(self)
     }
 
+
     public render() {
         const {
             houseOptions,
@@ -132,37 +146,39 @@ export class OrderFilter extends React.Component<any, any> {
             status,
             itemsOrdered,
             clearDate,
-            filters,
-            viewFormat
+            filters
         } = this.state
+
+        let allBtn = classnames({
+            'btn': true,
+            'btn-secondary': true,
+            'btn-highlight': this.props.allOrMine == "All"
+        });
+
+        let myBtn = classnames({
+            'btn': true,
+            'btn-secondary': true,
+            'btn-highlight': this.props.allOrMine == "Mine"
+        });
 
         return <div>
             <div className='row'>
-                <div style={marginTop}>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        {filters === true &&
-                            <button className='btn btn-secondary' onClick={this.hideFilters.bind(this)}>Hide filters</button>
-                        }
-                        {filters === false &&
-                            <button className='btn btn-secondary' onClick={this.showFilters.bind(this)}>Show filters</button>
-                        }
+                <div className='col-md-12'>
+                    <div className='pull-left'>
+                        <h1 style={marginLeft}>{this.props.count} orders</h1>
+                        <button onClick={this.props.all} className={allBtn}>All Orders</button>
+                        <button onClick={this.props.mine} className={myBtn}>My Orders</button>
+                        <button className='btn btn-secondary' onClick={this.toggleFilters.bind(this)}><span className='glyphicon glyphicon-search'></span></button>
+                        <button className='btn btn-secondary hidden-sm hidden-xs' onClick={this.toggleViewFormat.bind(this)}><span className='glyphicon glyphicon-eye-open'></span></button>
                     </div>
-                    <div className='col-md-4 col-sm-12 text-center'>
-                        <button className='btn btn-secondary' onClick={this.clearFilters.bind(this)}>Clear all filters</button>
-                    </div>
-                    <div className='col-md-4 hidden-sm hidden-xs text-center'>
-                        {viewFormat == 'cards' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle table view</button>
-                        }
-                        {viewFormat == 'table' &&
-                            <button className='btn btn-secondary' onClick={this.toggleViewFormat.bind(this)}>Toggle card view</button>
-                        }
+                    <div className='hidden-sm hidden-xs hidden-md pull-right'>
+                        <img style={imgSize} src='./images/fire.png' className="img-responsive center-block" />
                     </div>
                 </div>
             </div>
-            <hr />
+            <br />
             {filters == true &&
-                <div className='form-group'>
+                <div style={filterContainer} className='form-group'>
                     <div className='row'>
                         <div className='col-md-6'>
                             <Select
@@ -209,6 +225,9 @@ export class OrderFilter extends React.Component<any, any> {
                                 options={itemTypes}
                             />
                         </div>
+                    </div>
+                    <div className='text-center'>
+                        <button className='btn btn-warning' onClick={this.clearFilters.bind(this)}>Clear</button>
                     </div>
                 </div>
             }
