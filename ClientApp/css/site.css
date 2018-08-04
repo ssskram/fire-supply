@@ -349,6 +349,7 @@ textarea {
 
 .btn {
     z-index: 0 !important;
+    white-space: normal; 
 }
 
 .btn-success,

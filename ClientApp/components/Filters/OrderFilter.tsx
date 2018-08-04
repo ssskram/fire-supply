@@ -38,7 +38,7 @@ const itemTypes = [
 ]
 
 const marginLeft = {
-    marginLeft: '20px'
+    marginLeft: '30px'
 }
 
 export class OrderFilter extends React.Component<any, any> {
@@ -166,10 +166,10 @@ export class OrderFilter extends React.Component<any, any> {
                 <div className='col-md-12'>
                     <div className='pull-left'>
                         <h1 className='hidden-xs hidden-sm' style={marginLeft}>{this.props.count} orders</h1>
-                        <div className='col-xs-12 col-md-3'>
+                        <div className='col-xs-12 col-md-4'>
                             <button onClick={this.props.all} className={allBtn}>All Orders</button>
                         </div>
-                        <div className='col-xs-12 col-md-3'>
+                        <div className='col-xs-12 col-md-4'>
                             <button onClick={this.props.mine} className={myBtn}>My Orders</button>
                         </div>
                         <div className='col-xs-12 col-md-2'>
