@@ -40,6 +40,13 @@ export class OrderTable extends React.Component<any, any> {
                 pageSize={50}
                 showPageSizeOptions={false}
                 noDataText=''
+                getTdProps={() => ({
+                    style: {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center'
+                    }
+                })}
                 defaultSorted={[
                     {
                         id: 'obj',

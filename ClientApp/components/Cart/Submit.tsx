@@ -33,6 +33,10 @@ const red = {
     marginTop: '15px'
 }
 
+const narcanContainer = {
+    backgroundColor: 'red'
+}
+
 export class Submit extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -99,7 +103,7 @@ export class Submit extends React.Component<any, any> {
 
         return <div>
             <div className='text-center' >
-                <h2 style={greenFont}>Submit your order</h2>
+                <h2 style={greenFont}><b>Submit your order</b></h2>
             </div>
             <div className="form-group">
                 <Select
@@ -144,7 +148,7 @@ export class Submit extends React.Component<any, any> {
                 {narcan.length > 0 &&
                     <div>
                         <h3 style={red}>Narcan</h3>
-                        <hr/>
+                        <hr />
                         <Select
                             value={narcanCases}
                             name="narcanCases"
@@ -163,7 +167,6 @@ export class Submit extends React.Component<any, any> {
                         />
                     </div>
                 }
-
                 <div className='text-center'>
                     <button disabled={!isEnabled} style={btnStyle} onClick={this.post.bind(this)} className='btn btn-success'>Submit</button>
                 </div>

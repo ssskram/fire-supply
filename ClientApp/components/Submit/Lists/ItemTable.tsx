@@ -54,7 +54,7 @@ export class ItemTable extends React.Component<any, any> {
             accessor: 'unit'
         }, {
             Header: '',
-            Cell: props=> <button className='btn btn-success' onClick={() => this.addtoCart(props)} >Select</button>
+            Cell: props => <button className='btn btn-success' onClick={() => this.addtoCart(props)} >Select</button>
         }]
 
         return <div>
@@ -66,6 +66,13 @@ export class ItemTable extends React.Component<any, any> {
                 pageSize={50}
                 showPageSizeOptions={false}
                 noDataText=''
+                getTdProps={() => ({
+                    style: {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center'
+                    }
+                })}
                 defaultSorted={[
                     {
                         id: 'obj',

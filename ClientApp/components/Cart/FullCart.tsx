@@ -331,6 +331,13 @@ export class FullCart extends React.Component<any, any> {
                             minRows={0}
                             showPagination={false}
                             noDataText=''
+                            getTdProps={() => ({
+                                style: {
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center'
+                                }
+                            })}
                             defaultSorted={[
                                 {
                                     id: 'family',
