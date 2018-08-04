@@ -165,11 +165,19 @@ export class OrderFilter extends React.Component<any, any> {
             <div className='row'>
                 <div className='col-md-12'>
                     <div className='pull-left'>
-                        <h1 style={marginLeft}>{this.props.count} orders</h1>
-                        <button onClick={this.props.all} className={allBtn}>All Orders</button>
-                        <button onClick={this.props.mine} className={myBtn}>My Orders</button>
-                        <button className='btn btn-secondary' onClick={this.toggleFilters.bind(this)}><span className='glyphicon glyphicon-search'></span></button>
-                        <button className='btn btn-secondary hidden-sm hidden-xs' onClick={this.toggleViewFormat.bind(this)}><span className='glyphicon glyphicon-eye-open'></span></button>
+                        <h1 className='hidden-xs hidden-sm' style={marginLeft}>{this.props.count} orders</h1>
+                        <div className='col-xs-12 col-md-3'>
+                            <button onClick={this.props.all} className={allBtn}>All Orders</button>
+                        </div>
+                        <div className='col-xs-12 col-md-3'>
+                            <button onClick={this.props.mine} className={myBtn}>My Orders</button>
+                        </div>
+                        <div className='col-xs-12 col-md-2'>
+                            <button className='btn btn-secondary' onClick={this.toggleFilters.bind(this)}><span className='glyphicon glyphicon-search'></span></button>
+                        </div>
+                        <div className='col-xs-12 col-md-2'>
+                            <button className='btn btn-secondary hidden-sm hidden-xs' onClick={this.toggleViewFormat.bind(this)}><span className='glyphicon glyphicon-eye-open'></span></button>
+                        </div>
                     </div>
                     <div className='hidden-sm hidden-xs hidden-md pull-right'>
                         <img style={imgSize} src='./images/fire.png' className="img-responsive center-block" />
