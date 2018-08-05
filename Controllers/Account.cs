@@ -47,15 +47,11 @@ namespace firesupply.Controllers {
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback (string returnUrl = null, string remoteError = null) {
-            // // get user group from sp site
-            // await GetUserGroup();
-            // var usergroup = TempData["usergroup"].ToString();
-
             var info = await _signInManager.GetExternalLoginInfoAsync ();
             // create user account, and log user in.
             var email = info.Principal.FindFirstValue (ClaimTypes.Email);
-            // check email address against domain name and membership in user group
-            if (email.Contains ("@pittsburghpa.gov")) // && (usergroup.Contains(email)))
+            // check email address against domain
+            if (email.Contains ("@pittsburghpa.gov")) 
             {
                 var user = new ApplicationUser { UserName = email, Email = email };
                 var add = await _userManager.CreateAsync (user);

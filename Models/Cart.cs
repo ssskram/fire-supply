@@ -49,6 +49,12 @@ namespace firesupply.Models {
 
         [BsonElement ("items")]
         public List<cartItem> items { get; set; }
+
+        // sharepoint specific
+        [BsonIgnore]
+        public bool isOld { get; set; }
+        [BsonIgnore]
+        public string link { get; set; }
     }
     public class cartItem {
         [BsonIgnore]

@@ -23,21 +23,23 @@ namespace firesupply.Controllers {
     public class orders : Controller {
         HttpClient client = new HttpClient ();
 
+        List<OrderEntity> AllOrders = new List<OrderEntity> ();
+
         [HttpGet ("[action]")]
         public async Task<object> all () {
             // initialize enmpty list of orders
 
             // get orders from mongo and add to list
             var collection = getCollection ();
-            var list = collection.Find (new BsonDocument ()).ToList ();
+            var list = collection.Find (new BsonDocument ()).ToList<OrderEntity> ();
             var onlySubmitted = list.Where (order => order.submitted == "true");
+            AllOrders.AddRange (onlySubmitted);
 
             // get orders from sharepoint and add to list
-            await refreshtoken ();
-            var token = refreshtoken ().Result;
+            await getSPOrders ();
 
             // return full list of orders
-            return onlySubmitted;
+            return (AllOrders);
         }
         private IMongoCollection<OrderEntity> getCollection () {
             var connectionString = Environment.GetEnvironmentVariable ("mongoURI");
@@ -50,6 +52,31 @@ namespace firesupply.Controllers {
             var database = mongoClient.GetDatabase ("firesupply");
             var collection = database.GetCollection<OrderEntity> ("supplyOrders");
             return collection;
+        }
+
+        public async Task getSPOrders () {
+            await refreshtoken ();
+            var token = refreshtoken ().Result;
+            string url = "https://cityofpittsburgh.sharepoint.com/sites/Fire/_api/web/lists/GetByTitle('Supply Requests')/items?$top=5000";
+            client.DefaultRequestHeaders.Clear ();
+            client.DefaultRequestHeaders.Add ("Accept", "application/json");
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue ("Bearer", token);
+            string items = await client.GetStringAsync (url);
+            dynamic parsedItems = JObject.Parse (items) ["value"];
+            foreach (var item in parsedItems) {
+                OrderEntity itm = new OrderEntity () {
+                    id = item.ID,
+                    submitted = "true",
+                    orderSubmitted = item.SubmissionDate,
+                    user = item.SubmittedBy,
+                    isOld = true,
+                    house = item.House,
+                    status = item.Status
+                };
+                AllOrders.Add (itm);
+            }
+            // var sorted = AllOrders.OrderBy (x => x.obj).ToList ();
         }
 
         private async Task<string> refreshtoken () {
