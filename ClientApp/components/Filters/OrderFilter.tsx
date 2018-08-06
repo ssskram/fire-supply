@@ -6,6 +6,10 @@ import * as Houses from '../../store/houses'
 import Datepicker from '../FormElements/datepicker'
 import classnames from 'classnames'
 
+const headerWidth = {
+    width: '80%'
+}
+
 const filterContainer = {
     backgroundColor: 'rgba(92, 184, 92, .05)',
     padding: '10px',
@@ -149,27 +153,37 @@ export class OrderFilter extends React.Component<any, any> {
             filters
         } = this.state
 
+        const {
+            allOrMine
+        } = this.props
+
         let allBtn = classnames({
             'btn': true,
             'btn-secondary': true,
-            'btn-highlight': this.props.allOrMine == "All"
+            'btn-highlight': allOrMine == "All"
         });
 
         let myBtn = classnames({
             'btn': true,
             'btn-secondary': true,
-            'btn-highlight': this.props.allOrMine == "Mine"
+            'btn-highlight': allOrMine == "Mine"
         });
 
         return <div>
             <div className='row'>
                 <div className='col-md-12'>
-                    <div className='pull-left'>
-                        <h1 className='hidden-xs hidden-sm' style={marginLeft}>{this.props.count} orders</h1>
-                        <div className='col-xs-12 col-md-4'>
+                    <div style={headerWidth} className='pull-left'>
+                        {allOrMine == "Mine" &&
+                            <h1 style={marginLeft}>My orders - {this.props.count}</h1>
+                        }
+                        {allOrMine == "All" &&
+                            <h1 style={marginLeft}>All orders - {this.props.count}</h1>
+                        }
+                        <hr />
+                        <div className='col-xs-12 col-md-3'>
                             <button onClick={this.props.all} className={allBtn}>All Orders</button>
                         </div>
-                        <div className='col-xs-12 col-md-4'>
+                        <div className='col-xs-12 col-md-3'>
                             <button onClick={this.props.mine} className={myBtn}>My Orders</button>
                         </div>
                         <div className='col-xs-12 col-md-2'>
@@ -180,7 +194,7 @@ export class OrderFilter extends React.Component<any, any> {
                         </div>
                     </div>
                     <div className='hidden-sm hidden-xs hidden-md pull-right'>
-                        <img style={imgSize} src='./images/fire.png' className="img-responsive center-block" />
+                        <img style={imgSize} src='./images/fire.png' className="img-responsive" />
                     </div>
                 </div>
             </div>

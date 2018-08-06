@@ -4,6 +4,7 @@ import { ApplicationState } from '../../store';
 import Card from './Lists/OrderCard'
 import Table from './Lists/OrderTable'
 import Modal from 'react-responsive-modal'
+import FullOrder from './FullOrder'
 
 export class Orders extends React.Component<any, any> {
     constructor() {
@@ -59,12 +60,16 @@ export class Orders extends React.Component<any, any> {
                 center>
                 {selectedItem.isOld == true &&
                     <div>
-                        <a className='btn btn-success' target='_blank' href={selectedItem.link}>Open</a>
+                        <FullOrder order={selectedItem} />
+                        <div className='col-md-12 text-center'>
+                            <a className='btn btn-success' target='_blank' href={selectedItem.link}>Click here to view items ordered</a>
+                        </div>
                     </div>
                 }
                 {selectedItem.isOld != true &&
                     <div>
-                        <h1>FRESH</h1>
+                        <FullOrder order={selectedItem} />
+                        Enumerate items here
                     </div>
                 }
 
