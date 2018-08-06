@@ -74,11 +74,12 @@ namespace firesupply.Controllers {
                 } else {
                     modifiedHouse = house;
                 }
+                var email = item.SubmittedBy.ToString().Replace(" ",".") + "@pittsburghpa.gov";
                 OrderEntity itm = new OrderEntity () {
                     id = item.ID,
                     submitted = "true",
                     orderSubmitted = item.SubmissionDate,
-                    user = item.SubmittedBy,
+                    user = email.ToLower(),
                     userFullName = item.SubmittedBy,
                     isOld = true,
                     house = modifiedHouse,

@@ -23,7 +23,7 @@ export class OrderTable extends React.Component<any, any> {
             Header: 'Supplies',
             accessor: 'orderType'
         }, {
-            Header: 'Submitted by',
+            Header: 'Ordered by',
             accessor: 'userFullName'
         }, {
             Header: 'Status',
