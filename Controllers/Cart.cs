@@ -69,8 +69,26 @@ namespace firesupply.Controllers {
             var filter =
                 Builders<OrderEntity>.Filter.Eq ("user", user) &
                 Builders<OrderEntity>.Filter.Eq ("id", model.cartID);
+
+            // add item to list
             var update = Builders<OrderEntity>.Update.AddToSet ("items", model);
             await collection.FindOneAndUpdateAsync (filter, update);
+
+            // if itemType not already present in orderType, add and reset value
+            var itemType = model.family;
+            var cart = collection.Find (filter).FirstOrDefault ();
+            if (cart.orderType == null) {
+                var add = Builders<OrderEntity>.Update
+                    .Set ("orderType", itemType);
+                await collection.FindOneAndUpdateAsync (filter, add);
+            } else if (cart.orderType != null) {
+                if (!cart.orderType.Contains(itemType)) {
+                    var updatedType = cart.orderType + ", " + itemType;
+                    var concat = Builders<OrderEntity>.Update
+                    .Set ("orderType", updatedType);
+                    await collection.FindOneAndUpdateAsync (filter, concat);
+                }
+            }
         }
 
         [HttpPost ("[action]")]

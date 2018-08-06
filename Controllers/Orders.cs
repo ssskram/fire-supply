@@ -65,6 +65,7 @@ namespace firesupply.Controllers {
             string items = await client.GetStringAsync (url);
             dynamic parsedItems = JObject.Parse (items) ["value"];
             foreach (var item in parsedItems) {
+                var link = "https://cityofpittsburgh.sharepoint.com/sites/Fire/Lists/Asset%20Request/Item/editifs.aspx?List=1467ff73-fda0-4f99-8705-6242222e5f43&ID=" + item.ID;
                 OrderEntity itm = new OrderEntity () {
                     id = item.ID,
                     submitted = "true",
@@ -72,12 +73,12 @@ namespace firesupply.Controllers {
                     user = item.SubmittedBy,
                     isOld = true,
                     house = item.House,
-                    status = item.Status
+                    status = item.Status,
+                    orderType = item.RequestType,
+                    link = link
                 };
                 AllOrders.Add (itm);
-            }
-            // var sorted = AllOrders.OrderBy (x => x.obj).ToList ();
-        }
+            }        }
 
         private async Task<string> refreshtoken () {
             var MSurl = "https://accounts.accesscontrol.windows.net/f5f47917-c904-4368-9120-d327cf175591/tokens/OAuth/2";

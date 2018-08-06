@@ -46,6 +46,8 @@ namespace firesupply.Models {
 
         [BsonElement ("status")]
         public string status { get; set; }
+        [BsonElement ("orderType")]
+        public string orderType { get; set; }
 
         [BsonElement ("items")]
         public List<cartItem> items { get; set; }

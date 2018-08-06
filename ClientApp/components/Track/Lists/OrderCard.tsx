@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Modal from 'react-responsive-modal'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
 import Paging from '../../Utilities/Paging'
@@ -17,10 +16,7 @@ export class OrderCard extends React.Component<any, any> {
         this.state = {
             currentPage: 1,
             itemsPerPage: 45,
-            selectedItem: {},
-            modalIsOpen: false
         }
-        this.closeModal = this.closeModal.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -47,19 +43,10 @@ export class OrderCard extends React.Component<any, any> {
         });
     }
 
-    closeModal() {
-        this.setState({
-            modalIsOpen: false,
-            selectedItem: {}
-        });
-    }
-
     public render() {
         const {
             currentPage,
             itemsPerPage,
-            selectedItem,
-            modalIsOpen
         } = this.state
 
         const {
@@ -89,6 +76,7 @@ export class OrderCard extends React.Component<any, any> {
                             <div className='col-md-4'>
                                 Supply feedback
                             </div>
+                            <button className='btn btn-success' onClick={() => this.props.openItem(item)}>View Report</button>
                         </div>
                     </div>
                 </div>
@@ -114,15 +102,6 @@ export class OrderCard extends React.Component<any, any> {
                 prev={this.handlePreviousClick.bind(this)} />
             <br />
             <br />
-            <Modal
-                open={modalIsOpen}
-                onClose={this.closeModal.bind(this)}
-                classNames={{
-                    overlay: 'custom-overlay',
-                    modal: 'custom-modal'
-                }}
-                center>
-            </Modal>
         </div>;
     }
 }

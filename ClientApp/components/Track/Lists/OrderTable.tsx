@@ -8,7 +8,6 @@ export class OrderTable extends React.Component<any, any> {
         super();
     }
 
-
     public render() {
         const {
             orders
@@ -21,6 +20,9 @@ export class OrderTable extends React.Component<any, any> {
             Header: 'House',
             accessor: 'house'
         }, {
+            Header: 'Supplies',
+            accessor: 'orderType'
+        }, {
             Header: 'Submitted by',
             accessor: 'user'
         }, {
@@ -28,7 +30,7 @@ export class OrderTable extends React.Component<any, any> {
             accessor: 'status'
         }, {
             Header: '',
-            Cell: props=> <button className='btn btn-success'>View</button>
+            Cell: props => <button className='btn btn-success' onClick={() => this.props.openItem(props.original)}>View Report</button>
         }]
 
         return <div>
