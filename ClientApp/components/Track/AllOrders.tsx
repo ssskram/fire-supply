@@ -6,6 +6,7 @@ import * as User from '../../store/user'
 import Spinner from '../Utilities/Spinner'
 import OrderFilters from '../Filters/OrderFilter'
 import Orders from './Orders'
+import Format from 'date-format'
 
 export class AllOrders extends React.Component<any, any> {
     constructor(props) {
@@ -13,6 +14,7 @@ export class AllOrders extends React.Component<any, any> {
         this.state = {
             orders: this.props.orders,
             viewFormat: 'cards',
+            filterState: {},
             onFilter: false,
             allOrMine: 'All'
         }
@@ -35,6 +37,8 @@ export class AllOrders extends React.Component<any, any> {
             onFilter: true,
             allOrMine: 'Mine',
             orders: this.props.orders.filter(order => order.user == this.props.user)
+        }, function (this) {
+            this.filter(this.state.filterState)
         })
     }
 
@@ -42,15 +46,65 @@ export class AllOrders extends React.Component<any, any> {
         this.setState({
             onFilter: false,
             allOrMine: 'All',
-            orders: this.props.orders
+            orders: this.props.orders,
+            filterState: {}
+        }, function (this) {
+            this.filter(this.state.filterState)
         })
     }
 
     filter(state) {
-        this.setState({
-            onFilter: true
+        if (state.house) {
+            var house = state.house.toLowerCase()
+            console.log(house)
+        }
+        if (state.status) {
+            var status = state.status.toLowerCase()
+        }
+        if (state.orderDate) {
+            var date = new Date(state.date)
+            var orderDate = Format('yyyy-MM-dd', date)
+        }
+        if (state.itemsOrdered) {
+            var itemsOrdered = state.itemsOrdered.toLowerCase()
+        }
+        var filtered = this.props.orders.filter(function (item) {
+            if (house) {
+                if (!item.house.toLowerCase().includes(house)) {
+                    return false
+                }
+            }
+            if (status) {
+                if (!item.status.toLowerCase().includes(status)) {
+                    return false
+                }
+            }
+            if (orderDate) {
+                if (!item.orderSubmitted.toLowerCase().includes(orderDate)) {
+                    return false
+                }
+            }
+            if (itemsOrdered) {
+                if (!item.orderType.toLowerCase().includes(itemsOrdered)) {
+                    return false
+                }
+            }
+            return true
         })
-        console.log(state)
+        if (this.state.allOrMine == 'All') {
+            this.setState({
+                orders: filtered,
+                onFilter: true,
+                filterState: state
+            })
+        }
+        else {
+            this.setState({
+                orders: filtered.filter(order => order.user == this.props.user),
+                onFilter: true,
+                filterState: state
+            })
+        }
     }
 
     toggleViewFormat(type) {
@@ -64,6 +118,7 @@ export class AllOrders extends React.Component<any, any> {
             viewFormat,
             orders,
             onFilter,
+            filterState,
             allOrMine
         } = this.state
 
@@ -71,6 +126,7 @@ export class AllOrders extends React.Component<any, any> {
             <OrderFilters
                 mine={this.mine.bind(this)}
                 all={this.all.bind(this)}
+                filterState={filterState}
                 allOrMine={allOrMine}
                 count={orders.length}
                 toggleViewFormat={this.toggleViewFormat.bind(this)}

@@ -18,7 +18,6 @@ export class Orders extends React.Component<any, any> {
     }
 
     openItem(item) {
-        console.log(item)
         this.setState({
             selectedItem: item,
             modalIsOpen: true

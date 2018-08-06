@@ -69,6 +69,18 @@ export class OrderFilter extends React.Component<any, any> {
 
     componentWillReceiveProps(nextProps) {
         let self = this
+
+        if (this.props.filterState != nextProps.filterState) {
+            if (Object.keys(nextProps.filterState).length === 0 && nextProps.filterState.constructor === Object) {
+                this.setState({
+                    house: '',
+                    orderDate: '',
+                    status: '',
+                    itemsOrdered: ''
+                })
+            }
+        }
+
         // add options to select
         var futureOptions: any[] = [];
         nextProps.houses.forEach(function (element) {
@@ -104,7 +116,7 @@ export class OrderFilter extends React.Component<any, any> {
             status: '',
             itemsOrdered: ''
         }, function (this) {
-            this.filter()
+            this.props.all()
         })
     }
 
@@ -137,7 +149,12 @@ export class OrderFilter extends React.Component<any, any> {
     }
 
     filter() {
-        let self = this.state
+        let self = {
+            house: this.state.house,
+            orderDate: this.state.orderDate,
+            status: this.state.status,
+            itemsOrdered: this.state.itemsOrdered
+        }
         this.props.filter(self)
     }
 

@@ -2,7 +2,6 @@ import { fetch, addTask } from 'domain-task';
 
 const requestOrders = 'request'
 const receiveOrders = 'receive'
-const add = 'add'
 
 export interface OrdersState {
     orders: OrderItems[]
@@ -24,6 +23,7 @@ export interface OrderItems {
     supplyComments: string
     lastModified: string
     status: string
+    orderType: string
     items: CartItems[]
 }
 
