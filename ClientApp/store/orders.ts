@@ -14,6 +14,7 @@ export interface OrderItems {
     cartGenerated: string
     orderSubmitted: string
     user: string
+    userFullName: string
     house: string
     comments: string
     emergency: string

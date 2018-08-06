@@ -50,6 +50,7 @@ namespace firesupply.Controllers {
             var info = await _signInManager.GetExternalLoginInfoAsync ();
             // create user account, and log user in.
             var email = info.Principal.FindFirstValue (ClaimTypes.Email);
+            var name = info.Principal.FindFirstValue (ClaimTypes.Name);
             // check email address against domain
             if (email.Contains ("@pittsburghpa.gov")) 
             {

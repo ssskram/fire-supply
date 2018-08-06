@@ -19,6 +19,8 @@ namespace firesupply.Models {
 
         [BsonElement ("user")]
         public string user { get; set; }
+        [BsonElement ("userFullName")]  
+        public string userFullName { get; set; }
 
         [BsonElement ("house")]
         public string house { get; set; }

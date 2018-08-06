@@ -66,19 +66,29 @@ namespace firesupply.Controllers {
             dynamic parsedItems = JObject.Parse (items) ["value"];
             foreach (var item in parsedItems) {
                 var link = "https://cityofpittsburgh.sharepoint.com/sites/Fire/Lists/Asset%20Request/Item/editifs.aspx?List=1467ff73-fda0-4f99-8705-6242222e5f43&ID=" + item.ID;
+                var modifiedHouse = string.Empty;
+                var house = item.House.ToString();
+                if (house.Contains("House")) {
+                    house = house.Replace("House", "Firehouse");
+                    modifiedHouse = house;
+                } else {
+                    modifiedHouse = house;
+                }
                 OrderEntity itm = new OrderEntity () {
                     id = item.ID,
                     submitted = "true",
                     orderSubmitted = item.SubmissionDate,
                     user = item.SubmittedBy,
+                    userFullName = item.SubmittedBy,
                     isOld = true,
-                    house = item.House,
+                    house = modifiedHouse,
                     status = item.Status,
                     orderType = item.RequestType,
                     link = link
                 };
                 AllOrders.Add (itm);
-            }        }
+            }
+        }
 
         private async Task<string> refreshtoken () {
             var MSurl = "https://accounts.accesscontrol.windows.net/f5f47917-c904-4368-9120-d327cf175591/tokens/OAuth/2";

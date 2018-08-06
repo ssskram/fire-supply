@@ -1,9 +1,11 @@
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Authentication;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using firesupply.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -50,11 +52,15 @@ namespace firesupply.Controllers {
         private object newCart () {
             var collection = getCollection ();
             var user = _userManager.GetUserName (HttpContext.User);
+            string[] splitEmail = user.Split('@');
+            string lowerCase = splitEmail[0].Replace(".", " ");
+            string fullName = new CultureInfo("en-US").TextInfo.ToTitleCase(lowerCase);
             Guid uuid = Guid.NewGuid ();
             OrderEntity itm = new OrderEntity () {
                 id = uuid.ToString (),
                 submitted = "false",
                 user = user,
+                userFullName = fullName,
                 cartGenerated = DateTime.Now.ToString (),
                 items = new List<cartItem> ()
             };
@@ -82,10 +88,10 @@ namespace firesupply.Controllers {
                     .Set ("orderType", itemType);
                 await collection.FindOneAndUpdateAsync (filter, add);
             } else if (cart.orderType != null) {
-                if (!cart.orderType.Contains(itemType)) {
+                if (!cart.orderType.Contains (itemType)) {
                     var updatedType = cart.orderType + ", " + itemType;
                     var concat = Builders<OrderEntity>.Update
-                    .Set ("orderType", updatedType);
+                        .Set ("orderType", updatedType);
                     await collection.FindOneAndUpdateAsync (filter, concat);
                 }
             }

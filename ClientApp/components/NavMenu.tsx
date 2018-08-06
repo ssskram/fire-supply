@@ -83,10 +83,10 @@ export class NavMenu extends React.Component<any, any>  {
                             <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary'>
                                 <b>Add items to cart</b>
                             </NavLink>
-                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-info'>
+                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-secondary'>
                                 Units of Issue
                             </NavLink>
-                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-info'>
+                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-secondary'>
                                 What's an emergency order?
                             </NavLink>
                         </div>
