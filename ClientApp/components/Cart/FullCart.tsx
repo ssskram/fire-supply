@@ -4,7 +4,6 @@ import { ApplicationState } from '../../store'
 import Modal from 'react-responsive-modal'
 import * as Cart from '../../store/cart'
 import { Redirect } from 'react-router-dom'
-import { Helmet } from "react-helmet"
 import SelectQuantity from './EnterQuantity'
 import DeleteItem from './DeleteItems'
 import Table from "react-table"
@@ -237,9 +236,6 @@ export class FullCart extends React.Component<any, any> {
         })
 
         return <div>
-            <Helmet>
-                <style>{'body { background-color: rgba(92, 184, 92, .05); }'}</style>
-            </Helmet>
             <div className='col-md-12'>
                 <div className='row'>
                     <span style={cartIcon} className='glyphicon glyphicon-shopping-cart pull-left'></span>

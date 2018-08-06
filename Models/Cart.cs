@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
+using System;
 
 namespace firesupply.Models {
 
@@ -19,7 +20,7 @@ namespace firesupply.Models {
 
         [BsonElement ("user")]
         public string user { get; set; }
-        [BsonElement ("userFullName")]  
+        [BsonElement ("userFullName")]
         public string userFullName { get; set; }
 
         [BsonElement ("house")]

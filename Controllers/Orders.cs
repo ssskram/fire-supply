@@ -38,7 +38,8 @@ namespace firesupply.Controllers {
             // get orders from sharepoint and add to list
             await getSPOrders ();
 
-            // return full list of orders
+            // return full list of sorted orders
+            AllOrders.ForEach(item => DateTime.Parse(item.orderSubmitted));
             return (AllOrders);
         }
         private IMongoCollection<OrderEntity> getCollection () {

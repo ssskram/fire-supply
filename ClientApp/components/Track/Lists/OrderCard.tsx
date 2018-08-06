@@ -53,10 +53,14 @@ export class OrderCard extends React.Component<any, any> {
             orders
         } = this.props
 
+        var sortedOrders = orders.sort(function (a, b) {
+            return +new Date(b.orderSubmitted) - +new Date(a.orderSubmitted);
+        })
+
         // Logic for paging
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        const currentItems = orders.slice(indexOfFirstItem, indexOfLastItem);
+        const currentItems = sortedOrders.slice(indexOfFirstItem, indexOfLastItem);
         const renderItems = currentItems.map((item) => {
             const encodedHouse = item.house.split(' ').join('_');
             const imgUrl = "https://tools.wprdc.org/images/pittsburgh/facilities/" + encodedHouse + ".jpg"
@@ -76,7 +80,7 @@ export class OrderCard extends React.Component<any, any> {
                             <div className='col-md-4'>
                                 Supply feedback
                             </div>
-                            <button className='btn btn-success' onClick={() => this.props.openItem(item)}>View Report</button>
+                            <button className='btn btn-success' onClick={() => this.props.openItem(item)}>View</button>
                         </div>
                     </div>
                 </div>
@@ -95,7 +99,7 @@ export class OrderCard extends React.Component<any, any> {
             </div>
             <br />
             <Paging
-                count={orders}
+                count={sortedOrders}
                 currentPage={currentPage}
                 totalPages={pageNumbers}
                 next={this.handleNextClick.bind(this)}

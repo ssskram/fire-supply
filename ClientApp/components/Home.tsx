@@ -6,6 +6,7 @@ import * as Houses from '../store/houses'
 import * as ItemsStore from '../store/items'
 import * as MessagesStore from '../store/messages'
 import Messages from './Utilities/Messages'
+import * as Cart from '../store/cart'
 import AllOrders from './Track/AllOrders'
 
 export class Home extends React.Component<any, any> {
@@ -24,6 +25,9 @@ export class Home extends React.Component<any, any> {
 
         // load engine houses
         this.props.loadHouses()
+
+        // load cart
+        this.props.loadCart()
     }
 
     componentWillUnmount() {
@@ -46,12 +50,14 @@ export default connect(
         ...state.messages,
         ...state.ping,
         ...state.items,
+        ...state.cart,
         ...state.houses
     }),
     ({
         ...MessagesStore.actionCreators,
         ...Ping.actionCreators,
         ...ItemsStore.actionCreators,
+        ...Cart.actionCreators,
         ...Houses.actionCreators
     })
 )(Home as any) as typeof Home;

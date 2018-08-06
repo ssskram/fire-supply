@@ -8,7 +8,6 @@ import Items from './Items'
 import Modal from 'react-responsive-modal'
 import * as Cart from '../../store/cart'
 import Spinner from '../Utilities/Spinner'
-import { Helmet } from "react-helmet"
 import MiscItem from './MiscItem'
 
 export class ItemSelection extends React.Component<any, any> {
@@ -31,6 +30,9 @@ export class ItemSelection extends React.Component<any, any> {
 
         // load inventory items
         this.props.getItems()
+
+        // load cart
+        this.props.loadCart()
 
         if (this.props.items) {
             if (this.props.items.length != 0) {
@@ -129,9 +131,6 @@ export class ItemSelection extends React.Component<any, any> {
         } = this.state
 
         return <div className='col-md-12'>
-            <Helmet>
-                <style>{'body { background-color: rgba(92, 184, 92, .05); }'}</style>
-            </Helmet>
             <ItemFilters
                 toggleViewFormat={this.toggleViewFormat.bind(this)}
                 filter={this.filter.bind(this)} />
