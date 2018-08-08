@@ -39,7 +39,7 @@ namespace firesupply.Controllers {
             await getSPOrders ();
 
             // return full list of sorted orders
-            AllOrders.ForEach(item => DateTime.Parse(item.orderSubmitted));
+            AllOrders.ForEach (item => DateTime.Parse (item.orderSubmitted));
             return (AllOrders);
         }
         private IMongoCollection<OrderEntity> getCollection () {
@@ -68,19 +68,46 @@ namespace firesupply.Controllers {
             foreach (var item in parsedItems) {
                 var link = "https://cityofpittsburgh.sharepoint.com/sites/Fire/Lists/Asset%20Request/Item/editifs.aspx?List=1467ff73-fda0-4f99-8705-6242222e5f43&ID=" + item.ID;
                 var modifiedHouse = string.Empty;
-                var house = item.House.ToString();
-                if (house.Contains("House")) {
-                    house = house.Replace("House", "Firehouse");
+                var house = item.House.ToString ();
+                if (house.Contains ("House")) {
+                    house = house.Replace ("House", "Firehouse");
                     modifiedHouse = house;
                 } else {
                     modifiedHouse = house;
                 }
-                var email = item.SubmittedBy.ToString().Replace(" ",".") + "@pittsburghpa.gov";
+                if (modifiedHouse == "Firehouse 3") {
+                    modifiedHouse = modifiedHouse.Replace ("3", "03");
+                }
+                if (modifiedHouse == "Firehouse 4") {
+                    modifiedHouse = modifiedHouse.Replace ("4", "04");
+                }
+                if (modifiedHouse == "Firehouse 6") {
+                    modifiedHouse = modifiedHouse.Replace ("6", "06");
+                }
+                if (modifiedHouse == "Firehouse 7") {
+                    modifiedHouse = modifiedHouse.Replace ("7", "07");
+                }
+                if (modifiedHouse == "Firehouse 8") {
+                    modifiedHouse = modifiedHouse.Replace ("8", "08");
+                }
+                if (modifiedHouse == "Firehouse 10") {
+                    modifiedHouse = modifiedHouse.Replace ("10", "10 Medic 5");
+                }
+                if (modifiedHouse == "Firehouse 12") {
+                    modifiedHouse = modifiedHouse.Replace ("12", "12 Medic 7");
+                }
+                if (modifiedHouse == "Firehouse 20") {
+                    modifiedHouse = modifiedHouse.Replace ("20", "20 Medic 12");
+                }
+                if (modifiedHouse == "Firehouse 33") {
+                    modifiedHouse = modifiedHouse.Replace ("33", "33 Truck");
+                }
+                var email = item.SubmittedBy.ToString ().Replace (" ", ".") + "@pittsburghpa.gov";
                 OrderEntity itm = new OrderEntity () {
                     id = item.ID,
                     submitted = "true",
                     orderSubmitted = item.SubmissionDate,
-                    user = email.ToLower(),
+                    user = email.ToLower (),
                     userFullName = item.SubmittedBy,
                     isOld = true,
                     house = modifiedHouse,
