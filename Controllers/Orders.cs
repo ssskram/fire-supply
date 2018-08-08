@@ -23,12 +23,11 @@ namespace firesupply.Controllers {
     public class orders : Controller {
         HttpClient client = new HttpClient ();
 
+        // initialize enmpty list of orders
         List<OrderEntity> AllOrders = new List<OrderEntity> ();
 
         [HttpGet ("[action]")]
         public async Task<object> all () {
-            // initialize enmpty list of orders
-
             // get orders from mongo and add to list
             var collection = getCollection ();
             var list = collection.Find (new BsonDocument ()).ToList<OrderEntity> ();

@@ -1,7 +1,7 @@
+using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
-using System;
 
 namespace firesupply.Models {
 
@@ -9,19 +9,20 @@ namespace firesupply.Models {
         [BsonElement ("id")]
         public string id { get; set; }
 
-        [BsonElement ("submitted")]
-        public string submitted { get; set; }
-
         [BsonElement ("cartGenerated")]
         public string cartGenerated { get; set; }
 
-        [BsonElement ("orderSubmitted")]
-        public string orderSubmitted { get; set; }
-
         [BsonElement ("user")]
         public string user { get; set; }
+
         [BsonElement ("userFullName")]
         public string userFullName { get; set; }
+
+        [BsonElement ("submitted")]
+        public string submitted { get; set; }
+
+        [BsonElement ("orderSubmitted")]
+        public string orderSubmitted { get; set; }
 
         [BsonElement ("house")]
         public string house { get; set; }
@@ -41,18 +42,20 @@ namespace firesupply.Models {
         [BsonElement ("narcanExplanation")]
         public string narcanExplanation { get; set; }
 
-        [BsonElement ("supplyComments")]
-        public string supplyComments { get; set; }
+        [BsonElement ("orderType")]
+        public string orderType { get; set; }
+
+        [BsonElement ("status")]
+        public string status { get; set; }
 
         [BsonElement ("lastModified")]
         public string lastModified { get; set; }
 
-        [BsonElement ("status")]
-        public string status { get; set; }
+        [BsonElement ("supplyComments")]
+        public string supplyComments { get; set; }
+
         [BsonElement ("receivedBy")]
         public string receivedBy { get; set; }
-        [BsonElement ("orderType")]
-        public string orderType { get; set; }
 
         [BsonElement ("items")]
         public List<cartItem> items { get; set; }
@@ -60,6 +63,7 @@ namespace firesupply.Models {
         // sharepoint specific
         [BsonIgnore]
         public bool isOld { get; set; }
+
         [BsonIgnore]
         public string link { get; set; }
     }

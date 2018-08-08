@@ -6,20 +6,29 @@ import Table from './Lists/OrderTable'
 import Modal from 'react-responsive-modal'
 import FullOrder from './FullOrder'
 
+const padding = {
+    padding: '15px'
+}
+
+const qtyColor = {
+    color: '#449d44'
+}
+
 export class Orders extends React.Component<any, any> {
     constructor() {
         super();
         this.state = {
             modalIsOpen: false,
-            selectedItem: {}
+            selectedItem: {},
+            selectedItems: []
         }
         this.openItem = this.openItem.bind(this);
-
     }
 
     openItem(item) {
         this.setState({
             selectedItem: item,
+            selectedItems: item.items,
             modalIsOpen: true
         })
     }
@@ -39,8 +48,26 @@ export class Orders extends React.Component<any, any> {
 
         const {
             modalIsOpen,
-            selectedItem
+            selectedItem,
+            selectedItems
         } = this.state
+
+        let items
+        if (selectedItems) {
+            items = selectedItems.map((item) => {
+                return (
+                    <div className="col-sm-12" key={item.obj}>
+                        <div className="panel">
+                            <div className="panel-body text-center">
+                                <h3>{item.obj}</h3>
+                                <h3 style={qtyColor}><b>{item.quantityOrdered}</b></h3>
+                                <h5>Unit: <b>{item.unit}</b></h5>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        }
 
         return <div>
             {viewFormat == 'cards' &&
@@ -58,7 +85,7 @@ export class Orders extends React.Component<any, any> {
                 }}
                 center>
                 {selectedItem.isOld == true &&
-                    <div>
+                    <div style={padding}>
                         <FullOrder order={selectedItem} />
                         <div className='col-md-12 text-center'>
                             <a className='btn btn-success' target='_blank' href={selectedItem.link}>Click here to view items ordered</a>
@@ -66,9 +93,11 @@ export class Orders extends React.Component<any, any> {
                     </div>
                 }
                 {selectedItem.isOld != true &&
-                    <div>
+                    <div style={padding}>
                         <FullOrder order={selectedItem} />
-                        Enumerate items here
+                        <h3>Items</h3>
+                        <hr />
+                        {items}
                     </div>
                 }
 

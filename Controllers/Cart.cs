@@ -131,6 +131,7 @@ namespace firesupply.Controllers {
                 .Set ("emergency", model.emergency)
                 .Set ("emergencyJustification", model.emergencyJustification)
                 .Set ("narcanCases", model.narcanCases)
+                .Set ("lastModified", DateTime.Now.ToString ())
                 .Set ("narcanExplanation", model.narcanExplanation);
             await collection.FindOneAndUpdateAsync (filter, update);
             
