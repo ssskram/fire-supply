@@ -1,6 +1,6 @@
 using System;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -19,6 +19,8 @@ using MongoDB.Driver;
 using MongoDB.Driver.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace firesupply.Controllers {
 
@@ -52,9 +54,9 @@ namespace firesupply.Controllers {
         private object newCart () {
             var collection = getCollection ();
             var user = _userManager.GetUserName (HttpContext.User);
-            string[] splitEmail = user.Split('@');
-            string lowerCase = splitEmail[0].Replace(".", " ");
-            string fullName = new CultureInfo("en-US").TextInfo.ToTitleCase(lowerCase);
+            string[] splitEmail = user.Split ('@');
+            string lowerCase = splitEmail[0].Replace (".", " ");
+            string fullName = new CultureInfo ("en-US").TextInfo.ToTitleCase (lowerCase);
             Guid uuid = Guid.NewGuid ();
             OrderEntity itm = new OrderEntity () {
                 id = uuid.ToString (),
@@ -134,8 +136,23 @@ namespace firesupply.Controllers {
                 .Set ("lastModified", DateTime.Now.ToString ())
                 .Set ("narcanExplanation", model.narcanExplanation);
             await collection.FindOneAndUpdateAsync (filter, update);
-            
             // if model.emergency == "Yes", fire off email to Supply
+            if (model.emergency == "Yes") {
+                await SendEmail ();
+            }
+        }
+
+        public async Task SendEmail () {
+            var submittedby = _userManager.GetUserName (HttpContext.User);
+            var apiKey = Environment.GetEnvironmentVariable ("sendgrid");
+            var client = new SendGridClient (apiKey);
+            var from = new EmailAddress (submittedby, "PBF Supply");
+            var subject = "An emergency order has been placed";
+            var to = new EmailAddress ("paul.marks@pittsburghpa.gov", "PBF Supply");
+            var plainTextContent = "<strong>An emergency order has been placed in the supply portal</strong>";
+            var htmlContent = "<strong>An emergency order has been placed in the supply portal</strong>";
+            var msg = MailHelper.CreateSingleEmail (from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync (msg);
         }
 
         private IMongoCollection<OrderEntity> getCollection () {
