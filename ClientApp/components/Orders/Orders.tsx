@@ -87,6 +87,7 @@ export class Orders extends React.Component<any, any> {
                 {selectedItem.isOld == true &&
                     <div style={padding}>
                         <FullOrder order={selectedItem} />
+                        <br/>
                         <div className='col-md-12 text-center'>
                             <a className='btn btn-success' target='_blank' href={selectedItem.link}>Click here to view items ordered</a>
                         </div>
