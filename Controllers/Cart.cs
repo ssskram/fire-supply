@@ -133,6 +133,8 @@ namespace firesupply.Controllers {
                 .Set ("narcanCases", model.narcanCases)
                 .Set ("narcanExplanation", model.narcanExplanation);
             await collection.FindOneAndUpdateAsync (filter, update);
+            
+            // if model.emergency == "Yes", fire off email to Supply
         }
 
         private IMongoCollection<OrderEntity> getCollection () {

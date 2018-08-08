@@ -33,10 +33,6 @@ const red = {
     marginTop: '15px'
 }
 
-const narcanContainer = {
-    backgroundColor: 'red'
-}
-
 export class Submit extends React.Component<any, any> {
     constructor(props) {
         super(props);
@@ -46,7 +42,7 @@ export class Submit extends React.Component<any, any> {
             house: '',
             comments: '',
             emergency: '',
-            emergencyJusticiation: '',
+            emergencyJustification: '',
             narcanCases: '',
             narcanExplanation: '',
         }
@@ -91,7 +87,7 @@ export class Submit extends React.Component<any, any> {
             house,
             comments,
             emergency,
-            emergencyJusticiation,
+            emergencyJustification,
             narcanCases,
             narcanExplanation
         } = this.state
@@ -136,8 +132,8 @@ export class Submit extends React.Component<any, any> {
                     />
                     {emergency == 'Yes' &&
                         <TextArea
-                            value={emergencyJusticiation}
-                            name="emergencyJusticiation"
+                            value={emergencyJustification}
+                            name="emergencyJustification"
                             header="Justicication"
                             placeholder="Explain the emergency"
                             callback={this.handleChildChange.bind(this)}

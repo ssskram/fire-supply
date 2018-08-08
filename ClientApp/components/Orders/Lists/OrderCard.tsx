@@ -3,11 +3,23 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
 import Paging from '../../Utilities/Paging'
 import LoadingImage from '../../Utilities/LoadingImage'
+import Moment from 'react-moment'
+
+const feedback = {
+    backgroundColor: 'rgba(92, 184, 92, .2)',
+    padding: '5px',
+    margin: '5px',
+    borderRadius: '10px'
+}
 
 const imgStyle = {
-    maxHeight: '150px',
+    maxHeight: '180px',
     borderRadius: '10px',
     margin: '0 auto'
+}
+
+const emergencyOrder = {
+    color: 'red'
 }
 
 export class OrderCard extends React.Component<any, any> {
@@ -68,23 +80,37 @@ export class OrderCard extends React.Component<any, any> {
                 <div className="col-md-12" key={item.id}>
                     <div className="panel">
                         <div className="panel-body text-center">
-                            <div className='col-md-4'>
-                                <h4><b>{item.house}</b></h4>
+                            <div className='col-md-4 hidden-sm hidden-xs'>
                                 <LoadingImage style={imgStyle} src={imgUrl} />
                             </div>
                             <div className='col-md-4'>
-                                Order info
-                                <h4>Ordered by: <b>{item.userFullName}</b></h4>
-                                <h5>Comments: <b>{item.comments}</b></h5>
-                                <h5>Order status: <b>{item.status}</b></h5>
-                                <h5>Order contents: <b>{item.orderType}</b></h5>
-                                <h5>Supple comments: <b>{item.supplyComments}</b></h5>
-                                <h5>Emergency: <b>{item.emergency}</b></h5>
+                                <h4><b>{item.house}</b></h4>
+                                <h4><Moment format="MM/DD/YYYY HH:mm" date={item.orderSubmitted} /></h4>
+                                <h4>{item.userFullName}</h4>
+                                <h4>Supplies: <b>{item.orderType}</b></h4>
+                                {item.comments &&
+                                    <h5><i>"{item.comments}"</i></h5>
+                                }
+                                <div className='hidden-sm hidden-xs'>
+                                    <button className='btn btn-success' onClick={() => this.props.openItem(item)}>View</button>
+                                </div>
                             </div>
                             <div className='col-md-4'>
-                                Supply feedback
+                                {item.emergency == 'Yes' &&
+                                    <h4 style={emergencyOrder}>Emergency Order</h4>
+                                }
+                                <div style={feedback}>
+                                    <h5><b>Supply Feedback</b></h5>
+                                    <h5>Order status: <b>{item.status}</b></h5>
+                                    <h5>Last activity: <b><Moment format="MM/DD/YYYY HH:mm" date={item.lastModified} /></b></h5>
+                                    {item.supplyComments &&
+                                        <h5><i>"{item.supplyComments}"</i></h5>
+                                    }
+                                </div>
+                                <div className='hidden-md hidden-lg hidden-xl'>
+                                    <button className='btn btn-success' onClick={() => this.props.openItem(item)}>View</button>
+                                </div>
                             </div>
-                            <button className='btn btn-success' onClick={() => this.props.openItem(item)}>View</button>
                         </div>
                     </div>
                 </div>

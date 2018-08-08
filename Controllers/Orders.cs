@@ -67,7 +67,7 @@ namespace firesupply.Controllers {
             dynamic parsedItems = JObject.Parse (items) ["value"];
             foreach (var item in parsedItems) {
                 var link = "https://cityofpittsburgh.sharepoint.com/sites/Fire/Lists/Asset%20Request/Item/editifs.aspx?List=1467ff73-fda0-4f99-8705-6242222e5f43&ID=" + item.ID;
-                
+
                 // handle houses
                 var modifiedHouse = string.Empty;
                 var house = item.House.ToString ();
@@ -105,10 +105,20 @@ namespace firesupply.Controllers {
                     modifiedHouse = modifiedHouse.Replace ("33", "33 Truck");
                 }
                 var email = item.SubmittedBy.ToString ().Replace (" ", ".") + "@pittsburghpa.gov";
+
+                // handle dates
+                DateTime createdDate = item.Created;
+                DateTime createdConverted = createdDate.AddHours (-4);
+                string finalCreatedDate = createdConverted.ToString ();
+
+                DateTime modifiedDate = item.Modified;
+                DateTime modifiedConverted = modifiedDate.AddHours (-4);
+                string finalModifiedDate = modifiedConverted.ToString ();
+
                 OrderEntity itm = new OrderEntity () {
                     id = item.ID,
                     submitted = "true",
-                    orderSubmitted = item.SubmissionDate,
+                    orderSubmitted = finalCreatedDate,
                     user = email.ToLower (),
                     userFullName = item.SubmittedBy,
                     isOld = true,
@@ -118,8 +128,9 @@ namespace firesupply.Controllers {
                     link = link,
                     emergency = item.Emergency,
                     emergencyJustification = item.EmergencyExplanation,
-                    lastModified = item.Modified,
-                    supplyComments = item.SupplyNotes
+                    lastModified = finalModifiedDate,
+                    supplyComments = item.SupplyNotes,
+                    comments = item.AdditionalComments
                 };
                 AllOrders.Add (itm);
             }
