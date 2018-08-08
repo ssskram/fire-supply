@@ -23,6 +23,7 @@ export interface OrderItems {
     supplyComments: string
     lastModified: string
     status: string
+    receivedBy: string
     orderType: string
     items: CartItems[]
 }

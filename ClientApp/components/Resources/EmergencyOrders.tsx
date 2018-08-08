@@ -16,6 +16,7 @@ export default class WhatsanEmergency extends React.Component<any, any> {
                 <div style={margin} role="alert" className="alert alert-info">
                     <h4 className="message-body">An emergency order must have a good brief description of what happened and why it is needed. Lack of details will delay the order process because the order will need to be validated as a true emergency, and sent to higher authority for approval.</h4>
                 </div>
+                <br/>
                 <h2>Examples</h2>
                 <h4><b>Emergency Orders:</b></h4>
                 <p>When one or more items have been used in its entirety for the following reasons:</p>

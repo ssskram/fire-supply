@@ -49,6 +49,8 @@ namespace firesupply.Models {
 
         [BsonElement ("status")]
         public string status { get; set; }
+        [BsonElement ("receivedBy")]
+        public string receivedBy { get; set; }
         [BsonElement ("orderType")]
         public string orderType { get; set; }
 

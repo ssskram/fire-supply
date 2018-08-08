@@ -67,6 +67,8 @@ namespace firesupply.Controllers {
             dynamic parsedItems = JObject.Parse (items) ["value"];
             foreach (var item in parsedItems) {
                 var link = "https://cityofpittsburgh.sharepoint.com/sites/Fire/Lists/Asset%20Request/Item/editifs.aspx?List=1467ff73-fda0-4f99-8705-6242222e5f43&ID=" + item.ID;
+                
+                // handle houses
                 var modifiedHouse = string.Empty;
                 var house = item.House.ToString ();
                 if (house.Contains ("House")) {
@@ -113,7 +115,11 @@ namespace firesupply.Controllers {
                     house = modifiedHouse,
                     status = item.Status,
                     orderType = item.RequestType,
-                    link = link
+                    link = link,
+                    emergency = item.Emergency,
+                    emergencyJustification = item.EmergencyExplanation,
+                    lastModified = item.Modified,
+                    supplyComments = item.SupplyNotes
                 };
                 AllOrders.Add (itm);
             }

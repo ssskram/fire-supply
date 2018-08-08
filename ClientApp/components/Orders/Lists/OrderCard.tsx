@@ -76,6 +76,10 @@ export class OrderCard extends React.Component<any, any> {
                                 Order info
                                 <h4>Ordered by: <b>{item.userFullName}</b></h4>
                                 <h5>Comments: <b>{item.comments}</b></h5>
+                                <h5>Order status: <b>{item.status}</b></h5>
+                                <h5>Order contents: <b>{item.orderType}</b></h5>
+                                <h5>Supple comments: <b>{item.supplyComments}</b></h5>
+                                <h5>Emergency: <b>{item.emergency}</b></h5>
                             </div>
                             <div className='col-md-4'>
                                 Supply feedback

@@ -7,7 +7,7 @@ import * as ItemsStore from '../store/items'
 import * as MessagesStore from '../store/messages'
 import Messages from './Utilities/Messages'
 import * as Cart from '../store/cart'
-import AllOrders from './Track/AllOrders'
+import AllOrders from './Orders/AllOrders'
 
 export class Home extends React.Component<any, any> {
     constructor(props) {

@@ -83,10 +83,10 @@ export class NavMenu extends React.Component<any, any>  {
                             <NavLink to={'/Items'} style={btnWidth} className='btn btn-primary'>
                                 <b>Add items to cart</b>
                             </NavLink>
-                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-secondary'>
+                            <NavLink to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-secondary btn-highlight'>
                                 Units of Issue
                             </NavLink>
-                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-secondary'>
+                            <NavLink to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-secondary btn-highlight'>
                                 What's an emergency order?
                             </NavLink>
                         </div>
@@ -120,10 +120,10 @@ export class NavMenu extends React.Component<any, any>  {
                         <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary'>
                             View orders
                     </Link>
-                        <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-info'>
+                        <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-secondary btn-highlight'>
                             Units of Issue
                     </Link>
-                        <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-info'>
+                        <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-secondary btn-highlight'>
                             What's an emergency order?
                     </Link>
                         <MiniCart closeModal={this.closeModal.bind(this)} />

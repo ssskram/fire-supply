@@ -11,7 +11,6 @@ const headerWidth = {
 }
 
 const filterContainer = {
-    backgroundColor: 'rgba(92, 184, 92, .05)',
     padding: '10px',
     marginBottom: '25px',
     borderRadius: '20px',
