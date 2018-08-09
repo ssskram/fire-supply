@@ -54,9 +54,6 @@ namespace firesupply.Models {
         [BsonElement ("supplyComments")]
         public string supplyComments { get; set; }
 
-        [BsonElement ("receivedBy")]
-        public string receivedBy { get; set; }
-
         [BsonElement ("items")]
         public List<cartItem> items { get; set; }
 
@@ -85,5 +82,8 @@ namespace firesupply.Models {
 
         [BsonElement ("quantityReceived")]
         public string quantityReceived { get; set; }
+
+        [BsonElement ("receivedBy")]
+        public string receivedBy { get; set; }
     }
 }
