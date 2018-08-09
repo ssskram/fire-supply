@@ -93,7 +93,7 @@ export class OrderFilter extends React.Component<any, any> {
 
     handleChildDate(date) {
         this.setState({
-            date: date,
+            orderDate: date,
             clearDate: false
         }, function (this) {
             this.filter()

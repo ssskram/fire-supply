@@ -56,14 +56,13 @@ export class AllOrders extends React.Component<any, any> {
     filter(state) {
         if (state.house) {
             var house = state.house.toLowerCase()
-            console.log(house)
         }
         if (state.status) {
             var status = state.status.toLowerCase()
         }
         if (state.orderDate) {
-            var date = new Date(state.date)
-            var orderDate = Format('yyyy-MM-dd', date)
+            var date = new Date(state.orderDate)
+            var orderDate = Format('MM/dd/yyyy', date)
         }
         if (state.itemsOrdered) {
             var itemsOrdered = state.itemsOrdered.toLowerCase()
@@ -80,7 +79,9 @@ export class AllOrders extends React.Component<any, any> {
                 }
             }
             if (orderDate) {
-                if (!item.orderSubmitted.toLowerCase().includes(orderDate)) {
+                var incomingDate = new Date(item.orderSubmitted)
+                var formattedDate = Format('MM/dd/yyyy', incomingDate)
+                if (!formattedDate.includes(orderDate)) {
                     return false
                 }
             }
