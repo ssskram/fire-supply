@@ -6,14 +6,20 @@ import { ApplicationState } from '../store'
 import Modal from 'react-responsive-modal'
 import MiniCart from './Cart/MiniCart'
 
+const imgSize = {
+    height: '50px'
+}
+
+const marginTop = {
+    marginTop: '18px',
+}
+
 const btnWidth = {
     width: '93%'
 }
 
 const modalLogout = {
-    color: '#383838',
-    width: '100%',
-    whiteSpace: 'normal'
+    color: '#383838'
 }
 
 export class NavMenu extends React.Component<any, any>  {
@@ -68,13 +74,10 @@ export class NavMenu extends React.Component<any, any>  {
                         <span className='icon-bar'></span>
                         <span className='icon-bar'></span>
                     </button>
-                    <div className='navbar-brand-container'>
-                        <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">
-                            <span><img src='./images/helmet.png' className="navbar-brand-image" />
-                                PBF <strong>Supply</strong>
-                            </span>
-                        </Link>
-                    </div>
+                    <Link className='navbar-brand' to={'/'} data-toggle="collapse" data-target=".in">
+                        <div style={marginTop} className='pull-left'>pbf <strong>Supply</strong></div>
+                        <div><img style={imgSize} className='pull-right hidden-md hidden-sm hidden-xs' src='./images/siteIcon.png' /></div>
+                    </Link>
                 </div>
                 <div className='clearfix'></div>
                 <div className='navbar-collapse collapse'>
@@ -120,17 +123,17 @@ export class NavMenu extends React.Component<any, any>  {
                         <Link onClick={this.closeModal.bind(this)} to={'/'} style={btnWidth} className='btn btn-primary'>
                             View orders
                     </Link>
-                        <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-secondary btn-highlight'>
+                        <Link onClick={this.closeModal.bind(this)} to={'/UnitsOfIssue'} style={btnWidth} className='btn btn-primary'>
                             Units of Issue
                     </Link>
-                        <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-secondary btn-highlight'>
+                        <Link onClick={this.closeModal.bind(this)} to={'/WhatsAnEmergency'} style={btnWidth} className='btn btn-primary'>
                             What's an emergency order?
                     </Link>
                         <MiniCart closeModal={this.closeModal.bind(this)} />
                     </div>
                     <div className='accountcontainer'>
-                        <div className="account">{user}</div>
-                        <div className='logout'>
+                        <div style={modalLogout} className="account">{user}</div>
+                        <div style={modalLogout} className='logout'>
                             <NavLink style={modalLogout} to={'/Account/Login'} activeClassName='active' id="logout" className='btn btn-link navbar-logout-btn'>
                                 <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout
                             </NavLink>

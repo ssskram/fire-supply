@@ -176,13 +176,13 @@ export class OrderFilter extends React.Component<any, any> {
         let allBtn = classnames({
             'btn': true,
             'btn-secondary': true,
-            'btn-highlight': allOrMine == "All"
+            'btn-filterActive': allOrMine == "All"
         });
 
         let myBtn = classnames({
             'btn': true,
             'btn-secondary': true,
-            'btn-highlight': allOrMine == "Mine"
+            'btn-filterActive': allOrMine == "Mine"
         });
 
         return <div>

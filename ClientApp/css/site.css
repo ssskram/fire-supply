@@ -1,30 +1,19 @@
 /* Core
 /* ------------------------- */
 
-html,
-body {
+html {
     height: 100% !important;
+    width: 100% !important;
 }
 
 body {
-    background-color: rgba(18, 101, 0, .05);
+    background-color: rgba(255, 250, 238, .5);
     font-family: 'Raleway', sans-serif;
     letter-spacing: .5px;
+    padding: 45px 0px;
 }
 
-.container-fluid {
-    padding-top: 25px;
-}
-
-.card-row {
-    min-height: 250px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
+h1, h2, h3, h4, h5 {
     color: #383838;
     font-family: 'Raleway', sans-serif;
 }
@@ -57,9 +46,10 @@ hr {
 /* ------------------------- */
 
 @media (max-width: 767px) {
-    body {
-        padding-top: 50px;
+    body { 
+        padding: 110px 0px;
     }
+
     .main-nav {
         z-index: 100000;
         height: auto;
@@ -68,15 +58,11 @@ hr {
     }
     .home-image {
         opacity: 0.8;
-        max-height: 200px !important;
-        margin: 0 auto;
+        max-height: 250px !important;
+        margin-top: 45px;
     }
-    .navbar-inverse {
-        box-shadow: inset 0 -7px 5px -7px rgba(0, 0, 0, 0.4);
-        border-color: transparent;
-    }
-    .container-fluid {
-        padding-top: 50px;
+    .navbar-logout-btn {
+        padding: 7px 5px 5px 5px !important;
     }
 }
 
@@ -87,7 +73,6 @@ hr {
     }
     .navbar-inverse {
         overflow: auto;
-        box-shadow: inset -7px 0 11px -7px rgba(0, 0, 0, 0.4);
     }
     .main-nav .navbar {
         border-radius: 0px;
@@ -106,21 +91,24 @@ hr {
     }
     .main-nav .navbar li {
         float: none;
-        font-size: 15px;
-        margin: 6px;
+        font-size: 20px;
+        margin: 10px;
     }
     .main-nav .navbar li a {
-        padding: 10px 16px;
+        padding: 15px 20px;
         border-radius: 4px;
     }
     .main-nav .navbar a {
         width: 100%;
         white-space: normal;
     }
+    .navbar-logout-btn {
+        padding: 7px 5px 5px 5px !important;
+    }
     .home-image {
         opacity: 0.8;
-        height: 150px !important;
-        margin: 0 auto;
+        max-height: 350px !important;
+        margin-top: 45px;
     }
 }
 
@@ -135,23 +123,24 @@ hr {
     z-index: 2;
 }
 
-.nav-glyphicon {
+.main-nav li .glyphicon {
     margin-right: 10px;
 }
 
 .main-nav li a.active:focus {
     background-color: rgb(26, 36, 47);
-    color: #383838 !important;
+    color: #fffaee !important;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #fffaee;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
-    color: #BF1E2E;
-}
-
-.navbar-inverse .navbar-nav>li>a:hover,
-.navbar-inverse .navbar-nav>li>a:focus {
-    color: #383838;
-    background-color: transparent;
+    color: rgba(186, 134, 6, 1);
 }
 
 .navbar {
@@ -159,49 +148,32 @@ hr {
 }
 
 .navbar-inverse {
-    background-color: #fffaf0 !important;
-}
-
-.navbar-brand-container {
-    padding: 25px 0px;
-}
-
-@media (max-width: 767px) {
-    .navbar-brand-container {
-        padding: 10px 0px;
-    }
+    background-color: rgb(44, 62, 80) !important;
+    border-color: rgba(202, 205, 206, .5) !important;
 }
 
 .navbar-brand {
-    color: #383838 !important;
-    letter-spacing: 2px;
-    font-size: 30px;
-    line-height: 25px;
+    color: #fffaee !important;
+    letter-spacing: 4px;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    margin-bottom: 7px;
+    font-size: 25px;
+    height: 75px;
 }
 
-.navbar-brand-image {
-    transform: rotate(300deg);
-    height: 50px;
-    margin-top: -25px;
-    margin-right: -25px;
+.navbar-inverse .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    background: rgb(26, 36, 47) !important;
+    color: #fffaee !important;
 }
 
-.navbar-inverse .navbar-brand:hover {
-    color: #BF1E2E !important;
-}
-
-.navbar-inverse .navbar-collapse,
-.navbar-inverse .navbar-form {
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: rgba(202, 205, 206, .5) !important;
 }
 
 .navbar-inverse .navbar-toggle {
     border-color: transparent !important;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .icon-bar {
@@ -209,20 +181,18 @@ hr {
     height: 5px !important;
 }
 
-.navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:focus {
-    border-color: #383838 !important;
-    background-color: transparent !important;
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    background-color: rgb(26, 36, 47) !important;
 }
 
 .navbar-inverse .navbar-toggle .icon-bar {
-    background-color: #383838 !important;
+    background-color: #fffaee !important;
 }
 
 .sidenav-header {
     letter-spacing: 1px;
     padding-left: 10px;
-    color: #383838 !important;
+    color: #fffaee !important;
     margin-top: 15px !important;
     font-size: 20px !important;
 }
@@ -234,7 +204,7 @@ hr {
 }
 
 .account {
-    color: #383838;
+    color: #fffaee;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -251,11 +221,11 @@ hr {
 
 .navbar-inverse .btn-link:hover,
 .navbar-inverse .btn-link:focus {
-    color: #383838;
+    color: #fffaee;
 }
 
 .navbar-inverse .btn-link {
-    color: #383838;
+    color: #fffaee;
 }
 
 .btn-link {
@@ -265,9 +235,14 @@ hr {
 .btn-link:hover,
 .btn-link:focus,
 .btn-link:active {
-    border: .5px solid #383838;
+    border: .5px solid #fffaee;
     background-color: transparent !important;
 }
+
+.nav-glyphicon {
+    margin-right: 10px;
+}
+
 
 /* Forms
 /* ------------------------- */
@@ -399,8 +374,18 @@ textarea {
     outline: 0;
 }
 
+.btn-filterActive { 
+    border: 1px solid #BF1E2E;
+}
+
 .btn-highlight {
     border: 1px solid #BF1E2E;
+    color: #fffaee;
+}
+
+.btn-highlight:hover, .btn-highlight:focus {
+    background-color: #BF1E2E;
+    color: #fffaee;
 }
 
 /* Panels
@@ -682,14 +667,16 @@ a[href^="https://maps.google.com/maps"] {
 /* ------------------------- */
 
 .cart-container {
+    color: #fffaee;
     margin: auto;
     margin-top: 25px;
     margin-bottom: 15px;
     padding: 20px 15px;
-    background-color: rgba(92, 184, 92, .2);
+    background-color: rgba(92, 184, 92, .8);
     height: auto;
     width: 85%;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 .mini-cart-button {
@@ -703,11 +690,3 @@ a[href^="https://maps.google.com/maps"] {
     border: 1px solid #BF1E2E;
 }
 
-/* Site specific
-/* ------------------------- */
-
-.home-icon {
-    color: #383838;
-    font-size: 2em;
-    vertical-align: middle;
-}
