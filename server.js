@@ -58,7 +58,9 @@ Only one to retrieve email
 // returns user's email address
 app.use('/getUser', function (req, res) {
   res.status(200).send({
-    "user": req.user.emails[0].value
+    'email': req.user.emails[0].value,
+    'organization': "City of Pittsburgh",
+    'name': req.user.displayName
   })
 })
 

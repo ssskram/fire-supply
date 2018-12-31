@@ -1,5 +1,5 @@
 import * as React from 'react'
-import HydrateStore from './components/utilities/hydrateStore'
+import HydrateStore from '../utilities/hydrateStore'
 
 export default class Home extends React.Component<any, any> {
 

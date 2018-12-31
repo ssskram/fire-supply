@@ -1,6 +1,11 @@
 import * as React from 'react'
 import { Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import * as Style from './style'
+
+const fullCart = require('../../images/fullCart.png')
+const allOrders = require('../../images/allOrders.png')
+const singleOrder = require('../../images/singleOrder.png')
 
 export default class Menu extends React.Component {
 
@@ -8,13 +13,29 @@ export default class Menu extends React.Component {
         return (
             <Nav>
                 <LinkContainer to={'/'} exact>
-                    <NavItem>Submit</NavItem>
+                    <NavItem>
+                        <button style={Style.navButton} className='btn btn-success'>
+                            <img src={fullCart as string} className="img-responsive center-block" />
+                            <div style={Style.orderFont}>Order supplies</div>
+                        </button>
+                    </NavItem>
                 </LinkContainer>
                 <LinkContainer to={'/MyRequests'}>
-                    <NavItem>My Requests</NavItem>
+                    <NavItem>
+                        <button style={Style.navButton} className='btn btn-primary'>
+                            <span><img src={singleOrder as string} style={Style.smallImg} />My orders</span>
+                        </button>
+                    </NavItem>
                 </LinkContainer>
                 <LinkContainer to={'/AllRequests'}>
-                    <NavItem>All Requests</NavItem>
+                    <NavItem>
+                        <button style={Style.navButton} className='btn btn-primary'>
+                            <span><img src={allOrders as string} style={Style.smallImg} />All orders</span>
+                        </button>
+                    </NavItem>
+                </LinkContainer>
+                <LinkContainer to={'/Admin'}>
+                    <NavItem><button style={Style.navButton} className='btn btn-danger'>Administration</button></NavItem>
                 </LinkContainer>
             </Nav>
         )
