@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import * as Style from './style'
+import Cart from '../cart'
 
-const fullCart = require('../../images/fullCart.png')
 const allOrders = require('../../images/allOrders.png')
 const singleOrder = require('../../images/singleOrder.png')
 
@@ -14,14 +14,14 @@ export default class Menu extends React.Component {
             <Nav>
                 <LinkContainer to={'/Admin'}>
                     <NavItem>
-                        <button style={Style.navButton} className='btn btn-danger'>
+                        <button className='btn btn-danger nav-button'>
                             Administration
                         </button>
                     </NavItem>
                 </LinkContainer>
                 <LinkContainer to={'/MyOrders'}>
                     <NavItem>
-                        <button style={Style.navButton} className='btn btn-primary'>
+                        <button className='btn btn-primary nav-button'>
                             <img src={singleOrder as string} className='img-responsive center-block' />
                             <div>My orders</div>
                         </button>
@@ -29,23 +29,16 @@ export default class Menu extends React.Component {
                 </LinkContainer>
                 <LinkContainer to={'/AllOrders'}>
                     <NavItem>
-                        <button style={Style.navButton} className='btn btn-primary'>
+                        <button className='btn btn-primary nav-button'>
                             <img src={allOrders as string} className='img-responsive center-block' />
                             <div>All orders</div>
                         </button>
                     </NavItem>
                 </LinkContainer>
                 <hr />
-                <LinkContainer to={'/Cart'} exact>
-                    <NavItem>
-                        <button style={Style.navButton} className='btn btn-success'>
-                            <div style={Style.orderFont}>
-                                <img src={fullCart as string} className='img-responsive center-block' />
-                                <div>Shopping cart</div>
-                            </div>
-                        </button>
-                    </NavItem>
-                </LinkContainer>
+                <NavItem>
+                    <Cart />
+                </NavItem>
             </Nav>
         )
     }
