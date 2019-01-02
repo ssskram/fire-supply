@@ -1,45 +1,95 @@
 import * as React from 'react'
-import logout from '../../functions/logout'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as user from '../../store/user'
 import * as userProfile from '../../store/userProfile'
 import * as style from './style'
+import Spinner from '../utilities/spinner'
+import SetProfile from './markup/setProfile'
+import UpdateProfile from './markup/updateProfile'
+import Modal from 'react-responsive-modal'
+import AccountContainer from './markup/account'
 
 type props = {
     user: types.user
     userProfile: types.userProfile
+    loadUser: () => types.user
+    loadUserProfile: (object: types.user) => types.userProfile
+    setUserProfile: (object: types.userProfile) => void
 }
 
-export class AccountContainer extends React.Component<props, {}> {
+type state = {
+    loadingProfile: boolean
+    setProfile: boolean
+    updateProfile: boolean
+}
+
+export class Account extends React.Component<props, state> {
     constructor(props) {
         super(props)
+        this.state = {
+            loadingProfile: true,
+            setProfile: false,
+            updateProfile: false
+        }
+    }
+
+    async componentDidMount() {
+        const user = await this.props.loadUser()
+        const profile = await this.props.loadUserProfile(user)
+        this.setState({ loadingProfile: false })
+        if (!profile) this.setState({ setProfile: true })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.userProfile != nextProps.userProfile) {
+            this.setState({
+                setProfile: false,
+                updateProfile: false
+            })
+        }
     }
 
     render() {
         const {
-            user,
-            userProfile
-        } = this.props
+            loadingProfile,
+            setProfile,
+            updateProfile
+        } = this.state
 
         return (
-            <div className='accountcontainer'>
-                {user &&
-                    <div>
-                        <div className="account">{user.name}</div>
-                        <div className="account">{user.email}</div>
-                    </div>
+            <div>
+                <AccountContainer
+                    user={this.props.user}
+                    userProfile={this.props.userProfile}
+                    setState={this.setState.bind(this)}
+                />
+                {loadingProfile &&
+                    <Spinner notice='...loading your profile...' />
                 }
-                {userProfile &&
-                    <button style={style.profileButton} className='btn btn-secondary'>{userProfile.department}</button>
+                {setProfile &&
+                    <Modal
+                        open={true}
+                        onClose={() => { }}
+                        classNames={style.modalClasses}
+                        showCloseIcon={false}
+                        center>
+                        <SetProfile />
+                    </Modal>
                 }
-                <div className='logout'>
-                    <button onClick={logout} id="logout" className='btn btn-link navbar-logout-btn'>
-                        <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout
-                    </button>
-                </div>
+                {updateProfile &&
+                    <Modal
+                        open={true}
+                        onClose={() => this.setState({ updateProfile: false })}
+                        classNames={style.modalClasses}
+                        showCloseIcon={true}
+                        center>
+                        <UpdateProfile />
+                    </Modal>
+                }
             </div>
+
         )
     }
 }
@@ -53,4 +103,4 @@ export default connect(
         ...user.actionCreators,
         ...userProfile.actionCreators
     })
-)(AccountContainer as any)
+)(Account as any)

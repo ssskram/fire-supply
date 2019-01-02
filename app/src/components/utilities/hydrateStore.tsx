@@ -6,22 +6,15 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as user from '../../store/user'
-import * as userProfile from '../../store/userProfile'
 
 type props = {
-    loadUser: () => types.user
-    loadUserProfile: (object: types.user) => void
-    setUserProfile: (object: types.userProfile) => void
+    user: types.user
 }
 
 class Hydrate extends React.Component<props, {}> {
 
-    async componentDidMount() {
-        const user = await this.props.loadUser()
-        this.props.loadUserProfile(user)        
+    componentDidMount() {
 
-        // testing set
-        this.props.setUserProfile({ department: "Bureau of Fire" })
     }
 
     public render() { return null }
@@ -29,11 +22,9 @@ class Hydrate extends React.Component<props, {}> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.user,
-        ...state.userProfile
+        ...state.user
     }),
     ({
-        ...user.actionCreators,
-        ...userProfile.actionCreators
+        ...user.actionCreators
     })
 )(Hydrate as any)

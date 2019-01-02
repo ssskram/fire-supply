@@ -10,17 +10,31 @@ const unloadedState: types.userProfile = {
 
 export const actionCreators = {
     loadUserProfile: (user): AppThunkAction<any> => async (dispatch) => {
-
-        // get from mongo here
-
-        const userProfile = {}
-        dispatch({ type: constants.loadUserProfile, userProfile: userProfile })
+        const response = await fetch("http://localhost:3000/get/userProfile?user=" + user.email, {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO
+            })
+        })
+        if (response.status != 404) {
+            const profileRecord = await response.json()
+            const profile: types.userProfile = {
+                department: profileRecord.department
+            }
+            dispatch({ type: constants.loadUserProfile, userProfile: profile })
+            return profile
+        } else return undefined
     },
-    setUserProfile: (profile): AppThunkAction<any> => async (dispatch) => {
-
-        // set from mongo here
+    setUserProfile: (profile): AppThunkAction<any> => (dispatch) => {
         console.log(profile)
-        
+        fetch('http://localhost:3000/new/userProfile', {
+            method: 'POST',
+            body: JSON.stringify(profile),
+            headers: new Headers({
+                'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO,
+                'Content-Type': 'application/json'
+            })
+        })
         dispatch({ type: constants.setUserProfile, userProfile: profile })
     }
 }

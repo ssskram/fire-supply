@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
-import AccountContainer from '../userProfile'
+import Account from '../userProfile'
 import Menu from './menu'
 
 export default class NavMenu extends React.Component<any, any> {
-
+  
   public render() {
     return (
       <Navbar inverse fixedTop fluid collapseOnSelect style={{zIndex: 1000 as any}}>
@@ -17,7 +17,7 @@ export default class NavMenu extends React.Component<any, any> {
         </Navbar.Header>
         <Navbar.Collapse>
           <Menu />
-          <AccountContainer />
+          <Account />
         </Navbar.Collapse>
       </Navbar>
     )
