@@ -6,7 +6,7 @@ export default class UpdateProfile extends React.Component {
     render() {
         return (
             <div className='text-center'>
-                <h3>Select your department or bureau</h3>
+                <h3>Change your department or bureau</h3>
                 <Select />
             </div>
         )

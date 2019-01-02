@@ -10,7 +10,7 @@ const unloadedState: types.userProfile = {
 
 export const actionCreators = {
     loadUserProfile: (user): AppThunkAction<any> => async (dispatch) => {
-        const response = await fetch("http://localhost:3000/get/userProfile?user=" + user.email, {
+        const response = await fetch("https://mongo-proxy.azurewebsites.us/get/userProfile?user=" + user.email, {
             method: 'get',
             headers: new Headers({
                 'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO
@@ -26,8 +26,7 @@ export const actionCreators = {
         } else return undefined
     },
     setUserProfile: (profile): AppThunkAction<any> => (dispatch) => {
-        console.log(profile)
-        fetch('http://localhost:3000/new/userProfile', {
+        fetch('https://mongo-proxy.azurewebsites.us/save/userProfile', {
             method: 'POST',
             body: JSON.stringify(profile),
             headers: new Headers({
