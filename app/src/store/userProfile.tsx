@@ -19,9 +19,9 @@ export const actionCreators = {
     setUserProfile: (profile): AppThunkAction<any> => async (dispatch) => {
 
         // set from mongo here
-
-        const userProfile = {}
-        dispatch({ type: constants.setUserProfile, userProfile: userProfile })
+        console.log(profile)
+        
+        dispatch({ type: constants.setUserProfile, userProfile: profile })
     }
 }
 

@@ -2,13 +2,14 @@ import * as React from 'react'
 import logout from '../../functions/logout'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
-import * as types from './../../store/types'
+import * as types from '../../store/types'
 import * as user from '../../store/user'
-import * as Style from './style'
+import * as userProfile from '../../store/userProfile'
+import * as style from './style'
 
 type props = {
-    user: types.user,
-    loadUser: () => void
+    user: types.user
+    userProfile: types.userProfile
 }
 
 export class AccountContainer extends React.Component<props, {}> {
@@ -16,13 +17,10 @@ export class AccountContainer extends React.Component<props, {}> {
         super(props)
     }
 
-    componentDidMount() {
-        this.props.loadUser()
-    }
-
     render() {
         const {
-            user
+            user,
+            userProfile
         } = this.props
 
         return (
@@ -33,7 +31,9 @@ export class AccountContainer extends React.Component<props, {}> {
                         <div className="account">{user.email}</div>
                     </div>
                 }
-                <button style={Style.pbfButton} className='btn btn-secondary'>Bureau of Fire</button>
+                {userProfile &&
+                    <button style={style.profileButton} className='btn btn-secondary'>{userProfile.department}</button>
+                }
                 <div className='logout'>
                     <button onClick={logout} id="logout" className='btn btn-link navbar-logout-btn'>
                         <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout
@@ -46,9 +46,11 @@ export class AccountContainer extends React.Component<props, {}> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.user
+        ...state.user,
+        ...state.userProfile
     }),
     ({
-        ...user.actionCreators
+        ...user.actionCreators,
+        ...userProfile.actionCreators
     })
 )(AccountContainer as any)

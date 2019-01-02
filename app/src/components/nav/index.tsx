@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
-import AccountContainer from './accountContainer'
+import AccountContainer from '../userProfile'
 import Menu from './menu'
 
 export default class NavMenu extends React.Component<any, any> {
