@@ -1,3 +1,7 @@
+
+// fields for profile information, currently just department
+// on change, triggers setUserProfile() from userProfile store
+
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../../store'
@@ -13,8 +17,8 @@ type props = {
 }
 
 const departments = [
-    { value: "Department of Public Works", label: "Department of Public Works" },
-    { value: "Bureau of Fire", label: "Bureau of Fire" }
+    { value: "Bureau of Fire", label: "Bureau of Fire" },
+    { value: "Department of Public Works", label: "Department of Public Works" }
 ]
 
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'

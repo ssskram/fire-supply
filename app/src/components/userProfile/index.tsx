@@ -1,3 +1,9 @@
+/*
+handles fetching, generation, and display of user account and user profile
+GETS both on load
+if no user profile, throws prompt to set profile
+all network activity occurs through store/user, or store/userProfile
+*/
 
 import * as React from 'react'
 import { connect } from 'react-redux'
@@ -37,13 +43,17 @@ export class Account extends React.Component<props, state> {
     }
 
     async componentDidMount() {
+        // first get user
         const user = await this.props.loadUser()
+        // with user, get profile
         const profile = await this.props.loadUserProfile(user)
         this.setState({ loadingProfile: false })
+        // no profile?  create a new one
         if (!profile) this.setState({ setProfile: true })
     }
 
     componentWillReceiveProps(nextProps) {
+        // when user profile changes or is set, close all modals
         if (this.props.userProfile != nextProps.userProfile) {
             this.setState({
                 setProfile: false,

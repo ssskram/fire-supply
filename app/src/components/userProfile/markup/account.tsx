@@ -1,3 +1,7 @@
+
+// displays users account & profile information within nav bar
+// button calls updateProfile modal from parent
+
 import * as React from 'react'
 import * as types from '../../../store/types'
 import * as style from '../style'

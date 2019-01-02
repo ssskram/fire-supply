@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Select from './select'
+import Select from './profileFields'
 
 export default class UpdateProfile extends React.Component {
 
