@@ -1,8 +1,10 @@
 /*
+
 handles fetching, generation, and display of user account and user profile
 GETS both on load
-if no user profile, throws prompt to set profile
+if no user profile, throws prompt to generate new profile
 all network activity occurs through store/user, or store/userProfile
+
 */
 
 import * as React from 'react'

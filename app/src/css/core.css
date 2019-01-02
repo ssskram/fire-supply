@@ -30,6 +30,10 @@ hr {
     margin: 1.8em 0;
 }
 
+.navbar-nav>hr {
+    border-top: 1px solid rgba(202, 205, 206, .5);
+}
+
 @media (max-width: 767px) {
 
     body {

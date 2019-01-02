@@ -12,30 +12,39 @@ export default class Menu extends React.Component {
     public render() {
         return (
             <Nav>
-                <LinkContainer to={'/NewOrder'} exact>
+                <LinkContainer to={'/Admin'}>
                     <NavItem>
-                        <button style={Style.navButton} className='btn btn-success'>
-                            <img src={fullCart as string} className="img-responsive center-block" />
-                            <div style={Style.orderFont}>Order supplies</div>
+                        <button style={Style.navButton} className='btn btn-danger'>
+                            Administration
                         </button>
                     </NavItem>
                 </LinkContainer>
                 <LinkContainer to={'/MyOrders'}>
                     <NavItem>
                         <button style={Style.navButton} className='btn btn-primary'>
-                            <span><img src={singleOrder as string} style={Style.smallImg} />My orders</span>
+                            <img src={singleOrder as string} className='img-responsive center-block' />
+                            <div>My orders</div>
                         </button>
                     </NavItem>
                 </LinkContainer>
                 <LinkContainer to={'/AllOrders'}>
                     <NavItem>
                         <button style={Style.navButton} className='btn btn-primary'>
-                            <span><img src={allOrders as string} style={Style.smallImg} />All orders</span>
+                            <img src={allOrders as string} className='img-responsive center-block' />
+                            <div>All orders</div>
                         </button>
                     </NavItem>
                 </LinkContainer>
-                <LinkContainer to={'/Admin'}>
-                    <NavItem><button style={Style.navButton} className='btn btn-danger'>Administration</button></NavItem>
+                <hr />
+                <LinkContainer to={'/Cart'} exact>
+                    <NavItem>
+                        <button style={Style.navButton} className='btn btn-success'>
+                            <div style={Style.orderFont}>
+                                <img src={fullCart as string} className='img-responsive center-block' />
+                                <div>Shopping cart</div>
+                            </div>
+                        </button>
+                    </NavItem>
                 </LinkContainer>
             </Nav>
         )
