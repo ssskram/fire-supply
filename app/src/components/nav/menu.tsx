@@ -16,10 +16,6 @@ type props = {
 
 export class Menu extends React.Component<props, {}> {
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-    }
-
     public render() {
         return (
             <Nav>

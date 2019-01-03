@@ -1,6 +1,6 @@
 /*
 
-handles fetching, generation, and display of user account and user profile
+handles user account and user profile
 GETS both on load
 then checks admin status, and writes to user profile
 if no user profile, throws prompt to generate new profile
@@ -50,13 +50,13 @@ export class Account extends React.Component<props, state> {
     async componentDidMount() {
         // first get user
         const user = await this.props.loadUser()
-        // with user, get profile
+        // then, load user admin status into userProfile store
+        await this.props.isUserAdmin(user)
+        // with admin status loaded, load profile
         const profile = await this.props.loadUserProfile(user)
         this.setState({ loadingProfile: false })
         // no profile?  create a new one
         if (!profile) this.setState({ setProfile: true })
-        // then, load user admin status into userProfile store
-        await this.props.isUserAdmin(user)
     }
 
     componentWillReceiveProps(nextProps) {

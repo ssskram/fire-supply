@@ -3,8 +3,8 @@
 export const loadUser = 'loadUser'
 
 // user profile
-export const loadUserProfile = 'loadUserProfile'
-export const setUserProfile = 'setUserProfile'
+export const setDepartment = 'setDepartment'
+export const setAdminStatus = 'setAdminStatus'
 
 // isAdmin
 export const isUserAdmin = 'isUserAdmin'

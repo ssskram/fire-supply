@@ -23,7 +23,7 @@ const departments = [
 
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'
 
-export class SelectDepartment extends React.Component<props, any> {
+export class SelectDepartment extends React.Component<props, {}> {
     render() {
         return (
             <div>
