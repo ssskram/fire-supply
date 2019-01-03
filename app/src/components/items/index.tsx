@@ -61,9 +61,15 @@ export class Items extends React.Component<props, state> {
                 // otherwise, add it
                 selectedTypes = this.state.selectedTypes.concat([filter])
             }
-            this.setState({ selectedTypes: selectedTypes }, () => this.executefilter())
+            this.setState({
+                selectedTypes: selectedTypes,
+                items: filterItemsByDept(this.props.items, this.props.userProfile)
+            }, () => this.executefilter())
         } else {
-            this.setState({ searchTerm: filter }, () => this.executefilter())
+            this.setState({
+                searchTerm: filter,
+                items: filterItemsByDept(this.props.items, this.props.userProfile)
+            }, () => this.executefilter())
         }
     }
 
