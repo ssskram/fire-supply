@@ -10,7 +10,7 @@ export default class Header extends React.Component<props, {}>{
         return (
             <div className='text-center'>
                 <h2>Available inventory</h2>
-                <h4>{this.props.department}</h4>
+                <h3><b>{this.props.department}</b></h3>
             </div>
         )
     }

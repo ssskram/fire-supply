@@ -6,7 +6,7 @@ type props = {
     userProfile: types.userProfile
 }   
 
-export default class Search extends React.Component<props, {}>{
+export default class NoItems extends React.Component<props, {}>{
 
     render() {
         return (

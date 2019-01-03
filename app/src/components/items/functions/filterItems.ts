@@ -1,6 +1,10 @@
 
 export default function filterItems(state) {
-    console.log('here')
     console.log(state)
-    return state.items
+    const items = state.items.filter(item => {
+        if (!item.name.toLowerCase().includes(state.searchTerm.toLowerCase())) return false
+        else return true
+    })
+    console.log(items)
+    return items
 }

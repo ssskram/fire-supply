@@ -12,6 +12,7 @@ import Types from './markup/types'
 import Search from './markup/search'
 import NoItems from './markup/noItems'
 import ItemCards from './markup/items'
+import NullSearch from './markup/nullSearch'
 
 type props = {
     items: types.items,
@@ -23,6 +24,7 @@ type state = {
     itemTypes: Array<string>
     selectedTypes: Array<string>
     searchTerm: string
+    nullSearch: boolean
 }
 
 export class Items extends React.Component<props, state> {
@@ -32,7 +34,8 @@ export class Items extends React.Component<props, state> {
             items: [],
             itemTypes: [],
             selectedTypes: [],
-            searchTerm: ''
+            searchTerm: '',
+            nullSearch: false
         }
     }
 
@@ -48,25 +51,45 @@ export class Items extends React.Component<props, state> {
         }
     }
 
-    receiveFilter(filterType, filterLoad) {
+    receiveFilter(filterType, filter) {
         if (filterType == 'selectedTypes') {
-            this.setState({ selectedTypes: filterLoad }, () => this.executefilter())
+            let selectedTypes
+            if (this.state.selectedTypes.find(item => item == filter)) {
+                // if type already exists in array filter, remove it
+                selectedTypes = this.state.selectedTypes.filter(item => item != filter)
+            } else {
+                // otherwise, add it
+                selectedTypes = this.state.selectedTypes.concat([filter])
+            }
+            this.setState({ selectedTypes: selectedTypes }, () => this.executefilter())
         } else {
-            this.setState({ searchTerm: filterLoad }, () => this.executefilter()) 
+            this.setState({ searchTerm: filter }, () => this.executefilter())
         }
     }
 
     executefilter() {
         const filteredItems = filterItems(this.state)
-        this.setState({
-            items: filteredItems
-        })
+        if (filteredItems.length > 0) {
+            this.setState({
+                items: filteredItems,
+                nullSearch: false
+            })
+        } else {
+            this.setState({
+                items: filterItemsByDept(this.props.items, this.props.userProfile),
+                nullSearch: true
+            })
+        }
+
     }
 
     render() {
         const {
             items,
-            itemTypes
+            itemTypes,
+            searchTerm,
+            selectedTypes,
+            nullSearch
         } = this.state
 
         const {
@@ -79,9 +102,19 @@ export class Items extends React.Component<props, state> {
                 {items.length > 0 &&
                     <div>
                         <div className='row'>
-                            <Search />
-                            <Types itemTypes={itemTypes} />
+                            <Search
+                                searchTerm={searchTerm}
+                                receiveFilter={this.receiveFilter.bind(this)}
+                            />
+                            <Types
+                                itemTypes={itemTypes}
+                                selectedTypes={selectedTypes}
+                                receiveFilter={this.receiveFilter.bind(this)}
+                            />
                         </div>
+                        {nullSearch == true &&
+                            <NullSearch />
+                        }
                         <div className='row'>
                             <ItemCards items={items} />
                         </div>
