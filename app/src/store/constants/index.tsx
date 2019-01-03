@@ -9,6 +9,9 @@ export const setAdminStatus = 'setAdminStatus'
 // isAdmin
 export const isUserAdmin = 'isUserAdmin'
 
+// items
+export const getItems = 'getItems'
+
 // messages
 export const newMessage = 'reservationSuccess'
 export const success = 'successMessage'
