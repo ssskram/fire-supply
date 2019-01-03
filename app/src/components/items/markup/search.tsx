@@ -10,13 +10,12 @@ export default class Search extends React.Component<props, {}>{
         return (
             <div className='col-md-6'>
                 <br />
-                <h4>Search by item name</h4>
                 <div className='panel filter-panel text-center'>
                     <div className='panel-body'>
                         <input type='search'
                             className='form-control'
                             value={this.props.searchTerm}
-                            placeholder="Enter item name"
+                            placeholder="Search for item"
                             onChange={e => this.props.receiveFilter("searchTerm", e.target.value)}>
                         </input>
                     </div>

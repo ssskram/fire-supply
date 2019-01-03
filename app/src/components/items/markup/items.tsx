@@ -12,15 +12,16 @@ export default class ItemCards extends React.Component<props, {}>{
     render() {
         const columns = [{
             Header: 'Item',
-            accessor: 'name'
-        }, {
-            Header: 'Type',
-            accessor: 'type',
+            accessor: 'name',
+            Cell: props => <b>{props.value}</b>
         }, {
             Header: '',
             accessor: 'cartegraphID',
-            Cell: props => <button className='btn btn-success' title='Add to cart'><span className='glyphicon glyphicon-plus'></span></button>,
-            maxWidth: 60
+            Cell: props => <button className='btn btn-success' title='Add to cart'><span style={{ marginRight: '5px' }} className='glyphicon glyphicon-plus'></span>Cart</button>,
+            maxWidth: 125
+        }, {
+            Header: 'Type',
+            accessor: 'type',
         }]
 
         return (

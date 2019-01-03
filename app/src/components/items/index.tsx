@@ -51,16 +51,21 @@ export class Items extends React.Component<props, state> {
         }
     }
 
+    setSelectedTypes(filter) {
+        let selectedTypes
+        if (this.state.selectedTypes.find(item => item == filter)) {
+            // if type already exists in array filter, remove it
+            selectedTypes = this.state.selectedTypes.filter(item => item != filter)
+        } else {
+            // otherwise, add it
+            selectedTypes = this.state.selectedTypes.concat([filter])
+        }
+        return selectedTypes
+    }
+
     receiveFilter(filterType, filter) {
         if (filterType == 'selectedTypes') {
-            let selectedTypes
-            if (this.state.selectedTypes.find(item => item == filter)) {
-                // if type already exists in array filter, remove it
-                selectedTypes = this.state.selectedTypes.filter(item => item != filter)
-            } else {
-                // otherwise, add it
-                selectedTypes = this.state.selectedTypes.concat([filter])
-            }
+            const selectedTypes = this.setSelectedTypes(filter)
             this.setState({
                 selectedTypes: selectedTypes,
                 items: filterItemsByDept(this.props.items, this.props.userProfile)
@@ -83,7 +88,9 @@ export class Items extends React.Component<props, state> {
         } else {
             this.setState({
                 items: filterItemsByDept(this.props.items, this.props.userProfile),
-                nullSearch: true
+                nullSearch: true,
+                selectedTypes: [],
+                searchTerm: ''
             })
         }
 

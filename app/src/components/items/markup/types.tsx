@@ -16,7 +16,6 @@ type props = {
 
 export default class Types extends React.Component<props, {}>{
 
-
     render() {
         const buttons = this.props.itemTypes.map((type, key) => {
             return (
@@ -33,7 +32,6 @@ export default class Types extends React.Component<props, {}>{
         return (
             <div className='col-md-6'>
                 <br />
-                <h4>Filter by item type</h4>
                 <div className='panel filter-panel text-center'>
                     <div className='panel-body'>
                         {buttons}
