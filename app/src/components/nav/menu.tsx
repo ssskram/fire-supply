@@ -1,24 +1,37 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
+import * as types from '../../store/types'
+import * as userProfile from '../../store/userProfile'
 import { Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import * as Style from './style'
 import Cart from '../cart'
 
 const allOrders = require('../../images/allOrders.png')
 const singleOrder = require('../../images/singleOrder.png')
 
-export default class Menu extends React.Component {
+type props = {
+    userProfile: types.userProfile
+}
+
+export class Menu extends React.Component<props, {}> {
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+    }
 
     public render() {
         return (
             <Nav>
-                <LinkContainer to={'/Admin'}>
-                    <NavItem>
-                        <button className='btn btn-danger nav-button'>
-                            Administration
-                        </button>
-                    </NavItem>
-                </LinkContainer>
+                {this.props.userProfile.isAdmin &&
+                    <LinkContainer to={'/Admin'}>
+                        <NavItem>
+                            <button className='btn btn-danger nav-button'>
+                                Administration
+                    </button>
+                        </NavItem>
+                    </LinkContainer>
+                }
                 <LinkContainer to={'/MyOrders'}>
                     <NavItem>
                         <button className='btn btn-primary nav-button'>
@@ -43,3 +56,12 @@ export default class Menu extends React.Component {
         )
     }
 }
+
+export default connect(
+    (state: ApplicationState) => ({
+        ...state.userProfile
+    }),
+    ({
+        ...userProfile.actionCreators
+    })
+)(Menu as any)

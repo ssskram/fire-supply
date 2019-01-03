@@ -2,6 +2,7 @@
 
 handles fetching, generation, and display of user account and user profile
 GETS both on load
+then checks admin status, and writes to user profile
 if no user profile, throws prompt to generate new profile
 all network activity occurs through store/user, or store/userProfile
 
@@ -25,6 +26,7 @@ type props = {
     userProfile: types.userProfile
     loadUser: () => types.user
     loadUserProfile: (object: types.user) => types.userProfile
+    isUserAdmin: (object: types.user) => void
     setUserProfile: (object: types.userProfile) => void
 }
 
@@ -44,6 +46,7 @@ export class Account extends React.Component<props, state> {
         }
     }
 
+    // order is important here so user gets loaded in correctly
     async componentDidMount() {
         // first get user
         const user = await this.props.loadUser()
@@ -52,6 +55,8 @@ export class Account extends React.Component<props, state> {
         this.setState({ loadingProfile: false })
         // no profile?  create a new one
         if (!profile) this.setState({ setProfile: true })
+        // then, load user admin status into userProfile store
+        await this.props.isUserAdmin(user)
     }
 
     componentWillReceiveProps(nextProps) {

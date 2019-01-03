@@ -4,10 +4,12 @@ import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
 
-const unloadedState: types.user = {
-    email: '...loading',
-    organization: '...loading',
-    name: '...loading'
+const unloadedState = {
+    user: {
+        email: '...loading',
+        organization: '...loading',
+        name: '...loading'
+    } as types.user
 }
 
 export const actionCreators = {

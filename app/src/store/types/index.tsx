@@ -9,6 +9,7 @@ export interface user {
 // user profile
 export interface userProfile {
     department: string
+    isAdmin: boolean
 }
 
 // message
