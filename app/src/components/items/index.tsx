@@ -7,6 +7,10 @@ import * as userProfile from '../../store/userProfile'
 import filterItemsByDept from './functions/filterItemsByDept'
 import collectItemTypes from './functions/collectItemTypes'
 import Header from './markup/header'
+import Types from './markup/types'
+import Search from './markup/search'
+import NoItems from './markup/noItems'
+import ItemCards from './markup/items'
 
 type props = {
     items: types.items,
@@ -14,35 +18,60 @@ type props = {
 }
 
 type state = {
-    items: Array<types.items> | undefined
-    itemTypes: Array<string> | undefined
+    items: Array<types.item>
+    itemTypes: Array<string>
+    selectedTypes: Array<string>
+    searchTerm: string
 }
 
 export class Items extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
-            items: undefined,
-            itemTypes: undefined
+            items: [],
+            itemTypes: [],
+            selectedTypes: [],
+            searchTerm: ''
         }
     }
 
-    async componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         // get relevant items & item types by dept
-        const items = await filterItemsByDept(nextProps.items, nextProps.userProfile)
-        const types = await collectItemTypes(items)
-        if (items.length > 0 && types.length > 0) {
-            this.setState({
-                items: items,
-                itemTypes: types
-            }, function (this) { console.log(this.state) })
-        }
+        const items = filterItemsByDept(nextProps.items, nextProps.userProfile)
+        const types = collectItemTypes(items)
+        this.setState({
+            items: items,
+            itemTypes: types
+        })
     }
 
     render() {
+        const {
+            items,
+            itemTypes
+        } = this.state
+
+        const {
+            userProfile,
+        } = this.props
+
         return (
             <div>
-                <Header department={this.props.userProfile.department} />
+                <Header department={userProfile.department} />
+                {items.length > 0 &&
+                    <div>
+                        <div className='row'>
+                            <Types itemTypes={itemTypes} />
+                            <Search />
+                        </div>
+                        <div className='row'>
+                            <ItemCards items={items} />
+                        </div>
+                    </div>
+                }
+                {items.length == 0  && userProfile.department != "...loading" &&
+                    <NoItems userProfile={userProfile} />
+                }
             </div>
         )
     }

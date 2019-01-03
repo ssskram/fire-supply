@@ -32,6 +32,8 @@ export default class AccountContainer extends React.Component<props, {}> {
                             <button onClick={() => window.location.href = "/logout"} id="logout" className='btn btn-link navbar-logout-btn'>
                                 <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout
                         </button>
+                            <br />
+                            <br />
                         </div>
                     </div>
                 </div>

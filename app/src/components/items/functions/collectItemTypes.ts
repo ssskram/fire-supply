@@ -1,7 +1,8 @@
 
-export default function collectItemTypes (items) {
+export default function collectItemTypes(items) {
     if (items.length > 0) {
-        console.log(items)     
-        return []
+        const types = items.map(item => item.type)
+            .filter((value, index, self) => self.indexOf(value) === index)
+        return types.sort()
     } else return []
 }

@@ -1,3 +1,16 @@
 .nav-button {
     width: 98%;
 }
+
+.btn-item {
+    font-size: 16px;
+    margin: 5px;
+}
+
+.btn-item:hover {
+    background-color: black;
+}
+
+.filter-panel {
+    background-color: #D4D3D3;
+}
