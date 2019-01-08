@@ -5,7 +5,7 @@ import * as types from '../../store/types'
 import * as userProfile from '../../store/userProfile'
 import { Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import Cart from '../cart'
+import Cart from '../cart/cartButton'
 
 const allOrders = require('../../images/allOrders.png')
 const singleOrder = require('../../images/singleOrder.png')

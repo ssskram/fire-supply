@@ -10,6 +10,11 @@ export interface user {
 export interface userProfile {
     department: string
     isAdmin: boolean
+    cart: Array<cartItem>
+}
+export interface cartItem {
+    item: item
+    quantity: number
 }
 
 // items

@@ -6,6 +6,8 @@ export const loadUser = 'loadUser'
 export const setDepartment = 'setDepartment'
 export const setAdminStatus = 'setAdminStatus'
 
+// cart
+export const updateCart = 'updateCart'
 // isAdmin
 export const isUserAdmin = 'isUserAdmin'
 
