@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet"
 type props = {
     user: types.user
     setUserProfile: (object) => void
+    updateCart: (newCart) => void
 }
 
 const departments = [
@@ -24,6 +25,12 @@ const departments = [
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'
 
 export class SelectDepartment extends React.Component<props, {}> {
+
+    setUserProfile(department) {
+        this.props.setUserProfile({ user: this.props.user.email, department: department })
+        this.props.updateCart([])
+    }
+
     render() {
         return (
             <div>
@@ -34,7 +41,7 @@ export class SelectDepartment extends React.Component<props, {}> {
                     value={null}
                     header=""
                     placeholder='Select department or bureau'
-                    onChange={department => this.props.setUserProfile({ user: this.props.user.email, department: department.value })}
+                    onChange={department => this.setUserProfile(department.value)}
                     multi={false}
                     options={departments}
                 />
