@@ -13,10 +13,6 @@ type props = {
 
 export class CartButton extends React.Component<props, {}> {
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-    }
-
     render() {
         const {
             userProfile

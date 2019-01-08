@@ -49,11 +49,12 @@ export const actionCreators = {
         })
         dispatch({ type: constants.setDepartment, newDepartment: profile.department })
     },
-    updateCart: (newCart): AppThunkAction<any> => (dispatch) => {
-        console.log(newCart)
-        // fetch('https://mongo-proxy.azurewebsites.us/save/updateCart', {
+    updateCart: (newCart): AppThunkAction<any> => async (dispatch, getState) => {
+        let newProfile = await getState().userProfile
+        console.log(newProfile)
+        // fetch('https://mongo-proxy.azurewebsites.us/save/userProfile', {
         //     method: 'POST',
-        //     body: JSON.stringify(newCart),
+        //     body: JSON.stringify(newProfile),
         //     headers: new Headers({
         //         'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO,
         //         'Content-Type': 'application/json'
