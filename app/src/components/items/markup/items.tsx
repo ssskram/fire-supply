@@ -6,9 +6,10 @@ import "react-table/react-table.css"
 
 type props = {
     items: Array<types.item>
+    userProfile: types.userProfile
 }
 
-export default class ItemCards extends React.Component<props, {}>{
+export default class ItemTable extends React.Component<props, {}>{
 
     render() {
         const columns = [{
@@ -28,7 +29,9 @@ export default class ItemCards extends React.Component<props, {}>{
         return (
             <div className='col-md-12'>
                 <ReactTable
-                    data={this.props.items}
+                    data={this.props.items.filter(item => {
+                        return !this.props.userProfile.cart.some(e => e.item.cartegraphID === item.cartegraphID)
+                    })}
                     columns={columns}
                     loading={false}
                     minRows={0}
@@ -48,5 +51,4 @@ export default class ItemCards extends React.Component<props, {}>{
             </div>
         )
     }
-
 }

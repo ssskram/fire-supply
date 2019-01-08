@@ -11,7 +11,7 @@ import Header from './markup/header'
 import Types from './markup/types'
 import Search from './markup/search'
 import NoItems from './markup/noItems'
-import ItemCards from './markup/items'
+import ItemTable from './markup/items'
 import NullSearch from './markup/nullSearch'
 
 type props = {
@@ -129,7 +129,7 @@ export class Items extends React.Component<props, state> {
                             <NullSearch />
                         }
                         <div className='row'>
-                            <ItemCards items={items} />
+                            <ItemTable items={items} userProfile={userProfile} />
                         </div>
                     </div>
                 }
