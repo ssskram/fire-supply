@@ -50,14 +50,15 @@ export const actionCreators = {
         dispatch({ type: constants.setDepartment, newDepartment: profile.department })
     },
     updateCart: (newCart): AppThunkAction<any> => (dispatch) => {
-        fetch('https://mongo-proxy.azurewebsites.us/save/updateCart', {
-            method: 'POST',
-            body: JSON.stringify(newCart),
-            headers: new Headers({
-                'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO,
-                'Content-Type': 'application/json'
-            })
-        })
+        console.log(newCart)
+        // fetch('https://mongo-proxy.azurewebsites.us/save/updateCart', {
+        //     method: 'POST',
+        //     body: JSON.stringify(newCart),
+        //     headers: new Headers({
+        //         'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO,
+        //         'Content-Type': 'application/json'
+        //     })
+        // })
         dispatch({ type: constants.updateCart, newCart: newCart })
     }
 }

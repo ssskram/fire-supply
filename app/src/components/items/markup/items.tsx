@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as types from '../../../store/types'
 import ReactTable from "react-table"
+import AddToCart from '../../addToCart'
 import "react-table/react-table.css"
 
 type props = {
@@ -17,7 +18,7 @@ export default class ItemCards extends React.Component<props, {}>{
         }, {
             Header: '',
             accessor: 'cartegraphID',
-            Cell: props => <button className='btn btn-success' title='Add to cart'><span style={{ marginRight: '5px' }} className='glyphicon glyphicon-plus'></span>Cart</button>,
+            Cell: props => <AddToCart item={props.original} />,
             maxWidth: 125
         }, {
             Header: 'Type',
