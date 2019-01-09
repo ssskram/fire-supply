@@ -1,10 +1,10 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as userProfile from '../../store/userProfile'
-import { Nav, NavItem } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Nav } from 'react-bootstrap'
 import Cart from './cartButton'
 
 const allOrders = require('../../images/allOrders.png')
@@ -18,37 +18,29 @@ export class Menu extends React.Component<props, {}> {
 
     public render() {
         return (
-            <Nav>
+            <div className='nav-container'>
                 {this.props.userProfile.isAdmin &&
-                    <LinkContainer to={'/Admin'}>
-                        <NavItem>
-                            <button className='btn btn-danger nav-button'>
-                                Administration
-                    </button>
-                        </NavItem>
-                    </LinkContainer>
+                    <Link to={'/Admin'}>
+                        <button className='btn btn-danger nav-button'>
+                            Administration
+                            </button>
+                    </Link>
                 }
-                <LinkContainer to={'/MyOrders'}>
-                    <NavItem>
-                        <button className='btn btn-primary nav-button'>
-                            <img src={singleOrder as string} className='img-responsive center-block' />
-                            <div>My orders</div>
-                        </button>
-                    </NavItem>
-                </LinkContainer>
-                <LinkContainer to={'/AllOrders'}>
-                    <NavItem>
-                        <button className='btn btn-primary nav-button'>
-                            <img src={allOrders as string} className='img-responsive center-block' />
-                            <div>All orders</div>
-                        </button>
-                    </NavItem>
-                </LinkContainer>
+                <Link to={'/MyOrders'}>
+                    <button className='btn btn-primary nav-button'>
+                        <img src={singleOrder as string} className='img-responsive center-block' />
+                        <div>My orders</div>
+                    </button>
+                </Link>
+                <Link to={'/AllOrders'}>
+                    <button className='btn btn-primary nav-button'>
+                        <img src={allOrders as string} className='img-responsive center-block' />
+                        <div>All orders</div>
+                    </button>
+                </Link>
                 <hr />
-                <NavItem>
-                    <Cart />
-                </NavItem>
-            </Nav>
+                <Cart />
+            </div>
         )
     }
 }

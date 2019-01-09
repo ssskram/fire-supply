@@ -54,7 +54,6 @@ export class Account extends React.Component<props, state> {
         await this.props.isUserAdmin(user)
         // with admin status loaded, load profile
         const profile = await this.props.loadUserProfile(user)
-        console.log(profile)
         this.setState({ loadingProfile: false })
         // no profile?  create a new one
         if (!profile) this.setState({ setProfile: true })

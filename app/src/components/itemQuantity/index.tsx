@@ -10,7 +10,7 @@ type props = {
     quantity: number
     item: types.item
     type: string
-    returnQuantity: (cartItem: types.cartItem) => void
+    returnQuantity: (cartItem) => void
 }
 
 type state = {

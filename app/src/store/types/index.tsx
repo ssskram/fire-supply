@@ -13,6 +13,7 @@ export interface userProfile {
     cart: Array<cartItem>
 }
 export interface cartItem {
+    _id: string
     item: item
     quantity: number
 }
