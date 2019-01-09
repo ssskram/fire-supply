@@ -61,8 +61,8 @@ export class UpdateQuantity extends React.Component<props, state> {
 
         return (
             <div className='col-md-12 text-center'>
-                <h3>{item.name}</h3>
-                <h5>{item.type}</h5>
+                <h3>{item.itemName}</h3>
+                <h5>{item.itemType}</h5>
                 {limitExceeded &&
                     <div className='alert alert-danger'>
                         Sorry, you can't have that much.

@@ -23,8 +23,8 @@ export interface items {
 }
 export interface item {
     cartegraphID: string
-    name: string
-    type: string
+    itemName: string
+    itemType: string
     department:  string
 }
 

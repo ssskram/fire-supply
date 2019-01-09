@@ -13,6 +13,7 @@ import Search from './markup/search'
 import NoItems from './markup/noItems'
 import ItemTable from './markup/items'
 import NullSearch from './markup/nullSearch'
+import Spinner from '../utilities/spinner'
 
 type props = {
     items: types.items,
@@ -20,7 +21,7 @@ type props = {
 }
 
 type state = {
-    items: Array<types.item>
+    items: Array<types.item> | undefined
     itemTypes: Array<string>
     selectedTypes: Array<string>
     searchTerm: string
@@ -31,7 +32,7 @@ export class Items extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
-            items: [],
+            items: undefined,
             itemTypes: [],
             selectedTypes: [],
             searchTerm: '',
@@ -108,11 +109,14 @@ export class Items extends React.Component<props, state> {
         const {
             userProfile,
         } = this.props
-
+        
         return (
             <div>
                 <Header department={userProfile.department} />
-                {items.length > 0 &&
+                {items == undefined &&
+                    <Spinner notice='...loading inventory...' />
+                }
+                {items && items.length > 0 && 
                     <div>
                         <div className='row'>
                             <Search
@@ -133,7 +137,7 @@ export class Items extends React.Component<props, state> {
                         </div>
                     </div>
                 }
-                {items.length == 0 && userProfile.department != "...loading" &&
+                {items && items.length == 0 && userProfile.department != "...loading" &&
                     <NoItems userProfile={userProfile} />
                 }
             </div>

@@ -27,8 +27,7 @@ const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer {
 export class SelectDepartment extends React.Component<props, {}> {
 
     setUserProfile(department) {
-        this.props.setUserProfile({ user: this.props.user.email, department: department })
-        this.props.updateCart([])
+        this.props.setUserProfile({ user: this.props.user.email, department: department, cart: [] })
     }
 
     render() {

@@ -10,11 +10,10 @@ type props = {
 }
 
 export default class ItemTable extends React.Component<props, {}>{
-
     render() {
         const columns = [{
             Header: 'Item',
-            accessor: 'name',
+            accessor: 'itemName',
             Cell: props => <b>{props.value}</b>
         }, {
             Header: '',
@@ -23,7 +22,7 @@ export default class ItemTable extends React.Component<props, {}>{
             maxWidth: 125
         }, {
             Header: 'Type',
-            accessor: 'type',
+            accessor: 'itemType',
         }]
 
         return (

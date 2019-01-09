@@ -3,14 +3,17 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as userProfile from '../../store/userProfile'
+import * as user from '../../store/user'
 import * as Style from './style'
 import Modal from 'react-responsive-modal'
 import SetQuantity from '../itemQuantity'
 
+// fuck typescript
 type props = {
+    user: types.user
     userProfile: types.userProfile
     item: types.item
-    updateCart: (newCart: Array<types.cartItem>) => void
+    updateCart: (obj) => void
 }
 
 type state = {
@@ -28,7 +31,11 @@ export class AddToCart extends React.Component<any, state> {
     newCart(cartItem) {
         let newCart = this.props.userProfile.cart
         newCart.push(cartItem)
-        this.props.updateCart(newCart)
+        const newUserProfile = {
+            user: this.props.user.email, 
+            cart: newCart
+        }
+        this.props.updateCart(newUserProfile)
         this.setState({
             setQuantity: false
         })
@@ -71,9 +78,11 @@ export class AddToCart extends React.Component<any, state> {
 
 export default connect(
     (state: ApplicationState) => ({
-        ...state.userProfile
+        ...state.userProfile,
+        ...state.user
     }),
     ({
-        ...userProfile.actionCreators
+        ...userProfile.actionCreators,
+        ...user.actionCreators
     })
 )(AddToCart)
