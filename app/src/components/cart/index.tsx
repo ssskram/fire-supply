@@ -7,6 +7,7 @@ import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
 import ReactTable from "react-table"
 import Form from './fields'
+import Messages from '../utilities/messages'
 
 type props = {
     user: types.user
@@ -118,6 +119,7 @@ export class Cart extends React.Component<props, state> {
                     <h2>Your cart</h2>
                     <hr />
                 </div>
+                <Messages />
                 {cart.length > 0 &&
                     <div>
                         {limitExceeded &&

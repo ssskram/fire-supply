@@ -15,6 +15,10 @@ export const updateCart = 'updateCart'
 // items
 export const getItems = 'getItems'
 
+// orders
+export const getOrders = 'getOrders'
+export const newOrder = 'newOrder'
+
 // messages
 export const newMessage = 'reservationSuccess'
 export const success = 'successMessage'

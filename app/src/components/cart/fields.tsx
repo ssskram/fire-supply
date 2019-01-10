@@ -4,6 +4,7 @@ import { ApplicationState } from '../../store'
 import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
 import * as types from '../../store/types'
+import * as orders from '../../store/orders'
 import TextArea from '../formElements/textarea'
 import Select from '../formElements/select'
 import Modal from 'react-responsive-modal'
@@ -11,13 +12,14 @@ import * as selects from './selects'
 import SubmitIt from './submit'
 
 type props = {
-    user?: types.user
-    userProfile?: types.userProfile
-    updateCart?: (newProfile) => void
+    user: types.user
+    userProfile: types.userProfile
+    updateCart: (newProfile) => void
     closeForm: () => void
+    newOrder: (newOrder) => boolean
 }
 
-export class FormFields extends React.Component<props, any> {
+export class FormFields extends React.Component<any, any> {
     constructor(props) {
         super(props)
         this.state = {
@@ -37,9 +39,8 @@ export class FormFields extends React.Component<props, any> {
         else return true
     }
 
-    placeOrder() {
+    async placeOrder() {
         const newOrder = {
-            _id: '...loading',
             user: this.props.user.email,
             name: this.props.user.name,
             department: this.props.userProfile.department,
@@ -52,11 +53,15 @@ export class FormFields extends React.Component<props, any> {
             miscItems: this.state.miscItems,
             items: this.props.userProfile.cart
         }
-        console.log(newOrder)
-        // add order
-        // await confirmation
-        // return confirmationas true/false success
-        return true
+        const success = await this.props.newOrder(newOrder)
+        console.log(success)
+        if (success == true) {
+            this.props.updateCart({
+                user: this.props.user.email,
+                cart: []
+            })
+        }
+        return success
     }
 
     render() {
@@ -81,7 +86,7 @@ export class FormFields extends React.Component<props, any> {
                 showCloseIcon={true}
                 center>
                 <div className='col-md-12'>
-                    <h4 className='text-center'><b>ORDER INFO</b></h4>
+                    <h4 className='text-center'><b>COMPLETE ORDER</b></h4>
                     {this.doesOrderContainNarcan() &&
                         <div className='col-md-12' style={{ backgroundColor: 'rgba(154, 66, 4, .1)', padding: '10px 0px', margin: '10px 0px', borderRadius: '5px' }}>
                             <h5 className='text-center'><b>NARCAN</b></h5>
@@ -155,10 +160,12 @@ export class FormFields extends React.Component<props, any> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.userProfile,
-        ...state.user
+        ...state.user,
+        ...state.orders
     }),
     ({
         ...userProfile.actionCreators,
-        ...user.actionCreators
+        ...user.actionCreators,
+        ...orders.actionCreators
     })
 )(FormFields)

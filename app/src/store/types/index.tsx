@@ -29,6 +29,24 @@ export interface item {
     department: string
 }
 
+// orders
+export interface orders {
+    orders: order[]
+}
+export interface order {
+    _id: string
+    user: string
+    department: string
+    location: string
+    comments: string
+    emergencyOrder: boolean
+    emergencyJustification: string
+    narcanCases: boolean
+    narcanAdministeredUnknown: string
+    miscItems: string
+    items: item[]
+}
+
 // message
 export interface messsage {
     message: string

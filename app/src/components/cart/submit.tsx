@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { ApplicationState } from '../../store'
+import * as messages from '../../store/messages'
 
-export default class Submit extends React.Component<any, any> {
+export class Submit extends React.Component<any, any> {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,10 +15,10 @@ export default class Submit extends React.Component<any, any> {
     async submitIt() {
         const success = await this.props.submitIt()
         if (success == true) {
-            // this.props.message(success!)
+            this.props.successMessage()
             this.setState({ redirect: true })
         } else {
-            // this.props.message()
+            this.props.errorMessage()
             this.props.closeForm()
         }
 
@@ -32,3 +35,12 @@ export default class Submit extends React.Component<any, any> {
         )
     }
 }
+
+export default connect(
+    (state: ApplicationState) => ({
+        ...state.messages
+    }),
+    ({
+        ...messages.actionCreators
+    })
+)(Submit)
