@@ -26,10 +26,10 @@ export interface item {
     cartegraphID: string
     itemName: string
     itemType: string
-    department:  string
+    department: string
 }
 
 // message
-export interface messsage { 
+export interface messsage {
     message: string
 }

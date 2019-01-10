@@ -32,7 +32,9 @@ export class FormFields extends React.Component<props, any> {
     }
 
     doesOrderContainNarcan() {
-        return true
+        const narcan = this.props.userProfile.cart.filter(item => item.item.itemName.includes('Narcan'))
+        if (narcan.length == 0) return false
+        else return true
     }
 
     placeOrder() {
