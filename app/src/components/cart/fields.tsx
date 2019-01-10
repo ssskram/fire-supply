@@ -40,6 +40,18 @@ export class FormFields extends React.Component<any, any> {
     }
 
     async placeOrder() {
+        let items = [] as any
+        this.props.userProfile.cart.forEach(item => {
+            const orderItem = {
+                item: {
+                    cartegraphID: item.item.cartegraphID,
+                    itemName: item.item.itemName,
+                    itemType: item.item.itemType
+                },
+                quantityOrdered: item.quantity,
+            }
+            items.push(orderItem)
+        })
         const newOrder = {
             user: this.props.user.email,
             name: this.props.user.name,
@@ -51,10 +63,9 @@ export class FormFields extends React.Component<any, any> {
             narcanCases: this.state.narcanCases.value,
             narcanAdministeredUnknown: this.state.narcanAdministeredUnknown,
             miscItems: this.state.miscItems,
-            items: this.props.userProfile.cart
+            items: items
         }
         const success = await this.props.newOrder(newOrder)
-        console.log(success)
         if (success == true) {
             this.props.updateCart({
                 user: this.props.user.email,

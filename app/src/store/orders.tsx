@@ -9,22 +9,20 @@ const unloadedState: types.orders = {
 
 export const actionCreators = {
     loadOrders: (): AppThunkAction<any> => (dispatch) => {
-        // get orders from mongo here
+        fetch("https://mongo-proxy.azurewebsites.us/get/allOrders", {
+            method: 'get',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO
+            })
 
-        // fetch("https://cartegraphapi.azurewebsites.us/pghSupply/allItems", {
-        //     method: 'get',
-        //     headers: new Headers({
-        //         'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
-        //     })
-
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         dispatch({ type: constants.getOrders, orders: data })
-        //     })
+        })
+            .then(res => res.json())
+            .then(data => {
+                dispatch({ type: constants.getOrders, orders: data })
+            })
     },
     newOrder: (order): AppThunkAction<any> => async (dispatch) => {
-        const response = await fetch('http://localhost:3000/save/newOrder', {
+        const response = await fetch('https://mongo-proxy.azurewebsites.us/save/newOrder', {
             method: 'POST',
             body: JSON.stringify(order),
             headers: new Headers({
