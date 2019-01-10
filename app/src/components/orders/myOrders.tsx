@@ -10,7 +10,7 @@ import * as userProfile from '../../store/userProfile'
 import Cards from './cards'
 
 type props = {
-    orders: any
+    orders: types.order[]
     user: types.user
     userProfile: types.userProfile
 }
@@ -19,12 +19,16 @@ export class MyOrders extends React.Component<props, any> {
 
     render() {
         return (
-            <div>
-                <Messages/>
+            <div className='col-md-12'>
+                <h3>My Orders</h3>
+                <hr />
+                <Messages />
                 <HydrateStore />
-                <Cards orders={this.props.orders.filter(order => {
-                    return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
-                })} />
+                <Cards
+                    orders={this.props.orders.filter(order => {
+                        return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
+                    })}
+                />
             </div>
         )
     }

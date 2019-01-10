@@ -8,7 +8,7 @@ import * as userProfile from '../../store/userProfile'
 import Cards from './cards'
 
 type props = {
-    orders: any,
+    orders: types.order[],
     userProfile: types.userProfile
 }
 
@@ -16,9 +16,13 @@ export class AllOrders extends React.Component<props, any> {
 
     render() {
         return (
-            <div>
+            <div className='col-md-12'>
+                <h3>{this.props.userProfile.department}</h3>
+                <hr />
                 <HydrateStore />
-                <Cards orders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
+                <Cards
+                    orders={this.props.orders.filter(order => order.department == this.props.userProfile.department)}
+                />
             </div>
         )
     }
