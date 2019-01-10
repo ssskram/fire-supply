@@ -6,7 +6,7 @@ import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
 import * as Style from './style'
 import Modal from 'react-responsive-modal'
-import SetQuantity from '../itemQuantity'
+import SetQuantity from './itemQuantity'
 
 // fuck typescript
 type props = {

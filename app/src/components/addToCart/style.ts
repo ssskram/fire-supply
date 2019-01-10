@@ -6,3 +6,8 @@ export const modalClasses = {
 export const addToCart = {
     marginRight: '5px'
 }
+
+export const inputWidth = {
+    maxWidth: '100px',
+    margin: '0 auto'
+}
