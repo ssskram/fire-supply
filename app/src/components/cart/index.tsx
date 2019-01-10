@@ -6,6 +6,7 @@ import { Ghost } from 'react-kawaii'
 import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
 import ReactTable from "react-table"
+import Form from './fields'
 
 type props = {
     user: types.user
@@ -17,6 +18,7 @@ type props = {
 type state = {
     limitExceeded: boolean
     cart: types.cartItem[]
+    showForm: boolean
 }
 
 export class Cart extends React.Component<props, state> {
@@ -24,7 +26,8 @@ export class Cart extends React.Component<props, state> {
         super(props)
         this.state = {
             limitExceeded: false,
-            cart: props.userProfile.cart
+            cart: props.userProfile.cart,
+            showForm: false
         }
     }
 
@@ -36,7 +39,7 @@ export class Cart extends React.Component<props, state> {
 
     deleteItem(item) {
         const itemDeleted = this.state.cart.filter(i => i._id != item._id)
-        this.post(itemDeleted)
+        this.postCart(itemDeleted)
     }
 
     increaseQuantity(item) {
@@ -46,7 +49,7 @@ export class Cart extends React.Component<props, state> {
             this.setState({ limitExceeded: true })
         } else {
             cartCopy[itemIndex].quantity++
-            this.post(cartCopy)
+            this.postCart(cartCopy)
         }
     }
 
@@ -57,23 +60,28 @@ export class Cart extends React.Component<props, state> {
             this.deleteItem(item)
         } else {
             cartCopy[itemIndex].quantity--
-            this.post(cartCopy)
+            this.postCart(cartCopy)
         }
     }
 
-    post(newCart) {
+    postCart(newCart) {
         const newUserProfile = {
             user: this.props.user.email,
             cart: newCart
         }
-        this.setState ({ limitExceeded: false })
+        this.setState({ limitExceeded: false })
         this.props.updateCart(newUserProfile)
+    }
+
+    showForm() {
+        this.setState({ showForm: true })
     }
 
     render() {
         const {
             limitExceeded,
-            cart
+            cart,
+            showForm
         } = this.state
 
         const columns = [{
@@ -138,7 +146,7 @@ export class Cart extends React.Component<props, state> {
                         />
                         < div className='col-md-12 text-center'>
                             <br />
-                            <button className='btn btn-success'>Submit order</button>
+                            <button onClick={this.showForm.bind(this)} className='btn btn-success'>Submit order</button>
                         </div>
                     </div>
                 }
@@ -149,6 +157,9 @@ export class Cart extends React.Component<props, state> {
                             <h3>Your cart is empty</h3>
                         </div>
                     </div>
+                }
+                {showForm &&
+                    <Form closeForm={() => this.setState({ showForm: false })}/>
                 }
             </div>
         )

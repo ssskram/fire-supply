@@ -9,7 +9,7 @@ const unloadedState = {
         email: '...loading',
         organization: '...loading',
         name: '...loading'
-    } as types.user
+    }
 }
 
 export const actionCreators = {
@@ -27,7 +27,7 @@ export const actionCreators = {
     }
 }
 
-export const reducer: Reducer<types.user> = (state: types.user, incomingAction: Action) => {
+export const reducer: Reducer<types.user> = (state: any, incomingAction: Action) => {
     const action = incomingAction as any
     switch (action.type) {
         case constants.loadUser:
