@@ -10,6 +10,7 @@ import Select from '../../formElements/select'
 import Modal from 'react-responsive-modal'
 import * as selects from './selects'
 import SubmitIt from './submit'
+import * as style from '../style'
 
 type props = {
     user: types.user
@@ -101,7 +102,7 @@ export class FormFields extends React.Component<any, any> {
                 <div className='col-md-12'>
                     <h4 className='text-center'><b>COMPLETE ORDER</b></h4>
                     {this.doesOrderContainNarcan() &&
-                        <div className='col-md-12' style={{ backgroundColor: 'rgba(154, 66, 4, .1)', padding: '10px 0px', margin: '10px 0px', borderRadius: '5px' }}>
+                        <div className='col-md-12' style={style.narcanContainer}>
                             <h5 className='text-center'><b>NARCAN</b></h5>
                             <Select
                                 value={narcanCases}
@@ -135,7 +136,7 @@ export class FormFields extends React.Component<any, any> {
                         placeholder="Couldn't find what you were looking for?"
                         callback={e => this.setState({ miscItems: e.target.value })}
                     />
-                    <div className='col-md-12' style={emergencyOrder.value ? { backgroundColor: 'rgba(220, 53, 69, .1)', padding: '10px 0px', borderRadius: '5px', margin: '10px 0px' } : { padding: '0px 0px', borderRadius: '5px', margin: '0px 0px' }}>
+                    <div className='col-md-12' style={emergencyOrder.value ? style.emergencyColor : style.emergencyContainer}>
                         <Select
                             value={emergencyOrder}
                             header='Is this an emergency?'

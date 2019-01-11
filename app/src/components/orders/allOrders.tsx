@@ -7,14 +7,24 @@ import * as orders from '../../store/orders'
 import * as userProfile from '../../store/userProfile'
 import Card from './markup/card'
 import NoOrders from './markup/noOrders'
-
+import ViewOrder from './markup/viewOrder'
 
 type props = {
     orders: types.order[],
     userProfile: types.userProfile
 }
 
-export class AllOrders extends React.Component<props, any> {
+type state = {
+    viewOrder: types.order
+}
+
+export class AllOrders extends React.Component<props, state> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            viewOrder: undefined
+        }
+    }
 
     render() {
         const ordersByDept = this.props.orders.filter(order => order.department == this.props.userProfile.department)
@@ -26,12 +36,24 @@ export class AllOrders extends React.Component<props, any> {
                 <HydrateStore />
                 {ordersByDept.length > 0 &&
                     ordersByDept.map((order, key) => {
-                        <Card
-                            key={key}
-                            order={order}
-                        />
+                        return (
+                            <Card
+                                onClick={(order) => this.setState({ viewOrder: order })}
+                                key={key}
+                                order={order}
+                            />
+                        )
                     })
-                } : {<NoOrders />}
+                }
+                {ordersByDept.length == 0 &&
+                    <NoOrders />
+                }
+                {this.state.viewOrder &&
+                    <ViewOrder
+                        order={this.state.viewOrder}
+                        closeView={() => this.setState({ viewOrder: undefined })}
+                    />
+                }
             </div>
         )
     }

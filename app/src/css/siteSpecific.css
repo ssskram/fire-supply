@@ -14,3 +14,23 @@
 .filter-panel {
     background-color: #D4D3D3;
 }
+
+.funny-panel-big {
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.funny-panel-small {
+    height: 100%;
+    padding: 10px;
+    margin: 0;
+    color: #fff;
+}

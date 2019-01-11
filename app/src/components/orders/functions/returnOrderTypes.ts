@@ -4,5 +4,5 @@ export default function orderTypes(order) {
         types.push(supply.item.itemType)
     })
     // take unique
-    return types.filter((v, i, a) => a.indexOf(v) === i)
+    return types.filter((v, i, a) => a.indexOf(v) === i).join(", ")
 }

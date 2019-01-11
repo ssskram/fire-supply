@@ -9,6 +9,8 @@ import * as user from '../../store/user'
 import * as userProfile from '../../store/userProfile'
 import Card from './markup/card'
 import NoOrders from './markup/noOrders'
+import ViewOrder from './markup/viewOrder'
+import ModifyOrder from './markup/modifyOrder'
 
 type props = {
     orders: types.order[]
@@ -16,7 +18,17 @@ type props = {
     userProfile: types.userProfile
 }
 
-export class MyOrders extends React.Component<props, any> {
+type state = {
+    viewOrder: types.order
+}
+
+export class MyOrders extends React.Component<props, state> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            viewOrder: undefined
+        }
+    }
 
     render() {
         const myOrders = this.props.orders.filter(order => {
@@ -31,12 +43,32 @@ export class MyOrders extends React.Component<props, any> {
                 <HydrateStore />
                 {myOrders.length > 0 &&
                     myOrders.map((order, key) => {
-                        <Card
-                            key={key}
-                            order={order}
-                        />
+                        return (
+                            <Card
+                                onClick={(order) => this.setState({ viewOrder: order })}
+                                key={key}
+                                order={order}
+                            />
+                        )
                     })
-                } : { <NoOrders /> }
+                }
+                {myOrders.length == 0 &&
+                    <NoOrders />
+                }
+                {this.state.viewOrder &&
+                    this.state.viewOrder.status == "Order Submitted" &&
+                    <ModifyOrder
+                        order={this.state.viewOrder}
+                        closeView={() => this.setState({ viewOrder: undefined })}
+                    />
+                }
+                {this.state.viewOrder &&
+                    this.state.viewOrder.status != "Order Submitted" &&
+                    <ViewOrder
+                        order={this.state.viewOrder}
+                        closeView={() => this.setState({ viewOrder: undefined })}
+                    />
+                }
             </div>
         )
     }
