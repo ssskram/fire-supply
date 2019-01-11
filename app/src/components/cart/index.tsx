@@ -90,12 +90,16 @@ export class Cart extends React.Component<props, state> {
             accessor: 'item',
             Cell: props => <b>{props.value.itemName}</b>
         }, {
-            Header: 'Type',
+            Header: 'Unit',
             accessor: 'item',
-            Cell: props => <div>{props.value.itemType}</div>
+            Cell: props => <div>{props.value.itemUnit}</div>
         }, {
             Header: 'Quantity',
             accessor: 'quantity',
+        }, {
+            Header: 'Type',
+            accessor: 'item',
+            Cell: props => <div>{props.value.itemType}</div>
         }, {
             Header: '',
             accessor: 'item',
@@ -161,7 +165,7 @@ export class Cart extends React.Component<props, state> {
                     </div>
                 }
                 {showForm &&
-                    <Form closeForm={() => this.setState({ showForm: false })}/>
+                    <Form closeForm={() => this.setState({ showForm: false })} />
                 }
             </div>
         )

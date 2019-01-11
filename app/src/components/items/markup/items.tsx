@@ -12,14 +12,17 @@ type props = {
 export default class ItemTable extends React.Component<props, {}>{
     render() {
         const columns = [{
-            Header: 'Item',
-            accessor: 'itemName',
-            Cell: props => <b>{props.value}</b>
-        }, {
             Header: '',
             accessor: 'cartegraphID',
             Cell: props => <AddToCart item={props.original} />,
             maxWidth: 125
+        }, {
+            Header: 'Item',
+            accessor: 'itemName',
+            Cell: props => <b>{props.value}</b>
+        }, {
+            Header: 'Unit',
+            accessor: 'itemUnit',
         }, {
             Header: 'Type',
             accessor: 'itemType',

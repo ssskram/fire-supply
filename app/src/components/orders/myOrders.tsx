@@ -22,7 +22,7 @@ export class MyOrders extends React.Component<props, any> {
             <div className='col-md-12'>
                 <h3>My Orders</h3>
                 <hr />
-                <Messages />
+                <div className='col-md-12'><Messages /></div>
                 <HydrateStore />
                 <Cards
                     orders={this.props.orders.filter(order => {

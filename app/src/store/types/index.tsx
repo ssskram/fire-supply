@@ -26,6 +26,7 @@ export interface item {
     cartegraphID: string
     itemName: string
     itemType: string
+    itemUnit: string
     department?: string
 }
 
@@ -36,6 +37,7 @@ export interface orders {
 export interface order {
     _id: string
     user: string
+    userName: string
     department: string
     location: string
     comments: string
@@ -44,11 +46,14 @@ export interface order {
     narcanCases: boolean
     narcanAdministeredUnknown: string
     miscItems: string
-    items: orderItem[]
+    supplies: supplyItem[]
+    status: string
+    supplyComments: string
+    receivedBy: string
     createdAt: string
     _v: number
 }
-export interface orderItem {
+export interface supplyItem {
     _id: string
     item: item
     quantityOrdered: number

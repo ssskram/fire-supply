@@ -23,13 +23,13 @@ export class FormFields extends React.Component<any, any> {
     constructor(props) {
         super(props)
         this.state = {
-            location: '',
-            miscItems: '',
-            comments: '',
+            location: undefined,
+            miscItems: undefined,
+            comments: undefined,
             emergencyOrder: false,
-            emergencyJustification: '',
+            emergencyJustification: undefined,
             narcanCases: true,
-            narcanAdministeredUnknown: ''
+            narcanAdministeredUnknown: undefined
         }
     }
 
@@ -41,20 +41,21 @@ export class FormFields extends React.Component<any, any> {
 
     async placeOrder() {
         let items = [] as any
-        this.props.userProfile.cart.forEach(item => {
+        this.props.userProfile.cart.forEach(c => {
             const orderItem = {
                 item: {
-                    cartegraphID: item.item.cartegraphID,
-                    itemName: item.item.itemName,
-                    itemType: item.item.itemType
+                    cartegraphID: c.item.cartegraphID,
+                    itemName: c.item.itemName,
+                    itemType: c.item.itemType,
+                    itemUnit: c.item.itemUnit
                 },
-                quantityOrdered: item.quantity,
+                quantityOrdered: c.quantity,
             }
             items.push(orderItem)
         })
         const newOrder = {
             user: this.props.user.email,
-            name: this.props.user.name,
+            userName: this.props.user.name,
             department: this.props.userProfile.department,
             location: this.state.location.value,
             comments: this.state.comments,
@@ -63,7 +64,8 @@ export class FormFields extends React.Component<any, any> {
             narcanCases: this.state.narcanCases.value,
             narcanAdministeredUnknown: this.state.narcanAdministeredUnknown,
             miscItems: this.state.miscItems,
-            items: items
+            status: 'Order Submitted',
+            supplies: items
         }
         const success = await this.props.newOrder(newOrder)
         if (success == true) {
