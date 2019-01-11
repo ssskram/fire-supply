@@ -7,7 +7,7 @@ import * as types from '../../store/types'
 import * as orders from '../../store/orders'
 import * as user from '../../store/user'
 import * as userProfile from '../../store/userProfile'
-import Cards from './cards'
+import Cards from './markup/cards'
 
 type props = {
     orders: types.order[]

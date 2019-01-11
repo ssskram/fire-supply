@@ -6,7 +6,7 @@ import { Ghost } from 'react-kawaii'
 import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
 import ReactTable from "react-table"
-import Form from './fields'
+import Form from './markup/fields'
 import Messages from '../utilities/messages'
 
 type props = {
