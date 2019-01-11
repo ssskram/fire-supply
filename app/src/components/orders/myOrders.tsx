@@ -7,7 +7,8 @@ import * as types from '../../store/types'
 import * as orders from '../../store/orders'
 import * as user from '../../store/user'
 import * as userProfile from '../../store/userProfile'
-import Cards from './markup/cards'
+import Card from './markup/card'
+import NoOrders from './markup/noOrders'
 
 type props = {
     orders: types.order[]
@@ -18,17 +19,24 @@ type props = {
 export class MyOrders extends React.Component<props, any> {
 
     render() {
+        const myOrders = this.props.orders.filter(order => {
+            return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
+        })
+
         return (
             <div className='col-md-12'>
                 <h3>My Orders</h3>
                 <hr />
-                <div className='col-md-12'><Messages /></div>
+                <Messages />
                 <HydrateStore />
-                <Cards
-                    orders={this.props.orders.filter(order => {
-                        return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
-                    })}
-                />
+                {myOrders.length > 0 &&
+                    myOrders.map((order, key) => {
+                        <Card
+                            key={key}
+                            order={order}
+                        />
+                    })
+                } : { <NoOrders /> }
             </div>
         )
     }
