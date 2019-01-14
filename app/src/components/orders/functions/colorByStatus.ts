@@ -5,6 +5,9 @@ export default function colorByStatus(status) {
     if (status == "Approved") {
         return '#17a2b8'
     }
+    if (status == "Partially Approved") {
+        return '#17a2b8'
+    }
     if (status == "Rejected") {
         return '#dc3545'
     }

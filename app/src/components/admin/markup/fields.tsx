@@ -1,0 +1,38 @@
+import * as React from 'react'
+import TextArea from '../../formElements/textarea'
+import Select from '../../formElements/select'
+import Input from '../../formElements/input'
+import * as selects from './statuses'
+
+export default class SupplyFields extends React.Component<any, {}> {
+
+    render() {
+        return (
+            <div>
+                <Select
+                    value={{ value: this.props.state.status, label: this.props.state.status }}
+                    header='Status'
+                    placeholder='Order status'
+                    onChange={status => this.props.setState({ status: status.value })}
+                    multi={false}
+                    options={selects.orderStatuses}
+                    required
+                />
+                <TextArea
+                    value={this.props.state.supplyComments}
+                    header="Comments"
+                    placeholder="Visible to user as 'Supply Comments'"
+                    callback={e => this.props.setState({ supplyComments: e.target.value })}
+                    required
+                />
+                <Input
+                    value={this.props.state.receivedBy}
+                    header="Order received by"
+                    placeholder="Assignment number"
+                    callback={e => this.props.setState({ receivedBy: e.target.value })}
+                    required
+                />
+            </div>
+        )
+    }
+}

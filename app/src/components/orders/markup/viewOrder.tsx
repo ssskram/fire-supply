@@ -73,7 +73,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                         }
                         {order.supplyComments &&
                             <div style={style.alertMargin} className='alert alert-info'>
-                                <div>Supply comments:<br /><b>{order.supplyComments}</b></div>
+                                <div>Supply comments: <br /><b>{order.supplyComments}</b></div>
                             </div>
                         }
                         <hr />

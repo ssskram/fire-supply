@@ -5,14 +5,18 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as orders from '../../store/orders'
+import * as messages from '../../store/messages'
 import * as userProfile from '../../store/userProfile'
 import Card from '../orders/markup/card'
 import NoOrders from '../orders/markup/noOrders'
-import ModifyOrder from './modifyOrder'
+import ModifyOrder from './markup/modifyOrder'
+import Messages from '../utilities/messages'
 
 type props = {
     orders: types.order[],
     userProfile: types.userProfile
+    updateOrder: (newOrder) => boolean
+    errorMessage: () => void
 }
 
 type state = {
@@ -52,6 +56,7 @@ export class Admin extends React.Component<props, state> {
 
         return (
             <div className='col-md-12'>
+                <Messages />
                 <h3>{this.props.userProfile.department} <b>ADMIN</b></h3>
                 <hr />
                 <HydrateStore />
@@ -73,6 +78,8 @@ export class Admin extends React.Component<props, state> {
                     <ModifyOrder
                         order={this.state.modifyOrder}
                         closeView={() => this.setState({ modifyOrder: undefined })}
+                        updateOrder={this.props.updateOrder.bind(this)}
+                        errorMessage={this.props.errorMessage.bind(this)}
                     />
                 }
             </div>
@@ -83,10 +90,12 @@ export class Admin extends React.Component<props, state> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.orders,
-        ...state.userProfile
+        ...state.userProfile,
+        ...state.messages
     }),
     ({
         ...orders.actionCreators,
-        ...userProfile.actionCreators
+        ...userProfile.actionCreators,
+        ...messages.actionCreators
     })
 )(Admin as any)
