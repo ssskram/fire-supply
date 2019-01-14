@@ -127,7 +127,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                             <b>House {location}</b>
                         </h4>
                         {emergencyOrder &&
-                            <div style={style.alertMargin} className='alert alert-danger'>
+                            <div style={{ marginBottom: '5px' }} className='alert alert-danger'>
                                 <b>EMERGENCY ORDER</b><br />
                                 <i>{emergencyJustification}</i>
                             </div>

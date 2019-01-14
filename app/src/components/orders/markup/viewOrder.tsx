@@ -6,6 +6,7 @@ import * as moment from 'moment'
 import ReactTable from "react-table"
 import { narcanContainer } from '../../cart/style'
 import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
+import getColorByStatus from '../functions/colorByStatus'
 
 type props = {
     order: types.order
@@ -58,21 +59,21 @@ export default class ViewOrder extends React.Component<props, {}> {
                             <b>House {order.location}</b>
                         </h4>
                         {order.emergencyOrder &&
-                            <div style={style.alertMargin} className='alert alert-danger'>
+                            <div style={{ marginBottom: '5px' }} className='alert alert-danger'>
                                 <b>EMERGENCY ORDER</b><br />
                                 <i>{order.emergencyJustification}</i>
                             </div>
                         }
-                        <div style={style.alertMargin} className='alert alert-info'>
-                            <div>Order status: <b>{order.status}</b></div>
+                        <div style={{ borderColor: '#383838', marginBottom: '5px', backgroundColor: getColorByStatus(order.status) }} className='alert'>
+                            <div><b>{order.status}</b></div>
                         </div>
                         {order.receivedBy &&
-                            <div style={style.alertMargin} className='alert alert-info'>
+                            <div style={{ borderColor: '#383838', marginBottom: '5px', backgroundColor: getColorByStatus(order.status) }} className='alert'>
                                 <div>Received by: <b>{order.receivedBy}</b></div>
                             </div>
                         }
                         {order.supplyComments &&
-                            <div style={style.alertMargin} className='alert alert-info'>
+                            <div style={{ borderColor: '#383838', marginBottom: '5px', backgroundColor: getColorByStatus(order.status) }} className='alert'>
                                 <div>Supply comments: <br /><b>{order.supplyComments}</b></div>
                             </div>
                         }

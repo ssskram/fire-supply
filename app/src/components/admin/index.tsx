@@ -78,7 +78,7 @@ export class Admin extends React.Component<props, state> {
                     <Spinner notice='...saving...' />
                 }
                 <Messages />
-                <h3><b>SUPPLY WAREHOUSE</b> <span className='pull-right'>{this.props.userProfile.department}</span></h3>
+                <h3><b>SUPPLY WAREHOUSE</b> <span style={{ textTransform: 'uppercase' }} className='pull-right'>{this.props.userProfile.department}</span></h3>
                 <hr />
                 <FilterButtons filter={this.state.filter} setState={this.setState.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
                 <Search search={this.state.search} filter={this.state.filter} setState={this.setState.bind(this)} />

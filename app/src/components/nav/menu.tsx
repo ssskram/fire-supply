@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as userProfile from '../../store/userProfile'
-import { Nav } from 'react-bootstrap'
 import Cart from './cartButton'
 
 const allOrders = require('../../images/allOrders.png')
@@ -39,6 +38,11 @@ export class Menu extends React.Component<props, {}> {
                     </button>
                 </Link>
                 <hr />
+                <Link to={'/'}>
+                    <button className='btn btn-success nav-button'>
+                        <div>Shop {this.props.userProfile.department}</div>
+                    </button>
+                </Link>
                 <Cart />
             </div>
         )

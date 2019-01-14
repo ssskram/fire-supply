@@ -50,7 +50,3 @@ export const supplyContainer = {
     margin: '10px 0px',
     borderRadius: '5px'
 }
-
-export const alertMargin= {
-    marginBottom: '5px'
-}

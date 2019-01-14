@@ -119,7 +119,7 @@ export class FormFields extends React.Component<any, any> {
                     <Select
                         value={location}
                         header='Select location for delivery'
-                        placeholder='Select House'
+                        placeholder='Select location'
                         onChange={location => this.setState({ location })}
                         multi={false}
                         options={selects.FireHouses}

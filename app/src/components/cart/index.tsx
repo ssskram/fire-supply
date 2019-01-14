@@ -153,7 +153,7 @@ export class Cart extends React.Component<props, state> {
                         />
                         < div className='col-md-12 text-center'>
                             <br />
-                            <button onClick={this.showForm.bind(this)} className='btn btn-success'>Submit order</button>
+                            <button onClick={this.showForm.bind(this)} className='btn btn-success'>Complete order</button>
                         </div>
                     </div>
                 }
