@@ -5,6 +5,10 @@ import * as messages from '../../store/messages'
 
 export class Messages extends React.Component<any, {}> {
 
+    componentWillReceiveProps(next) {
+        console.log(next)
+    }
+
     createMarkup() {
         return { __html: this.props.message };
     }

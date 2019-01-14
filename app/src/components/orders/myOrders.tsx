@@ -5,17 +5,18 @@ import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as orders from '../../store/orders'
+import * as messages from '../../store/messages'
 import * as user from '../../store/user'
 import * as userProfile from '../../store/userProfile'
 import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
-import { narcanContainer } from '../cart/style'
 
 type props = {
     orders: types.order[]
     user: types.user
     userProfile: types.userProfile
+    clearMessage: () => void
 }
 
 type state = {
@@ -28,6 +29,10 @@ export class MyOrders extends React.Component<props, state> {
         this.state = {
             viewOrder: undefined
         }
+    }
+
+    componentWillUnmount() {
+        this.props.clearMessage()
     }
 
     render() {
@@ -69,11 +74,13 @@ export default connect(
     (state: ApplicationState) => ({
         ...state.orders,
         ...state.user,
-        ...state.userProfile
+        ...state.userProfile,
+        ...state.messages
     }),
     ({
         ...orders.actionCreators,
         ...user.actionCreators,
-        ...userProfile.actionCreators
+        ...userProfile.actionCreators,
+        ...messages.actionCreators
     })
 )(MyOrders as any)

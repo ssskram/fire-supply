@@ -2,11 +2,6 @@ import * as React from 'react'
 import * as style from '../style'
 
 export default class filterButtons extends React.Component<any, any> {
-
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     returnAllCount() {
         return this.props.allOrders.length
     }

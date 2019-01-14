@@ -20,6 +20,7 @@ type props = {
     userProfile: types.userProfile
     updateOrder: (newOrder) => boolean
     errorMessage: () => void
+    clearMessage: () => void
 }
 
 type state = {
@@ -56,6 +57,10 @@ export class Admin extends React.Component<props, state> {
         if (userProfile.isAdmin == false) {
             this.setState({ redirect: true })
         }
+    }
+
+    componentWillUnmount() {
+        this.props.clearMessage()
     }
 
     render() {
