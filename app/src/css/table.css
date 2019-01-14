@@ -23,7 +23,7 @@ td {
     white-space: pre-wrap !important;
     overflow: visible !important;
     text-overflow: inherit !important;
-    padding: 0px !important;
+    padding: 0px;
 }
 
 .rt-thead {

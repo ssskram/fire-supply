@@ -36,3 +36,17 @@ export const smallerFont = {
 export const panelBorder = {
     border: 'solid 0px white'
 }
+
+export const otherItems = {
+    backgroundColor: 'rgba(2, 20, 50, .1)',
+    padding: '10px 0px',
+    margin: '10px 0px',
+    borderRadius: '5px'
+}
+
+export const supplyContainer = {
+    backgroundColor: 'rgba(3, 97, 84, .1)',
+    padding: '10px 0px',
+    margin: '10px 0px',
+    borderRadius: '5px'
+}

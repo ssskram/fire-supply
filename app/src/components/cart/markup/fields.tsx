@@ -11,6 +11,7 @@ import Modal from 'react-responsive-modal'
 import * as selects from './selects'
 import SubmitIt from './submit'
 import * as style from '../style'
+import doesOrderContainNarcan from '../functions/doesOrderContainNarcan'
 
 type props = {
     user: types.user
@@ -32,12 +33,6 @@ export class FormFields extends React.Component<any, any> {
             narcanCases: true,
             narcanAdministeredUnknown: undefined
         }
-    }
-
-    doesOrderContainNarcan() {
-        const narcan = this.props.userProfile.cart.filter(item => item.item.itemName.includes('Narcan'))
-        if (narcan.length == 0) return false
-        else return true
     }
 
     async placeOrder() {
@@ -101,7 +96,7 @@ export class FormFields extends React.Component<any, any> {
                 center>
                 <div className='col-md-12'>
                     <h4 className='text-center'><b>COMPLETE ORDER</b></h4>
-                    {this.doesOrderContainNarcan() &&
+                    {doesOrderContainNarcan(this.props.userProfile.cart) &&
                         <div className='col-md-12' style={style.narcanContainer}>
                             <h5 className='text-center'><b>NARCAN</b></h5>
                             <Select

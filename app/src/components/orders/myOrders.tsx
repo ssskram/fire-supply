@@ -10,7 +10,7 @@ import * as userProfile from '../../store/userProfile'
 import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
-import ModifyOrder from './markup/modifyOrder'
+import { narcanContainer } from '../cart/style'
 
 type props = {
     orders: types.order[]
@@ -56,19 +56,10 @@ export class MyOrders extends React.Component<props, state> {
                     <NoOrders />
                 }
                 {this.state.viewOrder &&
-                    this.state.viewOrder.status == "Order Submitted" &&
-                    <ModifyOrder
-                        order={this.state.viewOrder}
-                        closeView={() => this.setState({ viewOrder: undefined })}
-                    />
-                }
-                {this.state.viewOrder &&
-                    this.state.viewOrder.status != "Order Submitted" &&
                     <ViewOrder
                         order={this.state.viewOrder}
                         closeView={() => this.setState({ viewOrder: undefined })}
-                    />
-                }
+                    />}
             </div>
         )
     }

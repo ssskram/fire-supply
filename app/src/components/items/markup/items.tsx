@@ -43,6 +43,7 @@ export default class ItemTable extends React.Component<props, {}>{
                     noDataText=''
                     getTdProps={() => ({
                         style: {
+                            padding: '0px',
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center',

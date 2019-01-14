@@ -12,14 +12,14 @@ export const narcanContainer = {
 }
 
 export const emergencyContainer = {
-    padding: '0px 0px', 
-    borderRadius: '5px', 
+    padding: '0px 0px',
+    borderRadius: '5px',
     margin: '0px 0px'
 }
 
 export const emergencyColor = {
-    backgroundColor: 'rgba(220, 53, 69, .1)', 
-    padding: '10px 0px', 
-    borderRadius: '5px', 
-    margin: '10px 0px' 
+    backgroundColor: 'rgba(220, 53, 69, .1)',
+    padding: '10px 0px',
+    borderRadius: '5px',
+    margin: '10px 0px'
 }

@@ -143,6 +143,7 @@ export class Cart extends React.Component<props, state> {
                             noDataText=''
                             getTdProps={() => ({
                                 style: {
+                                    padding: '0px',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     justifyContent: 'center',

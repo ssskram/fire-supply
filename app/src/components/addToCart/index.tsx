@@ -20,7 +20,7 @@ type state = {
     setQuantity: boolean
 }
 
-export class AddToCart extends React.Component<props, state> {
+export class AddToCart extends React.Component<any, state> {
     constructor(props) {
         super(props)
         this.state = {
