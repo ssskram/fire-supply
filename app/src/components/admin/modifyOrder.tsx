@@ -1,18 +1,18 @@
 import * as React from 'react'
 import Modal from 'react-responsive-modal'
-import * as types from '../../../store/types'
-import * as style from '../style'
+import * as types from '../../store/types'
+import * as style from '../orders/style'
 import * as moment from 'moment'
 import ReactTable from "react-table"
-import { narcanContainer } from '../../cart/style'
-import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
+import { narcanContainer } from '../cart/style'
+import doesOrderContainNarcan from '../cart/functions/doesOrderContainNarcan'
 
 type props = {
     order: types.order
     closeView: () => void
 }
 
-export default class ViewOrder extends React.Component<props, {}> {
+export default class ModifyOrder extends React.Component<props, {}> {
 
     render() {
         const {
