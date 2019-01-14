@@ -51,7 +51,7 @@ export class Admin extends React.Component<props, state> {
 
     componentWillReceiveProps(nextProps, nextState) {
         this.checkPermissions(nextProps.userProfile)
-        this.setState ({
+        this.setState({
             orders: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),
         })
     }
@@ -78,10 +78,10 @@ export class Admin extends React.Component<props, state> {
                     <Spinner notice='...saving...' />
                 }
                 <Messages />
-                <h3>{this.props.userProfile.department} <b>ADMIN</b></h3>
+                <h3><b>SUPPLY WAREHOUSE</b> <span className='pull-right'>{this.props.userProfile.department}</span></h3>
                 <hr />
-                <FilterButtons filter={this.state.filter} setState={this.setState.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)}/>
-                <Search search={this.state.search} filter={this.state.filter} setState={this.setState.bind(this)}/>
+                <FilterButtons filter={this.state.filter} setState={this.setState.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
+                <Search search={this.state.search} filter={this.state.filter} setState={this.setState.bind(this)} />
                 {this.state.orders.length > 0 &&
                     this.state.orders.map((order, key) => {
                         return (
