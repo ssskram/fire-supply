@@ -98,7 +98,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                                 noDataText=''
                                 getTdProps={() => ({
                                     style: {
-                                        padding: '5px',
+                                        padding: '10px',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'center',

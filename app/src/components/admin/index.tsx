@@ -11,6 +11,9 @@ import Card from '../orders/markup/card'
 import NoOrders from '../orders/markup/noOrders'
 import ModifyOrder from './markup/modifyOrder'
 import Messages from '../utilities/messages'
+import Spinner from '../utilities/spinner'
+import FilterButtons from './markup/filterButtons'
+import Search from './markup/search'
 
 type props = {
     orders: types.order[],
@@ -20,6 +23,10 @@ type props = {
 }
 
 type state = {
+    orders: any[]
+    filter: string
+    search: string
+    spinner: boolean
     redirect: boolean
     modifyOrder: types.order
 }
@@ -28,6 +35,10 @@ export class Admin extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
+            orders: props.orders.filter(order => order.department == this.props.userProfile.department),
+            filter: 'all orders',
+            search: '',
+            spinner: false,
             redirect: false,
             modifyOrder: undefined
         }
@@ -37,7 +48,7 @@ export class Admin extends React.Component<props, state> {
         this.checkPermissions(this.props.userProfile)
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps, nextState) {
         this.checkPermissions(nextProps.userProfile)
     }
 
@@ -48,20 +59,23 @@ export class Admin extends React.Component<props, state> {
     }
 
     render() {
-        const ordersByDept = this.props.orders.filter(order => order.department == this.props.userProfile.department)
-
         if (this.state.redirect) {
             return <Redirect push to={'/'} />
         }
 
         return (
             <div className='col-md-12'>
+                <HydrateStore />
+                {this.state.spinner == true &&
+                    <Spinner notice='...saving...' />
+                }
                 <Messages />
                 <h3>{this.props.userProfile.department} <b>ADMIN</b></h3>
                 <hr />
-                <HydrateStore />
-                {ordersByDept.length > 0 &&
-                    ordersByDept.map((order, key) => {
+                <FilterButtons filter={this.state.filter} setState={this.setState.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)}/>
+                <Search search={this.state.search} filter={this.state.filter} setState={this.setState.bind(this)}/>
+                {this.state.orders.length > 0 &&
+                    this.state.orders.map((order, key) => {
                         return (
                             <Card
                                 onClick={(order) => this.setState({ modifyOrder: order })}
@@ -71,13 +85,14 @@ export class Admin extends React.Component<props, state> {
                         )
                     })
                 }
-                {ordersByDept.length == 0 &&
+                {this.state.orders.length == 0 &&
                     <NoOrders />
                 }
                 {this.state.modifyOrder &&
                     <ModifyOrder
+                        setState={this.setState.bind(this)}
                         order={this.state.modifyOrder}
-                        closeView={() => this.setState({ modifyOrder: undefined })}
+                        closeView={() => this.setState({ modifyOrder: undefined, spinner: false })}
                         updateOrder={this.props.updateOrder.bind(this)}
                         errorMessage={this.props.errorMessage.bind(this)}
                     />

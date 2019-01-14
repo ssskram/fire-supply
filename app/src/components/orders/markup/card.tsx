@@ -46,7 +46,7 @@ export default class Orders extends React.Component<props, state> {
                             <div>{order.userName}</div>
                         </div>
                         <div className='col-md-3' style={style.paddingTen}>
-                            <div style={style.biggerFont}><b>House: {order.location}</b></div>
+                            <div style={style.biggerFont}><b>{order.location}</b></div>
                             <div>{countItems(order)} Items</div>
                             <div><i>{orderTypes(order)}</i></div>
                         </div>

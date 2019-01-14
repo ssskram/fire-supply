@@ -26,7 +26,7 @@ export const reducer: Reducer<types.messsage> = (state: types.messsage, incoming
     const action = incomingAction as any
     switch (action.type) {
         case constants.success:
-            return { ...state, message: "<b>Success!<b/><br/>Your order is in the works" }
+            return { ...state, message: "<b>Success!<b/>" }
         case constants.failure:
             return { ...state, message: "<b>Oops!<b/><br/>That didn't work<br/>Please log out, log back in, and try again" }
         case constants.clear:

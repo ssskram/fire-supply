@@ -14,6 +14,7 @@ type props = {
     closeView: () => void
     updateOrder: (newOrder) => boolean
     errorMessage: () => void
+    setState: (obj) => void
 }
 
 type state = types.order
@@ -50,6 +51,7 @@ export default class ModifyOrder extends React.Component<props, state> {
     }
 
     async saveOrder() {
+        this.props.setState({ spinner: true })
         const success = await this.props.updateOrder(this.state)
         if (success == true) this.props.closeView()
         else {
@@ -98,6 +100,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                     selectAllOnFocus={false}
                     autoFocus={false}
                     className='form-control'
+                    style={{ fontWeight: '600', color: '#a94442' }}
                     precision="0"
                     value={props.original.quantityReceived}
                     onChangeEvent={(e, m, f) => this.updateSupplies(f, props.original._id)}
@@ -182,7 +185,6 @@ export default class ModifyOrder extends React.Component<props, state> {
                     <hr />
                     <Fields state={this.state} setState={this.setState.bind(this)} />
                     <div className='col-md-12 text-center'>
-                        <button onClick={() => this.props.closeView()} className='btn btn-warning'>Discard changes</button>
                         <button onClick={this.saveOrder.bind(this)} className='btn btn-success'>Save</button>
                     </div>
                 </div>

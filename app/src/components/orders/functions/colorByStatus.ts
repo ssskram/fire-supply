@@ -1,18 +1,18 @@
 export default function colorByStatus(status) {
     if (status == "Order Submitted") {
-        return '#28a745' 
+        return 'rgba(40, 167, 69, .2)' 
     }
     if (status == "Approved") {
-        return '#17a2b8'
+        return 'rgba(23, 162, 184, .5)'
     }
     if (status == "Partially Approved") {
-        return '#17a2b8'
+        return 'rgba(23, 162, 184, .2)'
     }
     if (status == "Rejected") {
-        return '#dc3545'
+        return 'rgba(220, 53, 69, .5)'
     }
     if (status == "Pending Higher Approval") {
-        return '#ffc107'
+        return 'rgba(255, 193, 7, .2)'
     }
-    else return 'rgba(56, 56, 56, .8)' 
+    else return 'rgba(56, 56, 56, .5)' 
 }

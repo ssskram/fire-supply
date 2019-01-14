@@ -16,22 +16,21 @@ export default class SupplyFields extends React.Component<any, {}> {
                     onChange={status => this.props.setState({ status: status.value })}
                     multi={false}
                     options={selects.orderStatuses}
-                    required
                 />
                 <TextArea
                     value={this.props.state.supplyComments}
                     header="Comments"
                     placeholder="Visible to user as 'Supply Comments'"
                     callback={e => this.props.setState({ supplyComments: e.target.value })}
-                    required
                 />
-                <Input
-                    value={this.props.state.receivedBy}
-                    header="Order received by"
-                    placeholder="Assignment number"
-                    callback={e => this.props.setState({ receivedBy: e.target.value })}
-                    required
-                />
+                {this.props.state.status == 'Delivered' &&
+                    <Input
+                        value={this.props.state.receivedBy}
+                        header="Order received by"
+                        placeholder="Assignment number"
+                        callback={e => this.props.setState({ receivedBy: e.target.value })}
+                    />
+                }
             </div>
         )
     }
