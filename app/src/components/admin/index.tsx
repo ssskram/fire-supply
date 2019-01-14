@@ -36,7 +36,7 @@ export class Admin extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
-            orders: props.orders.filter(order => order.department == this.props.userProfile.department),
+            orders: props.orders.filter(order => order.department == props.userProfile.department),
             filter: 'all orders',
             search: '',
             spinner: false,
@@ -51,6 +51,9 @@ export class Admin extends React.Component<props, state> {
 
     componentWillReceiveProps(nextProps, nextState) {
         this.checkPermissions(nextProps.userProfile)
+        this.setState ({
+            orders: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),
+        })
     }
 
     checkPermissions(userProfile: types.userProfile) {
