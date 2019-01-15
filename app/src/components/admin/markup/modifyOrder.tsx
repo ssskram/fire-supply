@@ -146,28 +146,30 @@ export default class ModifyOrder extends React.Component<props, state> {
                         <a href={'mailto:' + user}>{user}</a>
                         {comments && <div><b>Comments: </b>"{comments}"</div>}
                         <div style={{ margin: '10px 0px' }}>
-                            <ReactTable
-                                data={supplies}
-                                columns={columns}
-                                loading={false}
-                                minRows={0}
-                                showPagination={false}
-                                showPageSizeOptions={false}
-                                noDataText=''
-                                getTdProps={() => ({
-                                    style: {
-                                        padding: '5px',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        fontSize: '12px'
-                                    }
-                                })}
-                            />
+                            {supplies.length > 0 &&
+                                <ReactTable
+                                    data={supplies}
+                                    columns={columns}
+                                    loading={false}
+                                    minRows={0}
+                                    showPagination={false}
+                                    showPageSizeOptions={false}
+                                    noDataText=''
+                                    getTdProps={() => ({
+                                        style: {
+                                            padding: '5px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'center',
+                                            fontSize: '12px'
+                                        }
+                                    })}
+                                />
+                            }
                         </div>
                         {miscItems &&
                             <div className='text-center' style={style.otherItems}>
-                                <b>Other items:</b><br />
+                                <b>Misc. items:</b><br />
                                 {miscItems}
                             </div>
                         }

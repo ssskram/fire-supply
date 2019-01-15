@@ -15,6 +15,10 @@ type props = {
 
 export default class ViewOrder extends React.Component<props, {}> {
 
+    componentDidMount() {
+        console.log(this.props)
+    }
+
     render() {
         const {
             order
@@ -90,38 +94,40 @@ export default class ViewOrder extends React.Component<props, {}> {
                         <a href={'mailto:' + order.user}>{order.user}</a>
                         {order.comments && <div><b>Comments: </b>"{order.comments}"</div>}
                         <div style={{ margin: '10px 0px' }}>
-                            <ReactTable
-                                data={order.supplies}
-                                columns={columns}
-                                loading={false}
-                                minRows={0}
-                                showPagination={false}
-                                showPageSizeOptions={false}
-                                noDataText=''
-                                getTdProps={() => ({
-                                    style: {
-                                        padding: '10px',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        fontSize: '12px'
-                                    }
-                                })}
-                            />
+                            {order.supplies.length > 0 &&
+                                <ReactTable
+                                    data={order.supplies}
+                                    columns={columns}
+                                    loading={false}
+                                    minRows={0}
+                                    showPagination={false}
+                                    showPageSizeOptions={false}
+                                    noDataText=''
+                                    getTdProps={() => ({
+                                        style: {
+                                            padding: '10px',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            justifyContent: 'center',
+                                            fontSize: '12px'
+                                        }
+                                    })}
+                                />
+                            }
                         </div>
                         {order.miscItems &&
                             <div className='text-center' style={style.otherItems}>
-                                <b>Other items:</b><br />
+                                <b>Misc. items:</b><br />
                                 {order.miscItems}
                             </div>
                         }
                         {doesOrderContainNarcan(order.supplies) &&
                             <div style={narcanContainer} className='text-center'>
                                 <b>NARCAN</b>
-                                <div>In posession of cases: <b>{order.narcanCases}</b></div>
+                                <div>In posession of cases: <b>{order.narcanCases.toString()}</b></div>
                                 {order.narcanAdministeredUnknown &&
                                     <div>
-                                        <div>Explanation for unknown amount administered:</div>
+                                        <div>Unknown amount administered:</div>
                                         <div><b>"{order.narcanAdministeredUnknown}"</b></div>
                                     </div>
                                 }
