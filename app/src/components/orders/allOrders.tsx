@@ -9,6 +9,8 @@ import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
 import Filters from './markup/filters'
+import { returnPageNumber, returnCurrentItems } from './functions/paging'
+import Paging from '../utilities/paging'
 
 type props = {
     orders: types.order[],
@@ -16,6 +18,7 @@ type props = {
 }
 
 type state = {
+    currentPage: number
     ordersByDept: types.order[]
     viewOrder: types.order
 }
@@ -24,6 +27,7 @@ export class AllOrders extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
+            currentPage: 1,
             ordersByDept: props.orders.filter(order => order.department == props.userProfile.department),
             viewOrder: undefined
         }
@@ -42,7 +46,19 @@ export class AllOrders extends React.Component<props, state> {
     }
 
     render() {
-        const { ordersByDept } = this.state
+        const { ordersByDept, currentPage } = this.state
+
+        const currentItems = returnCurrentItems(ordersByDept, currentPage)
+        const pageNumbers = returnPageNumber(ordersByDept)
+        const renderItems = currentItems.map((order, key) => {
+            return (
+                <Card
+                    onClick={(order) => this.setState({ viewOrder: order })}
+                    key={key}
+                    order={order}
+                />
+            )
+        })
 
         return (
             <div className='col-md-12'>
@@ -57,15 +73,25 @@ export class AllOrders extends React.Component<props, state> {
                     filter={this.filter.bind(this)}
                 />
                 {ordersByDept.length > 0 &&
-                    ordersByDept.map((order, key) => {
-                        return (
-                            <Card
-                                onClick={(order) => this.setState({ viewOrder: order })}
-                                key={key}
-                                order={order}
-                            />
-                        )
-                    })
+                    <div className='row'>
+                        {renderItems}
+                        <br />
+                        <br />
+                        <Paging
+                            count={ordersByDept}
+                            currentPage={currentPage}
+                            totalPages={pageNumbers}
+                            next={() => {
+                                window.scrollTo(0, 0)
+                                this.setState({ currentPage: this.state.currentPage + 1 })
+                            }}
+                            prev={() => {
+                                window.scrollTo(0, 0)
+                                this.setState({ currentPage: this.state.currentPage - 1 })
+                            }} />
+                        <br />
+                        <br />
+                    </div>
                 }
                 {ordersByDept.length == 0 &&
                     <NoOrders />

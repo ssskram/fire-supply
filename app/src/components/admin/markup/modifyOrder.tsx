@@ -176,10 +176,10 @@ export default class ModifyOrder extends React.Component<props, state> {
                         {doesOrderContainNarcan(supplies) &&
                             <div style={narcanContainer} className='text-center'>
                                 <b>NARCAN</b>
-                                <div>In posession of cases: <b>{narcanCases}</b></div>
+                                <div>In posession of cases: <b>{narcanCases.toString()}</b></div>
                                 {narcanAdministeredUnknown &&
                                     <div>
-                                        <div>Explanation for unknown amount administered:</div>
+                                        <div>Unknown amount administered:</div>
                                         <div><b>"{narcanAdministeredUnknown}"</b></div>
                                     </div>
                                 }

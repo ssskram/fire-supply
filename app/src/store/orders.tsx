@@ -10,7 +10,7 @@ const unloadedState: types.orders = {
 
 export const actionCreators = {
     loadOrders: (): AppThunkAction<any> => (dispatch) => {
-        fetch("https://mongo-proxy.azurewebsites.us/get/allOrders", {
+        fetch("http://localhost:3000/get/allOrders", {
             method: 'get',
             headers: new Headers({
                 'Authorization': 'Bearer ' + process.env.REACT_APP_MONGO
@@ -19,6 +19,7 @@ export const actionCreators = {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data)
                 dispatch({ type: constants.getOrders, orders: data })
             })
     },

@@ -14,6 +14,8 @@ import Messages from '../utilities/messages'
 import Spinner from '../utilities/spinner'
 import FilterButtons from './markup/filterButtons'
 import Search from './markup/search'
+import { returnPageNumber, returnCurrentItems } from '../orders/functions/paging'
+import Paging from '../utilities/paging'
 
 type props = {
     orders: types.order[],
@@ -24,6 +26,7 @@ type props = {
 }
 
 type state = {
+    currentPage: number
     orders: any[]
     filter: string
     search: string
@@ -36,6 +39,7 @@ export class Admin extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
+            currentPage: 1,
             orders: props.orders.filter(order => order.department == props.userProfile.department),
             filter: 'all orders',
             search: '',
@@ -103,6 +107,19 @@ export class Admin extends React.Component<props, state> {
     }
 
     render() {
+
+        const currentItems = returnCurrentItems(this.state.orders, this.state.currentPage)
+        const pageNumbers = returnPageNumber(this.state.orders)
+        const renderItems = currentItems.map((order, key) => {
+            return (
+                <Card
+                    onClick={(order) => this.setState({ modifyOrder: order })}
+                    key={key}
+                    order={order}
+                />
+            )
+        })
+
         if (this.state.redirect) {
             return <Redirect push to={'/'} />
         }
@@ -119,15 +136,25 @@ export class Admin extends React.Component<props, state> {
                 <FilterButtons filter={this.state.filter} setFilter={this.setFilter.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
                 <Search search={this.state.search} filter={this.state.filter} setSearch={this.setSearch.bind(this)} />
                 {this.state.orders.length > 0 &&
-                    this.state.orders.map((order, key) => {
-                        return (
-                            <Card
-                                onClick={(order) => this.setState({ modifyOrder: order })}
-                                key={key}
-                                order={order}
-                            />
-                        )
-                    })
+                    <div className='row'>
+                        {renderItems}
+                        <br />
+                        <br />
+                        <Paging
+                            count={this.state.orders}
+                            currentPage={this.state.currentPage}
+                            totalPages={pageNumbers}
+                            next={() => {
+                                window.scrollTo(0, 0)
+                                this.setState({ currentPage: this.state.currentPage + 1 })
+                            }}
+                            prev={() => {
+                                window.scrollTo(0, 0)
+                                this.setState({ currentPage: this.state.currentPage - 1 })
+                            }} />
+                        <br />
+                        <br />
+                    </div>
                 }
                 {this.state.orders.length == 0 &&
                     <NoOrders />

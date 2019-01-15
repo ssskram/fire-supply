@@ -11,6 +11,8 @@ import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
 import Filters from './markup/filters'
+import { returnPageNumber, returnCurrentItems } from './functions/paging'
+import Paging from '../utilities/paging'
 
 type props = {
     orders: types.order[]
@@ -20,6 +22,7 @@ type props = {
 }
 
 type state = {
+    currentPage: number
     myOrders: types.order[]
     viewOrder: types.order
 }
@@ -28,6 +31,7 @@ export class MyOrders extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
+            currentPage: 1,
             myOrders: props.orders.filter(order => {
                 return (order.user == props.user.email) && (order.department == props.userProfile.department)
             }),
@@ -54,7 +58,19 @@ export class MyOrders extends React.Component<props, state> {
     }
 
     render() {
-        const { myOrders } = this.state
+        const { myOrders, currentPage } = this.state
+
+        const currentItems = returnCurrentItems(myOrders, currentPage)
+        const pageNumbers = returnPageNumber(myOrders)
+        const renderItems = currentItems.map((order, key) => {
+            return (
+                <Card
+                    onClick={(order) => this.setState({ viewOrder: order })}
+                    key={key}
+                    order={order}
+                />
+            )
+        })
 
         return (
             <div className='col-md-12'>
@@ -64,22 +80,32 @@ export class MyOrders extends React.Component<props, state> {
                 </h3>
                 <hr />
                 <HydrateStore />
-                <Filters 
+                <Filters
                     orders={this.props.orders.filter(order => {
                         return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
                     })}
                     filter={this.filter.bind(this)}
                 />
                 {myOrders.length > 0 &&
-                    myOrders.map((order, key) => {
-                        return (
-                            <Card
-                                onClick={(order) => this.setState({ viewOrder: order })}
-                                key={key}
-                                order={order}
-                            />
-                        )
-                    })
+                    <div className='row'>
+                        {renderItems}
+                        <br />
+                        <br />
+                        <Paging
+                            count={myOrders}
+                            currentPage={currentPage}
+                            totalPages={pageNumbers}
+                            next={() => {
+                                window.scrollTo(0, 0)
+                                this.setState({ currentPage: this.state.currentPage + 1 })
+                            }}
+                            prev={() => {
+                                window.scrollTo(0, 0)
+                                this.setState({ currentPage: this.state.currentPage - 1 })
+                            }} />
+                        <br />
+                        <br />
+                    </div>
                 }
                 {myOrders.length == 0 &&
                     <NoOrders />
