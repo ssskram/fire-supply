@@ -38,8 +38,8 @@ export const panelBorder = {
 }
 
 export const otherItems = {
-    backgroundColor: 'rgba(2, 20, 50, .1)',
-    padding: '10px 0px',
+    backgroundColor: 'rgba(2, 20, 50, .05)',
+    padding: '10px 10px',
     margin: '10px 0px',
     borderRadius: '5px'
 }

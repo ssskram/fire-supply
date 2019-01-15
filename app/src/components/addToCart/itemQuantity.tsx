@@ -4,7 +4,7 @@ import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as userProfile from '../../store/userProfile'
 import * as style from './style'
-import Number from '../formElements/numbers'
+import Number from 'react-currency-input'
 
 type props = {
     quantity: number
@@ -32,6 +32,10 @@ export class UpdateQuantity extends React.Component<props, state> {
             this.setState({
                 limitExceeded: true
             })
+        } else if (value < 0) {
+            this.setState({
+                newQuantity: 0
+            })
         } else {
             this.setState({
                 limitExceeded: false,
@@ -46,6 +50,14 @@ export class UpdateQuantity extends React.Component<props, state> {
             quantity: this.state.newQuantity
         }
         this.props.returnQuantity(cartItem)
+    }
+
+    plusOne() {
+        this.handleLimit(this.state.newQuantity + 1)
+    }
+
+    minusOne() {
+        this.handleLimit(this.state.newQuantity - 1)
     }
 
     render() {
@@ -69,12 +81,23 @@ export class UpdateQuantity extends React.Component<props, state> {
                     </div>
                 }
                 <div className='row' style={style.inputWidth}>
-                    <Number
-                        value={newQuantity}
-                        header=""
-                        prefix=""
-                        callback={(e, m, f) => this.handleLimit(f)}
-                    />
+                    <div className='col-xs-3'>
+                        <button onClick={this.minusOne.bind(this)} className='btn'><span className='glyphicon glyphicon-minus'></span></button>
+                    </div>
+                    <div className='col-xs-6'>
+                        <Number
+                            type='search'
+                            value={newQuantity}
+                            selectAllOnFocus={false}
+                            autoFocus={false}
+                            className='form-control'
+                            precision="0"
+                            onChangeEvent={(e, m, f) => this.handleLimit(f)}
+                        />
+                    </div>
+                    <div className='col-xs-3'>
+                        <button onClick={this.plusOne.bind(this)} className='btn'><span className='glyphicon glyphicon-plus'></span></button>
+                    </div>
                 </div>
                 <button className='btn btn-success' onClick={this.returnQuantity.bind(this)}>{type}</button>
             </div>

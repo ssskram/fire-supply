@@ -32,7 +32,7 @@ export class AddToCart extends React.Component<any, state> {
         let newCart = this.props.userProfile.cart
         newCart.push(cartItem)
         const newUserProfile = {
-            user: this.props.user.email, 
+            user: this.props.user.email,
             cart: newCart
         }
         this.props.updateCart(newUserProfile)
@@ -53,8 +53,7 @@ export class AddToCart extends React.Component<any, state> {
         return (
             <div>
                 <button onClick={() => this.setState({ setQuantity: true })} className='btn btn-success' title='Add to cart'>
-                    <span style={Style.addToCart} className='glyphicon glyphicon-plus'></span>
-                    Cart
+                    <span className='glyphicon glyphicon-plus' style={{ marginRight: '-2px' }}></span>
                 </button>
                 {setQuantity &&
                     <Modal

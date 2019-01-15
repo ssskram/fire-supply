@@ -54,7 +54,7 @@ export default class Orders extends React.Component<props, state> {
                             <div style={{ alignSelf: 'center' }}>
                                 <div>Order #{lastSix}</div>
                                 <div style={style.smallerFont}>Status</div>
-                                <div style={style.biggerFont}><b>{order.status}</b></div>
+                                <div style={style.biggerFont}><b style={{ textTransform: 'uppercase' }}>{order.status}</b></div>
                             </div>
                         </div>
                     </div>

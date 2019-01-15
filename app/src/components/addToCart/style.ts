@@ -3,11 +3,8 @@ export const modalClasses = {
     modal: 'custom-modal'
 }
 
-export const addToCart = {
-    marginRight: '5px'
-}
-
 export const inputWidth = {
-    maxWidth: '100px',
+    maxWidth: '250px',
+    padding: '15px 0px',
     margin: '0 auto'
 }

@@ -55,9 +55,9 @@ export default class ViewOrder extends React.Component<props, {}> {
                         <h4 style={style.viewOrderHeader}>
                             {order.department}
                         </h4>
-                        <h4>
-                            <b>House {order.location}</b>
-                        </h4>
+                        <h5>
+                            <b>{order.location}</b>
+                        </h5>
                         {order.emergencyOrder &&
                             <div style={{ marginBottom: '5px' }} className='alert alert-danger'>
                                 <b>EMERGENCY ORDER</b><br />
@@ -80,6 +80,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                         <hr />
                     </div>
                     <div>
+                        <h4 className='text-center'>ORDER DETAILS</h4>
                         <div>
                             <span className='pull-left'>{order._id && <div>Order #{order._id.substr(order._id.length - 6)}</div>}</span>
                             <span className='pull-right'>{moment(order.createdAt).format('MM/DD/YYYY hh:mm A')}</span>

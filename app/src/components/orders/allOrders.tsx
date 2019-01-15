@@ -31,7 +31,10 @@ export class AllOrders extends React.Component<props, state> {
 
         return (
             <div className='col-md-12'>
-                <h3>{this.props.userProfile.department}</h3>
+                <h3>
+                    <b>ALL ORDERS</b>
+                    <span className='pull-right'>{this.props.userProfile.department}</span>
+                </h3>
                 <hr />
                 <HydrateStore />
                 {ordersByDept.length > 0 &&

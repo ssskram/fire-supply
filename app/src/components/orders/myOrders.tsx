@@ -42,9 +42,11 @@ export class MyOrders extends React.Component<props, state> {
 
         return (
             <div className='col-md-12'>
-                <h3>My Orders</h3>
+                <h3>
+                    <b>MY ORDERS</b>
+                    <span className='pull-right'>{this.props.userProfile.department}</span>
+                </h3>
                 <hr />
-                <Messages />
                 <HydrateStore />
                 {myOrders.length > 0 &&
                     myOrders.map((order, key) => {

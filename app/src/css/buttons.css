@@ -79,8 +79,9 @@ fieldset[disabled] .btn {
 }
 
 .btn-filter {
-    margin: 5px 10px;
-    font-size: 1.5em
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .btn-filter:hover,
@@ -90,9 +91,9 @@ fieldset[disabled] .btn {
 }
 
 .red {
-    background-color: #d9534f;
+    background-color: rgba(217, 83, 79, .5);
 }
 
 .orange {
-    background-color: #f0ad4e;
+    background-color: rgba(240, 173, 78, .4);
 }
