@@ -45,7 +45,7 @@ export class Cart extends React.Component<props, state> {
 
     increaseQuantity(item) {
         const cartCopy = this.state.cart
-        const itemIndex = cartCopy.findIndex(i => i._id == item._id)
+        const itemIndex = cartCopy.findIndex(i => i.item.cartegraphID == item.item.cartegraphID)
         if (cartCopy[itemIndex].quantity + 1 > 44) {
             this.setState({ limitExceeded: true })
         } else {
@@ -56,7 +56,7 @@ export class Cart extends React.Component<props, state> {
 
     decreaseQuantity(item) {
         const cartCopy = this.state.cart
-        const itemIndex = cartCopy.findIndex(i => i._id == item._id)
+        const itemIndex = cartCopy.findIndex(i => i.item.cartegraphID == item.item.cartegraphID)
         if (cartCopy[itemIndex].quantity - 1 < 1) {
             this.deleteItem(item)
         } else {

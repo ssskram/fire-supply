@@ -91,9 +91,9 @@ fieldset[disabled] .btn {
 }
 
 .red {
-    background-color: rgba(217, 83, 79, .5);
+    background-color: rgba(217, 83, 79, .8);
 }
 
 .orange {
-    background-color: rgba(240, 173, 78, .4);
+    background-color: rgba(240, 173, 78, .8);
 }
