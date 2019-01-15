@@ -50,7 +50,7 @@ export interface order {
     status: string
     supplyComments: string
     receivedBy: string
-    createdAt: string
+    createdAt: Date
     _v: number
 }
 export interface supplyItem {
