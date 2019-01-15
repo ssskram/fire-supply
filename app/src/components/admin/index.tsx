@@ -66,6 +66,42 @@ export class Admin extends React.Component<props, state> {
         this.props.clearMessage()
     }
 
+    setFilter(filter) {
+        this.setState({ filter: filter }, () => this.runFilter())
+    }
+
+    setSearch(search) {
+        this.setState({ search: search }, () => this.runFilter())
+    }
+
+    runFilter() {
+        const filtered = this.props.orders
+            .filter(order => order.department == this.props.userProfile.department)
+            .filter(order => {
+                if (this.state.filter == 'emergency orders') {
+                    if (!order.emergencyOrder == true) {
+                        return false
+                    }
+                }
+                if (this.state.filter == 'open orders') {
+                    if (order.status == 'Delivered' || order.status == 'Rejected') {
+                        return false
+                    }
+                }
+                if (this.state.search) {
+                    if (
+                        !order.location.toLowerCase().includes(this.state.search.toLowerCase()) &&
+                        !order.userName.toLowerCase().includes(this.state.search.toLowerCase()) &&
+                        !order.status.toLowerCase().includes(this.state.search.toLowerCase())
+                    ) return false
+                }
+                return true
+            })
+        this.setState({
+            orders: filtered
+        })
+    }
+
     render() {
         if (this.state.redirect) {
             return <Redirect push to={'/'} />
@@ -80,8 +116,8 @@ export class Admin extends React.Component<props, state> {
                 <Messages />
                 <h3><b>SUPPLY WAREHOUSE</b> <span style={{ textTransform: 'uppercase' }} className='pull-right'>{this.props.userProfile.department}</span></h3>
                 <hr />
-                <FilterButtons filter={this.state.filter} setState={this.setState.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
-                <Search search={this.state.search} filter={this.state.filter} setState={this.setState.bind(this)} />
+                <FilterButtons filter={this.state.filter} setFilter={this.setFilter.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
+                <Search search={this.state.search} filter={this.state.filter} setSearch={this.setSearch.bind(this)} />
                 {this.state.orders.length > 0 &&
                     this.state.orders.map((order, key) => {
                         return (
