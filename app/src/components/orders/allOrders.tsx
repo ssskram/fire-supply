@@ -8,6 +8,7 @@ import * as userProfile from '../../store/userProfile'
 import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
+import Filters from './markup/filters'
 
 type props = {
     orders: types.order[],
@@ -15,6 +16,7 @@ type props = {
 }
 
 type state = {
+    ordersByDept: types.order[]
     viewOrder: types.order
 }
 
@@ -22,12 +24,25 @@ export class AllOrders extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
+            ordersByDept: props.orders.filter(order => order.department == props.userProfile.department),
             viewOrder: undefined
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            ordersByDept: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),
+        })
+    }
+
+    filter(filteredOrders) {
+        this.setState({
+            ordersByDept: filteredOrders
+        })
+    }
+
     render() {
-        const ordersByDept = this.props.orders.filter(order => order.department == this.props.userProfile.department)
+        const { ordersByDept } = this.state
 
         return (
             <div className='col-md-12'>
@@ -37,6 +52,10 @@ export class AllOrders extends React.Component<props, state> {
                 </h3>
                 <hr />
                 <HydrateStore />
+                <Filters
+                    orders={this.props.orders.filter(order => order.department == this.props.userProfile.department)}
+                    filter={this.filter.bind(this)}
+                />
                 {ordersByDept.length > 0 &&
                     ordersByDept.map((order, key) => {
                         return (

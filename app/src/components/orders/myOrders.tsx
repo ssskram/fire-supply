@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Messages from '../utilities/messages'
 import HydrateStore from '../utilities/hydrateStore'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
@@ -11,6 +10,7 @@ import * as userProfile from '../../store/userProfile'
 import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
+import Filters from './markup/filters'
 
 type props = {
     orders: types.order[]
@@ -20,6 +20,7 @@ type props = {
 }
 
 type state = {
+    myOrders: types.order[]
     viewOrder: types.order
 }
 
@@ -27,6 +28,9 @@ export class MyOrders extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
+            myOrders: props.orders.filter(order => {
+                return (order.user == props.user.email) && (order.department == props.userProfile.department)
+            }),
             viewOrder: undefined
         }
     }
@@ -35,10 +39,22 @@ export class MyOrders extends React.Component<props, state> {
         this.props.clearMessage()
     }
 
-    render() {
-        const myOrders = this.props.orders.filter(order => {
-            return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            myOrders: nextProps.orders.filter(order => {
+                return (order.user == nextProps.user.email) && (order.department == nextProps.userProfile.department)
+            })
         })
+    }
+
+    filter(filteredOrders) {
+        this.setState({
+            myOrders: filteredOrders
+        })
+    }
+
+    render() {
+        const { myOrders } = this.state
 
         return (
             <div className='col-md-12'>
@@ -48,6 +64,12 @@ export class MyOrders extends React.Component<props, state> {
                 </h3>
                 <hr />
                 <HydrateStore />
+                <Filters 
+                    orders={this.props.orders.filter(order => {
+                        return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
+                    })}
+                    filter={this.filter.bind(this)}
+                />
                 {myOrders.length > 0 &&
                     myOrders.map((order, key) => {
                         return (
