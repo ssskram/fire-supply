@@ -27,7 +27,7 @@ export class Submit extends React.Component<any, any> {
     render() {
         return (
             <div className='text-center'>
-                <button onClick={this.submitIt.bind(this)} className='btn btn-success'>Submit</button>
+                <button disabled={!this.props.isEnabled} onClick={this.submitIt.bind(this)} className='btn btn-success'>Submit</button>
                 {this.state.redirect && 
                     <Redirect push to={'MyOrders'} />
                 }

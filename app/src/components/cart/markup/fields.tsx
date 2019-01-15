@@ -28,9 +28,9 @@ export class FormFields extends React.Component<any, any> {
             location: undefined,
             miscItems: undefined,
             comments: undefined,
-            emergencyOrder: false,
+            emergencyOrder: undefined,
             emergencyJustification: undefined,
-            narcanCases: true,
+            narcanCases: undefined,
             narcanAdministeredUnknown: undefined
         }
     }
@@ -84,6 +84,10 @@ export class FormFields extends React.Component<any, any> {
             narcanAdministeredUnknown
         } = this.state
 
+        const containsNarcan = doesOrderContainNarcan(this.props.userProfile.cart)
+        let isEnabled = location && emergencyOrder
+        if (containsNarcan) isEnabled = narcanCases
+
         return (
             <Modal
                 open={true}
@@ -96,7 +100,7 @@ export class FormFields extends React.Component<any, any> {
                 center>
                 <div className='col-md-12'>
                     <h4 className='text-center'><b>COMPLETE ORDER</b></h4>
-                    {doesOrderContainNarcan(this.props.userProfile.cart) &&
+                    {containsNarcan &&
                         <div className='col-md-12' style={style.narcanContainer}>
                             <h5 className='text-center'><b>NARCAN</b></h5>
                             <Select
@@ -131,7 +135,7 @@ export class FormFields extends React.Component<any, any> {
                         placeholder="Couldn't find what you were looking for?"
                         callback={e => this.setState({ miscItems: e.target.value })}
                     />
-                    <div className='col-md-12' style={emergencyOrder.value ? style.emergencyColor : style.emergencyContainer}>
+                    <div className='col-md-12' style={emergencyOrder && emergencyOrder.value ? style.emergencyColor : style.emergencyContainer}>
                         <Select
                             value={emergencyOrder}
                             header='Is this an emergency?'
@@ -141,12 +145,13 @@ export class FormFields extends React.Component<any, any> {
                             options={selects.YesNo}
                             required
                         />
-                        {emergencyOrder.value &&
+                        {emergencyOrder && emergencyOrder.value &&
                             <TextArea
                                 value={emergencyJustification}
                                 header="Emergency Justification"
                                 placeholder="Please explain why this is an emergency"
                                 callback={e => this.setState({ emergencyJustification: e.target.value })}
+                                required
                             />
                         }
                     </div>
@@ -157,6 +162,7 @@ export class FormFields extends React.Component<any, any> {
                         callback={e => this.setState({ comments: e.target.value })}
                     />
                     <SubmitIt
+                        isEnabled={isEnabled}
                         submitIt={this.placeOrder.bind(this)}
                         closeForm={() => this.props.closeForm()}
                     />
