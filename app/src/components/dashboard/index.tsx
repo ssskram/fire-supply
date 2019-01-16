@@ -5,12 +5,14 @@ import { ApplicationState } from '../../store'
 import * as items from '../../store/items'
 import * as orders from '../../store/orders'
 import * as types from '../../store/types'
-import ScatterPlot from './scatter'
+import * as userProfile from '../../store/userProfile'
+import ScatterPlot from './plot'
 import Filters from './filters'
 
 type props = {
     items: types.item[]
     orders: types.order[]
+    userProfile: types.userProfile
 }
 
 type state = {
@@ -31,14 +33,19 @@ export class Dashbard extends React.Component<props, state> {
         return (
             <div>
                 <HydrateStore />
-                <h3 style={{ textTransform: 'uppercase' }}>Toilet Paper Dashboard</h3>
+                <h3 style={{ textTransform: 'uppercase' }}>{this.state.item} Dashboard</h3>
                 <hr />
                 <Filters
                     state={this.state}
                     setState={this.setState.bind(this)}
                     items={this.props.items}
                 />
-                <ScatterPlot orders={this.props.orders} />
+                <ScatterPlot
+                    orders={this.props.orders.filter(order => order.department == this.props.userProfile.department)}
+                    items={this.props.items}
+                    recipient={this.state.recipient}
+                    item={this.state.item}
+                />
             </div>
         )
     }
@@ -47,10 +54,12 @@ export class Dashbard extends React.Component<props, state> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.orders,
-        ...state.items
+        ...state.items,
+        ...state.userProfile
     }),
     ({
         ...orders.actionCreators,
-        ...items.actionCreators
+        ...items.actionCreators,
+        ...userProfile.actionCreators
     })
 )(Dashbard as any)

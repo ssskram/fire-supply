@@ -12,15 +12,20 @@ type props = {
 export default class Filters extends React.Component<props, {}> {
 
     render() {
-
         let itemDropdowns = [] as any
         this.props.items.forEach(item => {
-            const select = { value: item.itemName, label: item.itemName }
-            itemDropdowns.push(select)
+            if (item.itemType != 'Medicine' && item.itemType != 'Equipment') {
+                const select = { value: item.itemName, label: item.itemName }
+                itemDropdowns.push(select)
+            }
         })
 
+        const isEnabled = 
+            this.props.state.recipient ||
+            this.props.state.item != "Toilet Paper"
+
         return (
-            <div className='row'>
+            <div className='row' style={{marginBottom: '15px'}}>
                 <div className='col-md-5'>
                     <Select
                         value={{ value: this.props.state.item, label: this.props.state.item }}
@@ -41,8 +46,8 @@ export default class Filters extends React.Component<props, {}> {
                         options={hs.FireHouses}
                     />
                 </div>
-                <div className='col-md-2'>
-                    <button disabled={!this.props.state.recipient} className='btn btn-warning' onClick={() => this.props.setState({ item: 'Toilet Paper', recipient: undefined})} style={{ width: '90%' }}>Clear</button>
+                <div className='col-md-2 text-center'>
+                    <button disabled={!isEnabled} className='btn btn-warning' onClick={() => this.props.setState({ item: 'Toilet Paper', recipient: undefined })} style={{ width: '90%' }}>Clear</button>
                 </div>
             </div>
         )
