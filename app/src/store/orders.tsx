@@ -18,10 +18,7 @@ export const actionCreators = {
 
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                dispatch({ type: constants.getOrders, orders: data })
-            })
+            .then(data => dispatch({ type: constants.getOrders, orders: data }))
     },
     newOrder: (order): AppThunkAction<any> => async (dispatch) => {
         const response = await fetch('https://mongo-proxy.azurewebsites.us/save/newOrder', {

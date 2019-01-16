@@ -21,7 +21,7 @@ export class Menu extends React.Component<props, {}> {
             <div className='nav-container'>
                 {this.props.userProfile.department != '...loading' &&
                     <Link to={'/'} >
-                        <button className='btn btn-success nav-button'>
+                        <button className='btn btn-secondary nav-button'>
                             <div>Shop {this.props.userProfile.department}</div>
                         </button>
                     </Link>
@@ -36,7 +36,7 @@ export class Menu extends React.Component<props, {}> {
                         <img src={allOrders as string} className='img-responsive center-block' />
                     </button>
                 </Link>
-                <Link to={'/'}>
+                <Link to={'/Dashboard'}>
                     <button className='btn btn-primary nav-button'>
                         <img src={tp as string} className='img-responsive center-block' />
                     </button>

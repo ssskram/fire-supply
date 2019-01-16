@@ -15,10 +15,6 @@ type props = {
 
 export default class ViewOrder extends React.Component<props, {}> {
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     render() {
         const {
             order

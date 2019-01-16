@@ -23,10 +23,6 @@ class Hydrate extends React.Component<props, {}> {
         this.props.loadOrders()
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-    }
-
     public render() { return null }
 }
 
