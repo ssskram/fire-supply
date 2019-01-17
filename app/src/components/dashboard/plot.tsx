@@ -17,6 +17,7 @@ type props = {
 type state = {
     data: any[]
     colors: any[]
+    hoverHouse: string
     selectedOrder: types.order
     countXTicks: number
     plotWidth: number
@@ -29,6 +30,7 @@ export default class ScatterPlot extends React.Component<props, state> {
         this.state = {
             data: undefined,
             colors: undefined,
+            hoverHouse: undefined,
             selectedOrder: undefined,
             plotWidth: 0,
             countXTicks: 0
@@ -55,7 +57,7 @@ export default class ScatterPlot extends React.Component<props, state> {
     }
 
     setData(orders) {
-        let dataArr: any = this.props.orders.map((o) => {
+        let dataArr: any = orders.map((o) => {
             const color = this.state.colors.find(color => color.location == o.location)
             if (o.supplies.some(i => i.item.itemName == this.props.item)) {
                 return {
@@ -84,7 +86,7 @@ export default class ScatterPlot extends React.Component<props, state> {
                         y: o.y,
                         h: o.y,
                         color: o.color,
-                        order: o.o
+                        order: o.order
                     }
                 } else {
                     return {
@@ -92,7 +94,7 @@ export default class ScatterPlot extends React.Component<props, state> {
                         y: 0,
                         h: o.y,
                         color: o.color,
-                        order: o.o
+                        order: o.order
                     }
                 }
             })
@@ -123,26 +125,30 @@ export default class ScatterPlot extends React.Component<props, state> {
     hoverColor(house) {
         let indexes = [] as any
         this.state.data.forEach((point, index) => {
-            if (point.order.location == house) indexes.push(index)
+            if (point.order) {
+                if (point.order.location == house) indexes.push(index)
+            }
         })
         let dataCopy = this.state.data
         indexes.forEach(i => {
             dataCopy[i].color = 'black'
         })
-        this.setState({ data: dataCopy })
+        this.setState({ data: dataCopy, hoverHouse: house })
     }
 
     returnColor(house) {
         let indexes = [] as any
         this.state.data.forEach((point, index) => {
-            if (point.order.location == house) indexes.push(index)
+            if (point.order) {
+                if (point.order.location == house) indexes.push(index)
+            }
         })
         let dataCopy = this.state.data
         const colorRecord = this.state.colors.find(color => color.location == house)
         indexes.forEach(i => {
             dataCopy[i].color = colorRecord.color
         })
-        this.setState({ data: dataCopy })
+        this.setState({ data: dataCopy, hoverHouse: undefined })
     }
 
     render() {
@@ -152,6 +158,9 @@ export default class ScatterPlot extends React.Component<props, state> {
         return (
             <div className='panel'>
                 <div ref={this.ref} className='panel-body'>
+                    {this.state.hoverHouse &&
+                        <div className='chartHoverLabel'>{this.state.hoverHouse}</div>
+                    }
                     {this.state.data &&
                         <div>
                             {this.state.data.length == 0 && this.props.orders.length == 0 &&
@@ -177,6 +186,7 @@ export default class ScatterPlot extends React.Component<props, state> {
                                 <VerticalBarSeries
                                     colorType="literal"
                                     data={this.state.data}
+                                    barWidth={2}
                                     onValueClick={(dp, event) => {
                                         this.setState({ selectedOrder: dp.order })
                                     }}
