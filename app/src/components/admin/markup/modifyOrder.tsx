@@ -6,6 +6,7 @@ import * as moment from 'moment'
 import ReactTable from "react-table"
 import { narcanContainer } from '../../cart/style'
 import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
+import doesOrderContainEquipment from '../../cart/functions/doesOrderContainEquipment'
 import Fields from './fields'
 import Number from 'react-currency-input'
 
@@ -33,6 +34,7 @@ export default class ModifyOrder extends React.Component<props, state> {
             emergencyJustification: props.order.emergencyJustification,
             narcanCases: props.order.narcanCases,
             narcanAdministeredUnknown: props.order.narcanAdministeredUnknown,
+            equipmentJustification: props.order.equipmentJustification,
             miscItems: props.order.miscItems,
             supplies: props.order.supplies,
             status: props.order.status,
@@ -74,6 +76,7 @@ export default class ModifyOrder extends React.Component<props, state> {
             miscItems,
             narcanCases,
             narcanAdministeredUnknown,
+            equipmentJustification,
             supplies
         } = this.state
 
@@ -183,6 +186,15 @@ export default class ModifyOrder extends React.Component<props, state> {
                                         <div><b>"{narcanAdministeredUnknown}"</b></div>
                                     </div>
                                 }
+                            </div>
+                        }
+                        {doesOrderContainEquipment(supplies) &&
+                            <div style={narcanContainer} className='text-center'>
+                                <b>EQUIPMENT</b>
+                                <div>
+                                    <div>Equipment Justification:</div>
+                                    <div>"{equipmentJustification}"</div>
+                                </div>
                             </div>
                         }
                     </div>

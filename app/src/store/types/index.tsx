@@ -45,6 +45,7 @@ export interface order {
     emergencyJustification: string
     narcanCases: boolean
     narcanAdministeredUnknown: string
+    equipmentJustification: string
     miscItems: string
     supplies: supplyItem[]
     status: string

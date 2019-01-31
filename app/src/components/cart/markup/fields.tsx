@@ -12,6 +12,7 @@ import * as selects from './selects'
 import SubmitIt from './submit'
 import * as style from '../style'
 import doesOrderContainNarcan from '../functions/doesOrderContainNarcan'
+import doesOrderContainEquipment from '../functions/doesOrderContainEquipment'
 
 type props = {
     user: types.user
@@ -31,7 +32,8 @@ export class FormFields extends React.Component<any, any> {
             emergencyOrder: undefined,
             emergencyJustification: undefined,
             narcanCases: undefined,
-            narcanAdministeredUnknown: undefined
+            narcanAdministeredUnknown: undefined,
+            equipmentJustification: undefined
         }
     }
 
@@ -59,6 +61,7 @@ export class FormFields extends React.Component<any, any> {
             emergencyJustification: this.state.emergencyJustification,
             narcanCases: this.state.narcanCases ? this.state.narcanCases.value : undefined,
             narcanAdministeredUnknown: this.state.narcanAdministeredUnknown,
+            equipmentJustification: this.state.equipmentJustification,
             miscItems: this.state.miscItems,
             status: 'Order Submitted',
             supplies: items
@@ -81,12 +84,15 @@ export class FormFields extends React.Component<any, any> {
             emergencyOrder,
             emergencyJustification,
             narcanCases,
-            narcanAdministeredUnknown
+            narcanAdministeredUnknown,
+            equipmentJustification
         } = this.state
 
+        const containsEquipment = doesOrderContainEquipment(this.props.userProfile.cart)
         const containsNarcan = doesOrderContainNarcan(this.props.userProfile.cart)
         let isEnabled = location && emergencyOrder
         if (containsNarcan) isEnabled = narcanCases
+        if (containsEquipment) isEnabled = equipmentJustification
 
         return (
             <Modal
@@ -117,6 +123,17 @@ export class FormFields extends React.Component<any, any> {
                                 header="If amount administered is unknown, please explain why"
                                 placeholder="Explanation"
                                 callback={e => this.setState({ narcanAdministeredUnknown: e.target.value })}
+                            />
+                        </div>
+                    }
+                    {containsEquipment &&
+                        <div className='col-md-12' style={style.narcanContainer}>
+                            <h5 className='text-center'><b>EQUIPMENT</b></h5>
+                            <TextArea
+                                value={equipmentJustification}
+                                header="Justify equipment request"
+                                placeholder="Equipment justification"
+                                callback={e => this.setState({ equipmentJustification: e.target.value })}
                             />
                         </div>
                     }

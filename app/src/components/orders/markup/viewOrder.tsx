@@ -6,6 +6,7 @@ import * as moment from 'moment'
 import ReactTable from "react-table"
 import { narcanContainer } from '../../cart/style'
 import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
+import doesOrderContainEquipment from '../../cart/functions/doesOrderContainEquipment'
 import getColorByStatus from '../functions/colorByStatus'
 
 type props = {
@@ -127,6 +128,15 @@ export default class ViewOrder extends React.Component<props, {}> {
                                         <div><b>"{order.narcanAdministeredUnknown}"</b></div>
                                     </div>
                                 }
+                            </div>
+                        }
+                        {doesOrderContainEquipment(order.supplies) &&
+                            <div style={narcanContainer} className='text-center'>
+                                <b>EQUIPMENT</b>
+                                <div>
+                                    <div>Equipment justification</div>
+                                    <div>"{order.equipmentJustification}"</div>
+                                </div>
                             </div>
                         }
                     </div>
