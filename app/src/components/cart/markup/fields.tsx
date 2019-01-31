@@ -161,13 +161,13 @@ export class FormFields extends React.Component<any, any> {
                             />
                         </div>
                     }
-                    {containsEquipment &&
+                    {containsEquipment.check &&
                         <div className='col-md-12' style={style.equipmentContainer}>
                             <h5 className='text-center'><b>JUSTIFY EQUIPMENT</b></h5>
                             <TextArea
                                 value={equipmentJustification}
                                 header=""
-                                placeholder="Equipment justification"
+                                placeholder={"Justify " + containsEquipment.items}
                                 callback={e => this.setState({ equipmentJustification: e.target.value })}
                             />
                         </div>
