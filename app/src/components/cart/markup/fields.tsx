@@ -57,7 +57,7 @@ export class FormFields extends React.Component<any, any> {
             comments: this.state.comments,
             emergencyOrder: this.state.emergencyOrder.value,
             emergencyJustification: this.state.emergencyJustification,
-            narcanCases: this.state.narcanCases.value,
+            narcanCases: this.state.narcanCases ? this.state.narcanCases.value : undefined,
             narcanAdministeredUnknown: this.state.narcanAdministeredUnknown,
             miscItems: this.state.miscItems,
             status: 'Order Submitted',
