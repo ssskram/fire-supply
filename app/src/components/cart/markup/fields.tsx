@@ -106,37 +106,6 @@ export class FormFields extends React.Component<any, any> {
                 center>
                 <div className='col-md-12'>
                     <h4 className='text-center'><b>COMPLETE ORDER</b></h4>
-                    {containsNarcan &&
-                        <div className='col-md-12' style={style.narcanContainer}>
-                            <h5 className='text-center'><b>NARCAN</b></h5>
-                            <Select
-                                value={narcanCases}
-                                header='Do you have the cases?'
-                                placeholder='Yes or no'
-                                onChange={narcanCases => this.setState({ narcanCases })}
-                                multi={false}
-                                options={selects.YesNo}
-                                required
-                            />
-                            <TextArea
-                                value={narcanAdministeredUnknown}
-                                header="If amount administered is unknown, please explain why"
-                                placeholder="Explanation"
-                                callback={e => this.setState({ narcanAdministeredUnknown: e.target.value })}
-                            />
-                        </div>
-                    }
-                    {containsEquipment &&
-                        <div className='col-md-12' style={style.narcanContainer}>
-                            <h5 className='text-center'><b>EQUIPMENT</b></h5>
-                            <TextArea
-                                value={equipmentJustification}
-                                header="Justify equipment request"
-                                placeholder="Equipment justification"
-                                callback={e => this.setState({ equipmentJustification: e.target.value })}
-                            />
-                        </div>
-                    }
                     <Select
                         value={location}
                         header='Select location for delivery'
@@ -172,6 +141,37 @@ export class FormFields extends React.Component<any, any> {
                             />
                         }
                     </div>
+                    {containsNarcan &&
+                        <div className='col-md-12' style={style.narcanContainer}>
+                            <h5 className='text-center'><b>NARCAN</b></h5>
+                            <Select
+                                value={narcanCases}
+                                header='Do you have the cases?'
+                                placeholder='Yes or no'
+                                onChange={narcanCases => this.setState({ narcanCases })}
+                                multi={false}
+                                options={selects.YesNo}
+                                required
+                            />
+                            <TextArea
+                                value={narcanAdministeredUnknown}
+                                header="If amount administered is unknown, please explain why"
+                                placeholder="Explanation"
+                                callback={e => this.setState({ narcanAdministeredUnknown: e.target.value })}
+                            />
+                        </div>
+                    }
+                    {containsEquipment &&
+                        <div className='col-md-12' style={style.equipmentContainer}>
+                            <h5 className='text-center'><b>JUSTIFY EQUIPMENT</b></h5>
+                            <TextArea
+                                value={equipmentJustification}
+                                header=""
+                                placeholder="Equipment justification"
+                                callback={e => this.setState({ equipmentJustification: e.target.value })}
+                            />
+                        </div>
+                    }
                     <TextArea
                         value={comments}
                         header="Additional comments"

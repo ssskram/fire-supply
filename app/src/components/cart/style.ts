@@ -11,6 +11,13 @@ export const narcanContainer = {
     borderRadius: '5px'
 }
 
+export const equipmentContainer = {
+    backgroundColor: 'rgba(90, 139, 36, .1)',
+    padding: '10px 0px',
+    margin: '10px 0px',
+    borderRadius: '5px'
+}
+
 export const emergencyContainer = {
     padding: '0px 0px',
     borderRadius: '5px',

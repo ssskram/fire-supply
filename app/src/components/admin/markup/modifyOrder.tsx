@@ -4,7 +4,7 @@ import * as types from '../../../store/types'
 import * as style from '../../orders/style'
 import * as moment from 'moment'
 import ReactTable from "react-table"
-import { narcanContainer } from '../../cart/style'
+import { narcanContainer, equipmentContainer } from '../../cart/style'
 import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
 import doesOrderContainEquipment from '../../cart/functions/doesOrderContainEquipment'
 import Fields from './fields'
@@ -179,17 +179,17 @@ export default class ModifyOrder extends React.Component<props, state> {
                         {doesOrderContainNarcan(supplies) &&
                             <div style={narcanContainer} className='text-center'>
                                 <b>NARCAN</b>
-                                <div>In posession of cases: <b>{narcanCases.toString()}</b></div>
+                                <div><b>In posession of cases: </b>{narcanCases.toString()}</div>
                                 {narcanAdministeredUnknown &&
                                     <div>
-                                        <div>Unknown amount administered:</div>
-                                        <div><b>"{narcanAdministeredUnknown}"</b></div>
+                                        <div><b>Unknown amount administered:</b></div>
+                                        <div>"{narcanAdministeredUnknown}"</div>
                                     </div>
                                 }
                             </div>
                         }
                         {doesOrderContainEquipment(supplies) &&
-                            <div style={narcanContainer} className='text-center'>
+                            <div style={equipmentContainer} className='text-center'>
                                 <b>Equipment Justification</b>
                                 <div>
                                     <div>"{equipmentJustification}"</div>

@@ -4,7 +4,7 @@ import * as types from '../../../store/types'
 import * as style from '../style'
 import * as moment from 'moment'
 import ReactTable from "react-table"
-import { narcanContainer } from '../../cart/style'
+import { narcanContainer, equipmentContainer } from '../../cart/style'
 import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
 import doesOrderContainEquipment from '../../cart/functions/doesOrderContainEquipment'
 import getColorByStatus from '../functions/colorByStatus'
@@ -59,15 +59,15 @@ export default class ViewOrder extends React.Component<props, {}> {
                         <h5>
                             <b>{order.location}</b>
                         </h5>
+                        <div style={{ borderColor: '#383838', marginBottom: '5px', backgroundColor: getColorByStatus(order.status) }} className='alert'>
+                            <div><b>{order.status}</b></div>
+                        </div>
                         {order.emergencyOrder &&
                             <div style={{ marginBottom: '5px' }} className='alert alert-danger'>
                                 <b>EMERGENCY ORDER</b><br />
                                 <i>{order.emergencyJustification}</i>
                             </div>
                         }
-                        <div style={{ borderColor: '#383838', marginBottom: '5px', backgroundColor: getColorByStatus(order.status) }} className='alert'>
-                            <div><b>{order.status}</b></div>
-                        </div>
                         {order.receivedBy &&
                             <div style={{ borderColor: '#383838', marginBottom: '5px', backgroundColor: getColorByStatus(order.status) }} className='alert'>
                                 <div>Received by: <b>{order.receivedBy}</b></div>
@@ -121,17 +121,17 @@ export default class ViewOrder extends React.Component<props, {}> {
                         {doesOrderContainNarcan(order.supplies) &&
                             <div style={narcanContainer} className='text-center'>
                                 <b>NARCAN</b>
-                                <div>In posession of cases: <b>{order.narcanCases.toString()}</b></div>
+                                <div><b>In posession of cases:</b> {order.narcanCases.toString()}</div>
                                 {order.narcanAdministeredUnknown &&
                                     <div>
-                                        <div>Unknown amount administered:</div>
-                                        <div><b>"{order.narcanAdministeredUnknown}"</b></div>
+                                        <div><b>Unknown amount administered:</b></div>
+                                        <div>"{order.narcanAdministeredUnknown}"</div>
                                     </div>
                                 }
                             </div>
                         }
                         {doesOrderContainEquipment(order.supplies) &&
-                            <div style={narcanContainer} className='text-center'>
+                            <div style={equipmentContainer} className='text-center'>
                                 <b>Equipment Justification</b>
                                 <div>
                                     <div>"{order.equipmentJustification}"</div>
