@@ -190,9 +190,8 @@ export default class ModifyOrder extends React.Component<props, state> {
                         }
                         {doesOrderContainEquipment(supplies) &&
                             <div style={narcanContainer} className='text-center'>
-                                <b>EQUIPMENT</b>
+                                <b>Equipment Justification</b>
                                 <div>
-                                    <div>Equipment Justification:</div>
                                     <div>"{equipmentJustification}"</div>
                                 </div>
                             </div>

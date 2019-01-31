@@ -132,9 +132,8 @@ export default class ViewOrder extends React.Component<props, {}> {
                         }
                         {doesOrderContainEquipment(order.supplies) &&
                             <div style={narcanContainer} className='text-center'>
-                                <b>EQUIPMENT</b>
+                                <b>Equipment Justification</b>
                                 <div>
-                                    <div>Equipment justification</div>
                                     <div>"{order.equipmentJustification}"</div>
                                 </div>
                             </div>
