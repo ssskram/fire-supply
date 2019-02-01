@@ -27,7 +27,7 @@ export default class AccountContainer extends React.Component<props, {}> {
                     <div>
                         <div className="account">{user.name}</div>
                         <div className="account">{user.email}</div>
-                        <button style={style.profileButton} onClick={() => setState({ updateProfile: true })} className='btn btn-secondary'>{userProfile.department}</button>
+                        <button style={style.profileButton} onClick={() => setState({ updateProfile: true })} className='btn btn-secondary userAccount'>{userProfile.department}</button>
                         <div className='logout'>
                             <button onClick={() => window.location.href = "/logout"} id="logout" className='btn btn-link navbar-logout-btn'>
                                 <span className='glyphicon glyphicon-user nav-glyphicon'></span>Logout

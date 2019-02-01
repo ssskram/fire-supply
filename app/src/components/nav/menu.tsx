@@ -27,17 +27,17 @@ export class Menu extends React.Component<props, {}> {
                     </Link>
                 }
                 <Link to={'/MyOrders'}>
-                    <button className='btn btn-primary nav-button' title='My orders'>
+                    <button className='btn btn-primary nav-button myOrders' title='My orders'>
                         <img src={singleOrder as string} className='img-responsive center-block' />
                     </button>
                 </Link>
                 <Link to={'/AllOrders'}>
-                    <button className='btn btn-primary nav-button' title='All orders'>
+                    <button className='btn btn-primary nav-button allOrders' title='All orders'>
                         <img src={allOrders as string} className='img-responsive center-block' />
                     </button>
                 </Link>
                 <Link to={'/Dashboard'}>
-                    <button className='btn btn-primary nav-button'>
+                    <button className='btn btn-primary nav-button tpDashboard'>
                         <img src={tp as string} className='img-responsive center-block' />
                     </button>
                 </Link>

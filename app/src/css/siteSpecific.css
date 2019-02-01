@@ -42,3 +42,23 @@
     width: auto;
     left: 50%;
 }
+
+/* Joyride
+/* ------------------------- */
+
+.example-appear {
+    opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.react-joyride__overlay {
+    z-index: 1000 !important;
+}
+
+.__floater {
+    z-index: 1050 !important;
+}

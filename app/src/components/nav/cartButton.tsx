@@ -22,7 +22,7 @@ export class CartButton extends React.Component<props, {}> {
             <div>
                 {userProfile.cart.length == 0 &&
                     <Link to={'/'}>
-                        <button className='btn btn-success nav-button'>
+                        <button className='btn btn-success nav-button cart'>
                             <div style={Style.orderFont}>
                                 <img src={fullCart as string} className='img-responsive center-block' />
                                 <div>Your cart is empty</div>
@@ -32,7 +32,7 @@ export class CartButton extends React.Component<props, {}> {
                 }
                 {userProfile.cart.length > 0 &&
                     <Link to={'/Cart'}>
-                        <button className='btn btn-success nav-button'>
+                        <button className='btn btn-success nav-button cart'>
                             <div style={Style.orderFont}>
                                 <img src={fullCart as string} className='img-responsive center-block' />
                                 <div>Shopping cart ({this.props.userProfile.cart.length})</div>
