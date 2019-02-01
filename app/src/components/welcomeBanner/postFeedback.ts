@@ -12,13 +12,13 @@ export default async function postFeedback(feedback, user) {
     const sendgridLoad = JSON.stringify({
         to: "paul.marks@pittsburghpa.gov",
         from: {
-            email: user,
-            name: 'PGH Works'
+            email: user.email,
+            name: 'PGH Supply'
         },
-        subject: 'Feedback from PGH Works',
+        subject: 'Feedback from PGH Supply',
         html: emailBody
     })
-
+    
     // and post
     fetch('https://sendgridproxy.azurewebsites.us/sendMail/single', {
         method: 'POST',
