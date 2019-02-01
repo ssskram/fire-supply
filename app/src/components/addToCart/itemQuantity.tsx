@@ -99,7 +99,7 @@ export class UpdateQuantity extends React.Component<props, state> {
                         <button onClick={this.plusOne.bind(this)} className='btn'><span className='glyphicon glyphicon-plus'></span></button>
                     </div>
                 </div>
-                <button className='btn btn-success' onClick={this.returnQuantity.bind(this)}>{type}</button>
+                <button disabled={newQuantity == 0} className='btn btn-success' onClick={this.returnQuantity.bind(this)}>{type}</button>
             </div>
         )
     }

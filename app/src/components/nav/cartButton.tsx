@@ -35,7 +35,7 @@ export class CartButton extends React.Component<props, {}> {
                         <button className='btn btn-success nav-button'>
                             <div style={Style.orderFont}>
                                 <img src={fullCart as string} className='img-responsive center-block' />
-                                <div className='cart-glow'>Shopping cart ({this.props.userProfile.cart.length})</div>
+                                <div>Shopping cart ({this.props.userProfile.cart.length})</div>
                             </div>
                         </button>
                     </Link>
