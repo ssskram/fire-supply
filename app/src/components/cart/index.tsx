@@ -39,7 +39,7 @@ export class Cart extends React.Component<props, state> {
     }
 
     deleteItem(item) {
-        const itemDeleted = this.state.cart.filter(i => i._id != item._id)
+        const itemDeleted = this.state.cart.filter(i => i.item.cartegraphID != item.item.cartegraphID)
         this.postCart(itemDeleted)
     }
 
