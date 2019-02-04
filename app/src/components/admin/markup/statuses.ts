@@ -3,6 +3,7 @@ export const orderStatuses = [
     { value: 'Approved', label: 'Approved' },
     { value: 'Partially Approved', label: 'Partially Approved' },
     { value: 'Pending Higher Approval', label: 'Pending Higher Approval' },
-    { value: 'Rejected', label: 'Rejected' },
+    { value: 'Partially Delivered', label: 'Partially Delivered' },
     { value: 'Delivered', label: 'Delivered' },
+    { value: 'Rejected', label: 'Rejected' }
 ]

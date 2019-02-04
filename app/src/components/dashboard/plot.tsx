@@ -104,10 +104,12 @@ export default class ScatterPlot extends React.Component<props, state> {
     }
 
     setPlot() {
-        this.setState({
-            plotWidth: this.ref.current.offsetWidth,
-            countXTicks: this.countTicks()
-        })
+        if (this.ref.current.offsetWidth) {
+            this.setState({
+                plotWidth: this.ref.current.offsetWidth,
+                countXTicks: this.countTicks()
+            })
+        }
     }
 
     countTicks() {
