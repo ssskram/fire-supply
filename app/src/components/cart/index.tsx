@@ -153,7 +153,12 @@ export class Cart extends React.Component<props, state> {
                         />
                         < div className='col-md-12 text-center'>
                             <br />
-                            <button onClick={this.showForm.bind(this)} className='btn btn-success'>Complete order</button>
+                            <button onClick={this.showForm.bind(this)} className='btn btn-primary'>
+                                <span style={{ fontSize: '1.2em', padding: '25px' }}>
+                                    <b>Complete order</b>
+                                    <span style={{ marginLeft: '15px' }} className='glyphicon glyphicon-ok'></span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 }

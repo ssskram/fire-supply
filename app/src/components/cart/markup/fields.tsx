@@ -76,6 +76,15 @@ export class FormFields extends React.Component<any, any> {
         return success
     }
 
+    validSubmission(equipment, narcan) {
+        let it = 0
+        if (equipment && this.state.equipmentJustification != undefined) it++
+        if (narcan && this.state.narcanCases != undefined) it++
+        if (this.state.location != undefined) it++
+        if (this.state.emergencyOrder != undefined) it++
+        return it > 0
+    }
+
     render() {
         const {
             location,
@@ -90,9 +99,7 @@ export class FormFields extends React.Component<any, any> {
 
         const containsEquipment = doesOrderContainEquipment(this.props.userProfile.cart)
         const containsNarcan = doesOrderContainNarcan(this.props.userProfile.cart)
-        let isEnabled = location && emergencyOrder
-        if (containsNarcan) isEnabled = narcanCases
-        if (containsEquipment) isEnabled = equipmentJustification
+        const isEnabled = this.validSubmission(containsEquipment, containsNarcan)
 
         return (
             <Modal
