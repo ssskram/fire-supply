@@ -78,11 +78,12 @@ export class FormFields extends React.Component<any, any> {
 
     validSubmission(equipment, narcan) {
         let it = 0
-        if (equipment && this.state.equipmentJustification != undefined) it++
-        if (narcan && this.state.narcanCases != undefined) it++
-        if (this.state.location != undefined) it++
-        if (this.state.emergencyOrder != undefined) it++
-        return it > 0
+        if (equipment.check && !this.state.equipmentJustification) it++
+        if (narcan && !this.state.narcanCases) it++
+        if (this.state.location == undefined) it++
+        if (this.state.emergencyOrder == undefined) it++
+        if (this.state.emergencyOrder && this.state.emergencyOrder.value && !this.state.emergencyJustification) it++
+        return it == 0
     }
 
     render() {
