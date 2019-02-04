@@ -41,7 +41,7 @@ export default class MainApp extends React.Component<any, any> {
                     </div>
                     <div className='col-md-12'>
                         <h4><b>Unpack your things</b></h4>
-                        <h5>Enjoy all your sweet new stuff.</h5>
+                        <h5>Enjoy your sweet new stuff.</h5>
                     </div>
                 </div>
                 <div style={{ padding: '10px' }} className='row text-center'>
