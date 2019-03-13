@@ -8,6 +8,7 @@ import * as types from '../../store/types'
 import * as user from '../../store/user'
 import * as items from '../../store/items'
 import * as orders from '../../store/orders'
+import errorHandler from '../../functions/errorHandler'
 
 type props = {
     user: types.user
@@ -19,8 +20,12 @@ type props = {
 class Hydrate extends React.Component<props, {}> {
 
     componentDidMount() {
-        this.props.loadItems()
-        this.props.loadOrders()
+        try {
+            this.props.loadItems()
+            this.props.loadOrders()
+        } catch (err) {
+            errorHandler(err)
+        }
     }
 
     public render() { return null }
