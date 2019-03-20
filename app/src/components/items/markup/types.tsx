@@ -31,7 +31,6 @@ export default class Types extends React.Component<props, {}>{
 
         return (
             <div className='col-md-6'>
-                <br />
                 <div className='panel filter-panel text-center'>
                     <div className='panel-body'>
                         {buttons}

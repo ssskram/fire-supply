@@ -12,6 +12,7 @@ td {
 .ReactTable {
     background-color: #fff;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .ReactTable .rt-tbody {

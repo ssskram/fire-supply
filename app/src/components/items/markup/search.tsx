@@ -9,7 +9,6 @@ export default class Search extends React.Component<props, {}>{
     render() {
         return (
             <div className='col-md-6'>
-                <br />
                 <div className='panel filter-panel text-center'>
                     <div className='panel-body'>
                         <input type='search'

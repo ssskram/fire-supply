@@ -1,5 +1,4 @@
 import * as React from 'react'
-const box = require('../../../images/inventory.png')
 
 type props = {
     department: string
@@ -10,9 +9,9 @@ export default class Header extends React.Component<props, {}>{
     render() {
         return (
             <div style={{ padding: '15px 25px 0px 25px' }}>
-                <h2>Available Inventory<span className='pull-right hidden-xs'><img src={box as string} /></span></h2>
+                <div style={{ fontSize: '2em'}} className='oswald-header'>Available Inventory</div>
+                <div style={{ fontSize: '1.3em'}} className='oswald'>{this.props.department}</div>
                 <hr />
-                <h3><b>{this.props.department}</b></h3>
             </div>
         )
     }

@@ -82,6 +82,7 @@ fieldset[disabled] .btn {
     font-size: 1.5em;
     margin-bottom: 10px;
     width: 100%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .btn-filter:hover,
