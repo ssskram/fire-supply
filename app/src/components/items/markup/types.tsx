@@ -23,7 +23,7 @@ export default class Types extends React.Component<props, {}>{
                     key={key}
                     onClick={() => this.props.receiveFilter("selectedTypes", type)}
                     style={(this.props.selectedTypes.toString().includes(type)) ? clicked : unclicked}
-                    className='btn btn-secondary btn-item ubuntu'>
+                    className='btn btn-secondary btn-item'>
                     {type}
                 </button>
             )

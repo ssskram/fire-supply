@@ -53,7 +53,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                 center>
                 <div>
                     <div className='text-center'>
-                        <h4 style={style.viewOrderHeader}>
+                        <h4 style={style.viewOrderHeader} className=' oswald'>
                             {order.department}
                         </h4>
                         <h5>
@@ -81,7 +81,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                         <hr />
                     </div>
                     <div>
-                        <h4 className='text-center'>ORDER DETAILS</h4>
+                        <h4 className='text-center oswald'>ORDER DETAILS</h4>
                         <div>
                             <span className='pull-left'>{order._id && <div>Order #{order._id.substr(order._id.length - 6)}</div>}</span>
                             <span className='pull-right'>{moment(order.createdAt).format('MM/DD/YYYY hh:mm A')}</span>

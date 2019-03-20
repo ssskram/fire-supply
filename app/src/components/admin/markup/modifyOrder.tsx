@@ -127,9 +127,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                         <h5 style={style.viewOrderHeader}>
                             {department}
                         </h5>
-                        <h4>
-                            <b>{location}</b>
-                        </h4>
+                        <h4 className='ubuntu'>{location}</h4>
                         {emergencyOrder &&
                             <div style={{ marginBottom: '5px' }} className='alert alert-danger'>
                                 <b>EMERGENCY ORDER</b><br />
@@ -139,7 +137,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                         <hr />
                     </div>
                     <div>
-                        <h4 className='text-center'>ORDER DETAILS</h4>
+                        <h4 className='text-center oswald'>ORDER DETAILS</h4>
                         <div>
                             <span className='pull-left'>{_id && <div>Order #{_id.substr(_id.length - 6)}</div>}</span>
                             <span className='pull-right'>{moment(createdAt).format('MM/DD/YYYY hh:mm A')}</span>
@@ -198,7 +196,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                         }
                     </div>
                     <hr />
-                    <h4 className='text-center'>SUPPLY FEEDBACK</h4>
+                    <h4 className='text-center oswald'>SUPPLY FEEDBACK</h4>
                     <Fields state={this.state} setState={this.setState.bind(this)} />
                     <div className='col-md-12 text-center'>
                         <button onClick={this.saveOrder.bind(this)} className='btn btn-success'>Save</button>
