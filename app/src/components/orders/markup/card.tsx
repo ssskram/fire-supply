@@ -40,14 +40,14 @@ export default class Orders extends React.Component<props, state> {
                     <div className='panel-body' style={style.panelBody}>
                         <div className='col-md-3' style={style.paddingTen}>
                             {order.emergencyOrder &&
-                                <div style={style.Emergency}><b className='emergency'>EMERGENCY</b></div>
+                                <div style={style.Emergency}><b className='emergency oswald'>EMERGENCY</b></div>
                             }
                             <div>{moment(order.createdAt).format('MM/DD/YYYY hh:mm A')}</div>
                             <div>{order.userName}</div>
                         </div>
                         <div className='col-md-3' style={style.paddingTen}>
-                            <div style={style.biggerFont}><b>{order.location}</b></div>
-                            <div>{countItems(order)} Items</div>
+                            <div className='ubuntu' style={style.biggerFont}><b>{order.location}</b></div>
+                            <div className='ubuntu'>{countItems(order)} Items</div>
                             <div><i>{orderTypes(order)}</i></div>
                         </div>
                         <div className={innerWidth < 990 ? 'col-md-4 col-md-offset-2 funny-panel-small' : 'col-md-4 col-md-offset-2 funny-panel-big'} style={{ backgroundColor: colorByStatus(order.status) }}>

@@ -53,7 +53,7 @@ export default class Filters extends React.Component<props, state> {
         const isEnabled = location || status
 
         return (
-            <div className='row text-center' style={{ marginBottom: '15px' }}>
+            <div className='row text-center' style={{ marginBottom: '5px' }}>
                 <div className='col-md-5'>
                     <Select
                         value={location}

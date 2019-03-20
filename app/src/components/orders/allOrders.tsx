@@ -9,6 +9,7 @@ import Card from './markup/card'
 import NoOrders from './markup/noOrders'
 import ViewOrder from './markup/viewOrder'
 import Filters from './markup/filters'
+import Header from './markup/header'
 import { returnPageNumber, returnCurrentItems } from './functions/paging'
 import Paging from '../utilities/paging'
 
@@ -62,10 +63,10 @@ export class AllOrders extends React.Component<props, state> {
 
         return (
             <div className='col-md-12'>
-                <h3>
-                    <b>ALL ORDERS</b>
-                    <span className='pull-right'>{this.props.userProfile.department}</span>
-                </h3>
+                <Header 
+                    text='ALL ORDERS'
+                    userProfile={this.props.userProfile}
+                />
                 <hr />
                 <HydrateStore />
                 <Filters

@@ -13,7 +13,7 @@
 
 .btn-secondary {
     color: #ffffff;
-    background-color: #777;
+    background-color: rgba(164, 163, 163, .6);
     border-color: #555;
 }
 
@@ -97,4 +97,8 @@ fieldset[disabled] .btn {
 
 .orange {
     background-color: rgba(240, 173, 78, .8);
+}
+
+.grey {
+    background-color: rgba(164, 163, 163, .6);
 }

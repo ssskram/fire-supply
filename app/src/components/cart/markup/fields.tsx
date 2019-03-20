@@ -113,7 +113,7 @@ export class FormFields extends React.Component<any, any> {
                 showCloseIcon={true}
                 center>
                 <div className='col-md-12'>
-                    <h4 className='text-center'><b>COMPLETE ORDER</b></h4>
+                    <h3 className='text-center oswald'>Complete your order</h3>
                     <Select
                         value={location}
                         header='Select location for delivery'

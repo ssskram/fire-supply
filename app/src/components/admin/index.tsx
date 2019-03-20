@@ -14,6 +14,7 @@ import Messages from '../utilities/messages'
 import Spinner from '../utilities/spinner'
 import FilterButtons from './markup/filterButtons'
 import Search from './markup/search'
+import Header from '../orders/markup/header'
 import { returnPageNumber, returnCurrentItems } from '../orders/functions/paging'
 import Paging from '../utilities/paging'
 
@@ -131,7 +132,10 @@ export class Admin extends React.Component<props, state> {
                     <Spinner notice='...saving...' />
                 }
                 <Messages />
-                <h3><b>SUPPLY WAREHOUSE</b> <span style={{ textTransform: 'uppercase' }} className='pull-right'>{this.props.userProfile.department}</span></h3>
+                <Header
+                    text="SUPPLY WHAREHOUSE"
+                    userProfile={this.props.userProfile}
+                />
                 <hr />
                 <FilterButtons filter={this.state.filter} setFilter={this.setFilter.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
                 <Search search={this.state.search} filter={this.state.filter} setSearch={this.setSearch.bind(this)} />

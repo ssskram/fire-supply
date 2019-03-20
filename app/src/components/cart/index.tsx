@@ -120,7 +120,7 @@ export class Cart extends React.Component<props, state> {
         return (
             <div className='row'>
                 <div className='col-md-12'>
-                    <h2>Your cart</h2>
+                    <h2 className='oswald'>Your cart</h2>
                     <hr />
                 </div>
                 <Messages />

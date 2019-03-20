@@ -18,7 +18,7 @@ export default class filterButtons extends React.Component<any, any> {
     render() {
         return <div className='text-center row'>
             <div className='col-sm-4'>
-                <button onClick={() => this.props.setFilter('all orders')} style={this.props.filter == 'all orders' ? style.buttonClicked : undefined} className='btn btn-filter'>
+                <button onClick={() => this.props.setFilter('all orders')} style={this.props.filter == 'all orders' ? style.buttonClicked : undefined} className='btn btn-filter grey'>
                     All Orders
                 <div style={style.buttonNumbers}>{this.returnAllCount()}</div>
                 </button>

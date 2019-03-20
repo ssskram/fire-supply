@@ -28,7 +28,7 @@ export class UpdateQuantity extends React.Component<props, state> {
     }
 
     handleLimit(value) {
-        if (value > 50) {
+        if (value > 60) {
             this.setState({
                 limitExceeded: true
             })
@@ -82,7 +82,7 @@ export class UpdateQuantity extends React.Component<props, state> {
                 }
                 <div className='row' style={style.inputWidth}>
                     <div className='col-xs-3'>
-                        <button onClick={this.minusOne.bind(this)} className='btn'><span className='glyphicon glyphicon-minus'></span></button>
+                        <button onClick={this.minusOne.bind(this)} className='btn grey'><span className='glyphicon glyphicon-minus'></span></button>
                     </div>
                     <div className='col-xs-6'>
                         <Number
@@ -96,7 +96,7 @@ export class UpdateQuantity extends React.Component<props, state> {
                         />
                     </div>
                     <div className='col-xs-3'>
-                        <button onClick={this.plusOne.bind(this)} className='btn'><span className='glyphicon glyphicon-plus'></span></button>
+                        <button onClick={this.plusOne.bind(this)} className='btn grey'><span className='glyphicon glyphicon-plus'></span></button>
                     </div>
                 </div>
                 <button disabled={newQuantity == 0} className='btn btn-success' onClick={this.returnQuantity.bind(this)}>{type}</button>
