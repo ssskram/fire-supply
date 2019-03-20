@@ -36,11 +36,6 @@ export class Menu extends React.Component<props, {}> {
                         <img src={allOrders as string} className='img-responsive center-block' />
                     </button>
                 </Link>
-                <Link to={'/Dashboard'}>
-                    <button className='btn btn-primary nav-button tpDashboard'>
-                        <img src={tp as string} className='img-responsive center-block' />
-                    </button>
-                </Link>
                 <hr />
                 <Cart />
                 {this.props.userProfile.isAdmin &&

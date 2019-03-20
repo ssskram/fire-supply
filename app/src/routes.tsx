@@ -6,7 +6,6 @@ import AllOrders from './components/orders/allOrders'
 import MyOrders from './components/orders/myOrders'
 import Cart from './components/cart'
 import Admin from './components/admin'
-import Dashboard from './components/dashboard'
 
 export default () => (
   <Layout>
@@ -15,6 +14,5 @@ export default () => (
     <Route exact path='/MyOrders' component={MyOrders} />
     <Route exact path='/Cart' component={Cart} />
     <Route exact path='/Admin' component={Admin} />
-    <Route exact path='/Dashboard' component={Dashboard} />
   </Layout>
 )
