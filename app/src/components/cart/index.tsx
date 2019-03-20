@@ -171,7 +171,9 @@ export class Cart extends React.Component<props, state> {
                     </div>
                 }
                 {showForm &&
-                    <Form closeForm={() => this.setState({ showForm: false })} />
+                    <Form
+                        closeForm={() => this.setState({ showForm: false })}
+                    />
                 }
             </div>
         )
