@@ -9,7 +9,7 @@ const unclicked = {
 }
 
 type props = {
-    selectedTypes: Array<any> | []
+    selectedType: string
     itemTypes: Array<string>
     receiveFilter: (type: string, load: string) => void
 }
@@ -22,7 +22,7 @@ export default class Types extends React.Component<props, {}>{
                 <button
                     key={key}
                     onClick={() => this.props.receiveFilter("selectedTypes", type)}
-                    style={(this.props.selectedTypes.toString().includes(type)) ? clicked : unclicked}
+                    style={(this.props.selectedType == type ? clicked : unclicked)}
                     className='btn btn-secondary btn-item'>
                     {type}
                 </button>

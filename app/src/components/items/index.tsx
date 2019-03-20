@@ -23,7 +23,7 @@ type props = {
 type state = {
     items: Array<types.item> | undefined
     itemTypes: Array<string>
-    selectedTypes: Array<string>
+    selectedType: string
     searchTerm: string
     nullSearch: boolean
 }
@@ -34,7 +34,7 @@ export class Items extends React.Component<props, state> {
         this.state = {
             items: undefined,
             itemTypes: [],
-            selectedTypes: [],
+            selectedType: '',
             searchTerm: '',
             nullSearch: false
         }
@@ -52,23 +52,10 @@ export class Items extends React.Component<props, state> {
         }
     }
 
-    setSelectedTypes(filter) {
-        let selectedTypes
-        if (this.state.selectedTypes.find(item => item == filter)) {
-            // if type already exists in array filter, remove it
-            selectedTypes = this.state.selectedTypes.filter(item => item != filter)
-        } else {
-            // otherwise, add it
-            selectedTypes = this.state.selectedTypes.concat([filter])
-        }
-        return selectedTypes
-    }
-
     receiveFilter(filterType, filter) {
         if (filterType == 'selectedTypes') {
-            const selectedTypes = this.setSelectedTypes(filter)
             this.setState({
-                selectedTypes: selectedTypes,
+                selectedType: filter,
                 items: filterItemsByDept(this.props.items, this.props.userProfile)
             }, () => this.executefilter())
         } else {
@@ -90,7 +77,7 @@ export class Items extends React.Component<props, state> {
             this.setState({
                 items: filterItemsByDept(this.props.items, this.props.userProfile),
                 nullSearch: true,
-                selectedTypes: [],
+                selectedType: '',
                 searchTerm: ''
             })
         }
@@ -102,7 +89,7 @@ export class Items extends React.Component<props, state> {
             items,
             itemTypes,
             searchTerm,
-            selectedTypes,
+            selectedType,
             nullSearch
         } = this.state
 
@@ -125,7 +112,7 @@ export class Items extends React.Component<props, state> {
                             />
                             <Types
                                 itemTypes={itemTypes}
-                                selectedTypes={selectedTypes}
+                                selectedType={selectedType}
                                 receiveFilter={this.receiveFilter.bind(this)}
                             />
                         </div>
