@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Select from '../../formElements/select'
-import * as fh from '../../cart/markup/selects'
+import * as fh from '../../cart/selects'
 import * as st from '../../admin/markup/statuses'
 import * as types from '../../../store/types'
 

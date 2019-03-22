@@ -32,16 +32,17 @@ export const FireHouses = [
     { value: 'Firehouse 38', label: 'Firehouse 38' },
     { value: 'Arson', label: 'Arson' },
     { value: 'TA', label: 'TA' },
-    { value: 'Fire Boat', label: 'Fire Boat' },
-    { value: 'Battalion Chief 1 Bin', label: 'Battalion Chief 1 Bin' },
-    { value: 'Battalion Chief 2 Bin', label: 'Battalion Chief 2 Bin' },
-    { value: 'Battalion Chief 3 Bin', label: 'Battalion Chief 3 Bin' },
-    { value: 'Battalion Chief 4 Bin', label: 'Battalion Chief 4 Bin' },
-    { value: 'BC-1', label: 'BC-1' },
-    { value: 'BC-2', label: 'BC-2' },
-    { value: 'BC-3', label: 'BC-3' },
-    { value: 'BC-4', label: 'BC-4' },
-    { value: 'DC', label: 'DC' },
+    { value: 'FB-1', label: 'FB-1' },
+    { value: 'BAT 1', label: 'BAT 1' },
+    { value: 'BAT 1 Bin', label: 'BAT 1 Bin' },
+    { value: 'BAT 2', label: 'BAT 2' },
+    { value: 'BAT 2 Bin', label: 'BAT 2 Bin' },
+    { value: 'BAT 3', label: 'BAT 3' },
+    { value: 'BAT 3 Bin', label: 'BAT 3 Bin' },
+    { value: 'BAT 4', label: 'BAT 4' },
+    { value: 'BAT 4 Bin', label: 'BAT 4 Bin' },
+    { value: 'DEP', label: 'DEP' },
+    { value: 'DEP Bin', label: 'DEP Bin' }
 ]
 
 export const YesNo = [
