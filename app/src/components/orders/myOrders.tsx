@@ -14,6 +14,7 @@ import Filters from './markup/filters'
 import Header from './markup/header'
 import { returnPageNumber, returnCurrentItems } from './functions/paging'
 import Paging from '../utilities/paging'
+import Messages from '../utilities/messages'
 
 type props = {
     orders: types.order[]
@@ -90,6 +91,7 @@ export class MyOrders extends React.Component<props, state> {
                 />
                 <hr />
                 <HydrateStore />
+                <Messages />
                 <Filters
                     orders={this.props.orders.filter(order => {
                         return (order.user == this.props.user.email) && (order.department == this.props.userProfile.department)
