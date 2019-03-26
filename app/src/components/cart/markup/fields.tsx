@@ -1,10 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { ApplicationState } from '../../../store'
-import * as userProfile from '../../../store/userProfile'
-import * as user from '../../../store/user'
 import * as types from '../../../store/types'
-import * as orders from '../../../store/orders'
 import TextArea from '../../formElements/textarea'
 import Select from '../../formElements/select'
 import Modal from 'react-responsive-modal'
@@ -22,18 +17,31 @@ type props = {
     newOrder: (newOrder) => boolean
 }
 
-export class FormFields extends React.Component<any, any> {
+type state = {
+    location: select
+    miscItems: string
+    comments: string
+    emergencyOrder: select
+    emergencyJustification: string
+    narcanCases: select
+    narcanAdministeredUnknown: string
+    equipmentJustification: string
+}
+
+type select = { label: string, value: string}
+
+export default class FormFields extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
             location: undefined,
-            miscItems: undefined,
-            comments: undefined,
+            miscItems: '',
+            comments: '',
             emergencyOrder: undefined,
-            emergencyJustification: undefined,
+            emergencyJustification: '',
             narcanCases: undefined,
-            narcanAdministeredUnknown: undefined,
-            equipmentJustification: undefined
+            narcanAdministeredUnknown: '',
+            equipmentJustification: ''
         }
     }
 
@@ -196,16 +204,3 @@ export class FormFields extends React.Component<any, any> {
         )
     }
 }
-
-export default connect(
-    (state: ApplicationState) => ({
-        ...state.userProfile,
-        ...state.user,
-        ...state.orders
-    }),
-    ({
-        ...userProfile.actionCreators,
-        ...user.actionCreators,
-        ...orders.actionCreators
-    })
-)(FormFields)

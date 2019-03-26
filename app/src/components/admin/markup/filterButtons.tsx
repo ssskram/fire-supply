@@ -1,7 +1,14 @@
 import * as React from 'react'
 import * as style from '../style'
+import * as types from '../../../store/types'
 
-export default class filterButtons extends React.Component<any, any> {
+type props = {
+    filter: string
+    setFilter: (filter: string) => void
+    allOrders: types.order[]
+}
+
+export default class filterButtons extends React.Component<props, {}> {
 
     returnAllCount() {
         return this.props.allOrders.length

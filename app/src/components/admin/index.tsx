@@ -51,7 +51,7 @@ export class Admin extends React.Component<props, state> {
     }
 
     componentDidMount() {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
         this.checkPermissions(this.props.userProfile)
     }
 
@@ -72,11 +72,11 @@ export class Admin extends React.Component<props, state> {
         this.props.clearMessage()
     }
 
-    setFilter(filter) {
+    setFilter(filter: string) {
         this.setState({ filter: filter }, () => this.runFilter())
     }
 
-    setSearch(search) {
+    setSearch(search: string) {
         this.setState({ search: search }, () => this.runFilter())
     }
 
@@ -138,8 +138,16 @@ export class Admin extends React.Component<props, state> {
                     userProfile={this.props.userProfile}
                 />
                 <hr />
-                <FilterButtons filter={this.state.filter} setFilter={this.setFilter.bind(this)} allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)} />
-                <Search search={this.state.search} filter={this.state.filter} setSearch={this.setSearch.bind(this)} />
+                <FilterButtons
+                    filter={this.state.filter}
+                    setFilter={this.setFilter.bind(this)}
+                    allOrders={this.props.orders.filter(order => order.department == this.props.userProfile.department)}
+                />
+                <Search
+                    search={this.state.search}
+                    filter={this.state.filter}
+                    setSearch={this.setSearch.bind(this)}
+                />
                 {this.state.orders.length > 0 &&
                     <div className='row'>
                         {renderItems}

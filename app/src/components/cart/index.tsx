@@ -5,6 +5,7 @@ import * as types from '../../store/types'
 import { Ghost } from 'react-kawaii'
 import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
+import * as orders from '../../store/orders'
 import ReactTable from "react-table"
 import Form from './markup/fields'
 import Messages from '../utilities/messages'
@@ -14,6 +15,7 @@ type props = {
     userProfile: types.userProfile
     setUserProfile: (object: types.userProfile) => void
     updateCart: (newProfile) => void
+    newOrder: (newOrder) => boolean
 }
 
 type state = {
@@ -173,6 +175,10 @@ export class Cart extends React.Component<props, state> {
                 {showForm &&
                     <Form
                         closeForm={() => this.setState({ showForm: false })}
+                        user={this.props.user}
+                        userProfile={this.props.userProfile}
+                        updateCart={this.props.updateCart.bind(this)}
+                        newOrder={this.props.newOrder.bind(this)}
                     />
                 }
             </div>
@@ -183,10 +189,12 @@ export class Cart extends React.Component<props, state> {
 export default connect(
     (state: ApplicationState) => ({
         ...state.userProfile,
-        ...state.user
+        ...state.user,
+        ...state.orders
     }),
     ({
         ...userProfile.actionCreators,
-        ...user.actionCreators
+        ...user.actionCreators,
+        ...orders.actionCreators
     })
 )(Cart as any)

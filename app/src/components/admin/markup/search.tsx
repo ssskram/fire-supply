@@ -1,7 +1,13 @@
 import * as React from 'react'
 import Input from '../../formElements/input'
 
-export default class Search extends React.Component<any, any> {
+type props = {
+    search: string
+    filter: string
+    setSearch: (search: string) => void
+}
+
+export default class Search extends React.Component<props, {}> {
 
     render() {
         const placeholder = "Search " + this.props.filter
