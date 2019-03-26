@@ -9,6 +9,7 @@ import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
 import doesOrderContainEquipment from '../../cart/functions/doesOrderContainEquipment'
 import Fields from './fields'
 import Number from 'react-currency-input'
+import ErrorHandler from '../../../functions/errorHandler'
 
 type props = {
     order: types.order
@@ -46,20 +47,24 @@ export default class ModifyOrder extends React.Component<props, state> {
     }
 
     updateSupplies(qtyReceived, itemID) {
-        const suppliesCopy = this.state.supplies
-        const itemIndex = suppliesCopy.findIndex(sp => sp._id == itemID)
-        suppliesCopy[itemIndex].quantityReceived = qtyReceived
-        this.setState({ supplies: suppliesCopy })
+        try {
+            const suppliesCopy = this.state.supplies
+            const itemIndex = suppliesCopy.findIndex(sp => sp._id == itemID)
+            suppliesCopy[itemIndex].quantityReceived = qtyReceived
+            this.setState({ supplies: suppliesCopy })
+        } catch (err) { ErrorHandler(err) }
     }
 
     async saveOrder() {
-        this.props.setState({ spinner: true })
-        const success = await this.props.updateOrder(this.state)
-        if (success == true) this.props.closeView()
-        else {
-            this.props.errorMessage()
-            this.props.closeView()
-        }
+        try {
+            this.props.setState({ spinner: true })
+            const success = await this.props.updateOrder(this.state)
+            if (success == true) this.props.closeView()
+            else {
+                this.props.errorMessage()
+                this.props.closeView()
+            }
+        } catch (err) { ErrorHandler(err) }
     }
 
     render() {

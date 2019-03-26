@@ -20,6 +20,7 @@ import SetProfile from './markup/setProfile'
 import UpdateProfile from './markup/updateProfile'
 import Modal from 'react-responsive-modal'
 import AccountContainer from './markup/account'
+import ErrorHandler from '../../functions/errorHandler'
 
 type props = {
     user: types.user
@@ -48,15 +49,17 @@ export class Account extends React.Component<props, state> {
 
     // order is important here so user gets loaded in correctly
     async componentDidMount() {
-        // first get user
-        const user = await this.props.loadUser()
-        // then, load user admin status into userProfile store
-        await this.props.isUserAdmin(user)
-        // with admin status loaded, load profile
-        const profile = await this.props.loadUserProfile(user)
-        this.setState({ loadingProfile: false })
-        // no profile?  create a new one
-        if (!profile) this.setState({ setProfile: true })
+        try {
+            // first get user
+            const user = await this.props.loadUser()
+            // then, load user admin status into userProfile store
+            await this.props.isUserAdmin(user)
+            // with admin status loaded, load profile
+            const profile = await this.props.loadUserProfile(user)
+            this.setState({ loadingProfile: false })
+            // no profile?  create a new one
+            if (!profile) this.setState({ setProfile: true })
+        } catch (err) { ErrorHandler(err) }
     }
 
     componentWillReceiveProps(nextProps) {

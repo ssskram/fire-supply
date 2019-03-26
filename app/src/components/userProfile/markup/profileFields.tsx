@@ -10,6 +10,7 @@ import * as user from '../../../store/user'
 import * as userProfile from '../../../store/userProfile'
 import Select from '../../formElements/select'
 import { Helmet } from "react-helmet"
+import ErrorHandler from '../../../functions/errorHandler'
 
 type props = {
     user: types.user
@@ -27,7 +28,9 @@ const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer {
 export class SelectDepartment extends React.Component<props, {}> {
 
     setUserProfile(department) {
-        this.props.setUserProfile({ user: this.props.user.email, department: department, cart: [] })
+        try {
+            this.props.setUserProfile({ user: this.props.user.email, department: department, cart: [] })
+        } catch (err) { ErrorHandler(err) }
     }
 
     render() {

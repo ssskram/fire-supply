@@ -41,10 +41,11 @@ export class AllOrders extends React.Component<props, state> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.onFilter == false)
-        this.setState({
-            ordersByDept: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),
-        })
+        if (this.state.onFilter == false) {
+            this.setState({
+                ordersByDept: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),
+            })
+        }
     }
 
     filter(filteredOrders) {

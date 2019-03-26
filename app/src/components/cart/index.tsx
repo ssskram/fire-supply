@@ -10,6 +10,7 @@ import * as messages from '../../store/messages'
 import ReactTable from "react-table"
 import Form from './markup/fields'
 import Messages from '../utilities/messages'
+import ErrorHandler from '../../functions/errorHandler'
 
 type props = {
     user: types.user
@@ -44,39 +45,47 @@ export class Cart extends React.Component<props, state> {
     }
 
     deleteItem(item) {
-        const itemDeleted = this.state.cart.filter(i => i.item.cartegraphID != item.item.cartegraphID)
-        this.postCart(itemDeleted)
+        try {
+            const itemDeleted = this.state.cart.filter(i => i.item.cartegraphID != item.item.cartegraphID)
+            this.postCart(itemDeleted)
+        } catch (err) { ErrorHandler(err) }
     }
 
     increaseQuantity(item) {
-        const cartCopy = this.state.cart
-        const itemIndex = cartCopy.findIndex(i => i.item.cartegraphID == item.item.cartegraphID)
-        if (cartCopy[itemIndex].quantity + 1 > 60) {
-            this.setState({ limitExceeded: true })
-        } else {
-            cartCopy[itemIndex].quantity++
-            this.postCart(cartCopy)
-        }
+        try {
+            const cartCopy = this.state.cart
+            const itemIndex = cartCopy.findIndex(i => i.item.cartegraphID == item.item.cartegraphID)
+            if (cartCopy[itemIndex].quantity + 1 > 60) {
+                this.setState({ limitExceeded: true })
+            } else {
+                cartCopy[itemIndex].quantity++
+                this.postCart(cartCopy)
+            }
+        } catch (err) { ErrorHandler(err) }
     }
 
     decreaseQuantity(item) {
-        const cartCopy = this.state.cart
-        const itemIndex = cartCopy.findIndex(i => i.item.cartegraphID == item.item.cartegraphID)
-        if (cartCopy[itemIndex].quantity - 1 < 1) {
-            this.deleteItem(item)
-        } else {
-            cartCopy[itemIndex].quantity--
-            this.postCart(cartCopy)
-        }
+        try {
+            const cartCopy = this.state.cart
+            const itemIndex = cartCopy.findIndex(i => i.item.cartegraphID == item.item.cartegraphID)
+            if (cartCopy[itemIndex].quantity - 1 < 1) {
+                this.deleteItem(item)
+            } else {
+                cartCopy[itemIndex].quantity--
+                this.postCart(cartCopy)
+            }
+        } catch (err) { ErrorHandler(err) }
     }
 
     postCart(newCart) {
-        const newUserProfile = {
-            user: this.props.user.email,
-            cart: newCart
-        }
-        this.setState({ limitExceeded: false })
-        this.props.updateCart(newUserProfile)
+        try {
+            const newUserProfile = {
+                user: this.props.user.email,
+                cart: newCart
+            }
+            this.setState({ limitExceeded: false })
+            this.props.updateCart(newUserProfile)
+        } catch (err) { ErrorHandler(err) }
     }
 
     showForm() {

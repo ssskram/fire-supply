@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Redirect } from 'react-router-dom'
+import ErrorHandler from '../../../functions/errorHandler'
 
 type props = {
     isEnabled: boolean
@@ -22,22 +23,23 @@ export default class Submit extends React.Component<props, state> {
     }
 
     async submitIt() {
-        const success = await this.props.submitIt()
-        if (success == true) {
-            this.props.successMessage()
-            this.setState({ redirect: true })
-        } else {
-            this.props.errorMessage()
-            this.props.closeForm()
-        }
-
+        try {
+            const success = await this.props.submitIt()
+            if (success == true) {
+                this.props.successMessage()
+                this.setState({ redirect: true })
+            } else {
+                this.props.errorMessage()
+                this.props.closeForm()
+            }
+        } catch (err) { ErrorHandler(err) }
     }
 
     render() {
         return (
             <div className='text-center'>
                 <button disabled={!this.props.isEnabled} onClick={this.submitIt.bind(this)} className='btn btn-success'>Submit</button>
-                {this.state.redirect && 
+                {this.state.redirect &&
                     <Redirect push to={'MyOrders'} />
                 }
             </div>

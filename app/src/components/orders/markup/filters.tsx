@@ -3,6 +3,7 @@ import Select from 'react-select'
 import * as fh from '../../cart/selects'
 import * as st from '../../admin/markup/statuses'
 import * as types from '../../../store/types'
+import ErrorHandler from '../../../functions/errorHandler'
 
 type props = {
     orders: types.order[]
@@ -24,20 +25,22 @@ export default class Filters extends React.Component<props, state> {
     }
 
     filter() {
-        const filtered = this.props.orders.filter(order => {
-            if (this.state.location) {
-                if (!order.location.includes(this.state.location.value)) {
-                    return false
+        try {
+            const filtered = this.props.orders.filter(order => {
+                if (this.state.location) {
+                    if (!order.location.includes(this.state.location.value)) {
+                        return false
+                    }
                 }
-            }
-            if (this.state.status) {
-                if (!order.status.includes(this.state.status.value)) {
-                    return false
+                if (this.state.status) {
+                    if (!order.status.includes(this.state.status.value)) {
+                        return false
+                    }
                 }
-            }
-            return true
-        })
-        this.props.filter(filtered)
+                return true
+            })
+            this.props.filter(filtered)
+        } catch (err) { ErrorHandler(err) }
     }
 
     clearFilter() {
@@ -53,7 +56,7 @@ export default class Filters extends React.Component<props, state> {
         const isEnabled = location || status
 
         return (
-            <div className='row text-center' style={{marginBottom: '10px'}}>
+            <div className='row text-center' style={{ marginBottom: '10px' }}>
                 <div className='col-md-5' style={{ margin: '5px 0px' }}>
                     <Select
                         value={location}

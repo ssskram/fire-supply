@@ -5,6 +5,7 @@ import * as types from '../../store/types'
 import * as userProfile from '../../store/userProfile'
 import * as style from './style'
 import Number from 'react-currency-input'
+import ErrorHandler from '../../functions/errorHandler'
 
 type props = {
     quantity: number
@@ -45,11 +46,13 @@ export class UpdateQuantity extends React.Component<props, state> {
     }
 
     returnQuantity() {
-        const cartItem = {
-            item: this.props.item,
-            quantity: this.state.newQuantity
-        }
-        this.props.returnQuantity(cartItem)
+        try {
+            const cartItem = {
+                item: this.props.item,
+                quantity: this.state.newQuantity
+            }
+            this.props.returnQuantity(cartItem)
+        } catch (err) { ErrorHandler(err) }
     }
 
     plusOne() {

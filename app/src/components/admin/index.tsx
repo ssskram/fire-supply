@@ -17,6 +17,7 @@ import Search from './markup/search'
 import Header from '../orders/markup/header'
 import { returnPageNumber, returnCurrentItems } from '../orders/functions/paging'
 import Paging from '../utilities/paging'
+import ErrorHandler from '../../functions/errorHandler'
 
 type props = {
     orders: types.order[],
@@ -81,31 +82,33 @@ export class Admin extends React.Component<props, state> {
     }
 
     runFilter() {
-        const filtered = this.props.orders
-            .filter(order => order.department == this.props.userProfile.department)
-            .filter(order => {
-                if (this.state.filter == 'emergency orders') {
-                    if (!order.emergencyOrder == true) {
-                        return false
+        try {
+            const filtered = this.props.orders
+                .filter(order => order.department == this.props.userProfile.department)
+                .filter(order => {
+                    if (this.state.filter == 'emergency orders') {
+                        if (!order.emergencyOrder == true) {
+                            return false
+                        }
                     }
-                }
-                if (this.state.filter == 'open orders') {
-                    if (order.status == 'Delivered' || order.status == 'Rejected') {
-                        return false
+                    if (this.state.filter == 'open orders') {
+                        if (order.status == 'Delivered' || order.status == 'Rejected') {
+                            return false
+                        }
                     }
-                }
-                if (this.state.search) {
-                    if (
-                        !order.location.toLowerCase().includes(this.state.search.toLowerCase()) &&
-                        !order.userName.toLowerCase().includes(this.state.search.toLowerCase()) &&
-                        !order.status.toLowerCase().includes(this.state.search.toLowerCase())
-                    ) return false
-                }
-                return true
+                    if (this.state.search) {
+                        if (
+                            !order.location.toLowerCase().includes(this.state.search.toLowerCase()) &&
+                            !order.userName.toLowerCase().includes(this.state.search.toLowerCase()) &&
+                            !order.status.toLowerCase().includes(this.state.search.toLowerCase())
+                        ) return false
+                    }
+                    return true
+                })
+            this.setState({
+                orders: filtered
             })
-        this.setState({
-            orders: filtered
-        })
+        } catch (err) { ErrorHandler(err) }
     }
 
     render() {

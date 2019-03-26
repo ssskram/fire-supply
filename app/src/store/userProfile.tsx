@@ -3,6 +3,7 @@ import { Action, Reducer } from 'redux'
 import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
+import ErrorHandler from '../functions/errorHandler'
 
 const unloadedState = {
     userProfile: {
@@ -47,6 +48,7 @@ export const actionCreators = {
                 'Content-Type': 'application/json'
             })
         })
+            .catch(err => ErrorHandler(err))
         dispatch({ type: constants.setProfile, userProfile: profile })
     },
     updateCart: (newProfile): AppThunkAction<any> => async (dispatch, getState) => {
@@ -58,6 +60,7 @@ export const actionCreators = {
                 'Content-Type': 'application/json'
             })
         })
+            .catch(err => ErrorHandler(err))
         dispatch({ type: constants.updateCart, newCart: newProfile.cart })
     }
 }

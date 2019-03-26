@@ -2,6 +2,7 @@ import { Action, Reducer } from 'redux'
 import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
+import ErrorHandler from '../functions/errorHandler'
 
 const unloadedState: types.orders = {
     orders: []
@@ -18,6 +19,7 @@ export const actionCreators = {
         })
             .then(res => res.json())
             .then(data => dispatch({ type: constants.getOrders, orders: data }))
+            .catch(err => ErrorHandler(err))
     },
     newOrder: (order): AppThunkAction<any> => async (dispatch) => {
         const response = await fetch('https://mongo-proxy.azurewebsites.us/save/newOrder', {
@@ -33,7 +35,10 @@ export const actionCreators = {
             dispatch({ type: constants.newOrder, order: order })
             return true
         }
-        else return false
+        else {
+            ErrorHandler("newOrder call, order store")
+            return false
+        }
     },
     updateOrder: (order): AppThunkAction<any> => async (dispatch) => {
         const response = await fetch('https://mongo-proxy.azurewebsites.us/save/updateOrder', {
@@ -49,7 +54,10 @@ export const actionCreators = {
             dispatch({ type: constants.updateOrder, order: order })
             return true
         }
-        else return false
+        else {
+            ErrorHandler("updateOrder call, order store")
+            return false
+        }
     }
 }
 

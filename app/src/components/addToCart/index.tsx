@@ -3,6 +3,7 @@ import * as types from '../../store/types'
 import * as Style from './style'
 import Modal from 'react-responsive-modal'
 import SetQuantity from './itemQuantity'
+import ErrorHandler from '../../functions/errorHandler'
 
 type props = {
     user: types.user
@@ -24,16 +25,18 @@ export default class AddToCart extends React.Component<props, state> {
     }
 
     newCart(cartItem) {
-        let newCart = this.props.userProfile.cart
-        newCart.push(cartItem)
-        const newUserProfile = {
-            user: this.props.user.email,
-            cart: newCart
-        }
-        this.props.updateCart(newUserProfile)
-        this.setState({
-            setQuantity: false
-        })
+        try {
+            let newCart = this.props.userProfile.cart
+            newCart.push(cartItem)
+            const newUserProfile = {
+                user: this.props.user.email,
+                cart: newCart
+            }
+            this.props.updateCart(newUserProfile)
+            this.setState({
+                setQuantity: false
+            })
+        } catch (err) { ErrorHandler(err) }
     }
 
     render() {
