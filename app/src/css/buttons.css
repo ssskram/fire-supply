@@ -4,6 +4,7 @@
 .btn {
     z-index: 0 !important;
     white-space: normal;
+    opacity: .85;
 }
 
 .btn:hover,
