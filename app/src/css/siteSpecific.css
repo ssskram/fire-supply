@@ -1,5 +1,7 @@
 .nav-button {
     width: 98%;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .btn-item {

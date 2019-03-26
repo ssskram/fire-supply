@@ -48,6 +48,10 @@ export class Items extends React.Component<props, state> {
             this.setState({
                 items: items,
                 itemTypes: types
+            }, () => {
+                if (this.state.selectedType != '' && this.state.searchTerm != '') {
+                    this.executefilter()
+                }
             })
         }
     }
@@ -55,7 +59,7 @@ export class Items extends React.Component<props, state> {
     receiveFilter(filterType, filter) {
         if (filterType == 'selectedTypes') {
             this.setState({
-                selectedType: filter,
+                selectedType: this.state.selectedType == filter ? '' : filter,
                 items: filterItemsByDept(this.props.items, this.props.userProfile)
             }, () => this.executefilter())
         } else {
@@ -96,14 +100,14 @@ export class Items extends React.Component<props, state> {
         const {
             userProfile,
         } = this.props
-        
+
         return (
             <div>
                 <Header department={userProfile.department} />
                 {items == undefined &&
                     <Spinner notice='...loading inventory...' />
                 }
-                {items && items.length > 0 && 
+                {items && items.length > 0 &&
                     <div>
                         <div className='row'>
                             <Search
@@ -120,7 +124,10 @@ export class Items extends React.Component<props, state> {
                             <NullSearch />
                         }
                         <div className='row'>
-                            <ItemTable items={items} userProfile={userProfile} />
+                            <ItemTable
+                                items={items}
+                                userProfile={userProfile}
+                            />
                         </div>
                     </div>
                 }

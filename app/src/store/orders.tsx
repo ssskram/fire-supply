@@ -2,7 +2,6 @@ import { Action, Reducer } from 'redux'
 import { AppThunkAction } from '.'
 import * as constants from './constants'
 import * as types from './types'
-import * as moment from 'moment'
 
 const unloadedState: types.orders = {
     orders: []
