@@ -7,14 +7,22 @@ import "react-table/react-table.css"
 type props = {
     items: Array<types.item>
     userProfile: types.userProfile
+    user: types.user
+    updateCart: (obj) => void
 }
 
 export default class ItemTable extends React.Component<props, {}>{
+    
     render() {
         const columns = [{
             Header: '',
             accessor: 'cartegraphID',
-            Cell: props => <AddToCart item={props.original} />,
+            Cell: props => <AddToCart
+                item={props.original}
+                user={this.props.user}
+                userProfile={this.props.userProfile}
+                updateCart={this.props.updateCart.bind(this)}
+            />,
             maxWidth: 125
         }, {
             Header: 'Item',
@@ -33,7 +41,7 @@ export default class ItemTable extends React.Component<props, {}>{
                 <ReactTable
                     data={this.props.items
                         .filter(item => !this.props.userProfile.cart.some(e => e.item.cartegraphID === item.cartegraphID))
-                        .sort((a,b) => a.itemName.localeCompare(b.itemName))
+                        .sort((a, b) => a.itemName.localeCompare(b.itemName))
                     }
                     columns={columns}
                     loading={false}

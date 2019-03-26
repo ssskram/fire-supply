@@ -1,14 +1,9 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
-import * as userProfile from '../../store/userProfile'
-import * as user from '../../store/user'
 import * as Style from './style'
 import Modal from 'react-responsive-modal'
 import SetQuantity from './itemQuantity'
 
-// fuck typescript
 type props = {
     user: types.user
     userProfile: types.userProfile
@@ -20,7 +15,7 @@ type state = {
     setQuantity: boolean
 }
 
-export class AddToCart extends React.Component<any, state> {
+export default class AddToCart extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
@@ -74,14 +69,3 @@ export class AddToCart extends React.Component<any, state> {
         )
     }
 }
-
-export default connect(
-    (state: ApplicationState) => ({
-        ...state.userProfile,
-        ...state.user
-    }),
-    ({
-        ...userProfile.actionCreators,
-        ...user.actionCreators
-    })
-)(AddToCart)

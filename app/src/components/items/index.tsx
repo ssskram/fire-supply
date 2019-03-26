@@ -4,6 +4,7 @@ import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
 import * as items from '../../store/items'
 import * as userProfile from '../../store/userProfile'
+import * as user from '../../store/user'
 import filterItemsByDept from './functions/filterItemsByDept'
 import collectItemTypes from './functions/collectItemTypes'
 import filterItems from './functions/filterItems'
@@ -18,6 +19,8 @@ import Spinner from '../utilities/spinner'
 type props = {
     items: types.items,
     userProfile: types.userProfile
+    user: types.user
+    updateCart: (obj) => void
 }
 
 type state = {
@@ -127,6 +130,8 @@ export class Items extends React.Component<props, state> {
                             <ItemTable
                                 items={items}
                                 userProfile={userProfile}
+                                user={this.props.user}
+                                updateCart={this.props.updateCart.bind(this)}
                             />
                         </div>
                     </div>
@@ -141,11 +146,13 @@ export class Items extends React.Component<props, state> {
 
 export default connect(
     (state: ApplicationState) => ({
+        ...state.user,
         ...state.userProfile,
         ...state.items
     }),
     ({
         ...userProfile.actionCreators,
-        ...items.actionCreators
+        ...items.actionCreators,
+        ...user.actionCreators
     })
 )(Items as any)
