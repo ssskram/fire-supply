@@ -57,9 +57,10 @@ export const reducer: Reducer<types.orders> = (state: types.orders, incomingActi
     const action = incomingAction as any
     switch (action.type) {
         case constants.getOrders:
-            return { ...state, orders: action.orders.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) }
+            return { ...state, orders: action.orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) }
         case constants.newOrder:
-            return { ...state, orders: state.orders.concat(action.order).sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) }
+            action.order.createdAt = new Date
+            return { ...state, orders: state.orders.concat(action.order).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) }
         case constants.updateOrder:
             return {
                 ...state,
@@ -83,7 +84,7 @@ export const reducer: Reducer<types.orders> = (state: types.orders, incomingActi
                     createdAt: action.order.createdAt,
                     _v: action.order._v
                 } : order
-                ).sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                ).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
             }
     }
     return state || unloadedState

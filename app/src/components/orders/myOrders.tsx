@@ -26,6 +26,7 @@ type state = {
     currentPage: number
     myOrders: types.order[]
     viewOrder: types.order
+    onFilter: boolean
 }
 
 export class MyOrders extends React.Component<props, state> {
@@ -36,12 +37,13 @@ export class MyOrders extends React.Component<props, state> {
             myOrders: props.orders.filter(order => {
                 return (order.user == props.user.email) && (order.department == props.userProfile.department)
             }),
-            viewOrder: undefined
+            viewOrder: undefined,
+            onFilter: false
         }
     }
 
     componentDidMount() {
-        window.scrollTo(0,0)
+        window.scrollTo(0, 0)
     }
 
     componentWillUnmount() {
@@ -49,16 +51,19 @@ export class MyOrders extends React.Component<props, state> {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            myOrders: nextProps.orders.filter(order => {
-                return (order.user == nextProps.user.email) && (order.department == nextProps.userProfile.department)
+        if (this.state.onFilter == false) {
+            this.setState({
+                myOrders: nextProps.orders.filter(order => {
+                    return (order.user == nextProps.user.email) && (order.department == nextProps.userProfile.department)
+                })
             })
-        })
+        }
     }
 
     filter(filteredOrders) {
         this.setState({
-            myOrders: filteredOrders
+            myOrders: filteredOrders,
+            onFilter: true
         })
     }
 
@@ -79,7 +84,7 @@ export class MyOrders extends React.Component<props, state> {
 
         return (
             <div className='col-md-12'>
-                <Header 
+                <Header
                     text='MY ORDERS'
                     userProfile={this.props.userProfile}
                 />

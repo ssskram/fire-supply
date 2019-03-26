@@ -22,6 +22,7 @@ type state = {
     currentPage: number
     ordersByDept: types.order[]
     viewOrder: types.order
+    onFilter: boolean
 }
 
 export class AllOrders extends React.Component<props, state> {
@@ -30,7 +31,8 @@ export class AllOrders extends React.Component<props, state> {
         this.state = {
             currentPage: 1,
             ordersByDept: props.orders.filter(order => order.department == props.userProfile.department),
-            viewOrder: undefined
+            viewOrder: undefined,
+            onFilter: false,
         }
     }
 
@@ -39,6 +41,7 @@ export class AllOrders extends React.Component<props, state> {
     }
 
     componentWillReceiveProps(nextProps) {
+        if (this.state.onFilter == false)
         this.setState({
             ordersByDept: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),
         })
@@ -46,13 +49,13 @@ export class AllOrders extends React.Component<props, state> {
 
     filter(filteredOrders) {
         this.setState({
+            onFilter: true,
             ordersByDept: filteredOrders
         })
     }
 
     render() {
         const { ordersByDept, currentPage } = this.state
-
         const currentItems = returnCurrentItems(ordersByDept, currentPage)
         const pageNumbers = returnPageNumber(ordersByDept)
         const renderItems = currentItems.map((order, key) => {

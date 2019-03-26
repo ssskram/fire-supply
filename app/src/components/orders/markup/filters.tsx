@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Select from '../../formElements/select'
+import Select from 'react-select'
 import * as fh from '../../cart/selects'
 import * as st from '../../admin/markup/statuses'
 import * as types from '../../../store/types'
@@ -53,8 +53,8 @@ export default class Filters extends React.Component<props, state> {
         const isEnabled = location || status
 
         return (
-            <div className='row text-center' style={{ marginBottom: '5px' }}>
-                <div className='col-md-5'>
+            <div className='row text-center' style={{marginBottom: '10px'}}>
+                <div className='col-md-5' style={{ margin: '5px 0px' }}>
                     <Select
                         value={location}
                         header=''
@@ -64,7 +64,7 @@ export default class Filters extends React.Component<props, state> {
                         options={fh.FireHouses}
                     />
                 </div>
-                <div className='col-md-5'>
+                <div className='col-md-5' style={{ margin: '5px 0px' }}>
                     <Select
                         value={status}
                         header=''
@@ -74,8 +74,8 @@ export default class Filters extends React.Component<props, state> {
                         options={st.orderStatuses}
                     />
                 </div>
-                <div className='col-md-2'>
-                    <button disabled={!isEnabled} className='btn btn-warning' onClick={this.clearFilter.bind(this)} style={{ width: '90%' }}>Clear</button>
+                <div className='col-md-2' style={{ margin: '5px 0px' }}>
+                    <button disabled={!isEnabled} className='btn btn-warning' onClick={this.clearFilter.bind(this)} style={{ width: '90%', margin: '0px', padding: '7px' }}>Clear</button>
                 </div>
             </div>
         )

@@ -134,7 +134,7 @@ export class Admin extends React.Component<props, state> {
                 }
                 <Messages />
                 <Header
-                    text="SUPPLY WHAREHOUSE"
+                    text="SUPPLY WAREHOUSE"
                     userProfile={this.props.userProfile}
                 />
                 <hr />
