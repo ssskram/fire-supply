@@ -1,10 +1,19 @@
 import * as React from 'react'
 import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { ApplicationState } from '../../../store'
-import * as messages from '../../../store/messages'
 
-export class Submit extends React.Component<any, any> {
+type props = {
+    isEnabled: boolean
+    submitIt: () => boolean
+    successMessage: () => void
+    errorMessage: () => void
+    closeForm: () => void
+}
+
+type state = {
+    redirect: boolean
+}
+
+export default class Submit extends React.Component<props, state> {
     constructor(props) {
         super(props)
         this.state = {
@@ -35,12 +44,3 @@ export class Submit extends React.Component<any, any> {
         )
     }
 }
-
-export default connect(
-    (state: ApplicationState) => ({
-        ...state.messages
-    }),
-    ({
-        ...messages.actionCreators
-    })
-)(Submit)

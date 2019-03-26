@@ -6,6 +6,7 @@ import { Ghost } from 'react-kawaii'
 import * as userProfile from '../../store/userProfile'
 import * as user from '../../store/user'
 import * as orders from '../../store/orders'
+import * as messages from '../../store/messages'
 import ReactTable from "react-table"
 import Form from './markup/fields'
 import Messages from '../utilities/messages'
@@ -16,6 +17,8 @@ type props = {
     setUserProfile: (object: types.userProfile) => void
     updateCart: (newProfile) => void
     newOrder: (newOrder) => boolean
+    errorMessage: () => void
+    successMessage: () => void
 }
 
 type state = {
@@ -179,6 +182,8 @@ export class Cart extends React.Component<props, state> {
                         userProfile={this.props.userProfile}
                         updateCart={this.props.updateCart.bind(this)}
                         newOrder={this.props.newOrder.bind(this)}
+                        successMessage={this.props.successMessage.bind(this)}
+                        errorMessage={this.props.errorMessage.bind(this)}
                     />
                 }
             </div>
@@ -190,11 +195,13 @@ export default connect(
     (state: ApplicationState) => ({
         ...state.userProfile,
         ...state.user,
-        ...state.orders
+        ...state.orders,
+        ...state.messages
     }),
     ({
         ...userProfile.actionCreators,
         ...user.actionCreators,
-        ...orders.actionCreators
+        ...orders.actionCreators,
+        ...messages.actionCreators
     })
 )(Cart as any)

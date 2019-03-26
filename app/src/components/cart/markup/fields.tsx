@@ -15,6 +15,8 @@ type props = {
     updateCart: (newProfile) => void
     closeForm: () => void
     newOrder: (newOrder) => boolean
+    errorMessage: () => void
+    successMessage: () => void
 }
 
 type state = {
@@ -198,6 +200,8 @@ export default class FormFields extends React.Component<props, state> {
                         isEnabled={isEnabled}
                         submitIt={this.placeOrder.bind(this)}
                         closeForm={() => this.props.closeForm()}
+                        successMessage={this.props.successMessage.bind(this)}
+                        errorMessage={this.props.errorMessage.bind(this)}
                     />
                 </div>
             </Modal>

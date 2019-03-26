@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Cat } from 'react-kawaii'
 import * as style from '../style'
+
 export default class NoOrders extends React.Component<{}, {}> {
 
     render() {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default class NullSearch extends React.Component{
+export default class NullSearch extends React.Component {
 
     render() {
         return (

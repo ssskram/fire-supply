@@ -197,7 +197,10 @@ export default class ModifyOrder extends React.Component<props, state> {
                     </div>
                     <hr />
                     <h4 className='text-center oswald'>SUPPLY FEEDBACK</h4>
-                    <Fields state={this.state} setState={this.setState.bind(this)} />
+                    <Fields
+                        state={this.state}
+                        setState={this.setState.bind(this)}
+                    />
                     <div className='col-md-12 text-center'>
                         <button onClick={this.saveOrder.bind(this)} className='btn btn-success'>Save</button>
                     </div>

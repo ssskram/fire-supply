@@ -1,10 +1,16 @@
 import * as React from 'react'
 import TextArea from '../../formElements/textarea'
 import Select from '../../formElements/select'
+import * as types from '../../../store/types'
 import Input from '../../formElements/input'
 import * as selects from './statuses'
 
-export default class SupplyFields extends React.Component<any, {}> {
+type props = {
+    state: types.order
+    setState: (state: object) => void
+}
+
+export default class SupplyFields extends React.Component<props, {}> {
 
     render() {
         return (

@@ -9,7 +9,6 @@ import Cart from './cartButton'
 
 const allOrders = require('../../images/allOrders.png')
 const singleOrder = require('../../images/singleOrder.png')
-const tp = require('../../images/tp.png')
 
 type props = {
     userProfile: types.userProfile
