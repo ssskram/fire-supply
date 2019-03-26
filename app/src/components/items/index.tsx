@@ -49,7 +49,7 @@ export class Items extends React.Component<props, state> {
                 items: items,
                 itemTypes: types
             }, () => {
-                if (this.state.selectedType != '' && this.state.searchTerm != '') {
+                if (this.state.selectedType != '' || this.state.searchTerm != '') {
                     this.executefilter()
                 }
             })

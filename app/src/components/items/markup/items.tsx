@@ -31,9 +31,10 @@ export default class ItemTable extends React.Component<props, {}>{
         return (
             <div className='col-md-12'>
                 <ReactTable
-                    data={this.props.items.filter(item => {
-                        return !this.props.userProfile.cart.some(e => e.item.cartegraphID === item.cartegraphID)
-                    })}
+                    data={this.props.items
+                        .filter(item => !this.props.userProfile.cart.some(e => e.item.cartegraphID === item.cartegraphID))
+                        .sort((a,b) => a.itemName.localeCompare(b.itemName))
+                    }
                     columns={columns}
                     loading={false}
                     minRows={0}
