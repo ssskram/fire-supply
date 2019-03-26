@@ -34,6 +34,10 @@ export class AllOrders extends React.Component<props, state> {
         }
     }
 
+    componentDidMount() {
+        window.scrollTo(0,0)
+    }
+
     componentWillReceiveProps(nextProps) {
         this.setState({
             ordersByDept: nextProps.orders.filter(order => order.department == nextProps.userProfile.department),

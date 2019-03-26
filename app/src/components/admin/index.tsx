@@ -51,6 +51,7 @@ export class Admin extends React.Component<props, state> {
     }
 
     componentDidMount() {
+        window.scrollTo(0,0)
         this.checkPermissions(this.props.userProfile)
     }
 

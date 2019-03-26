@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import { Nav, NavItem } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
@@ -21,24 +23,28 @@ export class CartButton extends React.Component<props, {}> {
         return (
             <div>
                 {userProfile.cart.length == 0 &&
-                    <Link to={'/'}>
-                        <button className='btn btn-success nav-button cart'>
-                            <div style={Style.orderFont}>
-                                <img src={fullCart as string} className='img-responsive center-block' />
-                                <div>Your cart is empty</div>
-                            </div>
-                        </button>
-                    </Link>
+                    <LinkContainer to={'/'}>
+                        <NavItem>
+                            <button className='btn btn-success nav-button cart'>
+                                <div style={Style.orderFont}>
+                                    <img src={fullCart as string} className='img-responsive center-block' />
+                                    <div>Your cart is empty</div>
+                                </div>
+                            </button>
+                        </NavItem>
+                    </LinkContainer>
                 }
                 {userProfile.cart.length > 0 &&
-                    <Link to={'/Cart'}>
-                        <button className='btn btn-success nav-button cart'>
-                            <div style={Style.orderFont}>
-                                <img src={fullCart as string} className='img-responsive center-block' />
-                                <div>Shopping cart ({this.props.userProfile.cart.length})</div>
-                            </div>
-                        </button>
-                    </Link>
+                    <LinkContainer to={'/Cart'}>
+                        <NavItem>
+                            <button className='btn btn-success nav-button cart'>
+                                <div style={Style.orderFont}>
+                                    <img src={fullCart as string} className='img-responsive center-block' />
+                                    <div>Shopping cart ({this.props.userProfile.cart.length})</div>
+                                </div>
+                            </button>
+                        </NavItem>
+                    </LinkContainer>
                 }
             </div>
         )

@@ -5,8 +5,8 @@
 .navbar .navbar-nav .active a:hover,
 .navbar .navbar-nav .active a:focus {
     background-image: none;
-    background-color: #4189C7;
-    color: white;
+    background-color: transparent;
+    color: transparent;
 }
 
 .navbar {
@@ -101,10 +101,6 @@
         height: 100%;
     }
 
-    .navbar-inverse {
-        overflow: auto;
-    }
-
     .navbar-header {
         float: none;
     }
@@ -138,7 +134,7 @@
     .main-nav {
         height: auto;
         max-height: 100vh;
-        overflow-x: hidden;
+        overflow-x: scroll;
     }
 
     .navbar-brand {
@@ -159,7 +155,7 @@
         font-size: 18px;
         text-align: center;
         padding: 0px;
-        margin: 5px 0px;
+        margin: 0px 0px;
     }
 
     .navbar-collapse,

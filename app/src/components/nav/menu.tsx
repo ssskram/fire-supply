@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Nav, NavItem } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import { connect } from 'react-redux'
 import { ApplicationState } from '../../store'
 import * as types from '../../store/types'
@@ -18,34 +19,41 @@ export class Menu extends React.Component<props, {}> {
 
     public render() {
         return (
-            <div className='nav-container'>
+            <Nav>
                 {this.props.userProfile.department != '...loading' &&
-                    <Link to={'/'} >
-                        <button className='btn btn-secondary nav-button'>
-                            <div>Shop {this.props.userProfile.department}</div>
-                        </button>
-                    </Link>
+                    <LinkContainer to={'/'} >
+                        <NavItem>
+                            <button className='btn btn-secondary nav-button'>
+                                <div>Shop {this.props.userProfile.department}</div>
+                            </button>
+                        </NavItem>
+                    </LinkContainer>
                 }
-                <Link to={'/MyOrders'}>
-                    <button className='btn btn-primary nav-button myOrders' title='My orders'>
-                        <img src={singleOrder as string} className='img-responsive center-block' />
-                    </button>
-                </Link>
-                <Link to={'/AllOrders'}>
-                    <button className='btn btn-primary nav-button allOrders' title='All orders'>
-                        <img src={allOrders as string} className='img-responsive center-block' />
-                    </button>
-                </Link>
-                <hr />
+                <LinkContainer to={'/MyOrders'}>
+                    <NavItem>
+                        <button className='btn btn-primary nav-button myOrders' title='My orders'>
+                            <img src={singleOrder as string} className='img-responsive center-block' />
+                        </button>
+                    </NavItem>
+                </LinkContainer>
+                <LinkContainer to={'/AllOrders'}>
+                    <NavItem>
+                        <button className='btn btn-primary nav-button allOrders' title='All orders'>
+                            <img src={allOrders as string} className='img-responsive center-block' />
+                        </button>
+                    </NavItem>
+                </LinkContainer>
                 <Cart />
                 {this.props.userProfile.isAdmin &&
-                    <Link to={'/Admin'}>
-                        <button className='btn btn-danger nav-button'>
-                            Administration
+                    <LinkContainer to={'/Admin'}>
+                        <NavItem>
+                            <button className='btn btn-danger nav-button'>
+                                Administration
                             </button>
-                    </Link>
+                        </NavItem>
+                    </LinkContainer>
                 }
-            </div>
+            </Nav>
         )
     }
 }

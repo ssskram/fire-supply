@@ -40,6 +40,10 @@ export class MyOrders extends React.Component<props, state> {
         }
     }
 
+    componentDidMount() {
+        window.scrollTo(0,0)
+    }
+
     componentWillUnmount() {
         this.props.clearMessage()
     }
