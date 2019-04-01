@@ -42,7 +42,8 @@ export const FireHouses = [
     { value: 'BAT 4', label: 'BAT 4' },
     { value: 'BAT 4 Bin', label: 'BAT 4 Bin' },
     { value: 'DEP', label: 'DEP' },
-    { value: 'DEP Bin', label: 'DEP Bin' }
+    { value: 'DEP Bin', label: 'DEP Bin' },
+    { value: 'SCBA', label: 'SCBA' }
 ]
 
 export const YesNo = [
