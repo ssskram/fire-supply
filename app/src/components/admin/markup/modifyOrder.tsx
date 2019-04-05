@@ -8,7 +8,6 @@ import { narcanContainer, equipmentContainer } from '../../cart/style'
 import doesOrderContainNarcan from '../../cart/functions/doesOrderContainNarcan'
 import doesOrderContainEquipment from '../../cart/functions/doesOrderContainEquipment'
 import Fields from './fields'
-import Number from 'react-currency-input'
 import ErrorHandler from '../../../functions/errorHandler'
 
 type props = {
@@ -104,15 +103,12 @@ export default class ModifyOrder extends React.Component<props, state> {
             Header: 'Received',
             accessor: 'quantityReceived',
             Cell: props => <div>
-                <Number
-                    type='search'
-                    selectAllOnFocus={false}
-                    autoFocus={false}
+                <input
+                    type='number'
                     className='form-control'
-                    style={{ fontWeight: '600', color: '#a94442' }}
-                    precision="0"
+                    style={{ fontWeight: 'bold', color: '#a94442' }}
                     value={props.original.quantityReceived}
-                    onChangeEvent={(e, m, f) => this.updateSupplies(f, props.original._id)}
+                    onChange={(e) => this.updateSupplies(e.target.value, props.original._id)}
                 />
             </div>
         }]

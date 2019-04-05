@@ -19,6 +19,7 @@ export default class SelectElement extends React.Component<any, any> {
                         removeSelected={this.props.multi}
                         multi={this.props.multi}
                         clearable={this.props.multi}
+                        autoFocus={false}
                     />
                 </div>
             </div>
