@@ -10,7 +10,7 @@ const unloadedState: types.items = {
 
 export const actionCreators = {
     loadItems: (): AppThunkAction<any> => (dispatch) => {
-            fetch("https://cartegraphapi.azurewebsites.us/pghSupply/allItems", {
+            fetch("https://cartegraphapi-staging.azurewebsites.us/pghSupply/allItems", {
                 method: 'get',
                 headers: new Headers({
                     'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API

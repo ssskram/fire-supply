@@ -27,7 +27,8 @@ export interface item {
     itemName: string
     itemType: string
     itemUnit: string
-    department?: string
+    department: string
+    hasImage: boolean
 }
 
 // orders

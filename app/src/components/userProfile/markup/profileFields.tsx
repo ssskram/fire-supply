@@ -20,7 +20,7 @@ type props = {
 
 const departments = [
     { value: "Bureau of Fire", label: "Bureau of Fire" },
-    { value: "Department of Public Works", label: "Department of Public Works" }
+    { value: "DPW/Parks", label: "DPW/Parks" }
 ]
 
 const dropdownStyle = '.custom-modal { overflow: visible; } .Select-menu-outer { overflow: visible}'
