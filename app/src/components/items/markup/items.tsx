@@ -72,7 +72,7 @@ export default class ItemTable extends React.Component<props, {}> {
           Cell: props => {
             return props.value == true ? (
               <LoadingImage
-                src={getInventoryImage(props.original.cartegraphID)}
+                call={() => getInventoryImage(props.original.cartegraphID)}
                 style={imgSize}
               />
             ) : (

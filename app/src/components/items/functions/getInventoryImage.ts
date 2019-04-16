@@ -1,15 +1,15 @@
 export default async function getImage(oid) {
   const call = await fetch(
-    "https://cartegraphapi-staging.azurewebsites.us/pghSupply/itemImage?oid=" +
-      oid,
+    "http://localhost:3000/pghSupply/itemImage?oid=" + oid,
     {
       method: "get",
       headers: new Headers({
-        'Authorization': 'Bearer ' + process.env.REACT_APP_CART_API
+        Authorization: "Bearer " + process.env.REACT_APP_CART_API
       })
     }
   );
-  const image = await call
-  console.log(image)
-  return null
+  const blob = await call.blob();
+  const src = URL.createObjectURL(blob);
+  console.log(src);
+  return src;
 }

@@ -10,9 +10,10 @@ export default class LoadingImage extends React.Component<any, any> {
     };
   }
 
-  onLoad() {
+  async componentDidMount() {
+    const response = await this.props.call();
     this.setState({
-      imagePath: this.props.src
+      imagePath: response
     });
   }
 
@@ -26,14 +27,6 @@ export default class LoadingImage extends React.Component<any, any> {
           className="center-block"
           src={imagePath}
         />
-        <div className="hidden">
-          <img
-            src={this.props.src}
-            style={this.props.style}
-            onLoad={this.onLoad.bind(this)}
-            className="center-block"
-          />
-        </div>
       </div>
     );
   }
