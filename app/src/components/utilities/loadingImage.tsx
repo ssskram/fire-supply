@@ -2,7 +2,18 @@ import * as React from "react";
 
 const placeholder = require("./../../images/image-placeholder.png");
 
-export default class LoadingImage extends React.Component<any, any> {
+type props = {
+  call: () => void;
+  style: object;
+  oid: number;
+};
+
+type state = {
+  imagePath: string;
+};
+
+export default class LoadingImage extends React.Component<props, state> {
+  mounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -10,11 +21,31 @@ export default class LoadingImage extends React.Component<any, any> {
     };
   }
 
-  async componentDidMount() {
-    const response = await this.props.call();
+  componentDidMount() {
+    this.mounted = true;
+    this.setImage(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.oid != this.props.oid) {
+      this.setState({
+        imagePath: placeholder
+      });
+    }
+    if (this.mounted) {
+      this.setImage(nextProps);
+    }
+  }
+
+  async setImage(props) {
+    const response = await props.call();
     this.setState({
       imagePath: response
     });
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   public render() {

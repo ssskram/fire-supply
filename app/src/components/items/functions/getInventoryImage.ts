@@ -1,6 +1,7 @@
 export default async function getImage(oid) {
   const call = await fetch(
-    "http://localhost:3000/pghSupply/itemImage?oid=" + oid,
+    "https://cartegraphapi-staging.azurewebsites.us/pghSupply/itemImage?oid=" +
+      oid,
     {
       method: "get",
       headers: new Headers({
@@ -10,6 +11,5 @@ export default async function getImage(oid) {
   );
   const blob = await call.blob();
   const src = URL.createObjectURL(blob);
-  console.log(src);
   return src;
 }

@@ -16,7 +16,8 @@ type props = {
 
 const imgSize = {
   height: "100px",
-  width: "100px"
+  width: "100px",
+  padding: "3px"
 };
 
 export default class ItemTable extends React.Component<props, {}> {
@@ -74,6 +75,7 @@ export default class ItemTable extends React.Component<props, {}> {
               <LoadingImage
                 call={() => getInventoryImage(props.original.cartegraphID)}
                 style={imgSize}
+                oid={props.original.cartegraphID}
               />
             ) : (
               <img src={placeholder} style={imgSize} className="center-block" />
