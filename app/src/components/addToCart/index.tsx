@@ -73,6 +73,7 @@ export default class AddToCart extends React.Component<props, state> {
               item={item}
               type={"Add to cart"}
               returnQuantity={this.newCart.bind(this)}
+              userProfile={this.props.userProfile}
             />
           </Modal>
         )}

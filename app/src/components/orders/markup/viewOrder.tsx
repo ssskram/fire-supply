@@ -30,16 +30,20 @@ export default class ViewOrder extends React.Component<props, {}> {
             accessor: 'item',
             Cell: props => <div>{props.value.itemType}</div>
         }, {
-            Header: 'Unit',
-            accessor: 'item',
-            Cell: props => <div>{props.value.itemUnit}</div>
-        }, {
             Header: 'Ordered',
             accessor: 'quantityOrdered',
         }, {
             Header: 'Received',
             accessor: 'quantityReceived',
         }]
+
+        if (this.props.order.department == "Bureau of Fire") {
+            columns.splice(2, 0, {
+              Header: "Unit",
+              accessor: "item",
+              Cell: props => <div>{props.value.itemUnit}</div>
+            });
+          }
 
         return (
             <Modal
@@ -100,6 +104,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                                     showPagination={false}
                                     showPageSizeOptions={false}
                                     noDataText=''
+                                    defaultPageSize={500}
                                     getTdProps={() => ({
                                         style: {
                                             padding: '10px',
@@ -112,13 +117,13 @@ export default class ViewOrder extends React.Component<props, {}> {
                                 />
                             }
                         </div>
-                        {order.miscItems &&
+                        {order.miscItems && this.props.order.department == "Bureau of Fire" &&
                             <div className='text-center' style={style.otherItems}>
                                 <b>Misc. items:</b><br />
                                 {order.miscItems}
                             </div>
                         }
-                        {doesOrderContainNarcan(order.supplies) &&
+                        {doesOrderContainNarcan(order.supplies) && this.props.order.department == "Bureau of Fire" &&
                             <div style={narcanContainer} className='text-center'>
                                 <b>NARCAN</b>
                                 <div><b>In posession of cases:</b> {order.narcanCases.toString()}</div>
@@ -130,7 +135,7 @@ export default class ViewOrder extends React.Component<props, {}> {
                                 }
                             </div>
                         }
-                        {doesOrderContainEquipment(order.supplies).check &&
+                        {doesOrderContainEquipment(order.supplies).check && this.props.order.department == "Bureau of Fire" &&
                             <div style={equipmentContainer} className='text-center'>
                                 <b>Equipment Justification</b>
                                 <div>

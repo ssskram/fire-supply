@@ -65,7 +65,7 @@ export class Admin extends React.Component<props, state> {
 
   componentWillReceiveProps(nextProps, nextState) {
     this.checkPermissions(nextProps.userProfile);
-    if (nextState.onFilter == false) {
+    if (this.state.onFilter == false) {
       this.setState({
         orders: nextProps.orders.filter(
           order => order.department == nextProps.userProfile.department
