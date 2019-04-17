@@ -1,6 +1,6 @@
 export default async function getImage(oid) {
   const call = await fetch(
-    "https://cartegraphapi-staging.azurewebsites.us/pghSupply/itemImage?oid=" +
+    "https://cartegraphapi.azurewebsites.us/pghSupply/itemImage?oid=" +
       oid,
     {
       method: "get",
