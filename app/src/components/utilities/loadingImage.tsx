@@ -5,7 +5,7 @@ const placeholder = require("./../../images/image-placeholder.png");
 type props = {
   call: () => void;
   style: object;
-  oid: number;
+  oid: string;
 };
 
 type state = {
