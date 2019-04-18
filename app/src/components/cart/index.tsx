@@ -7,6 +7,7 @@ import * as userProfile from "../../store/userProfile";
 import * as user from "../../store/user";
 import * as orders from "../../store/orders";
 import * as messages from "../../store/messages";
+import * as locations from "../../store/deliveryLocations";
 import ReactTable from "react-table";
 import Form from "./markup/fields";
 import Messages from "../utilities/messages";
@@ -15,6 +16,8 @@ import ErrorHandler from "../../functions/errorHandler";
 type props = {
   user: types.user;
   userProfile: types.userProfile;
+  locations: types.location[];
+  loadLocations: () => void;
   setUserProfile: (object: types.userProfile) => void;
   updateCart: (newProfile) => void;
   newOrder: (newOrder) => boolean;
@@ -36,6 +39,10 @@ export class Cart extends React.Component<props, state> {
       cart: props.userProfile.cart,
       showForm: false
     };
+  }
+
+  componentDidMount() {
+    this.props.loadLocations()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -243,6 +250,7 @@ export class Cart extends React.Component<props, state> {
             closeForm={() => this.setState({ showForm: false })}
             user={this.props.user}
             userProfile={this.props.userProfile}
+            locations={this.props.locations}
             updateCart={this.props.updateCart.bind(this)}
             newOrder={this.props.newOrder.bind(this)}
             successMessage={this.props.successMessage.bind(this)}
@@ -259,12 +267,14 @@ export default connect(
     ...state.userProfile,
     ...state.user,
     ...state.orders,
+    ...state.locations,
     ...state.messages
   }),
   {
     ...userProfile.actionCreators,
     ...user.actionCreators,
     ...orders.actionCreators,
+    ...locations.actionCreators,
     ...messages.actionCreators
   }
 )(Cart as any);

@@ -9,10 +9,12 @@ import * as style from "../style";
 import doesOrderContainNarcan from "../functions/doesOrderContainNarcan";
 import doesOrderContainEquipment from "../functions/doesOrderContainEquipment";
 import { Helmet } from "react-helmet";
+import Spinner from "../../utilities/spinner";
 
 type props = {
   user: types.user;
   userProfile: types.userProfile;
+  locations: types.location[];
   updateCart: (newProfile) => void;
   closeForm: () => void;
   newOrder: (newOrder) => boolean;
@@ -130,6 +132,14 @@ export default class FormFields extends React.Component<props, state> {
     const containsNarcan = doesOrderContainNarcan(this.props.userProfile.cart);
     const isEnabled = this.validSubmission(containsEquipment, containsNarcan);
 
+    let locations = [];
+    this.props.locations.forEach(location => {
+      if (location.department == this.props.userProfile.department) {
+        const select = { value: location.location, label: location.location };
+        locations.push(select);
+      }
+    });
+
     return (
       <Modal
         open={true}
@@ -154,7 +164,7 @@ export default class FormFields extends React.Component<props, state> {
             placeholder="Select location"
             onChange={location => this.setState({ location })}
             multi={false}
-            options={selects.FireHouses}
+            options={locations}
             required
           />
           {this.props.userProfile.department == "Bureau of Fire" && (
@@ -251,6 +261,9 @@ export default class FormFields extends React.Component<props, state> {
             errorMessage={this.props.errorMessage.bind(this)}
           />
         </div>
+        {this.props.locations.length == 0 && (
+          <Spinner notice="...loading delivery locations..." />
+        )}
       </Modal>
     );
   }

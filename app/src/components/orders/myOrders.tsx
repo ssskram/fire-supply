@@ -7,6 +7,7 @@ import * as orders from "../../store/orders";
 import * as messages from "../../store/messages";
 import * as user from "../../store/user";
 import * as userProfile from "../../store/userProfile";
+import * as locations from "../../store/deliveryLocations";
 import Card from "./markup/card";
 import NoOrders from "./markup/noOrders";
 import ViewOrder from "./markup/viewOrder";
@@ -20,6 +21,7 @@ type props = {
   orders: types.order[];
   user: types.user;
   userProfile: types.userProfile;
+  locations: types.location[];
   clearMessage: () => void;
 };
 
@@ -102,6 +104,7 @@ export class MyOrders extends React.Component<props, state> {
               order.department == this.props.userProfile.department
             );
           })}
+          locations={this.props.locations.filter(l => l.department == this.props.userProfile.department)}
           filter={this.filter.bind(this)}
         />
         {myOrders.length > 0 && (
@@ -143,12 +146,14 @@ export default connect(
     ...state.orders,
     ...state.user,
     ...state.userProfile,
-    ...state.messages
+    ...state.messages,
+    ...state.locations
   }),
   {
     ...orders.actionCreators,
     ...user.actionCreators,
     ...userProfile.actionCreators,
-    ...messages.actionCreators
+    ...messages.actionCreators,
+    ...locations.actionCreators
   }
 )(MyOrders as any);

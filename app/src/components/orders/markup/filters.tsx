@@ -1,86 +1,102 @@
-import * as React from 'react'
-import Select from 'react-select'
-import * as fh from '../../cart/selects'
-import * as st from '../../admin/markup/statuses'
-import * as types from '../../../store/types'
-import ErrorHandler from '../../../functions/errorHandler'
+import * as React from "react";
+import Select from "react-select";
+import * as fh from "../../cart/selects";
+import * as st from "../../admin/markup/statuses";
+import * as types from "../../../store/types";
+import ErrorHandler from "../../../functions/errorHandler";
 
 type props = {
-    orders: types.order[]
-    filter: (obj) => void
-}
+  orders: types.order[];
+  locations: types.location[];
+  filter: (obj) => void;
+};
 
 type state = {
-    location: any
-    status: any
-}
+  location: any;
+  status: any;
+};
 
 export default class Filters extends React.Component<props, state> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            location: undefined,
-            status: undefined
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: undefined,
+      status: undefined
+    };
+  }
+
+  filter() {
+    try {
+      const filtered = this.props.orders.filter(order => {
+        if (this.state.location) {
+          if (!order.location.includes(this.state.location.value)) {
+            return false;
+          }
         }
+        if (this.state.status) {
+          if (!order.status.includes(this.state.status.value)) {
+            return false;
+          }
+        }
+        return true;
+      });
+      this.props.filter(filtered);
+    } catch (err) {
+      ErrorHandler(err);
     }
+  }
 
-    filter() {
-        try {
-            const filtered = this.props.orders.filter(order => {
-                if (this.state.location) {
-                    if (!order.location.includes(this.state.location.value)) {
-                        return false
-                    }
-                }
-                if (this.state.status) {
-                    if (!order.status.includes(this.state.status.value)) {
-                        return false
-                    }
-                }
-                return true
-            })
-            this.props.filter(filtered)
-        } catch (err) { ErrorHandler(err) }
-    }
+  clearFilter() {
+    this.setState({
+      location: "",
+      status: ""
+    });
+    this.props.filter(this.props.orders);
+  }
 
-    clearFilter() {
-        this.setState({
-            location: '',
-            status: ''
-        })
-        this.props.filter(this.props.orders)
-    }
+  render() {
+    const { location, status } = this.state;
+    const isEnabled = location || status;
+    let locations = [];
+    this.props.locations.forEach(l => {
+      locations.push({ value: l.location, label: l.location });
+    });
 
-    render() {
-        const { location, status } = this.state
-        const isEnabled = location || status
-
-        return (
-            <div className='row text-center' style={{ marginBottom: '10px' }}>
-                <div className='col-md-5' style={{ margin: '5px 0px' }}>
-                    <Select
-                        value={location}
-                        header=''
-                        placeholder='Filter by recipient'
-                        onChange={location => this.setState({ location }, () => this.filter())}
-                        multi={false}
-                        options={fh.FireHouses}
-                    />
-                </div>
-                <div className='col-md-5' style={{ margin: '5px 0px' }}>
-                    <Select
-                        value={status}
-                        header=''
-                        placeholder='Filter by status'
-                        onChange={status => this.setState({ status }, () => this.filter())}
-                        multi={false}
-                        options={st.orderStatuses}
-                    />
-                </div>
-                <div className='col-md-2' style={{ margin: '5px 0px' }}>
-                    <button disabled={!isEnabled} className='btn btn-warning' onClick={this.clearFilter.bind(this)} style={{ width: '90%', margin: '0px', padding: '7px' }}>Clear</button>
-                </div>
-            </div>
-        )
-    }
+    return (
+      <div className="row" style={{ marginBottom: "10px" }}>
+        <div className="col-md-5" style={{ margin: "5px 0px" }}>
+          <Select
+            value={location}
+            header=""
+            placeholder="Filter by recipient"
+            onChange={location =>
+              this.setState({ location }, () => this.filter())
+            }
+            multi={false}
+            options={locations}
+          />
+        </div>
+        <div className="col-md-5" style={{ margin: "5px 0px" }}>
+          <Select
+            value={status}
+            header=""
+            placeholder="Filter by status"
+            onChange={status => this.setState({ status }, () => this.filter())}
+            multi={false}
+            options={st.orderStatuses}
+          />
+        </div>
+        <div className="col-md-2 text-center" style={{ margin: "5px 0px" }}>
+          <button
+            disabled={!isEnabled}
+            className="btn btn-warning"
+            onClick={this.clearFilter.bind(this)}
+            style={{ width: "90%", margin: "0px", padding: "7px" }}
+          >
+            Clear
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
