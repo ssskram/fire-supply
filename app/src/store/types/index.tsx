@@ -8,7 +8,7 @@ export interface user {
 
 // user profile
 export interface userProfile {
-    department: string
+    department: "Bureau of Fire" | "DPW/Parks"
     isAdmin: boolean
     cart: Array<cartItem>
 }
@@ -24,10 +24,11 @@ export interface items {
 }
 export interface item {
     cartegraphID: string
+    inventoryID: string
     itemName: string
     itemType: string
     itemUnit: string
-    department: string
+    department: "Bureau of Fire" | "DPW/Parks"
     hasImage: boolean
 }
 
@@ -39,7 +40,7 @@ export interface order {
     _id: string
     user: string
     userName: string
-    department: string
+    department: "Bureau of Fire" | "DPW/Parks"
     location: string
     comments: string
     emergencyOrder: boolean
@@ -60,6 +61,15 @@ export interface supplyItem {
     item: item
     quantityOrdered: number
     quantityReceived: number
+}
+
+// delivery locations
+export interface locations {
+    locations: location[]
+}
+export interface location{
+    location: string
+    department: "Bureau of Fire" | "DPW/Parks"
 }
 
 // message

@@ -20,6 +20,9 @@ export const getOrders = 'getOrders'
 export const newOrder = 'newOrder'
 export const updateOrder = 'updateOrder'
 
+// locations
+export const getLocations = 'getLocations'
+
 // messages
 export const newMessage = 'newMessage'
 export const success = 'successMessage'
