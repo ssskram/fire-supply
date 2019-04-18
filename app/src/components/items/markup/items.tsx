@@ -83,6 +83,10 @@ export default class ItemTable extends React.Component<props, {}> {
           }
         },
         {
+          Header: "ID",
+          accessor: "inventoryID"
+        },
+        {
           Header: "Item",
           accessor: "itemName",
           Cell: props => <b>{props.value}</b>

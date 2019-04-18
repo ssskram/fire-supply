@@ -130,6 +130,14 @@ export default class ModifyOrder extends React.Component<props, state> {
       });
     }
 
+    if (this.props.order.department == "DPW/Parks") {
+      columns.splice(1, 0, {
+        Header: "ID",
+        accessor: "item",
+        Cell: props => <div>{props.value.inventoryID}</div>
+      });
+    }
+
     return (
       <Modal
         open={true}

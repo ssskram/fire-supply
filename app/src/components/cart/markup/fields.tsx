@@ -57,6 +57,7 @@ export default class FormFields extends React.Component<props, state> {
       const orderItem = {
         item: {
           cartegraphID: c.item.cartegraphID,
+          inventoryID: c.item.inventoryID,
           itemName: c.item.itemName,
           itemType: c.item.itemType,
           itemUnit: c.item.itemUnit
@@ -71,7 +72,9 @@ export default class FormFields extends React.Component<props, state> {
       department: this.props.userProfile.department,
       location: this.state.location ? this.state.location.value : undefined,
       comments: this.state.comments,
-      emergencyOrder: this.state.emergencyOrder ? this.state.emergencyOrder.value : undefined,
+      emergencyOrder: this.state.emergencyOrder
+        ? this.state.emergencyOrder.value
+        : undefined,
       emergencyJustification: this.state.emergencyJustification,
       narcanCases: this.state.narcanCases
         ? this.state.narcanCases.value

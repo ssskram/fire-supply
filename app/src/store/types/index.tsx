@@ -8,7 +8,7 @@ export interface user {
 
 // user profile
 export interface userProfile {
-    department: "Bureau of Fire" | "DPW/Parks"
+    department: "Bureau of Fire" | "DPW/Parks" | "...loading"
     isAdmin: boolean
     cart: Array<cartItem>
 }

@@ -84,6 +84,9 @@ export class UpdateQuantity extends React.Component<props, state> {
         {userProfile.department == "Bureau of Fire" && (
           <h5>Unit: {item.itemUnit}</h5>
         )}
+        {userProfile.department == "DPW/Parks" && (
+          <h5>Inventory ID: {item.inventoryID}</h5>
+        )}
         {limitExceeded && (
           <div className="alert alert-danger">
             Sorry, you can't have that much.

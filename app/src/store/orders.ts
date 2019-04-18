@@ -95,28 +95,28 @@ export const reducer: Reducer<types.orders> = (
         orders: state.orders
           .map(order => {
             return order._id == action.order._id
-            ? {
-                ...order,
-                _id: action.order._id,
-                user: action.order.user,
-                userName: action.order.userName,
-                department: action.order.department,
-                location: action.order.location,
-                comments: action.order.comments,
-                emergencyOrder: action.order.emergencyOrder,
-                emergencyJustification: action.order.emergencyJustification,
-                narcanCases: action.order.narcanCases,
-                narcanAdministeredUnknown:
-                  action.order.narcanAdministeredUnknown,
-                miscItems: action.order.miscItems,
-                supplies: action.order.supplies,
-                status: action.order.status,
-                supplyComments: action.order.supplyComments,
-                receivedBy: action.order.receivedBy,
-                createdAt: action.order.createdAt,
-                _v: action.order._v
-            }
-            : order
+              ? {
+                  ...order,
+                  _id: action.order._id,
+                  user: action.order.user,
+                  userName: action.order.userName,
+                  department: action.order.department,
+                  location: action.order.location,
+                  comments: action.order.comments,
+                  emergencyOrder: action.order.emergencyOrder,
+                  emergencyJustification: action.order.emergencyJustification,
+                  narcanCases: action.order.narcanCases,
+                  narcanAdministeredUnknown:
+                    action.order.narcanAdministeredUnknown,
+                  miscItems: action.order.miscItems,
+                  supplies: action.order.supplies,
+                  status: action.order.status,
+                  supplyComments: action.order.supplyComments,
+                  receivedBy: action.order.receivedBy,
+                  createdAt: action.order.createdAt,
+                  _v: action.order._v
+                }
+              : order;
           })
           .sort(
             (a, b) =>
