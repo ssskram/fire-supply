@@ -45,6 +45,7 @@ export interface order {
     comments: string
     emergencyOrder: boolean
     emergencyJustification: string
+    cartegraphId: string
     narcanCases: boolean
     narcanAdministeredUnknown: string
     equipmentJustification: string

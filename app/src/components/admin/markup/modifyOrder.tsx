@@ -32,6 +32,7 @@ export default class ModifyOrder extends React.Component<props, state> {
       comments: props.order.comments,
       emergencyOrder: props.order.emergencyOrder,
       emergencyJustification: props.order.emergencyJustification,
+      cartegraphId: props.order.cartegraphId,
       narcanCases: props.order.narcanCases,
       narcanAdministeredUnknown: props.order.narcanAdministeredUnknown,
       equipmentJustification: props.order.equipmentJustification,
@@ -81,6 +82,7 @@ export default class ModifyOrder extends React.Component<props, state> {
       location,
       emergencyOrder,
       emergencyJustification,
+      cartegraphId,
       miscItems,
       narcanCases,
       narcanAdministeredUnknown,
@@ -153,6 +155,7 @@ export default class ModifyOrder extends React.Component<props, state> {
           <div className="text-center">
             <h5 style={style.viewOrderHeader}>{department}</h5>
             <h4 className="ubuntu">{location}</h4>
+            {/* is emergency && PBF order */}
             {emergencyOrder && this.props.order.department == "Bureau of Fire" && (
               <div
                 style={{ marginBottom: "5px" }}
@@ -206,6 +209,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                 />
               )}
             </div>
+            {/* has misc items && is PBF order */}
             {miscItems && this.props.order.department == "Bureau of Fire" && (
               <div className="text-center" style={style.otherItems}>
                 <b>Misc. items:</b>
@@ -213,6 +217,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                 {miscItems}
               </div>
             )}
+            {/* has narcan && is PBF order */}
             {doesOrderContainNarcan(supplies) &&
               this.props.order.department == "Bureau of Fire" && (
                 <div style={narcanContainer} className="text-center">
@@ -231,6 +236,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                   )}
                 </div>
               )}
+              {/* has equipment && is PBF order */}
             {doesOrderContainEquipment(supplies).check &&
               this.props.order.department == "Bureau of Fire" && (
                 <div style={equipmentContainer} className="text-center">
