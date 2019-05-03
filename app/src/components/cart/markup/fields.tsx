@@ -29,7 +29,6 @@ type state = {
   emergencyOrder: select;
   emergencyJustification: string;
   narcanCases: select;
-  cartegraphID: string;
   narcanAdministeredUnknown: string;
   equipmentJustification: string;
 };
@@ -48,7 +47,6 @@ export default class FormFields extends React.Component<props, state> {
       comments: "",
       emergencyOrder: undefined,
       emergencyJustification: "",
-      cartegraphID: "",
       narcanCases: undefined,
       narcanAdministeredUnknown: "",
       equipmentJustification: ""

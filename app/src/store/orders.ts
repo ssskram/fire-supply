@@ -42,6 +42,7 @@ export const actionCreators = {
     }
   },
   updateOrder: (order): AppThunkAction<any> => async dispatch => {
+    console.log(order)
     const response = await fetch(
       "https://mongo-proxy.azurewebsites.us/save/updateOrder",
       {
@@ -105,6 +106,7 @@ export const reducer: Reducer<types.orders> = (
                   comments: action.order.comments,
                   emergencyOrder: action.order.emergencyOrder,
                   emergencyJustification: action.order.emergencyJustification,
+                  cartegraphId: action.order.cartegraphId,
                   narcanCases: action.order.narcanCases,
                   narcanAdministeredUnknown:
                     action.order.narcanAdministeredUnknown,

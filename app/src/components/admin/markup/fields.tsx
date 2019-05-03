@@ -25,6 +25,16 @@ export default class SupplyFields extends React.Component<props, {}> {
           multi={false}
           options={selects.orderStatuses}
         />
+        {this.props.state.department == "DPW/Parks" && (
+          <Input
+            value={this.props.state.cartegraphId}
+            header="Cartegraph ID"
+            placeholder="Not visible to users"
+            callback={e =>
+              this.props.setState({ cartegraphId: e.target.value })
+            }
+          />
+        )}
         <TextArea
           value={this.props.state.supplyComments}
           header="Comments"

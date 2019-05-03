@@ -82,7 +82,6 @@ export default class ModifyOrder extends React.Component<props, state> {
       location,
       emergencyOrder,
       emergencyJustification,
-      cartegraphId,
       miscItems,
       narcanCases,
       narcanAdministeredUnknown,
@@ -90,7 +89,7 @@ export default class ModifyOrder extends React.Component<props, state> {
       supplies
     } = this.state;
 
-    const columns = [
+    const columns: any = [
       {
         Header: "Item",
         accessor: "item",
@@ -189,7 +188,19 @@ export default class ModifyOrder extends React.Component<props, state> {
             <div style={{ margin: "10px 0px" }}>
               {supplies.length > 0 && (
                 <ReactTable
-                  data={supplies}
+                  data={
+                    this.props.order.department == "DPW/Parks"
+                      ? supplies.sort(function(a, b) {
+                          if (a.item.inventoryID < b.item.inventoryID) {
+                            return -1;
+                          }
+                          if (a.item.inventoryID < b.item.inventoryID) {
+                            return 1;
+                          }
+                          return 0;
+                        })
+                      : supplies
+                  }
                   columns={columns}
                   loading={false}
                   minRows={0}
@@ -236,7 +247,7 @@ export default class ModifyOrder extends React.Component<props, state> {
                   )}
                 </div>
               )}
-              {/* has equipment && is PBF order */}
+            {/* has equipment && is PBF order */}
             {doesOrderContainEquipment(supplies).check &&
               this.props.order.department == "Bureau of Fire" && (
                 <div style={equipmentContainer} className="text-center">
