@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
 import * as types from "../../../store/types";
 import * as style from "../../orders/style";
@@ -268,6 +269,16 @@ export default class ModifyOrder extends React.Component<props, state> {
             >
               Save
             </button>
+            {_id && (
+              <Link to={"Print/id=" + _id}>
+                <button
+                  onClick={this.saveOrder.bind(this)}
+                  className="btn btn-primary"
+                >
+                  Print View
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </Modal>
