@@ -1,17 +1,36 @@
 import * as React from "react";
+import * as types from "../../store/types";
+import Form from "./form";
 
 type state = {
   modal: boolean;
+  location: select;
+  make: string;
+  model: string;
+  serialNumber: string;
+  reasonForRepair: string;
 };
 
-export default class EquipmentRepair extends React.Component<{}, state> {
+type props = {
+  locations: types.location[];
+  userProfile: types.userProfile;
+};
+
+type select = { label: string; value: string };
+
+export default class EquipmentRepair extends React.Component<props, state> {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      location: undefined,
+      make: "",
+      model: "",
+      serialNumber: "",
+      reasonForRepair: ""
     };
   }
-  
+
   render() {
     return (
       <div className="col-md-6">
@@ -27,6 +46,18 @@ export default class EquipmentRepair extends React.Component<{}, state> {
             Click here
           </div>
         </div>
+        {this.state.modal && (
+          <Form
+            setState={this.setState.bind(this)}
+            locations={this.props.locations}
+            userProfile={this.props.userProfile}
+            location={this.state.location}
+            make={this.state.make}
+            model={this.state.model}
+            serialNumber={this.state.serialNumber}
+            reasonForRepair={this.state.reasonForRepair}
+          />
+        )}
       </div>
     );
   }

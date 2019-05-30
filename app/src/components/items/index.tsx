@@ -128,7 +128,10 @@ export class Items extends React.Component<props, state> {
             <div className="row">
               {userProfile.department == "Bureau of Fire" && (
                 <div>
-                  <EquipmentRepair />
+                  <EquipmentRepair
+                    locations={this.props.locations}
+                    userProfile={this.props.userProfile}
+                  />
                   <MiscItem
                     user={this.props.user}
                     userProfile={this.props.userProfile}
