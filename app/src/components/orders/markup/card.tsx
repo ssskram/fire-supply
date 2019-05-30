@@ -60,7 +60,11 @@ export default class OrderCard extends React.Component<props, state> {
               <div className="ubuntu" style={style.biggerFont}>
                 <b>{order.location}</b>
               </div>
-              <div className="ubuntu">{countItems(order)} Items</div>
+              <div className="ubuntu">
+                {countItems(order) > 0
+                  ? countItems(order) + " Items"
+                  : "Misc. Item"}
+              </div>
               <div>
                 <i>{orderTypes(order)}</i>
               </div>

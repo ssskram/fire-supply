@@ -7,8 +7,7 @@
     opacity: .85;
 }
 
-.btn:hover,
-.btn:focus {
+.btn:hover, .btn:focus {
     color: #fff;
 }
 
@@ -18,12 +17,7 @@
     border-color: #555;
 }
 
-.btn-secondary,
-.btn-success,
-.btn-danger,
-.btn-primary,
-.btn-info,
-.btn-warning {
+.btn-secondary, .btn-success, .btn-danger, .btn-primary, .btn-info, .btn-warning {
     margin: 10px 5px;
     font-size: 18px;
     color: #fffcf5;
@@ -31,9 +25,7 @@
     letter-spacing: 2px !important;
 }
 
-.btn.disabled,
-.btn[disabled],
-fieldset[disabled] .btn {
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
     /* font */
     color: #383838;
     font-size: 18px;
@@ -60,18 +52,7 @@ fieldset[disabled] .btn {
     background-color: #383838;
 }
 
-.panel-button:hover h1,
-.panel-button:active h1,
-.panel-button:hover h2,
-.panel-button:active h2,
-.panel-button:hover h3,
-.panel-button:active h3,
-.panel-button:hover h4,
-.panel-button:active h4,
-.panel-button:hover h5,
-.panel-button:active h5,
-.panel-button:hover h6,
-.panel-button:active h6 {
+.panel-button:hover h1, .panel-button:active h1, .panel-button:hover h2, .panel-button:active h2, .panel-button:hover h3, .panel-button:active h3, .panel-button:hover h4, .panel-button:active h4, .panel-button:hover h5, .panel-button:active h5, .panel-button:hover h6, .panel-button:active h6 {
     color: #fff;
 }
 
@@ -86,8 +67,7 @@ fieldset[disabled] .btn {
     font-family: 'Ubuntu', sans-serif;
 }
 
-.btn-filter:hover,
-.btn-filter:active {
+.btn-filter:hover, .btn-filter:active {
     background-color: #383838;
     color: #fff
 }
@@ -102,4 +82,12 @@ fieldset[disabled] .btn {
 
 .grey {
     background-color: rgba(164, 163, 163, .6);
+}
+
+.text-button {
+    cursor: pointer;
+}
+
+.text-button:hover {
+    opacity: .8;
 }

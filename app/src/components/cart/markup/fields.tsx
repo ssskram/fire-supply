@@ -20,6 +20,7 @@ type props = {
   newOrder: (newOrder) => boolean;
   errorMessage: () => void;
   successMessage: () => void;
+  formType: "Complete" | "OneOff";
 };
 
 type state = {
@@ -157,7 +158,11 @@ export default class FormFields extends React.Component<props, state> {
               <style>{dropdownStyle}</style>
             </Helmet>
           )}
-          <h3 className="text-center oswald">Complete your order</h3>
+          <h3 className="text-center oswald">
+            {this.props.formType == "Complete"
+              ? "Complete your order"
+              : "New Order"}
+          </h3>
           <Select
             value={location}
             header="Select location for delivery"
@@ -171,7 +176,11 @@ export default class FormFields extends React.Component<props, state> {
             <div>
               <TextArea
                 value={miscItems}
-                header="Do you need anything else?"
+                header={
+                  this.props.formType == "Complete"
+                    ? "Do you need anything else?"
+                    : "What do you need?"
+                }
                 placeholder="Couldn't find what you were looking for?"
                 callback={e => this.setState({ miscItems: e.target.value })}
               />

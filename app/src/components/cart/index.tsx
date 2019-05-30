@@ -42,7 +42,7 @@ export class Cart extends React.Component<props, state> {
   }
 
   componentDidMount() {
-    this.props.loadLocations()
+    this.props.loadLocations();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -255,6 +255,7 @@ export class Cart extends React.Component<props, state> {
             newOrder={this.props.newOrder.bind(this)}
             successMessage={this.props.successMessage.bind(this)}
             errorMessage={this.props.errorMessage.bind(this)}
+            formType="Complete"
           />
         )}
       </div>
