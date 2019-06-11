@@ -126,7 +126,7 @@ export class Items extends React.Component<props, state> {
         {items && items.length > 0 && (
           <div>
             <div className="row">
-              {/* {userProfile.department == "Bureau of Fire" && (
+              {userProfile.department == "Bureau of Fire" && (
                 <div>
                   <EquipmentRepair
                     locations={this.props.locations}
@@ -142,7 +142,7 @@ export class Items extends React.Component<props, state> {
                     errorMessage={this.props.errorMessage.bind(this)}
                   />
                 </div>
-              )} */}
+              )}
               <Search
                 searchTerm={searchTerm}
                 receiveFilter={this.receiveFilter.bind(this)}
