@@ -68,7 +68,10 @@ export class Cart extends React.Component<props, state> {
       const itemIndex = cartCopy.findIndex(
         i => i.item.cartegraphID == item.item.cartegraphID
       );
-      if (cartCopy[itemIndex].quantity + 1 > 60) {
+      if (
+        cartCopy[itemIndex].quantity + 1 > 60 &&
+        item.item.department == "Bureau of Fire"
+      ) {
         this.setState({ limitExceeded: true });
       } else {
         cartCopy[itemIndex].quantity++;

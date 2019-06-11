@@ -38,7 +38,7 @@ export class UpdateQuantity extends React.Component<props, state> {
   }
 
   handleLimit(value) {
-    if (value > 60) {
+    if (value > 60 && this.props.item.department == "Bureau of Fire") {
       this.setState({
         limitExceeded: true
       });
