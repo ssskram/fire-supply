@@ -1,48 +1,54 @@
-import * as React from 'react'
-import { Redirect } from 'react-router-dom'
-import ErrorHandler from '../../../functions/errorHandler'
+import * as React from "react";
+import { Redirect } from "react-router-dom";
+import ErrorHandler from "../../../functions/errorHandler";
 
 type props = {
-    isEnabled: boolean
-    submitIt: () => boolean
-    successMessage: () => void
-    errorMessage: () => void
-    closeForm: () => void
-}
+  isEnabled: boolean;
+  submitIt: () => boolean;
+  successMessage: () => void;
+  errorMessage: () => void;
+  closeForm: () => void;
+};
 
 type state = {
-    redirect: boolean
-}
+  redirect: boolean;
+};
 
 export default class Submit extends React.Component<props, state> {
-    constructor(props) {
-        super(props)
-        this.state = {
-            redirect: false
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false
+    };
+  }
 
-    async submitIt() {
-        try {
-            const success = await this.props.submitIt()
-            if (success == true) {
-                this.props.successMessage()
-                this.setState({ redirect: true })
-            } else {
-                this.props.errorMessage()
-                this.props.closeForm()
-            }
-        } catch (err) { ErrorHandler(err) }
+  async submitIt() {
+    try {
+      const success = await this.props.submitIt();
+      if (success == true) {
+        this.props.successMessage();
+        this.setState({ redirect: true });
+      } else {
+        this.props.errorMessage();
+        this.props.closeForm();
+      }
+    } catch (err) {
+      ErrorHandler(err);
     }
+  }
 
-    render() {
-        return (
-            <div className='text-center'>
-                <button disabled={!this.props.isEnabled} onClick={this.submitIt.bind(this)} className='btn btn-success'>Submit</button>
-                {this.state.redirect &&
-                    <Redirect push to={'MyOrders'} />
-                }
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="text-center">
+        <button
+          disabled={!this.props.isEnabled}
+          onClick={this.submitIt.bind(this)}
+          className="btn btn-success"
+        >
+          Submit
+        </button>
+        {this.state.redirect && <Redirect push to={"MyOrders"} />}
+      </div>
+    );
+  }
 }

@@ -104,7 +104,9 @@ export class MyOrders extends React.Component<props, state> {
               order.department == this.props.userProfile.department
             );
           })}
-          locations={this.props.locations.filter(l => l.department == this.props.userProfile.department)}
+          locations={this.props.locations.filter(
+            l => l.department == this.props.userProfile.department
+          )}
           filter={this.filter.bind(this)}
         />
         {myOrders.length > 0 && (

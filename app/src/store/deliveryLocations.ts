@@ -10,12 +10,15 @@ const unloadedState: types.locations = {
 
 export const actionCreators = {
   loadLocations: (): AppThunkAction<any> => dispatch => {
-    fetch("https://cartegraphapi.azurewebsites.us/pghSupply/deliveryLocations", {
-      method: "get",
-      headers: new Headers({
-        Authorization: "Bearer " + process.env.REACT_APP_CART_API
-      })
-    })
+    fetch(
+      "https://cartegraphapi.azurewebsites.us/pghSupply/deliveryLocations",
+      {
+        method: "get",
+        headers: new Headers({
+          Authorization: "Bearer " + process.env.REACT_APP_CART_API
+        })
+      }
+    )
       .then(res => res.json())
       .then(data => {
         dispatch({ type: constants.getLocations, locations: data });

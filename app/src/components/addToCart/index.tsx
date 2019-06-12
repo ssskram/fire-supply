@@ -23,7 +23,7 @@ export default class AddToCart extends React.Component<props, state> {
       setQuantity: false
     };
   }
-  
+
   newCart(cartItem) {
     try {
       let newCart = this.props.userProfile.cart;
