@@ -7,6 +7,7 @@ import Input from "../formElements/input";
 
 type props = {
   setState: (parentState: object) => void;
+  post: () => void;
   locations: types.location[];
   userProfile: types.userProfile;
   location: select;
@@ -28,6 +29,13 @@ export default class EquipmentRepairForm extends React.Component<props, {}> {
         locations.push(select);
       }
     });
+
+    // validation
+    const isEnabled =
+      location != undefined &&
+      make != "" &&
+      model != "" &&
+      reasonForRepair != "";
 
     return (
       <Modal
@@ -83,6 +91,15 @@ export default class EquipmentRepairForm extends React.Component<props, {}> {
             }
             required
           />
+          <div className='text-center'>
+            <button
+              className="btn btn-success"
+              disabled={!isEnabled}
+              onClick={this.props.post}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </Modal>
     );

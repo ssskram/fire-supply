@@ -20,6 +20,7 @@ import NullSearch from "./markup/nullSearch";
 import Spinner from "../utilities/spinner";
 import EquipmentRepair from "../equipmentRepair";
 import MiscItem from "../miscItem";
+import Messages from "../utilities/messages";
 
 type props = {
   items: types.items;
@@ -30,6 +31,7 @@ type props = {
   newOrder: (newOrder) => boolean;
   errorMessage: () => void;
   successMessage: () => void;
+  clearMessage: () => void;
 };
 
 type state = {
@@ -69,6 +71,10 @@ export class Items extends React.Component<props, state> {
         }
       );
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearMessage();
   }
 
   receiveFilter(filterType, filter) {
@@ -122,6 +128,7 @@ export class Items extends React.Component<props, state> {
     return (
       <div>
         <Header department={userProfile.department} />
+        <Messages />
         {items == undefined && <Spinner notice="...loading inventory..." />}
         {items && items.length > 0 && (
           <div>
@@ -131,6 +138,9 @@ export class Items extends React.Component<props, state> {
                   <EquipmentRepair
                     locations={this.props.locations}
                     userProfile={this.props.userProfile}
+                    user={this.props.user}
+                    successMessage={this.props.successMessage.bind(this)}
+                    errorMessage={this.props.errorMessage.bind(this)}
                   />
                   <MiscItem
                     user={this.props.user}

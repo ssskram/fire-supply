@@ -29,7 +29,7 @@ export const reducer: Reducer<types.messsage> = (
   const action = incomingAction as any;
   switch (action.type) {
     case constants.success:
-      return { ...state, message: "<b>Success! Your stuff is on the way.<b/>" };
+      return { ...state, message: "<b>Success! We'll be in touch.<b/>" };
     case constants.failure:
       return {
         ...state,

@@ -56,19 +56,21 @@ export default class FormFields extends React.Component<props, state> {
 
   async placeOrder() {
     let items = [] as any;
-    this.props.userProfile.cart.forEach(c => {
-      const orderItem = {
-        item: {
-          cartegraphID: c.item.cartegraphID,
-          inventoryID: c.item.inventoryID,
-          itemName: c.item.itemName,
-          itemType: c.item.itemType,
-          itemUnit: c.item.itemUnit
-        },
-        quantityOrdered: c.quantity
-      };
-      items.push(orderItem);
-    });
+    if (this.props.formType == "Complete") {
+      this.props.userProfile.cart.forEach(c => {
+        const orderItem = {
+          item: {
+            cartegraphID: c.item.cartegraphID,
+            inventoryID: c.item.inventoryID,
+            itemName: c.item.itemName,
+            itemType: c.item.itemType,
+            itemUnit: c.item.itemUnit
+          },
+          quantityOrdered: c.quantity
+        };
+        items.push(orderItem);
+      });
+    }
     const newOrder = {
       user: this.props.user.email,
       userName: this.props.user.name,
@@ -98,19 +100,35 @@ export default class FormFields extends React.Component<props, state> {
     return success;
   }
 
-  validSubmission(equipment, narcan) {
+  validSubmission(equipment, narcan, formType: "Complete" | "OneOff") {
     let it = 0;
-    if (this.state.location == undefined) it++;
+    if (this.state.location == undefined) {
+      it++;
+    }
     if (this.props.userProfile.department == "Bureau of Fire") {
-      if (equipment.check && !this.state.equipmentJustification) it++;
-      if (narcan && !this.state.narcanCases) it++;
-      if (this.state.emergencyOrder == undefined) it++;
+      if (
+        formType == "Complete" &&
+        equipment.check &&
+        !this.state.equipmentJustification
+      ) {
+        it++;
+      }
+      if (formType == "Complete" && narcan && !this.state.narcanCases) {
+        it++;
+      }
+      if (this.state.emergencyOrder == undefined) {
+        it++;
+      }
       if (
         this.state.emergencyOrder &&
         this.state.emergencyOrder.value &&
         !this.state.emergencyJustification
-      )
+      ) {
         it++;
+      }
+      if (formType == "OneOff" && this.state.miscItems == "") {
+        it++;
+      }
     }
     return it == 0;
   }
@@ -131,7 +149,11 @@ export default class FormFields extends React.Component<props, state> {
       this.props.userProfile.cart
     );
     const containsNarcan = doesOrderContainNarcan(this.props.userProfile.cart);
-    const isEnabled = this.validSubmission(containsEquipment, containsNarcan);
+    const isEnabled = this.validSubmission(
+      containsEquipment,
+      containsNarcan,
+      this.props.formType
+    );
 
     let locations = [];
     this.props.locations.forEach(location => {
@@ -161,8 +183,23 @@ export default class FormFields extends React.Component<props, state> {
           <h3 className="text-center oswald">
             {this.props.formType == "Complete"
               ? "Complete your order"
-              : "New Order"}
+              : "Miscellaneous Item"}
           </h3>
+          {this.props.formType == "OneOff" && (
+            <div
+              style={{
+                fontSize: ".8em",
+                maxWidth: "400px",
+                margin: "10px 0px"
+              }}
+              className="text-center"
+            >
+              Note: If you currently have items in your cart, requesting a
+              miscellaneous item will empty your cart. Please proceed with
+              submitting your cart, and you will be able to add a miscellaneous
+              item at that point.
+            </div>
+          )}
           <Select
             value={location}
             header="Select location for delivery"
@@ -213,7 +250,7 @@ export default class FormFields extends React.Component<props, state> {
                   />
                 )}
               </div>
-              {containsNarcan && (
+              {containsNarcan && this.props.formType == "Complete" && (
                 <div className="col-md-12" style={style.narcanContainer}>
                   <h5 className="text-center">
                     <b>NARCAN</b>
@@ -239,7 +276,7 @@ export default class FormFields extends React.Component<props, state> {
                   />
                 </div>
               )}
-              {containsEquipment.check && (
+              {containsEquipment.check && this.props.formType == "Complete" && (
                 <div className="col-md-12" style={style.equipmentContainer}>
                   <h5 className="text-center">
                     <b>JUSTIFY EQUIPMENT</b>
