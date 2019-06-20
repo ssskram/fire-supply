@@ -1,3 +1,8 @@
+/*
+  Passed an array of inventory items,
+  Returns the unique itemTypes of the array
+ */
+
 export default function collectItemTypes(items) {
   if (items.length > 0) {
     const types = items

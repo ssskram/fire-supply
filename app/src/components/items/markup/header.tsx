@@ -1,3 +1,7 @@
+/*
+  Header for inventory collection
+ */
+
 import * as React from "react";
 
 type props = {

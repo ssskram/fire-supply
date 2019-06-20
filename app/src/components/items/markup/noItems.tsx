@@ -1,3 +1,7 @@
+/*
+  "No inventory items" notice"
+ */
+
 import * as React from "react";
 import { Cat } from "react-kawaii";
 import * as types from "../../../store/types";

@@ -1,3 +1,8 @@
+/*
+ * Displays form and handles state for Equipment Repairs
+ * On submit, passes data to POST function and returns status
+ */
+
 import * as React from "react";
 import * as types from "../../store/types";
 import Form from "./form";

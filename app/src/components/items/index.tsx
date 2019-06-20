@@ -23,7 +23,7 @@ import MiscItem from "../miscItem";
 import Messages from "../utilities/messages";
 
 type props = {
-  items: types.items;
+  items: Array<types.item>;
   userProfile: types.userProfile;
   user: types.user;
   locations: types.location[];
@@ -57,8 +57,11 @@ export class Items extends React.Component<props, state> {
   componentWillReceiveProps(nextProps) {
     if (this.props != nextProps) {
       // get relevant items & item types by dept
-      const items = filterItemsByDept(nextProps.items, nextProps.userProfile);
-      const types = collectItemTypes(items);
+      const items: types.item[] = filterItemsByDept(
+        nextProps.items,
+        nextProps.userProfile
+      );
+      const types: string[] = collectItemTypes(items);
       this.setState(
         {
           items: items,
@@ -66,7 +69,7 @@ export class Items extends React.Component<props, state> {
         },
         () => {
           if (this.state.selectedType != "" || this.state.searchTerm != "") {
-            this.executefilter();
+            this.executefilter() as void;
           }
         }
       );
@@ -77,28 +80,35 @@ export class Items extends React.Component<props, state> {
     this.props.clearMessage();
   }
 
-  receiveFilter(filterType, filter) {
+  // receives inventory filters from both the free text "searchTerm"
+  // and from the "selectedTypes" button
+  receiveFilter(filterType: "selectedTypes" | "searchTerm", filter: string) {
+    const itemsPerDept = filterItemsByDept(
+      this.props.items,
+      this.props.userProfile
+    ) as types.item[];
+    
     if (filterType == "selectedTypes") {
       this.setState(
         {
           selectedType: this.state.selectedType == filter ? "" : filter,
-          items: filterItemsByDept(this.props.items, this.props.userProfile)
+          items: itemsPerDept
         },
-        () => this.executefilter()
+        () => this.executefilter() as void
       );
     } else {
       this.setState(
         {
           searchTerm: filter,
-          items: filterItemsByDept(this.props.items, this.props.userProfile)
+          items: itemsPerDept
         },
-        () => this.executefilter()
+        () => this.executefilter() as void
       );
     }
   }
 
   executefilter() {
-    const filteredItems = filterItems(this.state);
+    const filteredItems: types.item[] = filterItems(this.state as state);
     if (filteredItems.length > 0) {
       this.setState({
         items: filteredItems,
@@ -106,7 +116,10 @@ export class Items extends React.Component<props, state> {
       });
     } else {
       this.setState({
-        items: filterItemsByDept(this.props.items, this.props.userProfile),
+        items: filterItemsByDept(
+          this.props.items,
+          this.props.userProfile
+        ) as types.item[],
         nullSearch: true,
         selectedType: "",
         searchTerm: ""

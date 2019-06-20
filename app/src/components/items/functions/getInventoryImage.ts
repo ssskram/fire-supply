@@ -1,4 +1,10 @@
-export default async function getImage(oid) {
+/*
+  Fetches inventory image from Cartegraph,
+  creates blob url for image
+  returns blob url
+ */
+
+export default async function getImage(oid: number) {
   const call = await fetch(
     "https://cartegraphapi.azurewebsites.us/pghSupply/itemImage?oid=" + oid,
     {

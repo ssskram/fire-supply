@@ -22,7 +22,7 @@ export interface items {
   items: item[];
 }
 export interface item {
-  cartegraphID: string;
+  cartegraphID: number;
   inventoryID: string;
   itemName: string;
   itemType: string;

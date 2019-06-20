@@ -1,3 +1,10 @@
+/*
+  Tiny cart button
+  If cart is empty, navigates user to inventory items
+  If cart is not empty, displays count of inventory items,
+  and navigates user to cart
+ */
+
 import * as React from "react";
 import { NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";

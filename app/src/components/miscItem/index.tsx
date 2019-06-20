@@ -1,3 +1,8 @@
+/*
+  Custom prompt wraps order form
+  for misc. item
+ */
+
 import * as React from "react";
 import * as types from "../../store/types";
 import Form from "../cart/markup/fields";

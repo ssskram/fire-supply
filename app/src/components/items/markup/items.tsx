@@ -1,3 +1,7 @@
+/*
+  Table of inventory items
+ */
+
 import * as React from "react";
 import * as types from "../../../store/types";
 import ReactTable from "react-table";

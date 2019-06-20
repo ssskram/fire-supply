@@ -1,8 +1,12 @@
+/*
+  Input for search, inventory items
+ */
+
 import * as React from "react";
 
 type props = {
   searchTerm: string;
-  receiveFilter: (type: string, load: string) => void;
+  receiveFilter: (type: "selectedTypes" | "searchTerm", load: string) => void;
 };
 
 export default class Search extends React.Component<props, {}> {

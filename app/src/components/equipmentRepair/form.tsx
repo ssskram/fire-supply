@@ -1,3 +1,7 @@
+/*
+ * Form fields for equipment repair
+ */
+
 import * as React from "react";
 import * as types from "../../store/types";
 import Modal from "react-responsive-modal";
@@ -91,7 +95,7 @@ export default class EquipmentRepairForm extends React.Component<props, {}> {
             }
             required
           />
-          <div className='text-center'>
+          <div className="text-center">
             <button
               className="btn btn-success"
               disabled={!isEnabled}

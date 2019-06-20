@@ -3,7 +3,7 @@ import * as types from "../../store/types";
 // handles sendgrid POSTs
 export default async function sendgridEndpoint(args) {
   let postSuccess = true;
-  const to = "joe.lang@pittsburghpa.gov";
+  const to = "joe.lang@pittsburghpa.gov"; // Supply Admin
   let sendgridLoad = {
     to: to,
     from: {

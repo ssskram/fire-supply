@@ -1,3 +1,8 @@
+/*
+  Buttons enumerate item types per inventory collection
+  On selection, inventory is filtered according to type selected
+ */
+
 import * as React from "react";
 
 const clicked = {
@@ -11,7 +16,7 @@ const unclicked = {
 type props = {
   selectedType: string;
   itemTypes: Array<string>;
-  receiveFilter: (type: string, load: string) => void;
+  receiveFilter: (type: "selectedTypes" | "searchTerm", load: string) => void;
 };
 
 export default class Types extends React.Component<props, {}> {

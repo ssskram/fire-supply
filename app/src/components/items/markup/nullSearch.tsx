@@ -1,3 +1,7 @@
+/*
+  Returned when inventory search returns null
+ */
+
 import * as React from "react";
 
 export default class NullSearch extends React.Component {

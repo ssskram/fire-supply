@@ -1,3 +1,7 @@
+/*
+ * Ships off equipment repair requests via Sendgrid
+ */
+
 import sendgridPost from "./sendgridEndpoint";
 
 export default async function sendEmail(request, user) {
