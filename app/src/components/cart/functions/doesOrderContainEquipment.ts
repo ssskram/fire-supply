@@ -1,3 +1,8 @@
+/*
+ * If order contains heavy equipment,
+ * returns "true" and narcan items as string array
+ */
+
 export default function doesOrderContainEquipment(items) {
   const equipment = items.filter(item =>
     item.item.itemType.includes("Equipment")

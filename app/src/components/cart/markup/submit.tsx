@@ -1,3 +1,7 @@
+/*
+ * Submits order, collects return status, communicates it out
+ */
+
 import * as React from "react";
 import { Redirect } from "react-router-dom";
 import ErrorHandler from "../../../functions/errorHandler";

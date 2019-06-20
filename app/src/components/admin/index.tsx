@@ -1,3 +1,9 @@
+/*
+ * Parent component for admin view
+ * Browse & filter all orders
+ * Orders open in modal, with fields to update
+ */
+
 import * as React from "react";
 import HydrateStore from "../utilities/hydrateStore";
 import { Redirect } from "react-router-dom";

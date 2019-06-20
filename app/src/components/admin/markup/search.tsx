@@ -1,3 +1,7 @@
+/*
+ * Input for filtering ordrs by keywords
+ */
+
 import * as React from "react";
 import Input from "../../formElements/input";
 

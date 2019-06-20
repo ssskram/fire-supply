@@ -1,3 +1,8 @@
+/*
+ * Increases/decreases item quantity
+ * Manages quantity caps
+*/
+
 import * as React from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../store";

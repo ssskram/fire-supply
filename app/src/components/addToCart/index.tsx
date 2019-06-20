@@ -1,3 +1,9 @@
+/*
+ * Selects item to add to cart
+ * Displays a modal with quantity selection
+ * Updates cart with changes in quantity selected
+*/
+
 import * as React from "react";
 import * as types from "../../store/types";
 import * as Style from "./style";

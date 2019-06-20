@@ -17,7 +17,7 @@ export interface cartItem {
   quantity: number;
 }
 
-// items
+// inventory
 export interface items {
   items: item[];
 }

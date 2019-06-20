@@ -1,3 +1,7 @@
+/*
+ * Buttons for filtering collection of orders
+*/
+
 import * as React from "react";
 import * as style from "../style";
 import * as types from "../../../store/types";

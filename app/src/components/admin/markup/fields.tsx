@@ -1,3 +1,7 @@
+/*
+ * Fields for admin editing of order
+*/
+
 import * as React from "react";
 import TextArea from "../../formElements/textarea";
 import Select from "../../formElements/select";

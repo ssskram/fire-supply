@@ -1,3 +1,14 @@
+/*
+ * Form for order submission
+ * A lot of conditionals here whether:
+ * Deparment is PBF or DPW, as well as
+ * Order is a full order, or a quick misc item (for PBF)
+ *
+ * If  order is a  "full"  order then props.formType == "Complete",
+ * else it is a "OneOff" order, where a single misc item is being requested, 
+ * and no cart items exist
+ */
+
 import * as React from "react";
 import * as types from "../../../store/types";
 import TextArea from "../../formElements/textarea";

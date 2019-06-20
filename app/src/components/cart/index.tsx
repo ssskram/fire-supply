@@ -1,3 +1,9 @@
+/*
+ * Parent cart component displays all cart items in a table,
+ * and changes to cart are handled through here.
+ * Interfaces for submitting cart are presented through modal.
+ */
+
 import * as React from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "../../store";

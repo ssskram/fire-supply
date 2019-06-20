@@ -1,3 +1,8 @@
+/*
+ * Admin order view
+ * Includes all order information, and fields for updating order
+ */
+
 import * as React from "react";
 import { Link } from "react-router-dom";
 import Modal from "react-responsive-modal";
