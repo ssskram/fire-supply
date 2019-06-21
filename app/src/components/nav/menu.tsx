@@ -22,7 +22,7 @@ export class Menu extends React.Component<props, {}> {
   public render() {
     return (
       <Nav>
-        {this.props.userProfile.department != "...loading" && (
+        {this.props.userProfile.department && (
           <LinkContainer to={"/"}>
             <NavItem>
               <button className="btn btn-secondary nav-button">

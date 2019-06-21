@@ -1,6 +1,6 @@
 /*
  * Fields for admin editing of order
-*/
+ */
 
 import * as React from "react";
 import TextArea from "../../formElements/textarea";
@@ -29,6 +29,10 @@ export default class SupplyFields extends React.Component<props, {}> {
           multi={false}
           options={selects.orderStatuses}
         />
+        {/*
+         * Only DPW cares about the Cartegraph Oid
+         * because only DPW is also managing orders in Cartegraph
+         */}
         {this.props.state.department == "DPW/Parks" && (
           <Input
             value={this.props.state.cartegraphId}
@@ -52,6 +56,7 @@ export default class SupplyFields extends React.Component<props, {}> {
             value={this.props.state.receivedBy}
             header="Order received by"
             placeholder={
+              // Delivered orders are tracking by "Assignment number" for PBF
               this.props.state.department == "Bureau of Fire"
                 ? "Assignment number"
                 : "Name"

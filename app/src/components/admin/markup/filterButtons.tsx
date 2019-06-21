@@ -1,6 +1,6 @@
 /*
  * Buttons for filtering collection of orders
-*/
+ */
 
 import * as React from "react";
 import * as style from "../style";
@@ -17,7 +17,8 @@ export default class filterButtons extends React.Component<props, {}> {
     return this.props.allOrders.length;
   }
 
-  returnEmergencyCount() {
+  returnEmergencyCount(): number {
+    // returns the count of open, emergency orders
     return this.props.allOrders.filter(
       order =>
         order.emergencyOrder == true &&
@@ -25,8 +26,8 @@ export default class filterButtons extends React.Component<props, {}> {
         order.status != "Rejected"
     ).length;
   }
-
-  returnOpenCount() {
+  returnOpenCount(): number {
+    // returns the count of open orders
     return this.props.allOrders.filter(
       order => order.status != "Delivered" && order.status != "Rejected"
     ).length;

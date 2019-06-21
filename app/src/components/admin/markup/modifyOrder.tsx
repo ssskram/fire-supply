@@ -29,6 +29,8 @@ type state = types.order;
 export default class ModifyOrder extends React.Component<props, state> {
   constructor(props) {
     super(props);
+    // gross, I know
+    // but it's the easiest way to reuse form components
     this.state = {
       _id: props.order._id,
       user: props.order.user,
@@ -52,7 +54,7 @@ export default class ModifyOrder extends React.Component<props, state> {
     };
   }
 
-  updateSupplies(qtyReceived, itemID) {
+  updateSupplies(qtyReceived: number, itemID: string): void {
     try {
       const suppliesCopy = this.state.supplies;
       const itemIndex = suppliesCopy.findIndex(sp => sp._id == itemID);
@@ -63,7 +65,7 @@ export default class ModifyOrder extends React.Component<props, state> {
     }
   }
 
-  async saveOrder() {
+  async saveOrder(): Promise<void> {
     try {
       this.props.setState({ spinner: true });
       const success = await this.props.updateOrder(this.state);
@@ -95,7 +97,7 @@ export default class ModifyOrder extends React.Component<props, state> {
       supplies
     } = this.state;
 
-    const columns: any = [
+    const columns: Array<any> = [
       {
         Header: "Item",
         accessor: "item",
@@ -121,7 +123,10 @@ export default class ModifyOrder extends React.Component<props, state> {
               style={{ fontWeight: "bold", color: "#a94442" }}
               value={props.original.quantityReceived}
               onChange={e =>
-                this.updateSupplies(e.target.value, props.original._id)
+                this.updateSupplies(
+                  e.target.value as undefined, // input => number, gotta call it undefined
+                  props.original._id as string
+                )
               }
             />
           </div>
@@ -129,6 +134,7 @@ export default class ModifyOrder extends React.Component<props, state> {
       }
     ];
 
+    // we're displaying the units for the inventory items, PBF
     if (this.props.order.department == "Bureau of Fire") {
       columns.splice(2, 0, {
         Header: "Unit",
@@ -137,6 +143,7 @@ export default class ModifyOrder extends React.Component<props, state> {
       });
     }
 
+    // we're displaying the cart ID for DPW items
     if (this.props.order.department == "DPW/Parks") {
       columns.splice(1, 0, {
         Header: "ID",
@@ -195,6 +202,8 @@ export default class ModifyOrder extends React.Component<props, state> {
               {supplies.length > 0 && (
                 <ReactTable
                   data={
+                    // different sorts for different department
+                    // DPW wants their shit sorted by cart ID
                     this.props.order.department == "DPW/Parks"
                       ? supplies.sort(function(a, b) {
                           if (a.item.inventoryID < b.item.inventoryID) {
@@ -274,6 +283,7 @@ export default class ModifyOrder extends React.Component<props, state> {
             >
               Save
             </button>
+            {/* Link to print view if _id has been returned from Mongo */}
             {_id && (
               <Link to={"Print/id=" + _id}>
                 <button

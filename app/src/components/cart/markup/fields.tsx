@@ -5,7 +5,7 @@
  * Order is a full order, or a quick misc item (for PBF)
  *
  * If  order is a  "full"  order then props.formType == "Complete",
- * else it is a "OneOff" order, where a single misc item is being requested, 
+ * else it is a "OneOff" order, where a single misc item is being requested,
  * and no cart items exist
  */
 
@@ -38,13 +38,14 @@ type state = {
   location: select;
   miscItems: string;
   comments: string;
-  emergencyOrder: select;
+  emergencyOrder: boolSelect;
   emergencyJustification: string;
-  narcanCases: select;
+  narcanCases: boolSelect;
   narcanAdministeredUnknown: string;
   equipmentJustification: string;
 };
 
+type boolSelect = { label: string; value: boolean };
 type select = { label: string; value: string };
 
 const dropdownStyle =
@@ -65,8 +66,12 @@ export default class FormFields extends React.Component<props, state> {
     };
   }
 
-  async placeOrder() {
-    let items = [] as any;
+  // builds order object
+  // passses order to store
+  // then empties the cart
+  // returns true/false if everything is gravy
+  async placeOrder(): Promise<boolean> {
+    let items = [] as Array<types.supplyItem>;
     if (this.props.formType == "Complete") {
       this.props.userProfile.cart.forEach(c => {
         const orderItem = {
@@ -82,7 +87,7 @@ export default class FormFields extends React.Component<props, state> {
         items.push(orderItem);
       });
     }
-    const newOrder = {
+    const newOrder: types.order = {
       user: this.props.user.email,
       userName: this.props.user.name,
       department: this.props.userProfile.department,
@@ -111,9 +116,12 @@ export default class FormFields extends React.Component<props, state> {
     return success;
   }
 
-  validSubmission(equipment, narcan, formType: "Complete" | "OneOff") {
+  // field validation
+  validSubmission(equipment, narcan, formType: "Complete" | "OneOff"): boolean {
+    // collection form errors here
     let it = 0;
     if (this.state.location == undefined) {
+      // WRONG
       it++;
     }
     if (this.props.userProfile.department == "Bureau of Fire") {
@@ -122,12 +130,15 @@ export default class FormFields extends React.Component<props, state> {
         equipment.check &&
         !this.state.equipmentJustification
       ) {
+        // WRONG
         it++;
       }
       if (formType == "Complete" && narcan && !this.state.narcanCases) {
+        // WRONG
         it++;
       }
       if (this.state.emergencyOrder == undefined) {
+        // WRONG
         it++;
       }
       if (
@@ -135,12 +146,15 @@ export default class FormFields extends React.Component<props, state> {
         this.state.emergencyOrder.value &&
         !this.state.emergencyJustification
       ) {
+        // WRONG
         it++;
       }
       if (formType == "OneOff" && this.state.miscItems == "") {
+        // WRONG
         it++;
       }
     }
+    // no form errors?
     return it == 0;
   }
 
@@ -166,7 +180,7 @@ export default class FormFields extends React.Component<props, state> {
       this.props.formType
     );
 
-    let locations = [];
+    let locations = [] as Array<select>;
     this.props.locations.forEach(location => {
       if (location.department == this.props.userProfile.department) {
         const select = { value: location.location, label: location.location };

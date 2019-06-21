@@ -2,7 +2,7 @@
  * Selects item to add to cart
  * Displays a modal with quantity selection
  * Updates cart with changes in quantity selected
-*/
+ */
 
 import * as React from "react";
 import * as types from "../../store/types";
@@ -30,15 +30,20 @@ export default class AddToCart extends React.Component<props, state> {
     };
   }
 
-  newCart(cartItem) {
+  newCart(cartItem: types.supplyItem): void {
     try {
+      // copy current cart
       let newCart = this.props.userProfile.cart;
+      // add new item
       newCart.push(cartItem);
+      // define user profile with new cart
       const newUserProfile = {
         user: this.props.user.email,
         cart: newCart
       };
+      // update store
       this.props.updateCart(newUserProfile);
+      // close modal
       this.setState({
         setQuantity: false
       });
@@ -49,7 +54,6 @@ export default class AddToCart extends React.Component<props, state> {
 
   render() {
     const { setQuantity } = this.state;
-
     const { item } = this.props;
 
     return (

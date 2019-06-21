@@ -33,7 +33,7 @@ type props = {
 
 type state = {
   limitExceeded: boolean;
-  cart: types.cartItem[];
+  cart: types.supplyItem[];
   showForm: boolean;
 };
 

@@ -1,7 +1,7 @@
 /*
  * Increases/decreases item quantity
  * Manages quantity caps
-*/
+ */
 
 import * as React from "react";
 import { connect } from "react-redux";
@@ -42,16 +42,19 @@ export class UpdateQuantity extends React.Component<props, state> {
     };
   }
 
-  handleLimit(value) {
+  handleLimit(value: number): void {
+    // we're only capping inventory for PBF
     if (value > 60 && this.props.item.department == "Bureau of Fire") {
       this.setState({
         limitExceeded: true
       });
     } else if (value < 0) {
+      // prohibit negative int
       this.setState({
         newQuantity: 0
       });
     } else {
+      // set newQuantity accordingly
       this.setState({
         limitExceeded: false,
         newQuantity: value
@@ -59,7 +62,8 @@ export class UpdateQuantity extends React.Component<props, state> {
     }
   }
 
-  returnQuantity() {
+  // pass newQuantity back to parent component to update store
+  returnQuantity(): void {
     try {
       const cartItem = {
         item: this.props.item,
@@ -71,11 +75,11 @@ export class UpdateQuantity extends React.Component<props, state> {
     }
   }
 
-  plusOne() {
+  plusOne(): void {
     this.handleLimit(this.state.newQuantity + 1);
   }
 
-  minusOne() {
+  minusOne(): void {
     this.handleLimit(this.state.newQuantity - 1);
   }
 

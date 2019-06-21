@@ -6,7 +6,7 @@ import ErrorHandler from "../functions/errorHandler";
 
 const unloadedState = {
   userProfile: {
-    department: "...loading",
+    department: undefined,
     isAdmin: false,
     cart: []
   } as types.userProfile

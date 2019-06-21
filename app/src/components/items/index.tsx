@@ -87,7 +87,7 @@ export class Items extends React.Component<props, state> {
       this.props.items,
       this.props.userProfile
     ) as types.item[];
-    
+
     if (filterType == "selectedTypes") {
       this.setState(
         {
@@ -187,11 +187,9 @@ export class Items extends React.Component<props, state> {
             </div>
           </div>
         )}
-        {items &&
-          items.length == 0 &&
-          userProfile.department != "...loading" && (
-            <NoItems userProfile={userProfile} />
-          )}
+        {items && items.length == 0 && userProfile.department && (
+          <NoItems userProfile={userProfile} />
+        )}
       </div>
     );
   }
