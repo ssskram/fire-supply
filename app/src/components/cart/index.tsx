@@ -57,29 +57,37 @@ export class Cart extends React.Component<props, state> {
     });
   }
 
-  deleteItem(item) {
+  // delete item from cart
+  deleteItem(item: types.supplyItem): void {
     try {
+      // copy cart, sub item
       const itemDeleted = this.state.cart.filter(
         i => i.item.cartegraphID != item.item.cartegraphID
       );
+      // send it to the store
       this.postCart(itemDeleted);
     } catch (err) {
       ErrorHandler(err);
     }
   }
 
-  increaseQuantity(item) {
+  // increase quantity of item in cart
+  increaseQuantity(item: types.supplyItem): void {
     try {
+      // copy the cart
       const cartCopy = this.state.cart;
+      // find the item that needs increased
       const itemIndex = cartCopy.findIndex(
         i => i.item.cartegraphID == item.item.cartegraphID
       );
       if (
+        // where PBF, cap at 60
         cartCopy[itemIndex].quantity + 1 > 60 &&
         item.item.department == "Bureau of Fire"
       ) {
         this.setState({ limitExceeded: true });
       } else {
+        // increase the quantity, and post cart copy to store
         cartCopy[itemIndex].quantity++;
         this.postCart(cartCopy);
       }
@@ -88,15 +96,20 @@ export class Cart extends React.Component<props, state> {
     }
   }
 
-  decreaseQuantity(item) {
+  // decrease quantity of item in cart
+  decreaseQuantity(item: types.supplyItem) {
     try {
+      // copy cart
       const cartCopy = this.state.cart;
+      // find item to be decreased
       const itemIndex = cartCopy.findIndex(
         i => i.item.cartegraphID == item.item.cartegraphID
       );
+      // if drawing to zero, just delete it
       if (cartCopy[itemIndex].quantity - 1 < 1) {
         this.deleteItem(item);
       } else {
+        // increase by 1, and post copy  to store
         cartCopy[itemIndex].quantity--;
         this.postCart(cartCopy);
       }
@@ -105,7 +118,8 @@ export class Cart extends React.Component<props, state> {
     }
   }
 
-  postCart(newCart) {
+  // updates cart in store by passing new user profile
+  postCart(newCart: types.supplyItem[]): void {
     try {
       const newUserProfile = {
         user: this.props.user.email,
@@ -125,7 +139,7 @@ export class Cart extends React.Component<props, state> {
   render() {
     const { limitExceeded, cart, showForm } = this.state;
 
-    const columns = [
+    const columns: Array<any> = [
       {
         Header: "Item",
         accessor: "item",
@@ -184,6 +198,7 @@ export class Cart extends React.Component<props, state> {
       }
     ];
 
+    // PBF likes to see those units with inventory items
     if (this.props.userProfile.department == "Bureau of Fire") {
       columns.splice(1, 0, {
         Header: "Unit",

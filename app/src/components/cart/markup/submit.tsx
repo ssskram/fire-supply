@@ -26,7 +26,10 @@ export default class Submit extends React.Component<props, state> {
     };
   }
 
-  async submitIt() {
+  // awaits on the post function
+  // success? true/false
+  // throw messages and redirect as necessary
+  async submitIt(): Promise<void> {
     try {
       const success = await this.props.submitIt();
       if (success == true) {
