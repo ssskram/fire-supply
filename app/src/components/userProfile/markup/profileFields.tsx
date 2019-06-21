@@ -1,3 +1,4 @@
+
 // fields for profile information, currently just department
 // on change, triggers setUserProfile() from userProfile store
 

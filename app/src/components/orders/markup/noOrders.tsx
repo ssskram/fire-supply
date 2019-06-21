@@ -1,3 +1,7 @@
+/*
+ * Thrown when there are no orders to show
+ */
+
 import * as React from "react";
 import { Cat } from "react-kawaii";
 import * as style from "../style";

@@ -1,3 +1,7 @@
+/*
+ * Displays the selected order in a modal
+ */
+
 import * as React from "react";
 import Modal from "react-responsive-modal";
 import * as types from "../../../store/types";

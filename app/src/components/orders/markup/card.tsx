@@ -1,3 +1,9 @@
+/*
+ * Order card displays conditional info on order (PBF v. DPW)
+ * Card also serves as a link to the full order record
+ * which opens in a modal
+ */
+
 import * as React from "react";
 import * as types from "../../../store/types";
 import * as moment from "moment";

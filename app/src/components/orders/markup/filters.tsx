@@ -1,6 +1,10 @@
+/*
+ * Filers for all orders view
+ * filter by recipient or by status
+ */
+
 import * as React from "react";
 import Select from "react-select";
-import * as fh from "../../cart/selects";
 import * as st from "../../admin/markup/statuses";
 import * as types from "../../../store/types";
 import ErrorHandler from "../../../functions/errorHandler";

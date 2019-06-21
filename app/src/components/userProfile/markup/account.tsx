@@ -1,3 +1,4 @@
+
 // displays users account & profile information within nav bar
 // button calls updateProfile modal from parent
 

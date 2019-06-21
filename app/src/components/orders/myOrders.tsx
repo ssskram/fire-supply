@@ -1,3 +1,8 @@
+/*
+ * Displays the logged in user's orders per department
+ * handles filters and paging
+ */
+
 import * as React from "react";
 import HydrateStore from "../utilities/hydrateStore";
 import { connect } from "react-redux";

@@ -1,3 +1,7 @@
+/*
+ * Displays the user's department
+ */
+
 import * as React from "react";
 import * as types from "../../../store/types";
 

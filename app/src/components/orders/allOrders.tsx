@@ -1,3 +1,8 @@
+/*
+ * Displays all orders per department as cards
+ * handles filters and paging
+ */
+
 import * as React from "react";
 import HydrateStore from "../utilities/hydrateStore";
 import { connect } from "react-redux";
