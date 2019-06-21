@@ -1,4 +1,11 @@
-export default function colorByStatus(status) {
+/*
+ * Provides background color for order cards
+ * depending on order status
+ */
+
+import * as types from "../../../store/types";
+
+export default function colorByStatus(status: types.orderStatus) {
   if (status == "Order Submitted") {
     return "rgba(40, 167, 69, .2)";
   }

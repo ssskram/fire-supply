@@ -50,7 +50,7 @@ export interface order {
   equipmentJustification: string;
   miscItems: string;
   supplies: supplyItem[];
-  status: string;
+  status: orderStatus;
   supplyComments: string;
   receivedBy: string;
   createdAt: Date;
@@ -62,6 +62,17 @@ export interface supplyItem {
   quantityOrdered: number;
   quantityReceived: number;
 }
+
+// order status
+export type orderStatus =
+  | "Order Submitted"
+  | "Approved"
+  | "Partially Approved"
+  | "Pending Higher Approval"
+  | "Partially Delivered"
+  | "Backordered"
+  | "Delivered"
+  | "Rejected";
 
 // delivery locations
 export interface locations {
