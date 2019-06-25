@@ -7,7 +7,7 @@ import * as types from "../../../store/types";
 export default function filterItemsByDepartment(
   items: Array<types.item>,
   userProfile: types.userProfile
-) {
+): types.item[] {
   if (items.length > 0) {
     const deptItems = items.filter(item => {
       return item.department == userProfile.department;

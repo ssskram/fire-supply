@@ -13,7 +13,7 @@ type state = {
   nullSearch: boolean;
 };
 
-export default function filterItems(state: state) {
+export default function filterItems(state: state): types.item[] {
   const items = state.items.filter(item => {
     if (
       !item.itemName.toLowerCase().includes(state.searchTerm.toLowerCase()) &&

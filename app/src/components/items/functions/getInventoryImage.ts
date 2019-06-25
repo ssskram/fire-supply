@@ -4,7 +4,7 @@
   returns blob url
  */
 
-export default async function getImage(oid: number) {
+export default async function getImage(oid: number): Promise<string> {
   const call = await fetch(
     "https://cartegraphapi.azurewebsites.us/pghSupply/itemImage?oid=" + oid,
     {

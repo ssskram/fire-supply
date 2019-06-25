@@ -3,7 +3,9 @@
   Returns the unique itemTypes of the array
  */
 
-export default function collectItemTypes(items) {
+import * as types from "../../../store/types";
+
+export default function collectItemTypes(items: types.item[]): Array<any> {
   if (items.length > 0) {
     const types = items
       .map(item => item.itemType)
